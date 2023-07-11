@@ -4,6 +4,7 @@ using CarParts2023.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarParts2023.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230711102600_AddedManyToManyTables")]
+    partial class AddedManyToManyTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,13 +34,11 @@ namespace CarParts2023.Data.Migrations
 
                     b.Property<string>("Make")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Model")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -93,18 +93,6 @@ namespace CarParts2023.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("CarUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            CarId = 1,
-                            UserId = "845cb430-7df3-4865-beaf-7fc07799f99c"
-                        },
-                        new
-                        {
-                            CarId = 2,
-                            UserId = "845cb430-7df3-4865-beaf-7fc07799f99c"
-                        });
                 });
 
             modelBuilder.Entity("CarParts2023.Data.Models.Part", b =>
@@ -115,7 +103,7 @@ namespace CarParts2023.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PartId"), 1L, 1);
 
-                    b.Property<int?>("CarId")
+                    b.Property<int>("CarId")
                         .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
@@ -123,13 +111,11 @@ namespace CarParts2023.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -152,6 +138,7 @@ namespace CarParts2023.Data.Migrations
                         new
                         {
                             PartId = 3,
+                            CarId = 1,
                             CategoryId = 1,
                             Description = "V8 Engine",
                             Name = "Engine",
@@ -161,6 +148,7 @@ namespace CarParts2023.Data.Migrations
                         new
                         {
                             PartId = 4,
+                            CarId = 1,
                             CategoryId = 2,
                             Description = "Front Suspension",
                             Name = "Suspension",
@@ -170,6 +158,7 @@ namespace CarParts2023.Data.Migrations
                         new
                         {
                             PartId = 5,
+                            CarId = 1,
                             CategoryId = 3,
                             Description = "Front Brakes",
                             Name = "Brakes",
@@ -188,8 +177,7 @@ namespace CarParts2023.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CategoryId");
 
@@ -226,18 +214,6 @@ namespace CarParts2023.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("PartUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            PartId = 3,
-                            UserId = "845cb430-7df3-4865-beaf-7fc07799f99c"
-                        },
-                        new
-                        {
-                            PartId = 4,
-                            UserId = "845cb430-7df3-4865-beaf-7fc07799f99c"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -487,12 +463,14 @@ namespace CarParts2023.Data.Migrations
 
             modelBuilder.Entity("CarParts2023.Data.Models.Part", b =>
                 {
-                    b.HasOne("CarParts2023.Data.Models.Car", null)
+                    b.HasOne("CarParts2023.Data.Models.Car", "Car")
                         .WithMany("Parts")
-                        .HasForeignKey("CarId");
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CarParts2023.Data.Models.PartCategory", "Category")
-                        .WithMany("Parts")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -502,6 +480,8 @@ namespace CarParts2023.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Car");
 
                     b.Navigation("Category");
 
@@ -579,11 +559,6 @@ namespace CarParts2023.Data.Migrations
                 });
 
             modelBuilder.Entity("CarParts2023.Data.Models.Car", b =>
-                {
-                    b.Navigation("Parts");
-                });
-
-            modelBuilder.Entity("CarParts2023.Data.Models.PartCategory", b =>
                 {
                     b.Navigation("Parts");
                 });

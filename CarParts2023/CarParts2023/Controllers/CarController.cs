@@ -5,7 +5,7 @@ namespace CarParts2023.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
 
-    public class CarController : Controller
+    public class CarController : BaseController
     {
         private readonly ICarService _carService;
 

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CarParts2023.Data.Models
 {
@@ -8,24 +9,25 @@ namespace CarParts2023.Data.Models
         public int CarId { get; set; }
 
         [Required] 
+        [MaxLength(50)]
         public string Make { get; set; } = null!;
 
         [Required]
+        [MaxLength(50)]
         public string Model { get; set; } = null!;
 
+        [Required]
         public int Year { get; set; }
 
         public ICollection<Part> Parts { get; set; } = new List<Part>();
 
+        [Required]
+        [ForeignKey(nameof(User))]
+        public string UserId { get; set; } = null!;
+        
+        [Required]
+        public ApplicationUser User { get; set; } = null!;
 
     }
 }
 
-
-/*
-     Car: Represents a car model.
-        CarID (Primary Key): A unique identifier for each car model.
-        Make: The make or manufacturer of the car (e.g., Ford, Toyota, BMW).
-        Model: The specific model of the car (e.g., Mustang, Camry, 3 Series).
-        Year: The year in which the car model was released (e.g., 2021, 2018).
-*/

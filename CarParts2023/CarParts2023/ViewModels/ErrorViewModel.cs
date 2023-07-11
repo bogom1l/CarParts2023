@@ -1,4 +1,4 @@
-namespace CarParts2023.Models
+namespace CarParts2023.ViewModels
 {
     public class ErrorViewModel
     {

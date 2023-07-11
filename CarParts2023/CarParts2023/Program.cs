@@ -39,7 +39,7 @@ namespace CarParts2023
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddScoped<ICarService, CarService>();
-            //TODO: builder.Services.AddScoped<IPartService, PartService>();
+            builder.Services.AddScoped<IPartService, PartService>();
 
 
             var app = builder.Build();

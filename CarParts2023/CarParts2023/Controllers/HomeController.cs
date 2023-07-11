@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using CarParts2023.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CarParts2023.Controllers
 {
-    using CarParts2023.Models;
     using Microsoft.AspNetCore.Mvc;
     using System.Diagnostics;
 

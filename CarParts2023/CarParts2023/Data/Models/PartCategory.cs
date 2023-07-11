@@ -8,15 +8,9 @@ namespace CarParts2023.Data.Models
         public int CategoryId { get; set; }
 
         [Required]
+        [MaxLength(50)]
         public string Name { get; set; } = null!;
 
-        
+        public ICollection<Part> Parts { get; set; } = new List<Part>();
     }
 }
-
-/*
- PartCategory: Represents the categories of car parts.
-
-CategoryID (Primary Key): A unique identifier for each part category.
-Name: The name or description of the category (e.g., Engine, Suspension, Brakes).
-    */

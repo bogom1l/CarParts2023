@@ -1,0 +1,14 @@
+﻿
+
+add favorite cars/parts
+
+
+
+
+da dobavq ogranicheniq w modelite nawsqkyde [required, minlen, maxlen, ...]
+
+da gi napravq konstanti papka GlobalConstants
+
+
+da naprawq The field Description must be a string or array type with a minimum length of '2'.
+na custom suobshtenie

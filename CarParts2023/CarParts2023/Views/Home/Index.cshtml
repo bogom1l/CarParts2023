@@ -1,8 +1,23 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewBag.Title = "Home";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h2>Welcome to the Car Parts Application!</h2>
+    <p>Explore our car parts inventory.</p>
+
+    <div class="btn-group" style="margin-right: 1cm;">
+        <a href="@Url.Action("All", "Car")" class="btn btn-dark btn-lg">View All Cars</a>
+    </div>
+
+    <div class="btn-group">
+        <a href="@Url.Action("All", "Part")" class="btn btn-secondary btn-lg">View All Parts</a>
+    </div>
+    
+    <div class="btn-group">
+        <a href="@Url.Action("Add", "Part")" class="btn btn-secondary btn-lg">Add Part</a>
+    </div>
+
+
 </div>
+
