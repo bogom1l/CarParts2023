@@ -4,6 +4,7 @@ using CarParts2023.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarParts2023.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230711080759_InitialSeed")]
+    partial class InitialSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,7 +107,7 @@ namespace CarParts2023.Data.Migrations
                     b.HasData(
                         new
                         {
-                            PartId = 3,
+                            PartId = 1,
                             CarId = 1,
                             CategoryId = 1,
                             Description = "V8 Engine",
@@ -114,7 +116,7 @@ namespace CarParts2023.Data.Migrations
                         },
                         new
                         {
-                            PartId = 4,
+                            PartId = 2,
                             CarId = 1,
                             CategoryId = 2,
                             Description = "Front Suspension",
@@ -123,7 +125,7 @@ namespace CarParts2023.Data.Migrations
                         },
                         new
                         {
-                            PartId = 5,
+                            PartId = 3,
                             CarId = 1,
                             CategoryId = 3,
                             Description = "Front Brakes",

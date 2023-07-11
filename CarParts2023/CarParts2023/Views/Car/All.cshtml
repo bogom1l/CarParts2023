@@ -1,0 +1,45 @@
+﻿@model ICollection<CarViewModel>
+@using CarParts2023.ViewModels.Car
+
+@{
+    ViewBag.Title = "All Cars";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+    @foreach (var car in Model)
+    {
+        <div class="card col-4" style="width: 20rem; ">
+            <div class="card-body">
+                <h5 class="card-title mt-1">@car.CarId</h5>
+                <p class="mb-0"><span class="fw-bold">Make: </span>@car.Make</p>
+                <p class="mb-0"><span class="fw-bold">Model: </span>@car.Model</p>
+                <p class="mb-0"><span class="fw-bold">Year: </span>@car.Year</p>
+            </div>
+
+            <a asp-controller="Car" asp-action="Details" asp-route-id="@car.CarId" class="btn btn-warning mb-2 w-100 p-3 fw-bold">View Details</a>
+
+            @*
+                @if (User!.Identity!.Name == car.Supplier)
+            {
+                <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.CarId" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Edit</a>
+            }
+            else
+            {
+                <form class="input-group-sm " asp-controller="Car" asp-action="Rent" asp-route-id="@car.CarId">
+                    <input type="submit" value="Rent the Car" class="fs-6 btn btn-warning mb-3 w-100 p-3 fw-bold" />
+                </form>
+            }
+            
+            *@
+
+        </div>
+    }
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

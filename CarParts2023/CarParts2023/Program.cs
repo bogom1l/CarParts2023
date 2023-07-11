@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using CarParts2023.Data;
+using CarParts2023.Services;
 
 namespace CarParts2023
 {
@@ -36,6 +37,10 @@ namespace CarParts2023
 
 
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped<ICarService, CarService>();
+            //TODO: builder.Services.AddScoped<IPartService, PartService>();
+
 
             var app = builder.Build();
 

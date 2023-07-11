@@ -8,7 +8,7 @@ namespace CarParts2023.Data.Models
         //write the code from the comment below
 
         [Key]
-        public int Id { get; set; }
+        public int PartId { get; set; }
 
         [Required]
         public string Name { get; set; } = null!;
@@ -17,20 +17,21 @@ namespace CarParts2023.Data.Models
         public string Description { get; set; } = null!;
 
         [Required]
-        public decimal Price { get; set; }
+        public double Price { get; set; }
 
         [Required]
-        [ForeignKey(nameof(CategoryId))]
+        [ForeignKey(nameof(Car))]
         public int CarId { get; set; }
-
-
-        [Required]
-        public PartCategory CategoryId { get; set; } = null!;
-
 
         [Required]
         public Car Car { get; set; } = null!;
 
+
+        [Required]
+        [ForeignKey(nameof(Category))]
+        public int CategoryId { get; set; }
+
+        public PartCategory Category { get; set; } = null!;
 
 
     }

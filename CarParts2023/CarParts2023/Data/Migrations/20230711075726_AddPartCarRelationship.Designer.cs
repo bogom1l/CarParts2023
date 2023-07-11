@@ -4,6 +4,7 @@ using CarParts2023.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarParts2023.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230711075726_AddPartCarRelationship")]
+    partial class AddPartCarRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,150 +23,6 @@ namespace CarParts2023.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("CarParts2023.Data.Models.Car", b =>
-                {
-                    b.Property<int>("CarId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CarId"), 1L, 1);
-
-                    b.Property<string>("Make")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Model")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.HasKey("CarId");
-
-                    b.ToTable("Cars");
-
-                    b.HasData(
-                        new
-                        {
-                            CarId = 1,
-                            Make = "Ford",
-                            Model = "Mustang",
-                            Year = 2021
-                        },
-                        new
-                        {
-                            CarId = 2,
-                            Make = "Toyota",
-                            Model = "Camry",
-                            Year = 2018
-                        },
-                        new
-                        {
-                            CarId = 3,
-                            Make = "BMW",
-                            Model = "3 Series",
-                            Year = 2020
-                        });
-                });
-
-            modelBuilder.Entity("CarParts2023.Data.Models.Part", b =>
-                {
-                    b.Property<int>("PartId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PartId"), 1L, 1);
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.HasKey("PartId");
-
-                    b.HasIndex("CarId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Parts");
-
-                    b.HasData(
-                        new
-                        {
-                            PartId = 3,
-                            CarId = 1,
-                            CategoryId = 1,
-                            Description = "V8 Engine",
-                            Name = "Engine",
-                            Price = 5000.0
-                        },
-                        new
-                        {
-                            PartId = 4,
-                            CarId = 1,
-                            CategoryId = 2,
-                            Description = "Front Suspension",
-                            Name = "Suspension",
-                            Price = 1000.0
-                        },
-                        new
-                        {
-                            PartId = 5,
-                            CarId = 1,
-                            CategoryId = 3,
-                            Description = "Front Brakes",
-                            Name = "Brakes",
-                            Price = 500.0
-                        });
-                });
-
-            modelBuilder.Entity("CarParts2023.Data.Models.PartCategory", b =>
-                {
-                    b.Property<int>("CategoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CategoryId");
-
-                    b.ToTable("PartCategories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            Name = "Engine"
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            Name = "Suspension"
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            Name = "Brakes"
-                        });
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -368,25 +226,6 @@ namespace CarParts2023.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("CarParts2023.Data.Models.Part", b =>
-                {
-                    b.HasOne("CarParts2023.Data.Models.Car", "Car")
-                        .WithMany("Parts")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CarParts2023.Data.Models.PartCategory", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Car");
-
-                    b.Navigation("Category");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -436,11 +275,6 @@ namespace CarParts2023.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("CarParts2023.Data.Models.Car", b =>
-                {
-                    b.Navigation("Parts");
                 });
 #pragma warning restore 612, 618
         }

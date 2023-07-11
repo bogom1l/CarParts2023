@@ -15,6 +15,9 @@ namespace CarParts2023.Data.Models
 
         public int Year { get; set; }
 
+        public ICollection<Part> Parts { get; set; } = new List<Part>();
+
+
     }
 }
 

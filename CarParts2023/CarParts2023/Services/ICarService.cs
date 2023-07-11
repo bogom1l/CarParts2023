@@ -1,0 +1,11 @@
+﻿using CarParts2023.ViewModels.Car;
+
+namespace CarParts2023.Services
+{
+    public interface ICarService
+    {
+        
+        Task<ICollection<CarViewModel>> GetAllCarsAsync();
+
+    }
+}

@@ -4,6 +4,7 @@ using CarParts2023.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarParts2023.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230711080230_AddedTables")]
+    partial class AddedTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,29 +46,6 @@ namespace CarParts2023.Data.Migrations
                     b.HasKey("CarId");
 
                     b.ToTable("Cars");
-
-                    b.HasData(
-                        new
-                        {
-                            CarId = 1,
-                            Make = "Ford",
-                            Model = "Mustang",
-                            Year = 2021
-                        },
-                        new
-                        {
-                            CarId = 2,
-                            Make = "Toyota",
-                            Model = "Camry",
-                            Year = 2018
-                        },
-                        new
-                        {
-                            CarId = 3,
-                            Make = "BMW",
-                            Model = "3 Series",
-                            Year = 2020
-                        });
                 });
 
             modelBuilder.Entity("CarParts2023.Data.Models.Part", b =>
@@ -101,35 +80,6 @@ namespace CarParts2023.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Parts");
-
-                    b.HasData(
-                        new
-                        {
-                            PartId = 3,
-                            CarId = 1,
-                            CategoryId = 1,
-                            Description = "V8 Engine",
-                            Name = "Engine",
-                            Price = 5000.0
-                        },
-                        new
-                        {
-                            PartId = 4,
-                            CarId = 1,
-                            CategoryId = 2,
-                            Description = "Front Suspension",
-                            Name = "Suspension",
-                            Price = 1000.0
-                        },
-                        new
-                        {
-                            PartId = 5,
-                            CarId = 1,
-                            CategoryId = 3,
-                            Description = "Front Brakes",
-                            Name = "Brakes",
-                            Price = 500.0
-                        });
                 });
 
             modelBuilder.Entity("CarParts2023.Data.Models.PartCategory", b =>
@@ -147,23 +97,6 @@ namespace CarParts2023.Data.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("PartCategories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            Name = "Engine"
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            Name = "Suspension"
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            Name = "Brakes"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
