@@ -1,9 +1,7 @@
 ﻿
 
-da dobavq property Price v klasa Car -> v viewmodelite sushto i v servecite da obnowq
-i drugi propertyta da izmislq da dobavq
-
-i v klasa Part sushtoto
+ask chatgpt what properties more i should add to the Car/Part classes (like Price, ...)
+-> add them to the viewmodels and the services
 
 
 pravq edit/details/delete na Car
@@ -11,5 +9,4 @@ pravq edit/details/delete na Car
 pravq edit/details/delete na Part
 ->
 add favorite cars/parts
-
 
