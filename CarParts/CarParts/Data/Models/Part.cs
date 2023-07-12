@@ -28,7 +28,7 @@ namespace CarParts.Data.Models
 
         [Required]
         [ForeignKey(nameof(User))]
-        public string? UserId { get; set; } = null!; //TODO: remove nullability
+        public string UserId { get; set; } = null!;
         
         [Required]
         public ApplicationUser User { get; set; } = null!;
