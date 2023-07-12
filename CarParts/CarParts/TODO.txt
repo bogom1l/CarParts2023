@@ -1,0 +1,12 @@
+﻿
+
+ask chatgpt what properties more i should add to the Car/Part classes (like Price, ...)
+-> add them to the viewmodels and the services
+
+
+pravq edit/details/delete na Car
+->
+pravq edit/details/delete na Part
+->
+add favorite cars/parts
+
