@@ -9,19 +9,6 @@ namespace CarParts2023.Data.Models
         [Key]
         public int CarId { get; set; }
 
-        [Required] 
-        [MaxLength(CarMakeMaxLength)]
-        public string Make { get; set; } = null!;
-
-        [Required]
-        [MaxLength(CarModelMaxLength)]
-        public string Model { get; set; } = null!;
-
-        [Required]
-        public int Year { get; set; }
-
-        public ICollection<Part> Parts { get; set; } = new List<Part>();
-
         [Required]
         [ForeignKey(nameof(User))]
         public string UserId { get; set; } = null!;
@@ -29,55 +16,12 @@ namespace CarParts2023.Data.Models
         [Required]
         public ApplicationUser User { get; set; } = null!;
 
-        [Required]
-        public Description Description { get; set; }
 
+        [ForeignKey(nameof(Description))]
+        public int DescriptionId { get; set; }
 
-        public ICollection<Wheel> Wheels { get; set; } = new List<Wheel>();
-
-        [Required]
-        public double Price { get; set; }
-
-        [Required]
-        [MaxLength(CarColorMaxLength)]
-        public string Color { get; set; } = null!;
-
-        [Required]
-        public double EngineSize { get; set; }
-
-        [Required]
-        [MaxLength(CarFuelTypeMaxLength)]
-        public string FuelType { get; set; } = null!;
-
-        [Required]
-        [MaxLength(CarTransmissionMaxLength)]
-        public string Transmission { get; set; } = null!;
-
-        [Required]
-        [MaxLength(CarCategoryMaxLength)]
-        public string Category { get; set; } = null!;
-
-        [Required]
-        public double Weight { get; set; }
-        [Required]
-        public double TopSpeed { get; set; }
-
-        [Required]
-        public double Acceleration { get; set; }
-        [Required]
-        public double Horsepower { get; set; }
-        [Required]
-        public double Torque { get; set; }
-        [Required]
-        public double FuelConsumption { get; set; }
-
-        [Required]
-        public double Emission { get; set; }
-
-        
-
-
-
+        [Required] 
+        public Description Description { get; set; } = null!;
 
     }
 }

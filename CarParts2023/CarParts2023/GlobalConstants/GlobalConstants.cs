@@ -12,6 +12,21 @@
 
             public const int CarYearMinValue = 1900;
             public const int CarYearMaxValue = 2024;
+
+            public const int CarColorMinLength = 2;
+            public const int CarColorMaxLength = 30;
+
+            public const int CarFuelTypeMinLength = 2;
+            public const int CarFuelTypeMaxLength = 30;
+
+            public const int CarTransmissionMinLength = 2;
+            public const int CarTransmissionMaxLength = 20;
+
+            public const int CarCategoryMinLength = 2;
+            public const int CarCategoryMaxLength = 20;
+
+            public const int CarWheelsMinLength = 2;
+            public const int CarWheelsMaxLength = 40;
         }
 
         public static class Part

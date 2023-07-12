@@ -4,6 +4,7 @@ using CarParts2023.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarParts2023.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230712105318_addedDescriltionIdInCar")]
+    partial class addedDescriltionIdInCar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,20 +44,6 @@ namespace CarParts2023.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Cars");
-
-                    b.HasData(
-                        new
-                        {
-                            CarId = 12,
-                            DescriptionId = 12,
-                            UserId = "42f08d29-7999-43f6-8b3a-012cd6928be5"
-                        },
-                        new
-                        {
-                            CarId = 13,
-                            DescriptionId = 13,
-                            UserId = "42f08d29-7999-43f6-8b3a-012cd6928be5"
-                        });
                 });
 
             modelBuilder.Entity("CarParts2023.Data.Models.CarUser", b =>
@@ -159,54 +147,6 @@ namespace CarParts2023.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Descriptions");
-
-                    b.HasData(
-                        new
-                        {
-                            DescriptionId = 12,
-                            Acceleration = 5.0,
-                            CarId = 12,
-                            Category = "sedan",
-                            Color = "red",
-                            Emission = 3.0,
-                            EngineSize = 2000.0,
-                            FuelConsumption = 8.0,
-                            FuelType = "benzin",
-                            Horsepower = 197.0,
-                            Make = "make1",
-                            Model = "model1",
-                            Price = 5000.0,
-                            SafetyFeatures = "blablabla",
-                            TopSpeed = 200.0,
-                            Torque = 213.0,
-                            Transmission = "ruchna",
-                            Weight = 2000.0,
-                            Wheels = "4 zimni gumi",
-                            Year = 2001
-                        },
-                        new
-                        {
-                            DescriptionId = 13,
-                            Acceleration = 6.0,
-                            CarId = 13,
-                            Category = "coupe",
-                            Color = "green",
-                            Emission = 2.0,
-                            EngineSize = 2002.0,
-                            FuelConsumption = 6.0,
-                            FuelType = "dizel",
-                            Horsepower = 222.0,
-                            Make = "make2",
-                            Model = "model2",
-                            Price = 6000.0,
-                            SafetyFeatures = "ima sedalki",
-                            TopSpeed = 300.0,
-                            Torque = 333.0,
-                            Transmission = "avtomat",
-                            Weight = 3000.0,
-                            Wheels = "4 letni gumi",
-                            Year = 2002
-                        });
                 });
 
             modelBuilder.Entity("CarParts2023.Data.Models.Part", b =>
