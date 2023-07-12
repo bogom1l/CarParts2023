@@ -1,22 +1,27 @@
 ﻿using CarParts2023.ViewModels.Category;
 using System.ComponentModel.DataAnnotations;
+using static CarParts2023.GlobalConstants.GlobalConstants.Part;
 
 namespace CarParts2023.ViewModels.Part
 {
     public class AddPartViewModel
     {
         [Required]
-        [MinLength(1)]
-        [MaxLength(50)]
+        [StringLength(PartNameMaxLength, 
+            MinimumLength = PartNameMinLength, 
+            ErrorMessage = "Name can be between 1 and 50 characters.")]
         public string Name { get; set; } = null!;
 
         [Required]
-        [MinLength(2)]
-        [MaxLength(300)]
+        [StringLength(PartDescriptionMaxLength,
+        MinimumLength = PartDescriptionMinLength,
+        ErrorMessage = "Description can be between 2 and 300 characters.")]
         public string Description { get; set; } = null!;
 
         [Required]
-        [Range(0, 10_000)]
+        [Range(PartPriceMinValue,
+            PartPriceMaxValue,
+            ErrorMessage = "Price can be between 0.01 and 10 000.")]
         public double Price { get; set; }
 
         [Required]

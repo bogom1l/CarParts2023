@@ -3,10 +3,8 @@
     using System.ComponentModel.DataAnnotations;
     using static CarParts2023.GlobalConstants.GlobalConstants.Car;
 
-    public class CarViewModel
+    public class AddCarViewModel
     {
-        public int CarId { get; set; }
-
         [Required]
         [StringLength(CarMakeMaxLength, 
             MinimumLength = CarMakeMinLength,

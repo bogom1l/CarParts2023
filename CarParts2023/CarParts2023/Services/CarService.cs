@@ -25,5 +25,10 @@ namespace CarParts2023.Services
                 Year = c.Year
             }).ToListAsync();
         }
+
+        public async Task<AddCarViewModel> GetAddCarViewModelAsync()
+        {
+            return new AddCarViewModel();
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static CarParts2023.GlobalConstants.GlobalConstants.Car;
 
 namespace CarParts2023.Data.Models
 {
@@ -9,11 +10,11 @@ namespace CarParts2023.Data.Models
         public int CarId { get; set; }
 
         [Required] 
-        [MaxLength(50)]
+        [MaxLength(CarMakeMaxLength)]
         public string Make { get; set; } = null!;
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(CarModelMaxLength)]
         public string Model { get; set; } = null!;
 
         [Required]

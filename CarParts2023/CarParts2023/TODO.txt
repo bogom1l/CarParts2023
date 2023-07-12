@@ -1,14 +1,15 @@
 ﻿
 
+da dobavq property Price v klasa Car -> v viewmodelite sushto i v servecite da obnowq
+i drugi propertyta da izmislq da dobavq
+
+i v klasa Part sushtoto
+
+
+pravq edit/details/delete na Car
+->
+pravq edit/details/delete na Part
+->
 add favorite cars/parts
 
 
-
-
-da dobavq ogranicheniq w modelite nawsqkyde [required, minlen, maxlen, ...]
-
-da gi napravq konstanti papka GlobalConstants
-
-
-da naprawq The field Description must be a string or array type with a minimum length of '2'.
-na custom suobshtenie

@@ -4,8 +4,8 @@ namespace CarParts2023.Services
 {
     public interface ICarService
     {
-        
         Task<ICollection<CarViewModel>> GetAllCarsAsync();
 
+        Task<AddCarViewModel> GetAddCarViewModelAsync();
     }
 }

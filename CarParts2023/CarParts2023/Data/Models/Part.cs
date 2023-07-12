@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Identity;
+using static CarParts2023.GlobalConstants.GlobalConstants.Part;
+
 
 namespace CarParts2023.Data.Models
 {
@@ -10,11 +11,11 @@ namespace CarParts2023.Data.Models
         public int PartId { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(PartNameMaxLength)]
         public string Name { get; set; } = null!;
 
         [Required]
-        [MaxLength(300)]
+        [MaxLength(PartDescriptionMaxLength)]
         public string Description { get; set; } = null!;
 
         [Required]
