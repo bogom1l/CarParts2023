@@ -19,11 +19,7 @@ namespace CarParts2023.Data
             builder.Entity<PartUser>().HasKey(pu => new { pu.PartId, pu.UserId });
 
 
-            builder.Entity<Car>()
-                .HasOne(c => c.Description)
-                .WithOne(d => d.Car)
-                .HasForeignKey<Description>(d => d.CarId);
-
+            
             // Call the base method
             base.OnModelCreating(builder);
 
