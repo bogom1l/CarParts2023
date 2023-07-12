@@ -77,11 +77,7 @@ namespace CarParts2023.Data.Models
         
 
 
-        [ForeignKey(nameof(Description))]
-        public int DescriptionId { get; set; }
 
-        [Required] 
-        public Description Description { get; set; } = null!;
 
     }
 }
