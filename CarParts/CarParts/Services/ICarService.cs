@@ -1,4 +1,5 @@
-﻿using CarParts.ViewModels.Car;
+﻿using CarParts.Data.Models;
+using CarParts.ViewModels.Car;
 
 namespace CarParts.Services
 {
@@ -20,6 +21,8 @@ namespace CarParts.Services
 
         Task DeleteCarAsync(int id, string userId);
 
+        Task<Car?> GetCarById(int id);
 
+        Task<ICollection<CarViewModel>> GetMyCarsAsync(string userId);
     }
 }

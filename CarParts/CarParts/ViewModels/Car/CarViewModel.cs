@@ -69,9 +69,8 @@
         [Required]
         public double FuelConsumption { get; set; }
 
-
-        //TODO: CarOwner
-        //public string OwnerName { get; set; } = null!;
+        [Required] //?
+        public string Owner { get; set; } = null!;
 
     }
 }

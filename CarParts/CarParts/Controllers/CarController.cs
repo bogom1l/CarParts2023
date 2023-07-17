@@ -1,4 +1,5 @@
-﻿using CarParts.Services;
+﻿using CarParts.Data.Models;
+using CarParts.Services;
 using CarParts.ViewModels.Car;
 
 namespace CarParts.Controllers
@@ -13,6 +14,7 @@ namespace CarParts.Controllers
         {
             this._carService = carService;
         }
+
 
         [HttpGet]
         public async Task<IActionResult> All()
@@ -60,6 +62,18 @@ namespace CarParts.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
+            Car? car = await this._carService.GetCarById(id);
+
+            if (car == null)
+            {
+                return RedirectToAction("All");
+            }
+
+            if (car.UserId != GetUserId())
+            {
+                return RedirectToAction("All");
+            }
+
             var editCarViewModel = await this._carService.GetEditCarViewModelAsync(id, GetUserId());
 
             if (editCarViewModel == null)
@@ -86,6 +100,18 @@ namespace CarParts.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
+            Car? car = await this._carService.GetCarById(id);
+
+            if (car == null)
+            {
+                return RedirectToAction("All");
+            }
+            
+            if (car.UserId != GetUserId())
+            {
+                return RedirectToAction("All");
+            }
+
             var carViewModel = await this._carService.GetCarViewModelByIdAsync(id);
             
             await this._carService.DeleteCarAsync(id, GetUserId());
@@ -93,6 +119,13 @@ namespace CarParts.Controllers
             return RedirectToAction("All");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> MyCars()
+        {
+            var cars = await this._carService.GetMyCarsAsync(GetUserId());
+
+            return View(cars);
+        }
 
 
     }

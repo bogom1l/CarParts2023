@@ -19,26 +19,28 @@ namespace CarParts.Services
 
         public async Task<ICollection<CarViewModel>> GetAllCarsAsync()
         {
-            var cars = await this._dbContext.Cars.Select(c => new CarViewModel
-            {
-                CarId = c.CarId,
-                Make = c.Make,
-                Model = c.Model,
-                Year = c.Year,
-                Description = c.Description,
-                Price = c.Price,
-                Color = c.Color,
-                EngineSize = c.EngineSize,
-                FuelType = c.FuelType.Name,
-                Transmission = c.Transmission.Name,
-                Category = c.Category.Name,
-                Weight = c.Weight,
-                TopSpeed = c.TopSpeed,
-                Acceleration = c.Acceleration,
-                Horsepower = c.Horsepower,
-                Torque = c.Torque,
-                FuelConsumption = c.FuelConsumption
-            }).ToListAsync();
+            var cars = await this._dbContext.Cars
+                .Select(c => new CarViewModel
+                {
+                    CarId = c.CarId,
+                    Make = c.Make,
+                    Model = c.Model,
+                    Year = c.Year,
+                    Description = c.Description,
+                    Price = c.Price,
+                    Color = c.Color,
+                    EngineSize = c.EngineSize,
+                    FuelType = c.FuelType.Name,
+                    Transmission = c.Transmission.Name,
+                    Category = c.Category.Name,
+                    Weight = c.Weight,
+                    TopSpeed = c.TopSpeed,
+                    Acceleration = c.Acceleration,
+                    Horsepower = c.Horsepower,
+                    Torque = c.Torque,
+                    FuelConsumption = c.FuelConsumption,
+                    Owner = c.User.UserName
+                }).ToListAsync();
 
             int a = 2;
             int b = 3;
@@ -242,18 +244,51 @@ namespace CarParts.Services
 
         public async Task DeleteCarAsync(int id, string userId)
         {
-            //CarUser carUser = this._dbContext
-            //    .CarUser
-            //    .FirstOrDefault(cu => cu.CarId == id && cu.UserId == userId);
+            var carData = this._dbContext
+                .Cars
+                .FirstOrDefault(cu => cu.CarId == id && cu.UserId == userId);
 
-            //if (carUser != null)
-            //{
-            //    this._dbContext.CarUsers.Remove(carUser);
-            //    await this._dbContext.SaveChangesAsync();
-            //}
-
-            throw new NotImplementedException();
+            if (carData != null)
+            {
+                this._dbContext.Cars.Remove(carData);
+                await this._dbContext.SaveChangesAsync();
+            }
         }
 
+        public async Task<Car?> GetCarById(int id)
+        {
+            Car? carData = await this._dbContext.Cars
+                .FirstOrDefaultAsync(c => c.CarId == id);
+
+            return carData;
+        }
+
+        public async Task<ICollection<CarViewModel>> GetMyCarsAsync(string userId)
+        {
+            return await this._dbContext
+                .Cars
+                .Where(c => c.UserId == userId)
+                .Select(c => new CarViewModel()
+                {
+                    CarId = c.CarId,
+                    Make = c.Make,
+                    Model = c.Model,
+                    Year = c.Year,
+                    Description = c.Description,
+                    Price = c.Price,
+                    Color = c.Color,
+                    EngineSize = c.EngineSize,
+                    FuelType = c.FuelType.Name,
+                    Transmission = c.Transmission.Name,
+                    Category = c.Category.Name,
+                    Weight = c.Weight,
+                    TopSpeed = c.TopSpeed,
+                    Acceleration = c.Acceleration,
+                    Horsepower = c.Horsepower,
+                    Torque = c.Torque,
+                    FuelConsumption = c.FuelConsumption,
+                    Owner = c.User.UserName
+                }).ToListAsync();
+        }
     }
 }

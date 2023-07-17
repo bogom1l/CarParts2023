@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 using static CarParts.GlobalConstants.GlobalConstants.Car;
 
 namespace CarParts.Data.Models
@@ -26,11 +27,11 @@ namespace CarParts.Data.Models
         public string UserId { get; set; } = null!;
         
         [Required]
-        public ApplicationUser User { get; set; } = null!;
+        public IdentityUser User { get; set; } = null!; //TODO: changed from ApplicationUser to IdentityUser
+
 
         [Required]
         public string Description { get; set; } = null!;
-
 
         [Required]
         public double Price { get; set; }

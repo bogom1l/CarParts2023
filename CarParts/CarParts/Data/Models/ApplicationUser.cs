@@ -8,7 +8,7 @@ namespace CarParts.Data.Models
 
         public ICollection<Car> Cars { get; set; } = new List<Car>();
 
-        //public string Name { get; set; } = null!; TODO:?
+        //public string Name { get; set; } = null!; //TODO:?
 
     }
 }

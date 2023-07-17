@@ -1,8 +1,6 @@
 ﻿
 
-
-make edit & delete only for CarOwners (ask chatgpt)
-
+add Image for Cars 
 
 
 testwam Add Part

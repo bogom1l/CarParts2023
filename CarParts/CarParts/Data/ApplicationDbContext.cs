@@ -14,7 +14,7 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<CarUser>().HasKey(cu => new { cu.CarId, cu.UserId });
+            
             builder.Entity<PartUser>().HasKey(pu => new { pu.PartId, pu.UserId });
 
             
@@ -61,7 +61,7 @@
                         Id = 1,
                         Name = "Automatic"
                     },
-                    new FuelType()
+                    new Transmission()
                     {
                         Id = 2,
                         Name = "Manual"
@@ -75,42 +75,42 @@
                         Id = 1,
                         Name = "Sedan"
                     },
-                    new FuelType()
+                    new Category()
                     {
                         Id = 2,
                         Name = "Coupe"
                     },
-                    new FuelType()
+                    new Category()
                     {
                         Id = 3,
                         Name = "Hatchback"
                     },
-                    new FuelType()
+                    new Category()
                     {
                         Id = 4,
                         Name = "SUV"
                     },
-                    new FuelType()
+                    new Category()
                     {
                         Id = 5,
                         Name = "Wagon"
                     },
-                    new FuelType()
+                    new Category()
                     {
                         Id = 6,
                         Name = "Cabrio"
                     },
-                    new FuelType()
+                    new Category()
                     {
                         Id = 7,
                         Name = "Pickup Truck"
                     },
-                    new FuelType()
+                    new Category()
                     {
                         Id = 8,
                         Name = "Minivan"
                     },
-                    new FuelType()
+                    new Category()
                     {
                         Id = 9,
                         Name = "Jeep"
@@ -146,9 +146,6 @@
                // Add more part category data as needed
            ); */
 
-
-           
-
             
 
         }
@@ -159,7 +156,8 @@
 
         public DbSet<PartCategory> PartCategories { get; set; } = null!;
 
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;
+        //public DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;
+
 
         public DbSet<FuelType> FuelTypes { get; set; } = null!;
 
@@ -170,6 +168,5 @@
 
         //public DbSet<PartUser> PartUsers { get; set; } = null!;
 
-       // public DbSet<CarUser> CarUsers { get; set; } = null!;
     }
 }

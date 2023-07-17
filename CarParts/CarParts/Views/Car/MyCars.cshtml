@@ -1,7 +1,7 @@
 ﻿@model ICollection<CarViewModel>
 
 @{
-    ViewBag.Title = "All Cars";
+    ViewBag.Title = "My Cars";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -11,6 +11,10 @@
     <div class="row d-flex align-items-start">
         @foreach (var car in Model)
         {
+            if (car.Owner != User.Identity.Name)
+            {
+                break;
+            }
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                 <div class="card">
                     <div class="card-body">
@@ -45,7 +49,6 @@
                                 Delete
                             </a>
                         }
-
 
                     </div>
                 </div>
