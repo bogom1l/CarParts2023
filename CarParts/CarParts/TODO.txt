@@ -7,6 +7,9 @@ testwam Add Part
 ->
 pravq edit/details/delete na Part
 ->
+
+see in database table Cars if i still have the field ApplicationUser = null (in Microsoft server sql management studio)
+
 add favorite cars/parts
 
 16:13 - 17.07.2023
