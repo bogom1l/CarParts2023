@@ -31,9 +31,6 @@ namespace CarParts.Data.Models
         [Required]
         public string Description { get; set; } = null!;
 
-        [Required]
-        [MaxLength(CarWheelsMaxLength)]
-        public string Wheels { get; set; } = null!;
 
         [Required]
         public double Price { get; set; }
@@ -45,17 +42,30 @@ namespace CarParts.Data.Models
         [Required]
         public double EngineSize { get; set; }
 
-        [Required]
-        [MaxLength(CarFuelTypeMaxLength)]
-        public string FuelType { get; set; } = null!;
+
+
+
 
         [Required]
-        [MaxLength(CarTransmissionMaxLength)]
-        public string Transmission { get; set; } = null!;
+        [ForeignKey(nameof(FuelType))]
+        public int FuelTypeId { get; set; }
+        public FuelType FuelType { get; set; } = null!;
+
 
         [Required]
-        [MaxLength(CarCategoryMaxLength)]
-        public string Category { get; set; } = null!;
+        [ForeignKey(nameof(Transmission))]
+        public int TransmissionId { get; set; } 
+        public Transmission Transmission { get; set; } = null!;
+
+
+        [Required]
+        [ForeignKey(nameof(Category))]
+        public int CategoryId { get; set; }
+        public Category Category { get; set; } = null!;
+
+
+
+
 
         [Required]
         public double Weight { get; set; }
@@ -75,9 +85,7 @@ namespace CarParts.Data.Models
         [Required]
         public double FuelConsumption { get; set; }
 
-        [Required]
-        public double Emission { get; set; }
-
+        
 
     }
 }

@@ -30,5 +30,19 @@ namespace CarParts.Controllers
             return View(car);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Add(AddCarViewModel car)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(car);
+            }
+
+            await this._carService.AddCarAsync(car, GetUserId());
+
+            return RedirectToAction("All");
+        }
+
     }
 }

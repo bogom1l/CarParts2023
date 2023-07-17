@@ -1,4 +1,6 @@
-﻿namespace CarParts.ViewModels.Car
+﻿using CarParts.ViewModels.Car.CarProperties;
+
+namespace CarParts.ViewModels.Car
 {
     using System.ComponentModel.DataAnnotations;
     using static CarParts.GlobalConstants.GlobalConstants.Car;
@@ -6,13 +8,13 @@
     public class AddCarViewModel
     {
         [Required]
-        [StringLength(CarMakeMaxLength, 
+        [StringLength(CarMakeMaxLength,
             MinimumLength = CarMakeMinLength,
             ErrorMessage = "Make can be between 2 and 50 characters.")]
         public string Make { get; set; } = null!;
 
         [Required]
-        [StringLength(CarModelMaxLength, 
+        [StringLength(CarModelMaxLength,
             MinimumLength = CarModelMinLength,
             ErrorMessage = "Model can be between 2 and 50 characters.")]
         public string Model { get; set; } = null!;
@@ -22,6 +24,87 @@
             CarYearMaxValue,
             ErrorMessage = "Year can be between 1900 and 2024.")]
         public int Year { get; set; }
+
+        [Required]
+        [StringLength(CarDescriptionMaxLength,
+            MinimumLength = CarDescriptionMinLength,
+            ErrorMessage = "Description can be between 2 and 300.")]
+        public string Description { get; set; } = null!;
+
+
+        [Required]
+        [Range(CarPriceMinValue,
+            CarPriceMaxValue,
+            ErrorMessage = "Price can be between 0 and 999 999.")]
+        public double Price { get; set; }
+
+        [Required]
+        [StringLength(CarColorMaxLength,
+            MinimumLength = CarColorMinLength,
+            ErrorMessage = "Color can be between 2 and 50 characters.")]
+        public string Color { get; set; } = null!;
+
+        [Required]
+        [Range(CarEngineSizeMinValue,
+            CarEngineSizeMaxValue,
+            ErrorMessage = "Engine size can be between 500 and 900.")]
+        public double EngineSize { get; set; }
+
+        [Required]
+        //TODO: Validation?
+        public int FuelTypeId { get; set; } //TODO: Dropdown Menu
+
+        public ICollection<FuelTypeViewModel> FuelTypes { get; set; } = new List<FuelTypeViewModel>();
+
+        [Required]
+        //TODO: Validation?
+        public int TransmissionId { get; set; }  //TODO: Dropdown Menu
+
+        public ICollection<TransmissionViewModel> Transmissions { get; set; } = new List<TransmissionViewModel>();
+
+        [Required]
+        //TODO: Validation?
+        public int CategoryId { get; set; } //TODO: Dropdown Menu
+
+        public ICollection<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
+
+        [Required]
+        [Range(CarWeightMinValue,
+            CarWeightMaxValue,
+            ErrorMessage = "Weight can be between 500 and 9000.")]
+
+        public double Weight { get; set; }
+
+        [Required]
+        [Range(CarTopSpeedMinValue,
+            CarTopSpeedMaxValue,
+            ErrorMessage = "Top speed can be between 60 and 350.")]
+        public double TopSpeed { get; set; }
+
+        [Required]
+        [Range(CarAccelerationMinValue,
+            CarAccelerationMaxValue,
+            ErrorMessage = "Acceleration can be between 1 and 20.")]  
+        public double Acceleration { get; set; } //seconds
+
+        [Required]
+        [Range(CarHorsepowerMinValue,
+            CarHorsepowerMaxValue,
+            ErrorMessage = "Horsepower can be between 20 and 2000.")]
+        public double Horsepower { get; set; }
+
+        [Required]
+        [Range(CarTorqueMinValue,
+            CarTorqueMaxValue,
+            ErrorMessage = "Torque can be between 50 and 2000.")]
+        public double Torque { get; set; }
+
+        [Required]
+        [Range(CarFuelConsumptionMinValue,
+            CarFuelConsumptionMaxValue,
+            ErrorMessage = "Fuel consumption can be between 2 and 50.")]
+        public double FuelConsumption { get; set; }
+        
 
     }
 }

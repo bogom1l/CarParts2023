@@ -18,19 +18,35 @@
                         <p class="card-text">
                             <span class="fw-bold">Year:</span> @car.Year
                         </p>
+                        <p class="card-text">
+                            <span class="fw-bold">Price:</span> $@car.Price
+                        </p>
+                        <p class="card-text">
+                            <span class="fw-bold">Fuel Type:</span> @car.FuelType
+                        </p>
+                        <p class="card-text">
+                            <span class="fw-bold">Category:</span> @car.Category
+                        </p>
+                        <p class="card-text">
+                            <span class="fw-bold">Horsepower:</span> @car.Horsepower
+                        </p>
                     </div>
                     <div class="card-footer">
-                        <a asp-controller="Car" asp-action="Details" asp-route-id="@car.CarId" class="btn btn-info btn-block">View Details</a>
+                        <a asp-controller="Car" asp-action="Details" asp-route-id="@car.CarId" class="btn btn-info btn-block">
+                            View Details
+                        </a>
+                        <!--
                         @* If (User.Identity.Name == car.Supplier)
-                        {
-                            <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.CarId" class="btn btn-info btn-block">Edit</a>
-                        }
-                        else
-                        {
-                            <form asp-controller="Car" asp-action="Rent" asp-route-id="@car.CarId">
-                                <button type="submit" class="btn btn-info btn-block">Rent the Car</button>
-                            </form>
-                        } *@
+                    {
+                        <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.CarId" class="btn btn-info btn-block">Edit</a>
+                    }
+                    else
+                    {
+                        <form asp-controller="Car" asp-action="Rent" asp-route-id="@car.CarId">
+                            <button type="submit" class="btn btn-info btn-block">Rent the Car</button>
+                        </form>
+                    } *@
+                        -->
                     </div>
                 </div>
             </div>

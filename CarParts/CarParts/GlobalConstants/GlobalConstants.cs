@@ -25,8 +25,33 @@
             public const int CarCategoryMinLength = 2;
             public const int CarCategoryMaxLength = 40;
 
-            public const int CarWheelsMaxLength = 2;
-            public const int CarWheelsMinLength = 40;
+            public const int CarDescriptionMinLength = 2;
+            public const int CarDescriptionMaxLength = 300;
+
+            public const double CarPriceMinValue = 0.01;
+            public const double CarPriceMaxValue = 999_999;
+
+            public const double CarEngineSizeMinValue = 500;
+            public const double CarEngineSizeMaxValue = 9000;
+
+            public const int CarWeightMinValue = 500;
+            public const int CarWeightMaxValue = 9000;
+
+            public const int CarTopSpeedMinValue = 60;
+            public const int CarTopSpeedMaxValue = 350;
+    
+            public const int CarAccelerationMinValue = 1;
+            public const int CarAccelerationMaxValue = 20;
+
+            public const int CarHorsepowerMinValue = 20;
+            public const int CarHorsepowerMaxValue = 2000;
+
+            public const int CarTorqueMinValue = 50;
+            public const int CarTorqueMaxValue = 2000;
+
+            public const int CarFuelConsumptionMinValue = 2;
+            public const int CarFuelConsumptionMaxValue = 50;
+
         }
 
         public static class Part
@@ -46,5 +71,18 @@
             public const int CategoryNameMinLength = 2;
             public const int CategoryNameMaxLength = 50;
         }
+
+        public static class CarProperties
+        {
+            public const int FuelTypeMaxLength = 30;
+            public const int FuelTypeMinLength = 2;
+
+            public const int TransmissionMaxLength = 30;
+            public const int TransmissionMinLength = 2;
+
+            public const int CategoryMaxLength = 40;
+            public const int CategoryMinLength = 2;
+        }
+
     }
 }

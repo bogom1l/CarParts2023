@@ -4,6 +4,7 @@ using CarParts.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarParts.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230717093650_RemovedWheelsAndEmissionFieldsInCar")]
+    partial class RemovedWheelsAndEmissionFieldsInCar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,8 +35,10 @@ namespace CarParts.Data.Migrations
                     b.Property<double>("Acceleration")
                         .HasColumnType("float");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("Color")
                         .IsRequired()
@@ -45,14 +49,19 @@ namespace CarParts.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("Emission")
+                        .HasColumnType("float");
+
                     b.Property<double>("EngineSize")
                         .HasColumnType("float");
 
                     b.Property<double>("FuelConsumption")
                         .HasColumnType("float");
 
-                    b.Property<int>("FuelTypeId")
-                        .HasColumnType("int");
+                    b.Property<string>("FuelType")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<double>("Horsepower")
                         .HasColumnType("float");
@@ -76,8 +85,10 @@ namespace CarParts.Data.Migrations
                     b.Property<double>("Torque")
                         .HasColumnType("float");
 
-                    b.Property<int>("TransmissionId")
-                        .HasColumnType("int");
+                    b.Property<string>("Transmission")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -86,20 +97,67 @@ namespace CarParts.Data.Migrations
                     b.Property<double>("Weight")
                         .HasColumnType("float");
 
+                    b.Property<string>("Wheels")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("CarId");
 
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("FuelTypeId");
-
-                    b.HasIndex("TransmissionId");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("Cars");
+
+                    b.HasData(
+                        new
+                        {
+                            CarId = 1,
+                            Acceleration = 123.0,
+                            Category = "Sedan",
+                            Color = "Red",
+                            Description = "This is a car",
+                            Emission = 123.0,
+                            EngineSize = 2.5,
+                            FuelConsumption = 123.0,
+                            FuelType = "Gas",
+                            Horsepower = 123.0,
+                            Make = "Ford",
+                            Model = "Mustang",
+                            Price = 10000.0,
+                            TopSpeed = 123.0,
+                            Torque = 123.0,
+                            Transmission = "Automatic",
+                            UserId = "41b333fe-2257-47d9-8e04-f43a0a645bf7",
+                            Weight = 123.0,
+                            Wheels = "4",
+                            Year = 2021
+                        },
+                        new
+                        {
+                            CarId = 2,
+                            Acceleration = 4443.0,
+                            Category = "Sedan",
+                            Color = "Red",
+                            Description = "This is a car2",
+                            Emission = 4123.0,
+                            EngineSize = 444.0,
+                            FuelConsumption = 4123.0,
+                            FuelType = "Gas",
+                            Horsepower = 443.0,
+                            Make = "Toyota",
+                            Model = "Camry",
+                            Price = 444.0,
+                            TopSpeed = 14423.0,
+                            Torque = 43.0,
+                            Transmission = "Automatic",
+                            UserId = "41b333fe-2257-47d9-8e04-f43a0a645bf7",
+                            Weight = 444.0,
+                            Wheels = "4",
+                            Year = 2018
+                        });
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.CarUser", b =>
@@ -115,111 +173,6 @@ namespace CarParts.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("CarUser");
-                });
-
-            modelBuilder.Entity("CarParts.Data.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Sedan"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Coupe"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Hatchback"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "SUV"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Wagon"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Cabrio"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Pickup Truck"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Minivan"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "Jeep"
-                        });
-                });
-
-            modelBuilder.Entity("CarParts.Data.Models.FuelType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FuelTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Diesel"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Petrol"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Electric"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Hybrid"
-                        });
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.Part", b =>
@@ -257,6 +210,35 @@ namespace CarParts.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Parts");
+
+                    b.HasData(
+                        new
+                        {
+                            PartId = 1,
+                            CategoryId = 1,
+                            Description = "V8 Engine",
+                            Name = "Engine",
+                            Price = 5000.0,
+                            UserId = "41b333fe-2257-47d9-8e04-f43a0a645bf7"
+                        },
+                        new
+                        {
+                            PartId = 2,
+                            CategoryId = 2,
+                            Description = "Front Suspension",
+                            Name = "Suspension",
+                            Price = 1000.0,
+                            UserId = "41b333fe-2257-47d9-8e04-f43a0a645bf7"
+                        },
+                        new
+                        {
+                            PartId = 3,
+                            CategoryId = 3,
+                            Description = "Front Brakes",
+                            Name = "Brakes",
+                            Price = 500.0,
+                            UserId = "41b333fe-2257-47d9-8e04-f43a0a645bf7"
+                        });
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.PartCategory", b =>
@@ -275,6 +257,23 @@ namespace CarParts.Data.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("PartCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            Name = "Engine"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            Name = "Suspension"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            Name = "Brakes"
+                        });
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.PartUser", b =>
@@ -290,36 +289,6 @@ namespace CarParts.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("PartUser");
-                });
-
-            modelBuilder.Entity("CarParts.Data.Models.Transmission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Transmissions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Automatic"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Manual"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -539,35 +508,11 @@ namespace CarParts.Data.Migrations
 
             modelBuilder.Entity("CarParts.Data.Models.Car", b =>
                 {
-                    b.HasOne("CarParts.Data.Models.Category", "Category")
-                        .WithMany("Cars")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("CarParts.Data.Models.FuelType", "FuelType")
-                        .WithMany("Cars")
-                        .HasForeignKey("FuelTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("CarParts.Data.Models.Transmission", "Transmission")
-                        .WithMany("Cars")
-                        .HasForeignKey("TransmissionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("CarParts.Data.Models.ApplicationUser", "User")
                         .WithMany("Cars")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Category");
-
-                    b.Navigation("FuelType");
-
-                    b.Navigation("Transmission");
 
                     b.Navigation("User");
                 });
@@ -680,24 +625,9 @@ namespace CarParts.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CarParts.Data.Models.Category", b =>
-                {
-                    b.Navigation("Cars");
-                });
-
-            modelBuilder.Entity("CarParts.Data.Models.FuelType", b =>
-                {
-                    b.Navigation("Cars");
-                });
-
             modelBuilder.Entity("CarParts.Data.Models.PartCategory", b =>
                 {
                     b.Navigation("Parts");
-                });
-
-            modelBuilder.Entity("CarParts.Data.Models.Transmission", b =>
-                {
-                    b.Navigation("Cars");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.ApplicationUser", b =>
