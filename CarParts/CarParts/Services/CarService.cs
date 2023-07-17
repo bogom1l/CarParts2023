@@ -19,7 +19,7 @@ namespace CarParts.Services
 
         public async Task<ICollection<CarViewModel>> GetAllCarsAsync()
         {
-            return await this._dbContext.Cars.Select(c => new CarViewModel
+            var cars = await this._dbContext.Cars.Select(c => new CarViewModel
             {
                 CarId = c.CarId,
                 Make = c.Make,
@@ -39,6 +39,11 @@ namespace CarParts.Services
                 Torque = c.Torque,
                 FuelConsumption = c.FuelConsumption
             }).ToListAsync();
+
+            int a = 2;
+            int b = 3;
+
+            return cars;
         }
 
         public async Task<AddCarViewModel> GetAddCarViewModelAsync()
@@ -68,7 +73,7 @@ namespace CarParts.Services
                 Categories = categories
             };
 
-            return addCarViewModel; 
+            return addCarViewModel;
         }
 
         public async Task AddCarAsync(AddCarViewModel car, string userId)
@@ -97,5 +102,158 @@ namespace CarParts.Services
             await this._dbContext.Cars.AddAsync(carData);
             await this._dbContext.SaveChangesAsync();
         }
+
+        public async Task<DetailsCarViewModel?> GetCarDetailsAsync(int id)
+        {
+            DetailsCarViewModel? detailsCarViewModel = await this._dbContext
+                .Cars
+                .Where(c => c.CarId == id)
+                .Select(c => new DetailsCarViewModel
+                {
+                    CarId = c.CarId,
+                    Make = c.Make,
+                    Model = c.Model,
+                    Year = c.Year,
+                    Description = c.Description,
+                    Price = c.Price,
+                    Color = c.Color,
+                    EngineSize = c.EngineSize,
+                    FuelType = c.FuelType.Name,
+                    Transmission = c.Transmission.Name,
+                    Category = c.Category.Name,
+                    Weight = c.Weight,
+                    TopSpeed = c.TopSpeed,
+                    Acceleration = c.Acceleration,
+                    Horsepower = c.Horsepower,
+                    Torque = c.Torque,
+                    FuelConsumption = c.FuelConsumption,
+
+                }).FirstOrDefaultAsync();
+
+            return detailsCarViewModel;
+        }
+
+        public async Task<EditCarViewModel?> GetEditCarViewModelAsync(int id, string userId)
+        {
+            var fuelTypes = await this._dbContext.FuelTypes.Select(f => new FuelTypeViewModel
+            {
+                Id = f.Id,
+                Name = f.Name
+            }).ToListAsync();
+
+            var transmissions = await this._dbContext.Transmissions.Select(t => new TransmissionViewModel
+            {
+                Id = t.Id,
+                Name = t.Name
+            }).ToListAsync();
+
+            var categories = await this._dbContext.Categories.Select(c => new CategoryViewModel
+            {
+                Id = c.Id,
+                Name = c.Name
+            }).ToListAsync();
+
+            var editCarViewModel = await this._dbContext.Cars
+                .Where(c => c.CarId == id)
+                .Select(c => new EditCarViewModel
+                {
+                    Make = c.Make,
+                    Model = c.Model,
+                    Year = c.Year,
+                    Description = c.Description,
+                    Price = c.Price,
+                    Color = c.Color,
+                    EngineSize = c.EngineSize,
+                    FuelTypeId = c.FuelTypeId,
+                    FuelTypes = fuelTypes,
+                    TransmissionId = c.TransmissionId,
+                    Transmissions = transmissions,
+                    CategoryId = c.CategoryId,
+                    Categories = categories,
+                    Weight = c.Weight,
+                    TopSpeed = c.TopSpeed,
+                    Acceleration = c.Acceleration,
+                    Horsepower = c.Horsepower,
+                    Torque = c.Torque,
+                    FuelConsumption = c.FuelConsumption
+                })
+                .FirstOrDefaultAsync();
+
+            return editCarViewModel;
+        }
+
+        public async Task EditCarAsync(int id, EditCarViewModel car)
+        {
+            var carData = await this._dbContext.Cars
+                .FirstOrDefaultAsync(c => c.CarId == id);
+
+            if (carData != null)
+            {
+                carData.Make = car.Make;
+                carData.Model = car.Model;
+                carData.Year = car.Year;
+                carData.Description = car.Description;
+                carData.Price = car.Price;
+                carData.Color = car.Color;
+                carData.EngineSize = car.EngineSize;
+                carData.FuelTypeId = car.FuelTypeId;
+                carData.TransmissionId = car.TransmissionId;
+                carData.CategoryId = car.CategoryId;
+                carData.Weight = car.Weight;
+                carData.TopSpeed = car.TopSpeed;
+                carData.Acceleration = car.Acceleration;
+                carData.Horsepower = car.Horsepower;
+                carData.Torque = car.Torque;
+                carData.FuelConsumption = car.FuelConsumption;
+
+                await this._dbContext.SaveChangesAsync();
+            }
+
+        }
+
+        public async Task<CarViewModel?> GetCarViewModelByIdAsync(int id)
+        {
+            CarViewModel? carViewModel = await this._dbContext
+                .Cars
+                .Where(c => c.CarId == id)
+                .Select(c => new CarViewModel
+                {
+                    CarId = c.CarId,
+                    Make = c.Make,
+                    Model = c.Model,
+                    Year = c.Year,
+                    Description = c.Description,
+                    Price = c.Price,
+                    Color = c.Color,
+                    EngineSize = c.EngineSize,
+                    FuelType = c.FuelType.Name,
+                    Transmission = c.Transmission.Name,
+                    Category = c.Category.Name,
+                    Weight = c.Weight,
+                    TopSpeed = c.TopSpeed,
+                    Acceleration = c.Acceleration,
+                    Horsepower = c.Horsepower,
+                    Torque = c.Torque,
+                    FuelConsumption = c.FuelConsumption
+                }).FirstOrDefaultAsync();
+
+            return carViewModel;
+        }
+
+        public async Task DeleteCarAsync(int id, string userId)
+        {
+            //CarUser carUser = this._dbContext
+            //    .CarUser
+            //    .FirstOrDefault(cu => cu.CarId == id && cu.UserId == userId);
+
+            //if (carUser != null)
+            //{
+            //    this._dbContext.CarUsers.Remove(carUser);
+            //    await this._dbContext.SaveChangesAsync();
+            //}
+
+            throw new NotImplementedException();
+        }
+
     }
 }

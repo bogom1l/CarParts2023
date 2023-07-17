@@ -1,0 +1,55 @@
+﻿@model DetailsCarViewModel
+@{
+    ViewBag.Title = "Car Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    <div class="card w-100">
+        <div class="card-body">
+            <h3 class="card-title text-center">@Model.Make @Model.Model</h3>
+            <p class="mb-0"><span class="fw-bold">Category: </span>@Model.Category</p>
+            <p class="mb-0"><span class="fw-bold">Year: </span>@Model.Year</p>
+            <p class="mb-0"><span class="fw-bold">Fuel Type: </span>@Model.FuelType</p>
+            <p class="mb-0"><span class="fw-bold">Transmission: </span>@Model.Transmission</p>
+            <p class="mb-0"><span class="fw-bold">Price: </span>@Model.Price</p>
+
+            <div id="moreDetails" style="display: none;">
+                <p class="mb-0"><span class="fw-bold">Description: </span>@Model.Description</p>
+                <p class="mb-0"><span class="fw-bold">Color: </span>@Model.Color</p>
+                <p class="mb-0"><span class="fw-bold">Engine Size: </span>@Model.EngineSize</p>
+                <p class="mb-0"><span class="fw-bold">Weight: </span>@Model.Weight</p>
+                <p class="mb-0"><span class="fw-bold">Top Speed: </span>@Model.TopSpeed</p>
+                <p class="mb-0"><span class="fw-bold">Acceleration: </span>@Model.Acceleration</p>
+                <p class="mb-0"><span class="fw-bold">Horsepower: </span>@Model.Horsepower</p>
+                <p class="mb-0"><span class="fw-bold">Torque: </span>@Model.Torque</p>
+                <p class="mb-0"><span class="fw-bold">Fuel Consumption: </span>@Model.FuelConsumption</p>
+            </div>
+
+            <button id="moreDetailsBtn" class="btn btn-link text-info btn-lg">More Details</button>
+            <button id="lessDetailsBtn" class="btn btn-link text-info btn-lg" style="display: none;">Less Details</button>
+        </div>
+
+        <a asp-controller="Car" asp-action="All" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Back to All Cars</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        document.getElementById("moreDetailsBtn").addEventListener("click", function () {
+            document.getElementById("moreDetails").style.display = "block";
+            document.getElementById("moreDetailsBtn").style.display = "none";
+            document.getElementById("lessDetailsBtn").style.display = "inline";
+        });
+
+        document.getElementById("lessDetailsBtn").addEventListener("click", function () {
+            document.getElementById("moreDetails").style.display = "none";
+            document.getElementById("moreDetailsBtn").style.display = "inline";
+            document.getElementById("lessDetailsBtn").style.display = "none";
+        });
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,8 +1,9 @@
 ﻿
 
 
-pravq edit/details/delete na Car
-->
+make edit & delete only for CarOwners (ask chatgpt)
+
+
 
 testwam Add Part
 ->
@@ -10,4 +11,4 @@ pravq edit/details/delete na Part
 ->
 add favorite cars/parts
 
-a
+16:13 - 17.07.2023

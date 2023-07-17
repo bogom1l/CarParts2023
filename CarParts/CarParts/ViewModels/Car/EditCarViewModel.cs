@@ -1,11 +1,10 @@
-﻿using CarParts.ViewModels.Car.CarProperties;
-
-namespace CarParts.ViewModels.Car
+﻿namespace CarParts.ViewModels.Car
 {
+    using CarParts.ViewModels.Car.CarProperties;
     using System.ComponentModel.DataAnnotations;
     using static CarParts.GlobalConstants.GlobalConstants.Car;
 
-    public class AddCarViewModel
+    public class EditCarViewModel
     {
         [Required]
         [StringLength(CarMakeMaxLength,
@@ -104,7 +103,5 @@ namespace CarParts.ViewModels.Car
             CarFuelConsumptionMaxValue,
             ErrorMessage = "Fuel consumption can be between 2 and 50.")]
         public double FuelConsumption { get; set; }
-        
-
     }
 }

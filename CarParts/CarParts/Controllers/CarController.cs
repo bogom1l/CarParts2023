@@ -44,5 +44,56 @@ namespace CarParts.Controllers
             return RedirectToAction("All");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var detailsCarViewModel = await this._carService.GetCarDetailsAsync(id);
+
+            if (detailsCarViewModel == null)
+            {
+                RedirectToPage("All");
+            }
+
+            return View(detailsCarViewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var editCarViewModel = await this._carService.GetEditCarViewModelAsync(id, GetUserId());
+
+            if (editCarViewModel == null)
+            {
+                return RedirectToAction("All");
+            }
+
+            return View(editCarViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditCarViewModel car)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(car);
+            }
+
+            await this._carService.EditCarAsync(id, car);
+
+            return RedirectToAction("All");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var carViewModel = await this._carService.GetCarViewModelByIdAsync(id);
+            
+            await this._carService.DeleteCarAsync(id, GetUserId());
+
+            return RedirectToAction("All");
+        }
+
+
+
     }
 }
