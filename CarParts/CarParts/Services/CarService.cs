@@ -39,7 +39,8 @@ namespace CarParts.Services
                     Horsepower = c.Horsepower,
                     Torque = c.Torque,
                     FuelConsumption = c.FuelConsumption,
-                    Owner = c.User.UserName
+                    Owner = c.User.UserName,
+                    ImageUrl = c.ImageUrl
                 }).ToListAsync();
 
             int a = 2;
@@ -98,7 +99,8 @@ namespace CarParts.Services
                 Acceleration = car.Acceleration,
                 Horsepower = car.Horsepower,
                 Torque = car.Torque,
-                FuelConsumption = car.FuelConsumption
+                FuelConsumption = car.FuelConsumption,
+                ImageUrl = car.ImageUrl
             };
 
             await this._dbContext.Cars.AddAsync(carData);
@@ -129,6 +131,7 @@ namespace CarParts.Services
                     Horsepower = c.Horsepower,
                     Torque = c.Torque,
                     FuelConsumption = c.FuelConsumption,
+                    ImageUrl = c.ImageUrl
 
                 }).FirstOrDefaultAsync();
 
@@ -177,7 +180,8 @@ namespace CarParts.Services
                     Acceleration = c.Acceleration,
                     Horsepower = c.Horsepower,
                     Torque = c.Torque,
-                    FuelConsumption = c.FuelConsumption
+                    FuelConsumption = c.FuelConsumption,
+                    ImageUrl = c.ImageUrl
                 })
                 .FirstOrDefaultAsync();
 
@@ -207,6 +211,7 @@ namespace CarParts.Services
                 carData.Horsepower = car.Horsepower;
                 carData.Torque = car.Torque;
                 carData.FuelConsumption = car.FuelConsumption;
+                carData.ImageUrl = car.ImageUrl;
 
                 await this._dbContext.SaveChangesAsync();
             }
@@ -236,7 +241,8 @@ namespace CarParts.Services
                     Acceleration = c.Acceleration,
                     Horsepower = c.Horsepower,
                     Torque = c.Torque,
-                    FuelConsumption = c.FuelConsumption
+                    FuelConsumption = c.FuelConsumption,
+                    ImageUrl = c.ImageUrl
                 }).FirstOrDefaultAsync();
 
             return carViewModel;
@@ -287,7 +293,8 @@ namespace CarParts.Services
                     Horsepower = c.Horsepower,
                     Torque = c.Torque,
                     FuelConsumption = c.FuelConsumption,
-                    Owner = c.User.UserName
+                    Owner = c.User.UserName,
+                    ImageUrl = c.ImageUrl
                 }).ToListAsync();
         }
     }

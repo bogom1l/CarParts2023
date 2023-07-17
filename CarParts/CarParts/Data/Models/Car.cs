@@ -7,10 +7,9 @@ namespace CarParts.Data.Models
 {
     public class Car
     {
-        [Key]
-        public int CarId { get; set; }
+        [Key] public int CarId { get; set; }
 
-        [Required] 
+        [Required]
         [MaxLength(CarMakeMaxLength)]
         public string Make { get; set; } = null!;
 
@@ -18,22 +17,22 @@ namespace CarParts.Data.Models
         [MaxLength(CarModelMaxLength)]
         public string Model { get; set; } = null!;
 
-        [Required]
+        [Required] 
         public int Year { get; set; }
 
 
-        [Required]
-        [ForeignKey(nameof(User))]
+        [Required] 
+        [ForeignKey(nameof(User))] 
         public string UserId { get; set; } = null!;
-        
-        [Required]
-        public IdentityUser User { get; set; } = null!; //TODO: changed from ApplicationUser to IdentityUser
+
+        [Required] public IdentityUser User { get; set; } = null!; //TODO: changed from ApplicationUser to IdentityUser
 
 
-        [Required]
+        [Required] 
+        [MaxLength(CarDescriptionMaxLength)]
         public string Description { get; set; } = null!;
 
-        [Required]
+        [Required] 
         public double Price { get; set; }
 
         [Required]
@@ -44,24 +43,26 @@ namespace CarParts.Data.Models
         public double EngineSize { get; set; }
 
 
-
-
+        
 
         [Required]
         [ForeignKey(nameof(FuelType))]
         public int FuelTypeId { get; set; }
+
         public FuelType FuelType { get; set; } = null!;
 
 
         [Required]
         [ForeignKey(nameof(Transmission))]
-        public int TransmissionId { get; set; } 
+        public int TransmissionId { get; set; }
+
         public Transmission Transmission { get; set; } = null!;
 
 
         [Required]
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
+
         public Category Category { get; set; } = null!;
 
 
@@ -71,13 +72,13 @@ namespace CarParts.Data.Models
         [Required]
         public double Weight { get; set; }
 
-        [Required]
+        [Required] 
         public double TopSpeed { get; set; }
 
-        [Required]
+        [Required] 
         public double Acceleration { get; set; }
 
-        [Required]
+        [Required] 
         public double Horsepower { get; set; }
 
         [Required]
@@ -86,7 +87,9 @@ namespace CarParts.Data.Models
         [Required]
         public double FuelConsumption { get; set; }
 
-        
+
+        public string ImageUrl { get; set; } = null!;
+
 
     }
 }

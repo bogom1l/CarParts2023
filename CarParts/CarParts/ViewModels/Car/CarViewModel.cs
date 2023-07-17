@@ -72,5 +72,10 @@
         [Required] //?
         public string Owner { get; set; } = null!;
 
+
+        
+        [Required]
+        public string ImageUrl { get; set; } = null!;
+
     }
 }

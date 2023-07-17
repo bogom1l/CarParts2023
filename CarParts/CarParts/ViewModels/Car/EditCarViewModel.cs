@@ -103,5 +103,11 @@
             CarFuelConsumptionMaxValue,
             ErrorMessage = "Fuel consumption can be between 2 and 50.")]
         public double FuelConsumption { get; set; }
+
+
+        [Required]
+        public string ImageUrl { get; set; } = null!;
+
+
     }
 }

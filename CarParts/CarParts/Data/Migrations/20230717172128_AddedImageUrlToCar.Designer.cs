@@ -4,6 +4,7 @@ using CarParts.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarParts.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230717172128_AddedImageUrlToCar")]
+    partial class AddedImageUrlToCar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,7 +111,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Cars", (string)null);
+                    b.ToTable("Cars");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.Category", b =>
@@ -127,7 +129,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -192,7 +194,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FuelTypes", (string)null);
+                    b.ToTable("FuelTypes");
 
                     b.HasData(
                         new
@@ -251,7 +253,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Parts", (string)null);
+                    b.ToTable("Parts");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.PartCategory", b =>
@@ -269,7 +271,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("PartCategories", (string)null);
+                    b.ToTable("PartCategories");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.PartUser", b =>
@@ -284,7 +286,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PartUser", (string)null);
+                    b.ToTable("PartUser");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.Transmission", b =>
@@ -302,7 +304,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Transmissions", (string)null);
+                    b.ToTable("Transmissions");
 
                     b.HasData(
                         new

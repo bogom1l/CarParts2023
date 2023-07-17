@@ -35,5 +35,9 @@
         public double Torque { get; set; }
 
         public double FuelConsumption { get; set; }
+
+
+        public string ImageUrl { get; set; } = null!;
+
     }
 }
