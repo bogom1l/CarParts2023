@@ -23,7 +23,7 @@ namespace CarParts.Services
             {
                 CarId = c.CarId,
                 Make = c.Make,
-                Model = c.Make,
+                Model = c.Model,
                 Year = c.Year,
                 Description = c.Description,
                 Price = c.Price,
