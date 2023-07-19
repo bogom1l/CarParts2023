@@ -4,6 +4,7 @@ using CarParts.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarParts.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230719083244_RemovedApplicationUser")]
+    partial class RemovedApplicationUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -265,43 +267,6 @@ namespace CarParts.Data.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("PartCategories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            Name = "Engine"
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            Name = "Transmission"
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            Name = "Brakes"
-                        },
-                        new
-                        {
-                            CategoryId = 4,
-                            Name = "Suspension"
-                        },
-                        new
-                        {
-                            CategoryId = 5,
-                            Name = "Interior"
-                        },
-                        new
-                        {
-                            CategoryId = 6,
-                            Name = "Exterior"
-                        },
-                        new
-                        {
-                            CategoryId = 7,
-                            Name = "Electrical"
-                        });
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.Transmission", b =>

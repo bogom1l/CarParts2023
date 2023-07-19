@@ -66,7 +66,7 @@
             public const double PartPriceMaxValue = 10_000;
         }
 
-        public static class Category
+        public static class PartProperties
         {
             public const int CategoryNameMinLength = 2;
             public const int CategoryNameMaxLength = 50;

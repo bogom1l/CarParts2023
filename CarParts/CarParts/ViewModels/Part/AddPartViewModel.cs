@@ -1,5 +1,5 @@
-﻿using CarParts.ViewModels.Category;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using CarParts.ViewModels.Part.PartProperties;
 using static CarParts.GlobalConstants.GlobalConstants.Part;
 
 namespace CarParts.ViewModels.Part
@@ -27,6 +27,6 @@ namespace CarParts.ViewModels.Part
         [Required]
         public int CategoryId { get; set; }
 
-        public ICollection<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
+        public ICollection<PartCategoryViewModel> Categories { get; set; } = new List<PartCategoryViewModel>();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static CarParts.GlobalConstants.GlobalConstants.Part;
 
@@ -21,17 +22,19 @@ namespace CarParts.Data.Models
         [Required]
         public double Price { get; set; }
 
+
         [Required]
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
         public PartCategory Category { get; set; } = null!;
 
+
         [Required]
         [ForeignKey(nameof(User))]
-        public string UserId { get; set; } = null!;
+        public string UserId { get; set; } = null!; //  [Column("UserId")]
         
         [Required]
-        public ApplicationUser User { get; set; } = null!;
+        public IdentityUser User { get; set; } = null!;
     }
 }
 

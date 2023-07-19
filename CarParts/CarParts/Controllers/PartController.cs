@@ -1,4 +1,5 @@
-﻿using CarParts.Services;
+﻿using CarParts.Data.Models;
+using CarParts.Services;
 using CarParts.ViewModels.Part;
 
 namespace CarParts.Controllers
@@ -42,6 +43,60 @@ namespace CarParts.Controllers
 
             return RedirectToAction("All");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var detailsPartViewModel = await this._partService.GetPartDetailsAsync(id);
+
+            if (detailsPartViewModel == null)
+            {
+                RedirectToPage("All");
+            }
+
+            return View(detailsPartViewModel);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            Part? part = await this._partService.GetPartByIdAsync(id);
+
+            if (part == null)
+            {
+                return RedirectToAction("All");
+            }
+
+            if (part.UserId != GetUserId())
+            {
+                return RedirectToAction("All");
+            }
+
+            var editPartViewModel = await this._partService.GetEditPartViewModelAsync(id, GetUserId());
+
+            if (editPartViewModel == null)
+            {
+                RedirectToPage("All");
+            }
+
+            return View(editPartViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditPartViewModel part)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(part);
+            }
+
+            await this._partService.EditPartAsync(id, part);
+
+            return RedirectToAction("All");
+        }
+
+
 
     }
 }

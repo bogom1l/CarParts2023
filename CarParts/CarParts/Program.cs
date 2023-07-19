@@ -40,6 +40,9 @@ namespace CarParts
             builder.Services.AddScoped<ICarService, CarService>();
             builder.Services.AddScoped<IPartService, PartService>();
              
+            //builder.Services.AddIdentity<CustomUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>()
+            //    .AddDefaultTokenProviders();
 
 
             var app = builder.Build();

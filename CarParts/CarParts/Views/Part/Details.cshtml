@@ -1,0 +1,30 @@
+﻿@model CarParts.ViewModels.Part.DetailsPartViewModel
+
+@{
+    ViewBag.Title = "Part Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+
+                <h3 class="card-title text-center">@Model.Name</h3>
+                <p class="mb-0"><span class="fw-bold">Category: </span>@Model.Category</p>
+                <p class="mb-0"><span class="fw-bold">Price: </span>@Model.Price</p>
+                <p class="mb-0"><span class="fw-bold">Description: </span>@Model.Description</p>
+
+                <div class="text-center mt-4">
+                    <a asp-controller="Part" asp-action="All" class="btn btn-warning p-3 fw-bold">Back to All Parts</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

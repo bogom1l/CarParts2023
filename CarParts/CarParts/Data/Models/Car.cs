@@ -25,7 +25,7 @@ namespace CarParts.Data.Models
         [ForeignKey(nameof(User))] 
         public string UserId { get; set; } = null!;
 
-        [Required] public IdentityUser User { get; set; } = null!; //TODO: changed from ApplicationUser to IdentityUser
+        [Required] public IdentityUser User { get; set; } = null!; // changed from ApplicationUser to IdentityUser
 
 
         [Required] 
@@ -93,33 +93,4 @@ namespace CarParts.Data.Models
 
     }
 }
-
-
-/*
- 
-CarId
-Make
-Model
-Year
-Parts
-UserId, User
-
-price
-color
-Engine size: The size of the engine in cubic centimeters (cc) or liters (L).
-Fuel type: - gasoline, diesel, or electric.
-Transmission: The type of transmission the car has, such as manual, automatic
-Category: The category of the car, such as sedan, coupe, hatchback, SUV, or pickup truck.
-Weight: The weight of the car in kilograms.
-Top speed: The maximum speed the car can achieve in kilometers per hour.
-Acceleration: The time it takes for the car to reach a certain speed, such as 0-60 mph or 0-100 km/h.
-horsepower 
-torque 
-fuel consumption
-emission
-safety features (e.g. airbags, backup camera, lane departure warning)
-
-Wheel Wheel 
- 
-*/
 

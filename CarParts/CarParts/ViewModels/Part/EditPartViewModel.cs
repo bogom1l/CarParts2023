@@ -1,14 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-using static CarParts.GlobalConstants.GlobalConstants.Part;
-using static CarParts.GlobalConstants.GlobalConstants.PartProperties;
-
+﻿using CarParts.ViewModels.Part.PartProperties;
 
 namespace CarParts.ViewModels.Part
 {
-    public class PartViewModel
-    {
-        public int Id { get; set; }
+    using System.ComponentModel.DataAnnotations;
+    using static CarParts.GlobalConstants.GlobalConstants.Part;
+    using static CarParts.GlobalConstants.GlobalConstants.PartProperties;
 
+    public class EditPartViewModel
+    {
         [Required]
         [StringLength(PartNameMaxLength,
             MinimumLength = PartNameMinLength,
@@ -27,16 +26,10 @@ namespace CarParts.ViewModels.Part
             ErrorMessage = "Part price can be between 0.01 and 10 000")]
         public double Price { get; set; }
 
-        [Required]
-        [StringLength(CategoryNameMaxLength, 
-            MinimumLength = CategoryNameMinLength,
-            ErrorMessage = "Category name can be between 2 and 50 characters.")]
-        public string CategoryName { get; set; } = null!;
-
 
         [Required]
-        public string Owner { get; set; } = null!;
+        public int CategoryId { get; set; }
+        public ICollection<PartCategoryViewModel> Categories { get; set; } = new List<PartCategoryViewModel>();
 
     }
 }
-

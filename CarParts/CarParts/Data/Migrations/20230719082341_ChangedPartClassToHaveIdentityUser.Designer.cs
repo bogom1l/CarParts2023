@@ -4,6 +4,7 @@ using CarParts.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarParts.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230719082341_ChangedPartClassToHaveIdentityUser")]
+    partial class ChangedPartClassToHaveIdentityUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,6 +34,9 @@ namespace CarParts.Data.Migrations
 
                     b.Property<double>("Acceleration")
                         .HasColumnType("float");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -95,6 +100,8 @@ namespace CarParts.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("CarId");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("CategoryId");
 
@@ -220,6 +227,9 @@ namespace CarParts.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PartId"), 1L, 1);
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -241,6 +251,8 @@ namespace CarParts.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("PartId");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("CategoryId");
 
@@ -265,43 +277,21 @@ namespace CarParts.Data.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("PartCategories");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            Name = "Engine"
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            Name = "Transmission"
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            Name = "Brakes"
-                        },
-                        new
-                        {
-                            CategoryId = 4,
-                            Name = "Suspension"
-                        },
-                        new
-                        {
-                            CategoryId = 5,
-                            Name = "Interior"
-                        },
-                        new
-                        {
-                            CategoryId = 6,
-                            Name = "Exterior"
-                        },
-                        new
-                        {
-                            CategoryId = 7,
-                            Name = "Electrical"
-                        });
+            modelBuilder.Entity("CarParts.Data.Models.PartUser", b =>
+                {
+                    b.Property<int>("PartId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("PartId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PartUser");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.Transmission", b =>
@@ -398,6 +388,10 @@ namespace CarParts.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -449,6 +443,8 @@ namespace CarParts.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -536,8 +532,19 @@ namespace CarParts.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("CarParts.Data.Models.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
             modelBuilder.Entity("CarParts.Data.Models.Car", b =>
                 {
+                    b.HasOne("CarParts.Data.Models.ApplicationUser", null)
+                        .WithMany("Cars")
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("CarParts.Data.Models.Category", "Category")
                         .WithMany("Cars")
                         .HasForeignKey("CategoryId")
@@ -573,6 +580,10 @@ namespace CarParts.Data.Migrations
 
             modelBuilder.Entity("CarParts.Data.Models.Part", b =>
                 {
+                    b.HasOne("CarParts.Data.Models.ApplicationUser", null)
+                        .WithMany("Parts")
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("CarParts.Data.Models.PartCategory", "Category")
                         .WithMany("Parts")
                         .HasForeignKey("CategoryId")
@@ -586,6 +597,25 @@ namespace CarParts.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CarParts.Data.Models.PartUser", b =>
+                {
+                    b.HasOne("CarParts.Data.Models.Part", "Part")
+                        .WithMany()
+                        .HasForeignKey("PartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CarParts.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Part");
 
                     b.Navigation("User");
                 });
@@ -659,6 +689,13 @@ namespace CarParts.Data.Migrations
             modelBuilder.Entity("CarParts.Data.Models.Transmission", b =>
                 {
                     b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("CarParts.Data.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Cars");
+
+                    b.Navigation("Parts");
                 });
 #pragma warning restore 612, 618
         }

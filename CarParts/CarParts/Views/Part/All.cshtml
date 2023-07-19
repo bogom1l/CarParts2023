@@ -26,17 +26,22 @@
                         </p>
                     </div>
                     <div class="card-footer">
-                        <a asp-controller="Part" asp-action="Details" asp-route-id="@part.Id" class="btn btn-success btn-block">View Details</a>
-                        @* If (User.Identity.Name == part.Supplier)
+                        <a asp-controller="Part" asp-action="Details" asp-route-id="@part.Id" class="btn btn-success btn-block">
+                            View Details
+                        </a>
+
+                        @if (User.Identity.Name == part.Owner)
                         {
-                            <a asp-controller="Part" asp-action="Edit" asp-route-id="@part.Id" class="btn btn-success btn-block">Edit</a>
+                            <a asp-controller="Part" asp-action="Edit" asp-route-id="@part.Id" class="btn btn-warning btn-block">
+                                Edit
+                            </a>
+
+                            <a asp-controller="Part" asp-action="Delete" asp-route-id="@part.Id" class="btn btn-danger btn-block">
+                                Delete
+                            </a>
                         }
-                        else
-                        {
-                            <form asp-controller="Part" asp-action="Order" asp-route-id="@part.Id">
-                                <button type="submit" class="btn btn-success btn-block">Order Part</button>
-                            </form>
-                        } *@
+
+                        
                     </div>
                 </div>
             </div>

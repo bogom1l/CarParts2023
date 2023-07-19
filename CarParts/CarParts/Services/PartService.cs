@@ -1,7 +1,7 @@
 ﻿using CarParts.Data;
 using CarParts.Data.Models;
-using CarParts.ViewModels.Category;
 using CarParts.ViewModels.Part;
+using CarParts.ViewModels.Part.PartProperties;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarParts.Services
@@ -23,15 +23,16 @@ namespace CarParts.Services
                 Name = p.Name,
                 Description = p.Description,
                 Price = p.Price,
-                CategoryName = p.Category.Name
+                CategoryName = p.Category.Name,
+                Owner = p.User.UserName
             }).ToListAsync();
         }
 
         public async Task<AddPartViewModel> GetAddPartViewModelAsync()
         {
-            List<CategoryViewModel> categories = await this._dbContext
+            var categories = await this._dbContext
                 .PartCategories
-                .Select(c => new CategoryViewModel
+                .Select(c => new PartCategoryViewModel
                 {
                     Id = c.CategoryId,
                     Name = c.Name
@@ -56,6 +57,66 @@ namespace CarParts.Services
 
             await this._dbContext.Parts.AddAsync(part);
             await this._dbContext.SaveChangesAsync();
+        }
+
+        public Task<DetailsPartViewModel?> GetPartDetailsAsync(int id)
+        {
+            return this._dbContext.Parts
+                .Where(p => p.PartId == id)
+                .Select(p => new DetailsPartViewModel
+                {
+                    Id = p.PartId,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Price = p.Price,
+                    Category = p.Category.Name
+                })
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<Part?> GetPartByIdAsync(int id)
+        {
+            return await this._dbContext.Parts
+                .FirstOrDefaultAsync(p => p.PartId == id);
+        }
+
+        public async Task<EditPartViewModel?> GetEditPartViewModelAsync(int id, string userId)
+        {
+            var categories = await this._dbContext.PartCategories
+                .Select(c => new PartCategoryViewModel
+                {
+                    Id = c.CategoryId,
+                    Name = c.Name
+                }).ToListAsync();
+
+            var editCarViewModel = await this._dbContext.Parts
+                .Where(p => p.PartId == id)
+                .Select(p => new EditPartViewModel
+                {
+                    Name = p.Name,
+                    Description = p.Description,
+                    Price = p.Price,
+                    CategoryId = p.CategoryId,
+                    Categories = categories
+                }).FirstOrDefaultAsync();
+
+            return editCarViewModel;
+        }
+
+        public async Task EditPartAsync(int id, EditPartViewModel editPartViewModel)
+        {
+            var part = this._dbContext.Parts
+                .FirstOrDefault(p => p.PartId == id);
+
+            if (part != null)
+            {
+                part.Name = editPartViewModel.Name;
+                part.Description = editPartViewModel.Description;
+                part.Price = editPartViewModel.Price;
+                part.CategoryId = editPartViewModel.CategoryId;
+
+                await this._dbContext.SaveChangesAsync();
+            }
         }
     }
 }
