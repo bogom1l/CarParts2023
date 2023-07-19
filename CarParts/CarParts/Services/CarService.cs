@@ -51,19 +51,19 @@ namespace CarParts.Services
 
         public async Task<AddCarViewModel> GetAddCarViewModelAsync()
         {
-            var fuelTypes = await this._dbContext.FuelTypes.Select(f => new FuelTypeViewModel
+            var fuelTypes = await this._dbContext.FuelTypes.Select(f => new CarFuelTypeViewModel
             {
                 Id = f.Id,
                 Name = f.Name
             }).ToListAsync();
 
-            var transmissions = await this._dbContext.Transmissions.Select(t => new TransmissionViewModel
+            var transmissions = await this._dbContext.Transmissions.Select(t => new CarTransmissionViewModel
             {
                 Id = t.Id,
                 Name = t.Name
             }).ToListAsync();
 
-            var categories = await this._dbContext.Categories.Select(c => new CategoryViewModel
+            var categories = await this._dbContext.Categories.Select(c => new CarCategoryViewModel
             {
                 Id = c.Id,
                 Name = c.Name
@@ -140,19 +140,19 @@ namespace CarParts.Services
 
         public async Task<EditCarViewModel?> GetEditCarViewModelAsync(int id, string userId)
         {
-            var fuelTypes = await this._dbContext.FuelTypes.Select(f => new FuelTypeViewModel
+            var fuelTypes = await this._dbContext.FuelTypes.Select(f => new CarFuelTypeViewModel
             {
                 Id = f.Id,
                 Name = f.Name
             }).ToListAsync();
 
-            var transmissions = await this._dbContext.Transmissions.Select(t => new TransmissionViewModel
+            var transmissions = await this._dbContext.Transmissions.Select(t => new CarTransmissionViewModel
             {
                 Id = t.Id,
                 Name = t.Name
             }).ToListAsync();
 
-            var categories = await this._dbContext.Categories.Select(c => new CategoryViewModel
+            var categories = await this._dbContext.Categories.Select(c => new CarCategoryViewModel
             {
                 Id = c.Id,
                 Name = c.Name

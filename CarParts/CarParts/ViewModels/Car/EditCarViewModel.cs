@@ -53,19 +53,19 @@
         //TODO: Validation?
         public int FuelTypeId { get; set; }
 
-        public ICollection<FuelTypeViewModel> FuelTypes { get; set; } = new List<FuelTypeViewModel>();
+        public ICollection<CarFuelTypeViewModel> FuelTypes { get; set; } = new List<CarFuelTypeViewModel>();
 
         [Required]
         //TODO: Validation?
         public int TransmissionId { get; set; }  
 
-        public ICollection<TransmissionViewModel> Transmissions { get; set; } = new List<TransmissionViewModel>();
+        public ICollection<CarTransmissionViewModel> Transmissions { get; set; } = new List<CarTransmissionViewModel>();
 
         [Required]
         //TODO: Validation?
         public int CategoryId { get; set; } 
 
-        public ICollection<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
+        public ICollection<CarCategoryViewModel> Categories { get; set; } = new List<CarCategoryViewModel>();
 
         [Required]
         [Range(CarWeightMinValue,

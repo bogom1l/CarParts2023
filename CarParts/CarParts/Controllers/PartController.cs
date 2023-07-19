@@ -38,7 +38,7 @@ namespace CarParts.Controllers
             {
                 return View(addPartViewModel);
             }
-            
+
             await this._partService.AddPartAsync(addPartViewModel, GetUserId());
 
             return RedirectToAction("All");
@@ -122,6 +122,51 @@ namespace CarParts.Controllers
             var parts = await this._partService.GetMyPartsAsync(GetUserId());
 
             return View(parts);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> MyFavoriteParts()
+        {
+            var parts = await this._partService.GetMyFavoritePartsAsync(GetUserId());
+
+            return View(parts);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> AddToFavoriteParts(int id)
+        {
+            var part = await this._partService.GetPartByIdAsync(id);
+
+            if (part == null)
+            {
+                return RedirectToAction("All");
+            }
+
+            if (!await this._partService.AddPartToMyFavoritePartsAsync(id, GetUserId()))
+            {
+                return RedirectToAction("All");
+            }
+
+            return RedirectToAction("MyFavoriteParts");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RemoveFromFavoriteParts(int id)
+        {
+            var part = await this._partService.GetPartByIdAsync(id);
+
+            if (part == null)
+            {
+                return RedirectToAction("MyFavoriteParts");
+            }
+
+            if (!await this._partService.RemovePartFromMyFavoritePartsAsync(id, GetUserId()))
+            {
+                return RedirectToAction("MyFavoriteParts");
+            }
+
+            return RedirectToAction("All");
         }
 
 

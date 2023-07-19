@@ -4,6 +4,14 @@
     ViewBag.Title = "My Parts";
 }
 
+<style>
+    .btn-purple {
+        background-color: purple;
+        color: white;
+        /* Add any additional styling as needed */
+    }
+</style>
+
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
@@ -44,6 +52,10 @@
                                 Delete
                             </a>
                         }
+                        
+                        <a asp-controller="Part" asp-action="AddToFavoriteParts" asp-route-id="@part.Id" class="btn btn-purple btn-block">
+                            Add to favorite parts
+                        </a>
 
                     </div>
                 </div>

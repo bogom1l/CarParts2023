@@ -2,7 +2,7 @@
 
 namespace CarParts.ViewModels.Car.CarProperties
 {
-    public class CategoryViewModel
+    public class CarCategoryViewModel
     {
         [Required]
         public int Id { get; set; }

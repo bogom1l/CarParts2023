@@ -15,7 +15,9 @@
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
-            // builder.Entity<PartUser>().HasKey(pu => new { pu.PartId, pu.UserId });
+            builder.Entity<UserFavoritePart>()
+                .HasKey(ufp => new { ufp.UserId, ufp.PartId });
+
 
 
             // Seed with some data
@@ -99,6 +101,8 @@
                     new PartCategory { CategoryId = 5, Name = "Interior" },
                     new PartCategory { CategoryId = 6, Name = "Exterior" },
                     new PartCategory { CategoryId = 7, Name = "Electrical" });
+            
+
         }
 
 
@@ -109,6 +113,9 @@
 
         public DbSet<Part> Parts { get; set; } = null!;
         public DbSet<PartCategory> PartCategories { get; set; } = null!;
+
+
+        public DbSet<UserFavoritePart> UsersFavoriteParts { get; set; } = null!;
 
         //public DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;
         //public DbSet<PartUser> PartUsers { get; set; } = null!;

@@ -22,5 +22,13 @@ namespace CarParts.Services
         Task DeletePartAsync(int id, string userId);
 
         Task<ICollection<PartViewModel>> GetMyPartsAsync(string userId);
+
+        Task<ICollection<PartViewModel>> GetMyFavoritePartsAsync(string userId);
+
+        Task<bool> AddPartToMyFavoritePartsAsync(int id, string userId);
+
+        
+        Task<bool> RemovePartFromMyFavoritePartsAsync(int id, string userId);
+
     }
 }

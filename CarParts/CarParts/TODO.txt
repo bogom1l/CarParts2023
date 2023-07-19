@@ -1,14 +1,15 @@
 ﻿
 
+add favorite cars
 
-see in database table Cars if i still have the field ApplicationUser = null (in Microsoft server sql management studio)
+before deleting - add one more confirmation "are you sure u want to delete this?"..
 
-rename databases Part Categories, etc , mnoo oburkwashto e, awe wsichko s kategorii moje da se renamene w celiq proekt
-
-add favorite cars/parts
+vmesto da refreshva page-a, da izpiswa na potrebitqla nqkwa izkachashta greshka zashto ne mu pozwolqwa da prawi edi si kvoto e naprawil
 
 split the project in small projects/folders -- need help! (for connections between projects)
 
+implement search functionality
+
 --------------------
 
-13:00 - 19.07.2023
+14:20 - 19.07.2023

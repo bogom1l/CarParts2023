@@ -147,5 +147,63 @@ namespace CarParts.Services
                     Owner = p.User.UserName
                 }).ToListAsync();
         }
+
+        public async Task<ICollection<PartViewModel>> GetMyFavoritePartsAsync(string userId)
+        {
+            return await this._dbContext
+                .Parts
+                .Where(p => p.UserFavoriteParts.Any(ufp => ufp.UserId == userId))
+                .Select(p => new PartViewModel
+                {
+                    Id = p.PartId,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Price = p.Price,
+                    CategoryName = p.Category.Name,
+                    Owner = p.User.UserName
+                }).ToListAsync();
+        }
+
+        public async Task<bool> AddPartToMyFavoritePartsAsync(int partId, string userId)
+        {
+            bool isPartAlreadyInMyFavoriteParts = await this._dbContext
+                .UsersFavoriteParts
+                .AnyAsync(ufp => ufp.PartId == partId && ufp.UserId == userId);
+
+            if (isPartAlreadyInMyFavoriteParts)
+            {
+                return false;
+            }
+
+            UserFavoritePart userFavoritePart = new UserFavoritePart
+            {
+                PartId = partId,
+                UserId = userId
+            };
+
+            await this._dbContext.UsersFavoriteParts.AddAsync(userFavoritePart);
+            await this._dbContext.SaveChangesAsync();
+
+            return true;    
+        }
+
+        public async Task<bool> RemovePartFromMyFavoritePartsAsync(int partId, string userId)
+        {
+            UserFavoritePart? part = await this._dbContext
+                .UsersFavoriteParts
+                .FirstOrDefaultAsync(ufp => ufp.PartId == partId && ufp.UserId == userId);
+
+            if (part == null)
+            {
+                return false; //doesnt exist (for some reason..)
+            }
+
+            this._dbContext.UsersFavoriteParts.Remove(part);
+            await this._dbContext.SaveChangesAsync();
+
+            return true;    
+        }
+
+        
     }
 }

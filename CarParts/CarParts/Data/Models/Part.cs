@@ -31,10 +31,17 @@ namespace CarParts.Data.Models
 
         [Required]
         [ForeignKey(nameof(User))]
-        public string UserId { get; set; } = null!; //  [Column("UserId")]
+        public string UserId { get; set; } = null!;
         
         [Required]
         public IdentityUser User { get; set; } = null!;
+
+
+
+        public ICollection<UserFavoritePart> UserFavoriteParts { get; set; } = new List<UserFavoritePart>();
+
+
+
     }
 }
 
