@@ -24,7 +24,8 @@ namespace CarParts.Services
                 Description = p.Description,
                 Price = p.Price,
                 CategoryName = p.Category.Name,
-                Owner = p.User.UserName
+                Owner = p.User.UserName,
+                ImageUrl = p.ImageUrl
             }).ToListAsync();
         }
 
@@ -52,7 +53,8 @@ namespace CarParts.Services
                 Description = addPartViewModel.Description,
                 Price = addPartViewModel.Price,
                 CategoryId = addPartViewModel.CategoryId,
-                UserId = userId
+                UserId = userId,
+                ImageUrl = addPartViewModel.ImageUrl
             };
 
             await this._dbContext.Parts.AddAsync(part);
@@ -69,7 +71,8 @@ namespace CarParts.Services
                     Name = p.Name,
                     Description = p.Description,
                     Price = p.Price,
-                    Category = p.Category.Name
+                    Category = p.Category.Name,
+                    ImageUrl = p.ImageUrl
                 })
                 .FirstOrDefaultAsync();
         }
@@ -97,7 +100,8 @@ namespace CarParts.Services
                     Description = p.Description,
                     Price = p.Price,
                     CategoryId = p.CategoryId,
-                    Categories = categories
+                    Categories = categories,
+                    ImageUrl = p.ImageUrl
                 }).FirstOrDefaultAsync();
 
             return editCarViewModel;
@@ -114,6 +118,7 @@ namespace CarParts.Services
                 part.Description = editPartViewModel.Description;
                 part.Price = editPartViewModel.Price;
                 part.CategoryId = editPartViewModel.CategoryId;
+                part.ImageUrl = editPartViewModel.ImageUrl;
 
                 await this._dbContext.SaveChangesAsync();
             }
@@ -144,7 +149,8 @@ namespace CarParts.Services
                     Description = p.Description,
                     Price = p.Price,
                     CategoryName = p.Category.Name,
-                    Owner = p.User.UserName
+                    Owner = p.User.UserName,
+                    ImageUrl = p.ImageUrl
                 }).ToListAsync();
         }
 
@@ -160,7 +166,8 @@ namespace CarParts.Services
                     Description = p.Description,
                     Price = p.Price,
                     CategoryName = p.Category.Name,
-                    Owner = p.User.UserName
+                    Owner = p.User.UserName,
+                    ImageUrl = p.ImageUrl
                 }).ToListAsync();
         }
 

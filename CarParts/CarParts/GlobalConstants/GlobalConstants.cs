@@ -60,10 +60,10 @@
             public const int PartNameMaxLength = 50;
 
             public const int PartDescriptionMinLength = 2;
-            public const int PartDescriptionMaxLength = 300;
+            public const int PartDescriptionMaxLength = 1500;
 
             public const double PartPriceMinValue = 0.01;
-            public const double PartPriceMaxValue = 10_000;
+            public const double PartPriceMaxValue = 100_000;
         }
 
         public static class PartProperties

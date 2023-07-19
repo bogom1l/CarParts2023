@@ -37,6 +37,9 @@ namespace CarParts.ViewModels.Part
         [Required]
         public string Owner { get; set; } = null!;
 
+
+        public string ImageUrl { get; set; } = null!;
+
     }
 }
 

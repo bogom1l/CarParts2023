@@ -1,6 +1,6 @@
 ﻿
 
-add favorite cars
+add functionality for favorite cars
 
 before deleting - add one more confirmation "are you sure u want to delete this?"..
 
@@ -12,4 +12,4 @@ implement search functionality
 
 --------------------
 
-14:20 - 19.07.2023
+15:30 - 19.07.2023

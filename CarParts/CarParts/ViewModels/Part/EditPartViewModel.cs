@@ -30,5 +30,8 @@ namespace CarParts.ViewModels.Part
         public int CategoryId { get; set; }
         public ICollection<PartCategoryViewModel> Categories { get; set; } = new List<PartCategoryViewModel>();
 
+
+        
+        public string ImageUrl { get; set; } = null!;
     }
 }

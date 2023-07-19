@@ -41,6 +41,7 @@ namespace CarParts.Data.Models
         public ICollection<UserFavoritePart> UserFavoriteParts { get; set; } = new List<UserFavoritePart>();
 
 
+        public string ImageUrl { get; set; } = null!;
 
     }
 }
