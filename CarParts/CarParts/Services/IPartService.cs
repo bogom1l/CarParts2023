@@ -19,5 +19,8 @@ namespace CarParts.Services
 
         Task EditPartAsync(int id, EditPartViewModel editPartViewModel);
 
+        Task DeletePartAsync(int id, string userId);
+
+        Task<ICollection<PartViewModel>> GetMyPartsAsync(string userId);
     }
 }

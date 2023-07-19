@@ -17,8 +17,6 @@ namespace CarParts.Services
 
         Task EditCarAsync(int id, EditCarViewModel car);
 
-        Task<CarViewModel?> GetCarViewModelByIdAsync(int id);
-
         Task DeleteCarAsync(int id, string userId);
 
         Task<Car?> GetCarById(int id);

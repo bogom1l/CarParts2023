@@ -4,7 +4,6 @@ namespace CarParts.ViewModels.Part
 {
     using System.ComponentModel.DataAnnotations;
     using static CarParts.GlobalConstants.GlobalConstants.Part;
-    using static CarParts.GlobalConstants.GlobalConstants.PartProperties;
 
     public class EditPartViewModel
     {

@@ -112,8 +112,6 @@ namespace CarParts.Controllers
                 return RedirectToAction("All");
             }
 
-            var carViewModel = await this._carService.GetCarViewModelByIdAsync(id);
-            
             await this._carService.DeleteCarAsync(id, GetUserId());
 
             return RedirectToAction("All");

@@ -1,0 +1,57 @@
+﻿@model ICollection<CarParts.ViewModels.Part.PartViewModel>
+
+@{
+    ViewBag.Title = "My Parts";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container">
+    <div class="row d-flex align-items-start">
+        @foreach (var part in Model)
+        {
+            if (part.Owner != User.Identity.Name)
+            {
+                break;
+            }
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h5 class="card-title">@part.Name</h5>
+                        <p class="card-text">
+                            <span class="fw-bold">Description:</span> @part.Description
+                        </p>
+                        <p class="card-text">
+                            <span class="fw-bold">Price:</span> $@part.Price
+                        </p>
+                        <p class="card-text">
+                            <span class="fw-bold">Category:</span> @part.CategoryName
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a asp-controller="Part" asp-action="Details" asp-route-id="@part.Id" class="btn btn-success btn-block">
+                            View Details
+                        </a>
+
+                        @if (User.Identity.Name == part.Owner)
+                        {
+                            <a asp-controller="Part" asp-action="Edit" asp-route-id="@part.Id" class="btn btn-warning btn-block">
+                                Edit
+                            </a>
+                            <a asp-controller="Part" asp-action="Delete" asp-route-id="@part.Id" class="btn btn-danger btn-block">
+                                Delete
+                            </a>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

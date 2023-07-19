@@ -1,15 +1,14 @@
 ﻿
 
 
-pravq delete/myParts na Part
-->
-rename databases Part Categories, etc , mnoo oburkwashto e, awe wsichko s kategorii moje da se renamene w celiq proekt
-
-
 see in database table Cars if i still have the field ApplicationUser = null (in Microsoft server sql management studio)
+
+rename databases Part Categories, etc , mnoo oburkwashto e, awe wsichko s kategorii moje da se renamene w celiq proekt
 
 add favorite cars/parts
 
+split the project in small projects/folders -- need help! (for connections between projects)
+
 --------------------
 
-20:00 - 17.07.2023
+13:00 - 19.07.2023

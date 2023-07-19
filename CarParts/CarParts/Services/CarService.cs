@@ -218,41 +218,12 @@ namespace CarParts.Services
 
         }
 
-        public async Task<CarViewModel?> GetCarViewModelByIdAsync(int id)
-        {
-            CarViewModel? carViewModel = await this._dbContext
-                .Cars
-                .Where(c => c.CarId == id)
-                .Select(c => new CarViewModel
-                {
-                    CarId = c.CarId,
-                    Make = c.Make,
-                    Model = c.Model,
-                    Year = c.Year,
-                    Description = c.Description,
-                    Price = c.Price,
-                    Color = c.Color,
-                    EngineSize = c.EngineSize,
-                    FuelType = c.FuelType.Name,
-                    Transmission = c.Transmission.Name,
-                    Category = c.Category.Name,
-                    Weight = c.Weight,
-                    TopSpeed = c.TopSpeed,
-                    Acceleration = c.Acceleration,
-                    Horsepower = c.Horsepower,
-                    Torque = c.Torque,
-                    FuelConsumption = c.FuelConsumption,
-                    ImageUrl = c.ImageUrl
-                }).FirstOrDefaultAsync();
-
-            return carViewModel;
-        }
 
         public async Task DeleteCarAsync(int id, string userId)
         {
-            var carData = this._dbContext
+            var carData = await this._dbContext
                 .Cars
-                .FirstOrDefault(cu => cu.CarId == id && cu.UserId == userId);
+                .FirstOrDefaultAsync(cu => cu.CarId == id && cu.UserId == userId);
 
             if (carData != null)
             {

@@ -118,5 +118,34 @@ namespace CarParts.Services
                 await this._dbContext.SaveChangesAsync();
             }
         }
+
+        public async Task DeletePartAsync(int id, string userId)
+        {
+            var partToDelete = await this._dbContext
+                .Parts
+                .FirstOrDefaultAsync(p => p.PartId == id && p.UserId==userId);
+
+            if (partToDelete != null)
+            {
+                this._dbContext.Parts.Remove(partToDelete);
+                await this._dbContext.SaveChangesAsync();
+            }
+        }
+
+        public async Task<ICollection<PartViewModel>> GetMyPartsAsync(string userId)
+        {
+            return await this._dbContext
+                .Parts
+                .Where(p => p.UserId == userId)
+                .Select(p => new PartViewModel
+                {
+                    Id = p.PartId,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Price = p.Price,
+                    CategoryName = p.Category.Name,
+                    Owner = p.User.UserName
+                }).ToListAsync();
+        }
     }
 }

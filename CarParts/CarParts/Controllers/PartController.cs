@@ -96,6 +96,33 @@ namespace CarParts.Controllers
             return RedirectToAction("All");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            Part? part = await this._partService.GetPartByIdAsync(id);
+
+            if (part == null)
+            {
+                return RedirectToAction("All");
+            }
+
+            if (part.UserId != GetUserId())
+            {
+                return RedirectToAction("All");
+            }
+
+            await this._partService.DeletePartAsync(id, GetUserId());
+
+            return RedirectToAction("All");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> MyParts()
+        {
+            var parts = await this._partService.GetMyPartsAsync(GetUserId());
+
+            return View(parts);
+        }
 
 
     }
