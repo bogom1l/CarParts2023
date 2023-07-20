@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using CarParts.Data;
 using CarParts.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarParts
 {
@@ -34,11 +35,16 @@ namespace CarParts
 
 
 
-            builder.Services.AddControllersWithViews();
-
+            //builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+            });
             
             builder.Services.AddScoped<ICarService, CarService>();
             builder.Services.AddScoped<IPartService, PartService>();
+
+            
              
             //builder.Services.AddIdentity<CustomUser, IdentityRole>()
             //    .AddEntityFrameworkStores<ApplicationDbContext>()

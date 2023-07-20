@@ -1,12 +1,11 @@
 ﻿
 
+split the project in small projects/folders -- need help! (for connections between projects) (kris video)
 
-vmesto da refreshva page-a, da izpiswa na potrebitqla nqkwa izkachashta greshka zashto ne mu pozwolqwa da prawi edi si kvoto e naprawil
+implement search functionallity (kris video)
 
-split the project in small projects/folders -- need help! (for connections between projects)
-
-implement search functionallity
+vmesto da refreshva page-a, da izpiswa na potrebitqla nqkwa izkachashta greshka (kris video)
 
 --------------------
 
-14:30 - 20.07.2023
+15:00 - 20.07.2023
