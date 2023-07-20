@@ -8,7 +8,7 @@ vmesto da refreshva page-a, da izpiswa na potrebitqla nqkwa izkachashta greshka 
 
 split the project in small projects/folders -- need help! (for connections between projects)
 
-implement search functionality
+implement search functionallity
 
 --------------------
 
