@@ -4,6 +4,11 @@
     ViewBag.Title = "My Parts";
 }
 
+@*SweetAlert CDN*@
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
+
+
 <style>
     .btn-purple {
         background-color: purple;
@@ -51,7 +56,12 @@
                             <a asp-controller="Part" asp-action="Edit" asp-route-id="@part.Id" class="btn btn-warning btn-block">
                                 Edit
                             </a>
-                            <a asp-controller="Part" asp-action="Delete" asp-route-id="@part.Id" class="btn btn-danger btn-block">
+
+                           @* <a asp-controller="Part" asp-action="Delete" asp-route-id="@part.Id" class="btn btn-danger btn-block">
+                                Delete
+                            </a>*@
+
+                            <a href="#" class="btn btn-danger btn-block delete-part" data-id="@part.Id">
                                 Delete
                             </a>
                         }
@@ -69,4 +79,28 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Handle the click event for the delete buttons
+        $('.delete-part').on('click', function (e) {
+            e.preventDefault();
+            const partId = $(this).data('id');
+
+            // Show SweetAlert confirmation dialog
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You are about to delete this part. This action cannot be undone.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If user confirms, redirect to the "Delete" action with partId as a parameter
+                    window.location.href = `/Part/Delete/${partId}`;
+                }
+            });
+        });
+    </script>
 }
