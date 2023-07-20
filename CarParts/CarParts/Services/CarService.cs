@@ -2,6 +2,7 @@
 using CarParts.Data.Models;
 using CarParts.ViewModels.Car;
 using CarParts.ViewModels.Car.CarProperties;
+using CarParts.ViewModels.Part;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarParts.Services
@@ -30,9 +31,9 @@ namespace CarParts.Services
                     Price = c.Price,
                     Color = c.Color,
                     EngineSize = c.EngineSize,
-                    FuelType = c.FuelType.Name,
-                    Transmission = c.Transmission.Name,
-                    Category = c.Category.Name,
+                    FuelTypeName = c.FuelType.Name,
+                    TransmissionName = c.Transmission.Name,
+                    CategoryName = c.Category.Name,
                     Weight = c.Weight,
                     TopSpeed = c.TopSpeed,
                     Acceleration = c.Acceleration,
@@ -232,7 +233,7 @@ namespace CarParts.Services
             }
         }
 
-        public async Task<Car?> GetCarById(int id)
+        public async Task<Car?> GetCarByIdAsync(int id)
         {
             Car? carData = await this._dbContext.Cars
                 .FirstOrDefaultAsync(c => c.CarId == id);
@@ -255,9 +256,9 @@ namespace CarParts.Services
                     Price = c.Price,
                     Color = c.Color,
                     EngineSize = c.EngineSize,
-                    FuelType = c.FuelType.Name,
-                    Transmission = c.Transmission.Name,
-                    Category = c.Category.Name,
+                    FuelTypeName = c.FuelType.Name,
+                    TransmissionName = c.Transmission.Name,
+                    CategoryName = c.Category.Name,
                     Weight = c.Weight,
                     TopSpeed = c.TopSpeed,
                     Acceleration = c.Acceleration,
@@ -268,5 +269,77 @@ namespace CarParts.Services
                     ImageUrl = c.ImageUrl
                 }).ToListAsync();
         }
+
+        public async Task<ICollection<CarViewModel>> GetMyFavoriteCarsAsync(string userId)
+        {
+            return await this._dbContext
+                .Cars
+                .Where(c => c.UserFavoriteCars.Any(ufc => ufc.UserId == userId))
+                .Select(c => new CarViewModel
+                {
+                    CarId = c.CarId,
+                    Make = c.Make,
+                    Model = c.Model,
+                    Year = c.Year,
+                    Description = c.Description,
+                    Price = c.Price,
+                    Color = c.Color,
+                    EngineSize = c.EngineSize,
+                    FuelTypeName = c.FuelType.Name,
+                    TransmissionName = c.Transmission.Name,
+                    CategoryName = c.Category.Name,
+                    Weight = c.Weight,
+                    TopSpeed = c.TopSpeed,
+                    Acceleration = c.Acceleration,
+                    Horsepower = c.Horsepower,
+                    Torque = c.Torque,
+                    FuelConsumption = c.FuelConsumption,
+                    Owner = c.User.UserName,
+                    ImageUrl = c.ImageUrl
+                }).ToListAsync();
+        }
+
+        public async Task<bool> AddCarToMyFavoriteCarsAsync(int carId, string userId)
+        {
+            bool isCarAlreadyInMyFavoriteCars = await this._dbContext
+                .UsersFavoriteCars
+                .AnyAsync(ufc => ufc.CarId == carId && ufc.UserId == userId);
+
+            if (isCarAlreadyInMyFavoriteCars)
+            {
+                return false;
+            }
+
+            UserFavoriteCar userFavoriteCar = new UserFavoriteCar
+            {
+                CarId = carId,
+                UserId = userId
+            };
+
+            await this._dbContext.UsersFavoriteCars.AddAsync(userFavoriteCar);
+            await this._dbContext.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> RemoveCarFromMyFavoriteCarsAsync(int carId, string userId)
+        {
+
+            UserFavoriteCar? car = await this._dbContext
+                .UsersFavoriteCars
+                .FirstOrDefaultAsync(ufc => ufc.CarId == carId && ufc.UserId == userId);
+
+            if (car == null)
+            {
+                return false; //doesnt exist (for some reason..)
+            }
+
+            this._dbContext.UsersFavoriteCars.Remove(car);
+            await this._dbContext.SaveChangesAsync();
+
+            return true;
+        }
+
+
     }
 }

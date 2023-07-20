@@ -62,7 +62,7 @@ namespace CarParts.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            Car? car = await this._carService.GetCarById(id);
+            Car? car = await this._carService.GetCarByIdAsync(id);
 
             if (car == null)
             {
@@ -100,7 +100,7 @@ namespace CarParts.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            Car? car = await this._carService.GetCarById(id);
+            Car? car = await this._carService.GetCarByIdAsync(id);
 
             if (car == null)
             {
@@ -123,6 +123,51 @@ namespace CarParts.Controllers
             var cars = await this._carService.GetMyCarsAsync(GetUserId());
 
             return View(cars);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> MyFavoriteCars()
+        {
+            var cars = await this._carService.GetMyFavoriteCarsAsync(GetUserId());
+
+            return View(cars);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> AddToFavoriteCars(int id)
+        {
+            var car = await this._carService.GetCarByIdAsync(id); 
+
+            if (car == null)
+            {
+                return RedirectToAction("All");
+            }
+
+            if (!await this._carService.AddCarToMyFavoriteCarsAsync(id, GetUserId()))
+            {
+                return RedirectToAction("All");
+            }
+
+            return RedirectToAction("MyFavoriteCars");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RemoveFromFavoriteCars(int id)
+        {
+            var car = await this._carService.GetCarByIdAsync(id); 
+
+            if (car == null)
+            {
+                return RedirectToAction("MyFavoriteCars");
+            }
+
+            if (!await this._carService.RemoveCarFromMyFavoriteCarsAsync(id, GetUserId()))
+            {
+                return RedirectToAction("MyFavoriteCars");
+            }
+
+            return RedirectToAction("All");
         }
 
 

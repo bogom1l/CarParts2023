@@ -19,8 +19,14 @@ namespace CarParts.Services
 
         Task DeleteCarAsync(int id, string userId);
 
-        Task<Car?> GetCarById(int id);
+        Task<Car?> GetCarByIdAsync(int id);
 
         Task<ICollection<CarViewModel>> GetMyCarsAsync(string userId);
+
+        Task<ICollection<CarViewModel>> GetMyFavoriteCarsAsync(string userId);
+
+        Task<bool> AddCarToMyFavoriteCarsAsync(int carId, string userId);
+
+        Task<bool> RemoveCarFromMyFavoriteCarsAsync(int carId, string userId);
     }
 }

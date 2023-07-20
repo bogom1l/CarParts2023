@@ -1,8 +1,5 @@
 ﻿
 
-add functionality for favorite cars
-
-before deleting - add one more confirmation "are you sure u want to delete this?"..
 
 vmesto da refreshva page-a, da izpiswa na potrebitqla nqkwa izkachashta greshka zashto ne mu pozwolqwa da prawi edi si kvoto e naprawil
 
@@ -12,4 +9,4 @@ implement search functionallity
 
 --------------------
 
-15:30 - 19.07.2023
+14:30 - 20.07.2023

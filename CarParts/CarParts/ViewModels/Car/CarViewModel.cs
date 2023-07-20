@@ -41,15 +41,15 @@
 
         [Required]
         [MaxLength(CarFuelTypeMaxLength)]
-        public string FuelType { get; set; } = null!; 
+        public string FuelTypeName { get; set; } = null!; 
 
         [Required]
         [MaxLength(CarTransmissionMaxLength)]
-        public string Transmission { get; set; } = null!; 
+        public string TransmissionName { get; set; } = null!; 
 
         [Required]
         [MaxLength(CarCategoryMaxLength)]
-        public string Category { get; set; } = null!; 
+        public string CategoryName { get; set; } = null!; 
 
         [Required]
         public double Weight { get; set; }

@@ -4,6 +4,14 @@
     ViewBag.Title = "My Cars";
 }
 
+<style>
+    .btn-purple {
+        background-color: purple;
+        color: white;
+        /* Add any additional styling as needed */
+    }
+</style>
+
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
@@ -30,10 +38,10 @@
                             <span class="fw-bold">Price:</span> $@car.Price
                         </p>
                         <p class="card-text">
-                            <span class="fw-bold">Fuel Type:</span> @car.FuelType
+                            <span class="fw-bold">Fuel Type:</span> @car.FuelTypeName
                         </p>
                         <p class="card-text">
-                            <span class="fw-bold">Category:</span> @car.Category
+                            <span class="fw-bold">Category:</span> @car.CategoryName
                         </p>
                         <p class="card-text">
                             <span class="fw-bold">Horsepower:</span> @car.Horsepower
@@ -53,6 +61,10 @@
                                 Delete
                             </a>
                         }
+
+                        <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@car.CarId" class="btn btn-purple btn-block">
+                            Add to favorite cars
+                        </a>
 
                     </div>
                 </div>

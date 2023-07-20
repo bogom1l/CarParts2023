@@ -18,7 +18,8 @@
             builder.Entity<UserFavoritePart>()
                 .HasKey(ufp => new { ufp.UserId, ufp.PartId });
 
-
+            builder.Entity<UserFavoriteCar>()
+                .HasKey(ufc => new { ufc.UserId, ufc.CarId});
 
             // Seed with some data
             SeedData(builder);
@@ -116,6 +117,8 @@
 
 
         public DbSet<UserFavoritePart> UsersFavoriteParts { get; set; } = null!;
+
+        public DbSet<UserFavoriteCar> UsersFavoriteCars { get; set; } = null!;
 
         //public DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;
         //public DbSet<PartUser> PartUsers { get; set; } = null!;

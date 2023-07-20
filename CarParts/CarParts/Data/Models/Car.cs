@@ -25,7 +25,7 @@ namespace CarParts.Data.Models
         [ForeignKey(nameof(User))] 
         public string UserId { get; set; } = null!;
 
-        [Required] public IdentityUser User { get; set; } = null!; // changed from ApplicationUser to IdentityUser
+        [Required] public IdentityUser User { get; set; } = null!; 
 
 
         [Required] 
@@ -89,6 +89,9 @@ namespace CarParts.Data.Models
 
 
         public string ImageUrl { get; set; } = null!;
+
+
+        public ICollection<UserFavoriteCar> UserFavoriteCars { get; set; } = new List<UserFavoriteCar>();
 
 
     }
