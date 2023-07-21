@@ -29,7 +29,7 @@ namespace CarParts.Web.ViewModels.Car
         [Required]
         [StringLength(CarDescriptionMaxLength,
             MinimumLength = CarDescriptionMinLength,
-            ErrorMessage = "Description can be between 2 and 300.")]
+            ErrorMessage = "Description can be between 2 and 2500.")]
         public string Description { get; set; } = null!;
 
 

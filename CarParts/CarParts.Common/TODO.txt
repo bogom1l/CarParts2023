@@ -1,6 +1,8 @@
 ﻿
 
-implement search functionallity AND pagination?
+add cars from all categories!
+
+think about how to implement search functionallity AND pagination?
 
 vmesto da refreshva page-a, da izpiswa na potrebitqla nqkwa izkachashta greshka (kris video)
 

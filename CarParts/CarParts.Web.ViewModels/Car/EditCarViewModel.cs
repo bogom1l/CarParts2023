@@ -29,7 +29,7 @@ namespace CarParts.Web.ViewModels.Car
         [Required]
         [StringLength(CarDescriptionMaxLength,
             MinimumLength = CarDescriptionMinLength,
-            ErrorMessage = "Description can be between 2 and 300.")]
+            ErrorMessage = "Description can be between 2 and 2500.")]
         public string Description { get; set; } = null!;
 
 
@@ -103,7 +103,7 @@ namespace CarParts.Web.ViewModels.Car
         [Required]
         [Range(CarFuelConsumptionMinValue,
             CarFuelConsumptionMaxValue,
-            ErrorMessage = "Fuel consumption can be between 2 and 50.")]
+            ErrorMessage = "Fuel consumption can be between 0 and 50.")]
         public double FuelConsumption { get; set; }
 
 

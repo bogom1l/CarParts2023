@@ -169,6 +169,23 @@ namespace CarParts.Web.Controllers
             return RedirectToAction("All");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Search(string searchTerm, string category, string priceSort
+            , string transmissionName, string fuelName)
+        {
+            // Call the SearchCarsAsync method of the CarService to retrieve the filtered cars
+            var cars = await _carService.SearchCarsAsync(searchTerm, category, priceSort,
+                 transmissionName, fuelName);
+
+            // Pass the search criteria to the view to maintain state in the search bar
+            ViewBag.SearchTerm = searchTerm;
+            ViewBag.Category = category;
+            ViewBag.PriceAscOrDesc = priceSort; //?
+            ViewBag.TransmissionName = transmissionName;
+            ViewBag.FuelName = fuelName;
+
+            return View(cars);
+        }
 
     }
 }

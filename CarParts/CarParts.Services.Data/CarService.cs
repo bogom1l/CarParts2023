@@ -344,6 +344,77 @@ namespace CarParts.Services.Data
 
             return true;
         }
+
+        public async Task<ICollection<CarViewModel>> SearchCarsAsync(string searchTerm, string category, string priceSort
+            , string transmissionName, string fuelName)
+        {
+            var query = _dbContext.Cars.AsQueryable();
+
+            // Filter by category
+            if (!string.IsNullOrEmpty(category))
+            {
+                query = query.Where(c => c.Category.Name == category);
+            }
+
+            // Filter by transmission
+            if (!string.IsNullOrEmpty(transmissionName))
+            {
+                query = query.Where(c => c.Transmission.Name == transmissionName);
+            }
+
+            // Filter by fuel
+            if (!string.IsNullOrEmpty(fuelName))
+            {
+                query = query.Where(c => c.FuelType.Name == fuelName);
+            }
+
+            // Search by custom text in car's name/description
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = query.Where(c =>
+                    c.Make.Contains(searchTerm) ||
+                    c.Description.Contains(searchTerm)
+                );
+            }
+
+            // Sort by price ascending/descending
+            if (priceSort == "asc")
+            {
+                query = query.OrderBy(c => c.Price);
+            }
+            else if (priceSort == "desc")
+            {
+                query = query.OrderByDescending(c => c.Price);
+            }
+
+            // Project the query results into CarViewModel
+            var cars = await query
+                .Select(c => new CarViewModel
+                {
+                    CarId = c.CarId,
+                    Make = c.Make,
+                    Model = c.Model,
+                    Year = c.Year,
+                    Description = c.Description,
+                    Price = c.Price,
+                    Color = c.Color,
+                    EngineSize = c.EngineSize,
+                    FuelTypeName = c.FuelType.Name,
+                    TransmissionName = c.Transmission.Name,
+                    CategoryName = c.Category.Name,
+                    Weight = c.Weight,
+                    TopSpeed = c.TopSpeed,
+                    Acceleration = c.Acceleration,
+                    Horsepower = c.Horsepower,
+                    Torque = c.Torque,
+                    FuelConsumption = c.FuelConsumption,
+                    Owner = c.User.UserName,
+                    ImageUrl = c.ImageUrl
+                })
+                .ToListAsync();
+
+            return cars;
+        }
     }
 
 }

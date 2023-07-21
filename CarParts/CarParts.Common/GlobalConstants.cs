@@ -26,7 +26,7 @@
             public const int CarCategoryMaxLength = 40;
 
             public const int CarDescriptionMinLength = 2;
-            public const int CarDescriptionMaxLength = 300;
+            public const int CarDescriptionMaxLength = 2500;
 
             public const double CarPriceMinValue = 0.01;
             public const double CarPriceMaxValue = 999_999;
@@ -49,7 +49,7 @@
             public const int CarTorqueMinValue = 50;
             public const int CarTorqueMaxValue = 2000;
 
-            public const int CarFuelConsumptionMinValue = 2;
+            public const int CarFuelConsumptionMinValue = 0;
             public const int CarFuelConsumptionMaxValue = 50;
 
         }

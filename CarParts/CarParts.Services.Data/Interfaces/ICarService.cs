@@ -28,5 +28,9 @@ namespace CarParts.Services.Data.Interfaces
         Task<bool> AddCarToMyFavoriteCarsAsync(int carId, string userId);
 
         Task<bool> RemoveCarFromMyFavoriteCarsAsync(int carId, string userId);
+
+        Task<ICollection<CarViewModel>> SearchCarsAsync(string searchTerm, string category, string priceSort
+            , string transmissionName, string fuelName);
+
     }
 }

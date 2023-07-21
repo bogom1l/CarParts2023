@@ -1,0 +1,137 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model ICollection<CarParts.Web.ViewModels.Car.CarViewModel>
+
+<h2>Search Results</h2>
+
+<style>
+    .card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s;
+    }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+    .card-img-top {
+        height: 200px; /* Adjust the height of the image as needed */
+        object-fit: cover;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .card-body {
+        padding: 10px;
+    }
+
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        margin-bottom: 5px;
+    }
+    
+    /* Add this CSS to make the "Fuel type" text italic */
+    .card-text-make-italic {
+        font-style: oblique;
+    }
+    
+
+</style>
+
+
+<form asp-controller="Car" asp-action="Search" method="get">
+    <div class="form-row">
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="searchTerm" value="@ViewBag.SearchTerm" 
+                   placeholder="Search by car name or description">
+        </div>
+        <div class="col-md-4">
+            <select class="form-control" name="category">
+                <option value="">All Categories</option>
+                <!-- Populate the dropdown options with available categories -->
+                <option value="Sedan">Sedan</option>
+                <option value="Coupe">Coupe</option>
+                <option value="Hatchback">Hatchback</option>
+                <option value="SUV">SUV</option>
+                <option value="Wagon">Wagon</option>
+                <option value="Cabrio">Cabrio</option>
+                <option value="Pickup Truck">Pickup Truck</option>
+                <option value="Minivan">Minivan</option>
+                <option value="Jeep">Jeep</option>
+
+            </select>
+        </div>
+        
+        <div class="col-md-4">
+            <select class="form-control" name="transmissionName">
+                <option value="">All Transmission Types</option>
+                <option value="Automatic">Automatic</option>
+                <option value="Manual">Manual</option>
+            </select>
+        </div>
+        
+        <div class="col-md-4">
+            <select class="form-control" name="fuelName">
+                <option value="">All Fuel Types</option>
+                <option value="Diesel">Diesel</option>
+                <option value="Petrol">Petrol</option>
+                <option value="Electric">Electric</option>
+                <option value="Hybrid">Hybrid</option>
+            </select>
+        </div>
+
+
+        <div class="col-md-4">
+            <select class="form-control" name="priceSort">
+                <option value="asc">Price: Low to High</option>
+                <option value="desc">Price: High to Low</option>
+            </select>
+        </div>
+        <div class="col-md-12 mt-2">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Cars</th> @*//TODO: remove?*@
+        </tr>
+    </thead>
+    <tbody>
+        
+    <div class="row">
+        @foreach (var car in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <!-- Car image -->
+                    <img class="card-img-top" src="@car.ImageUrl" alt="Car Image">
+
+                    <div class="card-body">
+                        <!-- Car properties -->
+                        <h5 class="card-title">@car.Make @car.Model</h5>
+                        <p class="card-text card-text-make-italic"><b>Price</b>: @car.Price</p>
+                        <p class="card-text card-text-make-italic"><b>Fuel type</b>: @car.FuelTypeName</p>
+                        <p class="card-text card-text-make-italic"><b>Category</b>: @car.CategoryName</p>
+                    </div>
+                    
+                    <a asp-controller="Car" asp-action="Details" asp-route-id="@car.CarId" class="btn btn-info btn-block">
+                        View Details
+                    </a>
+
+                </div>
+            </div>
+        }
+    </div>
+
+    
+
+    </tbody>
+</table>
