@@ -30,7 +30,7 @@ namespace CarParts.Web
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-
+            //?
 
             //builder.Services.AddControllersWithViews();
             builder.Services.AddControllersWithViews(options =>
