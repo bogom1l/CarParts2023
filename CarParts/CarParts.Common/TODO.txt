@@ -1,7 +1,7 @@
 ﻿
 
 
-implement search functionallity AND pagination? LIKE mobile.bg / auto.bg / cars.bg
+implement search functionallity AND pagination? - to add FROM year TO year, FROM hp TO hp, FROM price TO price
 
 fix big details info, trq gi smalq na cardovete
 

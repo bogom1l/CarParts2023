@@ -10,9 +10,125 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CarParts2023</a>
+                <a class="navbar-brand" href="/Home/Index">Home Page</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="@Url.Action("All", "Car")">
+                                All Cars
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Cars
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="@Url.Action("Add", "Car")">Add a car</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Search", "Car")">Search cars</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("MyFavoriteCars", "Car")">My favorite cars</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("MyCars", "Car")">My cars</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="@Url.Action("All", "Part")">
+                                All Parts
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Parts
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="@Url.Action("Add", "Part")">Add a part</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Search", "Part")">Search part</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("MyFavoriteParts", "Part")">
+                                    My favorite parts
+                                </a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("MyParts", "Part")">My parts</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+
+                       
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                About us
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="@Url.Action("Reviews", "Car")">Reviews</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Contacts", "Car")">Contact us</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="@Url.Action("TestView", "Home")">
+                                TEST VIEW
+                            </a>
+                        </li>
+
+                    </ul>
+                 
+
+                </div>
+
+                <span class="navbar-text">
+                    <partial name="_LoginPartial" />
+                </span>
+
+            </div>
+            
+        </nav>
+        
+        
+        
+        
+        
+
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - CarParts2023 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+
+
+
+
+
+
+@*
+    
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Car & Parts Catalog</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -25,7 +141,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a href="@Url.Action("All", "Car")" class="btn btn-dark btn-lg">View All Cars</a>
                         </li>
@@ -50,31 +166,28 @@
                         <li class="nav-item">
                             <a href="@Url.Action("Add", "Part")" class="btn btn-secondary btn-lg">Add Part</a>
                         </li>
-                       
-                        
-                        
-                        
+
+
+
+
 
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - CarParts2023 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+*@

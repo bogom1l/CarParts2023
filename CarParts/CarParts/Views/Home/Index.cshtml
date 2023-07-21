@@ -1,63 +1,357 @@
 ﻿@{
-    ViewBag.Title = "Home";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h2>Welcome to the Car Parts Application!</h2>
-    <p>Explore our car parts inventory.</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+                
+        body {
+            /*padding: 0;
+                    margin: 0;*/
+            background-color: #f2f2f2;
+        }
 
-    <div class="btn-group">
-        <a href="@Url.Action("All", "Car")" class="btn btn-dark btn-lg">View All Cars</a>
-    </div>
+        .container {
+            padding: 0;
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+      
+
+        .btn-group-vertical {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-left: 10px;
+        }
+
+            .btn-group-vertical .btn {
+                width: 200px;
+                margin: 5px;
+                border-radius: 25px;
+            }
+
+            .btn-group-vertical .btn-primary {
+                background-color: #1E90FF;
+                color: #fff;
+            }
+
+            .btn-group-vertical .btn-secondary {
+                background-color: #f0f0f0;
+                color: #000;
+            }
+
+        .main-content {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            text-align: center;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 300%; /* Increase the width of the container */
+            height: 650px; /* Increase the height of the container */
+        }
+
+        .catalog-title {
+            font-size: 36px; /* Set the font size to make it big */
+            font-weight: bold; /* Set the font weight to bold */
+            color: #1E90FF; /* Set the color to the desired blue */
+            margin-bottom: 20px; /* Add some space at the bottom */
+            margin-left: 0; /* Remove left margin */
+        }
+
+        
+
+        .car-image {
+            max-width: 75%;
+            border-radius: 5px;
+        }
+
+        .car-description {
+            margin-top: 10px;
+            font-size: 20px;
+            color: #1E90FF;
+        }
+        
+        
+        
+
+    </style>
+</head>
+<body>
+
+<div class="container">
     
-    <div class="btn-group">
-        <a href="@Url.Action("MyCars", "Car")" class="btn btn-secondary btn-lg">My Cars</a>
+    <div class="row">
+
+        <div class="col-lg-2 col-md-3 col-sm-6">
+            <div class="btn-group-vertical">
+                <a href="@Url.Action("All", "Car")" class="btn btn-primary">View All Cars</a>
+                <a href="@Url.Action("MyCars", "Car")" class="btn btn-secondary">My Cars</a>
+                <a href="@Url.Action("MyFavoriteCars", "Car")" class="btn btn-secondary">My favorite cars</a>
+                <a href="@Url.Action("Add", "Car")" class="btn btn-secondary">Add Car</a>
+
+                <br/>
+
+                <a href="@Url.Action("Search", "Car")" class="btn btn-secondary">Search Cars</a>
+
+                <br/>
+
+                <a href="@Url.Action("All", "Part")" class="btn btn-primary">View All Parts</a>
+                <a href="@Url.Action("MyParts", "Part")" class="btn btn-secondary">My Parts</a>
+                <a href="@Url.Action("MyFavoriteParts", "Part")" class="btn btn-secondary">My favorite parts</a>
+                <a href="@Url.Action("Add", "Part")" class="btn btn-secondary">Add Part</a>
+            </div>
+        </div>
+        
+        
+
+        <div class="col-lg-8 col-md-6 col-sm-6" style="padding-left: 302px;">
+
+            <div class="catalog-title">Car Catalog 2023</div>
+            <div class="main-content">
+                <div class="row">
+                
+                    <div class="col-md-6">
+
+                        <div class="card" style="width: 18rem;">
+                            <img src="https://www.nastarta.com/wp-content/uploads/2017/12/25360533_10203959402102183_1121707332_n.jpg" class="card-img-top" alt="BMW E60 M5">
+                            <div class="card-body">
+                                <h5 class="card-title">BMW E60 M5</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="card" style="width: 18rem;">
+                            <img src="https://i.ebayimg.com/images/g/3WMAAOSwu~BhnX29/s-l1200.jpg" class="card-img-top" alt="stoplight e60">
+                            <div class="card-body">
+                                <h5 class="card-title"> BMW 5 Series E60 LED Tail Lights 03-10 Red Rear Lamps Dynamic Signal</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+            
+        <!-- One column for the other text -->
+        
+        
+        
+        
+
     </div>
-    
-    <div class="btn-group">
-        <a href="@Url.Action("MyFavoriteCars", "Car")" class="btn btn-secondary btn-lg">My favorite cars</a>
-    </div>
-    
-    <div class="btn-group">
-        <a href="@Url.Action("Add", "Car")" class="btn btn-secondary btn-lg">Add Car</a>
-    </div>
-    
-    <br/>
-    <br/>
-    <br/>
-
-
-    <div class="btn-group">
-        <a href="@Url.Action("All", "Part")" class="btn btn-dark btn-lg">View All Parts</a>
-    </div>
-    
-    <div class="btn-group">
-        <a href="@Url.Action("MyParts", "Part")" class="btn btn-secondary btn-lg">My Parts</a>
-    </div>
-
-    <div class="btn-group">
-        <a href="@Url.Action("MyFavoriteParts", "Part")" class="btn btn-secondary btn-lg">My favorite parts</a>
-    </div>
-
-    <div class="btn-group">
-        <a href="@Url.Action("Add", "Part")" class="btn btn-secondary btn-lg">Add Part</a>
-    </div>
-
-
-    <br />
-    <br />
-    <br />
-
-    <div class="btn-group">
-        <a href="@Url.Action("Search", "Car")" class="btn btn-secondary btn-lg">Search Cars</a>
-    </div>
-
-    <br />
-    <br />
-    <br />
-
-    
-   
-
 </div>
 
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+   
+
+
+</body>
+</html>
+
+                    
+                
+@*
+    
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+                
+        body {
+            /*padding: 0;
+            margin: 0;*/
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            padding: 0;
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+      
+
+        .btn-group-vertical {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-left: 10px;
+        }
+
+            .btn-group-vertical .btn {
+                width: 200px;
+                margin: 5px;
+                border-radius: 25px;
+            }
+
+            .btn-group-vertical .btn-primary {
+                background-color: #1E90FF;
+                color: #fff;
+            }
+
+            .btn-group-vertical .btn-secondary {
+                background-color: #f0f0f0;
+                color: #000;
+            }
+
+        .main-content {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            text-align: center;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 300%; /* Increase the width of the container */
+            height: 650px; /* Increase the height of the container */
+        }
+
+        .catalog-title {
+            font-size: 36px; /* Set the font size to make it big */
+            font-weight: bold; /* Set the font weight to bold */
+            color: #1E90FF; /* Set the color to the desired blue */
+            margin-bottom: 20px; /* Add some space at the bottom */
+            margin-left: 0; /* Remove left margin */
+        }
+
+        
+
+        .car-image {
+            max-width: 75%;
+            border-radius: 5px;
+        }
+
+        .car-description {
+            margin-top: 10px;
+            font-size: 20px;
+            color: #1E90FF;
+        }
+        
+        
+        
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="btn-group-vertical">
+                <a href="@Url.Action("All", "Car")" class="btn btn-primary">View All Cars</a>
+                <a href="@Url.Action("MyCars", "Car")" class="btn btn-secondary">My Cars</a>
+                <a href="@Url.Action("MyFavoriteCars", "Car")" class="btn btn-secondary">My favorite cars</a>
+                <a href="@Url.Action("Add", "Car")" class="btn btn-secondary">Add Car</a>
+
+                <br/>
+
+                <a href="@Url.Action("Search", "Car")" class="btn btn-secondary">Search Cars</a>
+
+                <br/>
+
+                <a href="@Url.Action("All", "Part")" class="btn btn-primary">View All Parts</a>
+                <a href="@Url.Action("MyParts", "Part")" class="btn btn-secondary">My Parts</a>
+                <a href="@Url.Action("MyFavoriteParts", "Part")" class="btn btn-secondary">My favorite parts</a>
+                <a href="@Url.Action("Add", "Part")" class="btn btn-secondary">Add Part</a>
+            </div>
+        </div>
+        
+      
+        <div class="col-md-6">
+            <div class="catalog-title">Car Catalog 2023</div>
+
+            <div class="main-content">
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="card" style="width: 18rem;">
+                            <img src="https://www.nastarta.com/wp-content/uploads/2017/12/25360533_10203959402102183_1121707332_n.jpg" class="card-img-top" alt="BMW E60 M5">
+                            <div class="card-body">
+                                <h5 class="card-title">BMW E60 M5</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card" style="width: 18rem;">
+                            <img src="https://i.ebayimg.com/images/g/3WMAAOSwu~BhnX29/s-l1200.jpg" class="card-img-top" alt="stoplight e60">
+                            <div class="card-body">
+                                <h5 class="card-title"> BMW 5 Series E60 LED Tail Lights 03-10 Red Rear Lamps Dynamic Signal</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                    
+
+
+                </div>
+            </div>
+           
+            
+            
+            
+
+            
+
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+   
+
+
+</body>
+</html>
+
+
+
+
+*@

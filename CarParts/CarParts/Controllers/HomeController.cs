@@ -14,6 +14,11 @@ namespace CarParts.Web.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public IActionResult TestView()
+        {
+            return View();
+        }
 
 
 
