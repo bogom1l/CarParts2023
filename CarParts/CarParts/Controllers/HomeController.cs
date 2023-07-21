@@ -1,11 +1,10 @@
-﻿using CarParts.ViewModels;
+﻿using System.Diagnostics;
+using CarParts.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace CarParts.Controllers
+namespace CarParts.Web.Controllers
 {
-    using Microsoft.AspNetCore.Mvc;
-    using System.Diagnostics;
-
     public class HomeController : BaseController
     {
         

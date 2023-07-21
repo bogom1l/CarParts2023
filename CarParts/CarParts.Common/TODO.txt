@@ -1,0 +1,9 @@
+﻿
+
+implement search functionallity AND pagination?
+
+vmesto da refreshva page-a, da izpiswa na potrebitqla nqkwa izkachashta greshka (kris video)
+
+--------------------
+
+12:00 - 21.07.2023

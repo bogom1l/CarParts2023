@@ -1,11 +1,10 @@
 ﻿using CarParts.Data.Models;
-using CarParts.Services;
-using CarParts.ViewModels.Car;
+using CarParts.Services.Data.Interfaces;
+using CarParts.Web.ViewModels.Car;
+using Microsoft.AspNetCore.Mvc;
 
-namespace CarParts.Controllers
+namespace CarParts.Web.Controllers
 {
-    using Microsoft.AspNetCore.Mvc;
-
     public class CarController : BaseController
     {
         private readonly ICarService _carService;

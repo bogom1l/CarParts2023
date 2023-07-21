@@ -1,15 +1,12 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using CarParts.Data;
-using CarParts.Services;
+using CarParts.Services.Data;
+using CarParts.Services.Data.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
-namespace CarParts
+namespace CarParts.Web
 {
-    using CarParts.Data;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.EntityFrameworkCore;
-
     public class Program
     {
         public static void Main(string[] args)

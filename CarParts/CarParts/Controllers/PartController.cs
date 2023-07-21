@@ -1,11 +1,10 @@
 ﻿using CarParts.Data.Models;
-using CarParts.Services;
-using CarParts.ViewModels.Part;
+using CarParts.Services.Data.Interfaces;
+using CarParts.Web.ViewModels.Part;
+using Microsoft.AspNetCore.Mvc;
 
-namespace CarParts.Controllers
+namespace CarParts.Web.Controllers
 {
-    using Microsoft.AspNetCore.Mvc;
-
     public class PartController : BaseController
     {
         private readonly IPartService _partService;
