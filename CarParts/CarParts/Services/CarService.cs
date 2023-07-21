@@ -324,14 +324,13 @@ namespace CarParts.Services
 
         public async Task<bool> RemoveCarFromMyFavoriteCarsAsync(int carId, string userId)
         {
-
             UserFavoriteCar? car = await this._dbContext
                 .UsersFavoriteCars
                 .FirstOrDefaultAsync(ufc => ufc.CarId == carId && ufc.UserId == userId);
 
             if (car == null)
             {
-                return false; //doesnt exist (for some reason..)
+                return false; //doesnt exist (for some reason...)
             }
 
             this._dbContext.UsersFavoriteCars.Remove(car);
