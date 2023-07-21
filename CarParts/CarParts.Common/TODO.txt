@@ -1,11 +1,12 @@
 ﻿
 
-add cars from all categories!
 
-think about how to implement search functionallity AND pagination?
+implement search functionallity AND pagination? LIKE mobile.bg / auto.bg / cars.bg
+
+fix big details info, trq gi smalq na cardovete
 
 vmesto da refreshva page-a, da izpiswa na potrebitqla nqkwa izkachashta greshka (kris video)
 
 --------------------
 
-12:00 - 21.07.2023
+19:00 - 21.07.2023
