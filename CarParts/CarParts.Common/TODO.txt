@@ -1,12 +1,15 @@
 ﻿
 
 
-implement search functionallity AND pagination? - to add FROM year TO year, FROM hp TO hp, FROM price TO price
+(med) implement search functionallity AND pagination? - to add FROM year TO year, FROM hp TO hp, FROM price TO price
 
-fix big details info, trq gi smalq na cardovete
+(easy) fix big details info, trq gi smalq na cardovete
 
-vmesto da refreshva page-a, da izpiswa na potrebitqla nqkwa izkachashta greshka (kris video)
+(easy) vmesto da refreshva page-a, da izpiswa na potrebitqla nqkwa izkachashta greshka (kris video)
+
+da naprawq ApplicationUser (ot workshop instrukciite)
+
 
 --------------------
 
-19:00 - 21.07.2023
+19:00 - 23.07.2023
