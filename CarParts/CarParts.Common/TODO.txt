@@ -1,8 +1,11 @@
 ﻿
 
 
-(easy) vmesto da refreshva page-a, da izpiswa na potrebitqla nqkwa izkachashta greshka (kris video)
-na povecheto mesta kydeto moje da se sburka!
+IDEQ: da doizmislq ideqta s pari w saita i da moje vseki user koito ne e dealer da naema koli (vseki user si ima spisyk RentedCars)
+vseki chovek e ili user ili dealer , dealerite mogat da dobavqt koli v saita, a userite mogat da gi naemat
+kolata trqbwa da ima samo 1 naematel (user) i samo 1 dealer
+
+da dobawq Dealer , kakto w workshopa ima tam nqkyv podoben (nowa tablichka, nowi relacii, migracii)
 
 
 da naprawq ApplicationUser (ot workshop instrukciite)
@@ -10,4 +13,4 @@ da naprawq ApplicationUser (ot workshop instrukciite)
 
 --------------------
 
-11:00 - 24.07.2023
+15:00 - 24.07.2023

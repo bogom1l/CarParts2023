@@ -40,6 +40,7 @@ namespace CarParts.Web.Controllers
 
             await this._partService.AddPartAsync(addPartViewModel, GetUserId());
 
+            TempData["SuccessMessage"] = "Part successfully added!";
             return RedirectToAction("All");
         }
 
@@ -92,6 +93,7 @@ namespace CarParts.Web.Controllers
 
             await this._partService.EditPartAsync(id, part);
 
+            TempData["SuccessMessage"] = "Part successfully edited!";
             return RedirectToAction("All");
         }
 
@@ -112,6 +114,7 @@ namespace CarParts.Web.Controllers
 
             await this._partService.DeletePartAsync(id, GetUserId());
 
+            TempData["SuccessMessage"] = "Part successfully deleted!";
             return RedirectToAction("All");
         }
 
@@ -139,14 +142,17 @@ namespace CarParts.Web.Controllers
 
             if (part == null)
             {
+                TempData["ErrorMessage"] = "The part does not exist.";
                 return RedirectToAction("All");
             }
 
             if (!await this._partService.AddPartToMyFavoritePartsAsync(id, GetUserId()))
             {
+                TempData["ErrorMessage"] = "The part is already in your favorite parts.";
                 return RedirectToAction("All");
             }
 
+            TempData["SuccessMessage"] = "Part successfully added to favorite parts!";
             return RedirectToAction("MyFavoriteParts");
         }
 
@@ -157,14 +163,17 @@ namespace CarParts.Web.Controllers
 
             if (part == null)
             {
+                TempData["ErrorMessage"] = "The part does not exist.";
                 return RedirectToAction("MyFavoriteParts");
             }
 
             if (!await this._partService.RemovePartFromMyFavoritePartsAsync(id, GetUserId()))
             {
+                TempData["ErrorMessage"] = "The part does not exist.";
                 return RedirectToAction("MyFavoriteParts");
             }
 
+            TempData["SuccessMessage"] = "Part successfully removed from favorite parts!";
             return RedirectToAction("All");
         }
 

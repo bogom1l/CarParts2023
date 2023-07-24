@@ -4,6 +4,31 @@
     ViewBag.Title = "My favorite Parts";
 }
 
+
+
+
+
+@{
+    // Retrieve messages from TempData
+    var errorMessage = TempData["ErrorMessage"] as string;
+    var successMessage = TempData["SuccessMessage"] as string;
+}
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <div class="alert alert-success">@successMessage</div>
+}
+
+
+
+
+
+
 <style>
     .btn-customColor {
         background-color: darkolivegreen;

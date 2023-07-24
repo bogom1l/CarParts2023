@@ -42,6 +42,7 @@ namespace CarParts.Web.Controllers
 
             await this._carService.AddCarAsync(car, GetUserId());
 
+            TempData["SuccessMessage"] = "Car successfully added!";
             return RedirectToAction("All");
         }
 
@@ -93,6 +94,7 @@ namespace CarParts.Web.Controllers
 
             await this._carService.EditCarAsync(id, car); //x
 
+            TempData["SuccessMessage"] = "Car successfully edited!";
             return RedirectToAction("All");
         }
 
@@ -113,6 +115,7 @@ namespace CarParts.Web.Controllers
 
             await this._carService.DeleteCarAsync(id, GetUserId());
 
+            TempData["SuccessMessage"] = "Car successfully deleted!";
             return RedirectToAction("All");
         }
 
@@ -140,22 +143,17 @@ namespace CarParts.Web.Controllers
 
             if (car == null)
             {
+                TempData["ErrorMessage"] = "The car does not exist.";
                 return RedirectToAction("All");
             }
 
             if (!await this._carService.AddCarToMyFavoriteCarsAsync(id, GetUserId())) //false = car already in favorite cars
             {
-                //return RedirectToAction("All");
                 TempData["ErrorMessage"] = "The car is already in your favorite cars.";
                 return RedirectToAction("All");
             }
-            else
-            {
-                TempData["SuccessMessage"] = "Car added to favorite cars!";
-            }
-
             
-
+            TempData["SuccessMessage"] = "Car added to favorite cars!";
             return RedirectToAction("MyFavoriteCars");
         }
 
@@ -166,37 +164,35 @@ namespace CarParts.Web.Controllers
 
             if (car == null)
             {
+                TempData["ErrorMessage"] = "The car does not exist.";
                 return RedirectToAction("MyFavoriteCars");
             }
 
             if (!await this._carService.RemoveCarFromMyFavoriteCarsAsync(id, GetUserId()))
             {
+                TempData["ErrorMessage"] = "The car does not exist.";
                 return RedirectToAction("MyFavoriteCars");
             }
 
+            TempData["SuccessMessage"] = "Car removed from favorite cars!";
             return RedirectToAction("All");
         }
 
         [HttpGet]
-        public async Task<IActionResult> Search(string searchTerm, string category, string priceSort
-            , string transmissionName, string fuelName,
-            int? fromYear, int? toYear, int? fromHp, int? toHp, 
-            int? fromPrice, int? toPrice)
+        public async Task<IActionResult> Search(string searchTerm, string category, string priceSort, string transmissionName,
+            string fuelName, int? fromYear, int? toYear, int? fromHp, int? toHp, int? fromPrice, int? toPrice)
         {
-            // Call the SearchCarsAsync method of the CarService to retrieve the filtered cars
             var cars = await _carService.SearchCarsAsync(searchTerm, category, priceSort,
-                 transmissionName, fuelName,
-                 fromYear, toYear, fromHp, toHp, 
-                 fromPrice, toPrice);
+                 transmissionName, fuelName, fromYear, toYear, fromHp, toHp, fromPrice, toPrice);
 
-            //if i want to keep the search term in the search box
-            //ViewBag.SearchTerm = searchTerm;
-            //ViewBag.FromPrice = fromPrice;
-            //ViewBag.ToPrice = toPrice;
-            //ViewBag.FromHp = fromHp;
-            //ViewBag.ToHp = toHp;
-            //ViewBag.FromYear = fromYear;
-            //ViewBag.ToYear = toYear;
+            /*  if i want to keep the search term in the search box
+            ViewBag.SearchTerm = searchTerm;
+            ViewBag.FromPrice = fromPrice;
+            ViewBag.ToPrice = toPrice;
+            ViewBag.FromHp = fromHp;
+            ViewBag.ToHp = toHp;
+            ViewBag.FromYear = fromYear;
+            ViewBag.ToYear = toYear;  */
 
             return View(cars);
         }
