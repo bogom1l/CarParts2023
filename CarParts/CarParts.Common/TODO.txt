@@ -4,8 +4,11 @@
 IDEQ: da doizmislq ideqta s pari w saita i da moje vseki user koito ne e dealer da naema koli (vseki user si ima spisyk RentedCars)
 vseki chovek e ili user ili dealer , dealerite mogat da dobavqt koli v saita, a userite mogat da gi naemat
 kolata trqbwa da ima samo 1 naematel (user) i samo 1 dealer
+trq da izmislq mn dobre cqlata database sxema - tablici, relacii
 
 da dobawq Dealer , kakto w workshopa ima tam nqkyv podoben (nowa tablichka, nowi relacii, migracii)
+
+|| CQLA DRUGA IDEQ?
 
 
 da naprawq ApplicationUser (ot workshop instrukciite)
