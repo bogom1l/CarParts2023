@@ -143,10 +143,18 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("All");
             }
 
-            if (!await this._carService.AddCarToMyFavoriteCarsAsync(id, GetUserId()))
+            if (!await this._carService.AddCarToMyFavoriteCarsAsync(id, GetUserId())) //false = car already in favorite cars
             {
+                //return RedirectToAction("All");
+                TempData["ErrorMessage"] = "The car is already in your favorite cars.";
                 return RedirectToAction("All");
             }
+            else
+            {
+                TempData["SuccessMessage"] = "Car added to favorite cars!";
+            }
+
+            
 
             return RedirectToAction("MyFavoriteCars");
         }

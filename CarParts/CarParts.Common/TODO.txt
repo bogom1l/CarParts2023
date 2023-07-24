@@ -2,6 +2,8 @@
 
 
 (easy) vmesto da refreshva page-a, da izpiswa na potrebitqla nqkwa izkachashta greshka (kris video)
+na povecheto mesta kydeto moje da se sburka!
+
 
 da naprawq ApplicationUser (ot workshop instrukciite)
 

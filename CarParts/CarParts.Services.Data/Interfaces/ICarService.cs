@@ -36,6 +36,6 @@ namespace CarParts.Services.Data.Interfaces
 
         void GetDataFromDatabase();
 
-
+        Task<bool> IsCarAlreadyInMyFavoriteCars(int carId, string userId);
     }
 }

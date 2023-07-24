@@ -477,6 +477,14 @@ namespace CarParts.Services.Data
         }
 
 
+        public async Task<bool> IsCarAlreadyInMyFavoriteCars(int carId, string userId)
+        {
+            return await this._dbContext
+                .UsersFavoriteCars
+                .AnyAsync(ufc => ufc.CarId == carId && ufc.UserId == userId);
+        }
+
+
     }
 
 }

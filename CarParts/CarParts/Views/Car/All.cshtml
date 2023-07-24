@@ -1,12 +1,39 @@
-﻿@model ICollection<CarParts.Web.ViewModels.Car.CarViewModel>
+﻿@using CarParts.Services.Data.Interfaces
+@model ICollection<CarParts.Web.ViewModels.Car.CarViewModel>
+
+@inject ICarService CarService
 
 @{
     ViewBag.Title = "All Cars";
 }
 
+
+
+@{
+    // Retrieve messages from TempData
+    var errorMessage = TempData["ErrorMessage"] as string;
+    var successMessage = TempData["SuccessMessage"] as string;
+}
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <div class="alert alert-success">@successMessage</div>
+}
+
+
+
+
 @*SweetAlert CDN*@
 <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
+
+
+
 
 
 <style>
@@ -60,18 +87,12 @@
                                 Edit
                             </a>
 
-                            @*<a asp-controller="Car" asp-action="Delete" asp-route-id="@car.CarId" class="btn btn-danger btn-block">
-                                Delete
-                            </a>*@
-
                             <a href="#" class="btn btn-danger btn-block delete-car" data-id="@car.CarId">
                                 Delete
                             </a>
-
-
                         }
 
-
+                       
                         <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@car.CarId" class="btn btn-purple btn-block">
                             Add to favorite cars
                         </a>
@@ -82,10 +103,6 @@
         }
     </div>
 </div>
-
-
-
-
 
 
 
@@ -146,8 +163,13 @@
 </style>
 
 
+
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+
+    
     
     
 
