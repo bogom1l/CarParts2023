@@ -5,7 +5,7 @@ namespace CarParts.Data.Models
     using System.ComponentModel.DataAnnotations;
     using static GlobalConstants.CarProperties;
 
-    public class Transmission
+    public class CarTransmission
     {
         [Key]
         public int Id { get; set; }

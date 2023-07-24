@@ -18,6 +18,10 @@
 <div class="text-center row">
     @foreach (var car in Model)
     {
+        string newDescription = string.Join(" ", car.Description
+            .Split(new char[] { ' ', '\t', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+            .ToList().Take(5)) + "...";
+
         <div class="card col-4" style="width: 20rem;">
             <div class="card-body">
 
@@ -25,7 +29,7 @@
 
                 <h5 class="card-title mt-1">@car.Make @car.Model</h5>
                 <p class="mb-0"><span class="fw-bold">Year: </span>@car.Year</p>
-                <p class="mb-0"><span class="fw-bold">Description: </span>@car.Description</p>
+                <p class="mb-0"><span class="fw-bold">Description: </span>@newDescription</p>
                 <p class="mb-0"><span class="fw-bold">Price: </span>@car.Price</p>
                 <p class="mb-0"><span class="fw-bold">Color: </span>@car.Color</p>
                 <p class="mb-0"><span class="fw-bold">Engine Size: </span>@car.EngineSize</p>
@@ -62,5 +66,5 @@
 
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial"/>
 }

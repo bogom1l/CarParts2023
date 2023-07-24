@@ -171,18 +171,24 @@ namespace CarParts.Web.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Search(string searchTerm, string category, string priceSort
-            , string transmissionName, string fuelName)
+            , string transmissionName, string fuelName,
+            int? fromYear, int? toYear, int? fromHp, int? toHp, 
+            int? fromPrice, int? toPrice)
         {
             // Call the SearchCarsAsync method of the CarService to retrieve the filtered cars
             var cars = await _carService.SearchCarsAsync(searchTerm, category, priceSort,
-                 transmissionName, fuelName);
+                 transmissionName, fuelName,
+                 fromYear, toYear, fromHp, toHp, 
+                 fromPrice, toPrice);
 
-            // Pass the search criteria to the view to maintain state in the search bar
-            ViewBag.SearchTerm = searchTerm;
-            ViewBag.Category = category;
-            ViewBag.PriceAscOrDesc = priceSort; //?
-            ViewBag.TransmissionName = transmissionName;
-            ViewBag.FuelName = fuelName;
+            //if i want to keep the search term in the search box
+            //ViewBag.SearchTerm = searchTerm;
+            //ViewBag.FromPrice = fromPrice;
+            //ViewBag.ToPrice = toPrice;
+            //ViewBag.FromHp = fromHp;
+            //ViewBag.ToHp = toHp;
+            //ViewBag.FromYear = fromYear;
+            //ViewBag.ToYear = toYear;
 
             return View(cars);
         }

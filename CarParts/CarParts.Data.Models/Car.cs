@@ -49,21 +49,21 @@ namespace CarParts.Data.Models
         [ForeignKey(nameof(FuelType))]
         public int FuelTypeId { get; set; }
 
-        public FuelType FuelType { get; set; } = null!;
+        public CarFuelType FuelType { get; set; } = null!;
 
 
         [Required]
         [ForeignKey(nameof(Transmission))]
         public int TransmissionId { get; set; }
 
-        public Transmission Transmission { get; set; } = null!;
+        public CarTransmission Transmission { get; set; } = null!;
 
 
         [Required]
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
 
-        public Category Category { get; set; } = null!;
+        public CarCategory Category { get; set; } = null!;
 
 
 

@@ -46,6 +46,16 @@
                 color: #000;
             }
 
+            .btn-group-vertical .btn-colored {
+                background-color: #1e20ff;
+                color: #fff;
+            }
+
+            .btn-group-vertical .btn-contactus {
+                background-color: #013220;
+                color: #fff;
+            }
+
         .main-content {
             background-color: #fff;
             padding: 40px;
@@ -98,10 +108,8 @@
                 <a href="@Url.Action("MyCars", "Car")" class="btn btn-secondary">My Cars</a>
                 <a href="@Url.Action("MyFavoriteCars", "Car")" class="btn btn-secondary">My favorite cars</a>
                 <a href="@Url.Action("Add", "Car")" class="btn btn-secondary">Add Car</a>
-
                 <br/>
-
-                <a href="@Url.Action("Search", "Car")" class="btn btn-secondary">Search Cars</a>
+                    <a href="@Url.Action("Search", "Car")" class="btn btn-colored">Search Cars</a>
 
                 <br/>
 
@@ -109,6 +117,14 @@
                 <a href="@Url.Action("MyParts", "Part")" class="btn btn-secondary">My Parts</a>
                 <a href="@Url.Action("MyFavoriteParts", "Part")" class="btn btn-secondary">My favorite parts</a>
                 <a href="@Url.Action("Add", "Part")" class="btn btn-secondary">Add Part</a>
+                <br />
+                    <a href="@Url.Action("Search", "Part")" class="btn btn-colored">Search Parts</a>
+                
+                <br />
+                
+                <a href="@Url.Action("ContactUs", "Home")" class="btn btn-contactus">Contact Us</a>
+
+
             </div>
         </div>
         

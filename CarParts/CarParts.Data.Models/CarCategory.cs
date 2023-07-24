@@ -4,7 +4,7 @@ using static CarParts.Common.GlobalConstants.CarProperties;
 
 namespace CarParts.Data.Models
 {
-    public class Category
+    public class CarCategory
     {
         [Key]
         public int Id { get; set; }

@@ -169,5 +169,14 @@ namespace CarParts.Web.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> Search(string searchTerm, string category, string priceSort, int? fromPrice, int? toPrice)
+        {
+            var parts = await this._partService.SearchPartsAsync(searchTerm, category, priceSort, fromPrice, toPrice);
+
+            return View(parts);
+        }
+
+
     }
 }

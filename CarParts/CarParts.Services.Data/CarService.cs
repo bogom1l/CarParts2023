@@ -1,4 +1,5 @@
-﻿using CarParts.Data;
+﻿using System.Xml;
+using CarParts.Data;
 using CarParts.Services.Data.Interfaces;
 using CarParts.Web.ViewModels.Car;
 using CarParts.Web.ViewModels.Car.CarProperties;
@@ -11,6 +12,7 @@ namespace CarParts.Services.Data
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Text.Json;
     using System.Threading.Tasks;
 
     public class CarService : ICarService
@@ -346,49 +348,85 @@ namespace CarParts.Services.Data
         }
 
         public async Task<ICollection<CarViewModel>> SearchCarsAsync(string searchTerm, string category, string priceSort
-            , string transmissionName, string fuelName)
+            , string transmissionName, string fuelName,
+            int? fromYear, int? toYear, int? fromHp, int? toHp, 
+            int? fromPrice, int? toPrice)
         {
-            var query = _dbContext.Cars.AsQueryable();
+            var carsQuery = _dbContext.Cars.AsQueryable();
 
             // Filter by category
             if (!string.IsNullOrEmpty(category))
             {
-                query = query.Where(c => c.Category.Name == category);
+                carsQuery = carsQuery.Where(c => c.Category.Name == category);
             }
 
             // Filter by transmission
             if (!string.IsNullOrEmpty(transmissionName))
             {
-                query = query.Where(c => c.Transmission.Name == transmissionName);
+                carsQuery = carsQuery.Where(c => c.Transmission.Name == transmissionName);
             }
 
             // Filter by fuel
             if (!string.IsNullOrEmpty(fuelName))
             {
-                query = query.Where(c => c.FuelType.Name == fuelName);
+                carsQuery = carsQuery.Where(c => c.FuelType.Name == fuelName);
             }
 
             // Search by custom text in car's name/description
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                query = query.Where(c =>
+                carsQuery = carsQuery.Where(c =>
                     c.Make.Contains(searchTerm) ||
                     c.Description.Contains(searchTerm)
                 );
             }
 
+            // Filter by price range
+            if (fromPrice != null)
+            {
+                carsQuery = carsQuery.Where(c => c.Price >= fromPrice);
+            }
+
+            if (toPrice != null)
+            {
+                carsQuery = carsQuery.Where(c => c.Price <= toPrice);
+            }
+
+            // Filter by year range
+            if (fromYear != null)
+            {
+                carsQuery = carsQuery.Where(c => c.Year >= fromYear);
+            }
+
+            if (toYear != null)
+            {
+                carsQuery = carsQuery.Where(c => c.Year <= toYear);
+            }
+
+            // Filter by horsepower range
+            if (fromHp != null)
+            {
+                carsQuery = carsQuery.Where(c => c.Horsepower >= fromHp);
+            }
+
+            if (toHp != null)
+            {
+                carsQuery = carsQuery.Where(c => c.Horsepower <= toHp);
+            }
+
+
             // Sort by price ascending/descending
             if (priceSort == "asc")
             {
-                query = query.OrderBy(c => c.Price);
+                carsQuery = carsQuery.OrderBy(c => c.Price);
             }
             else if (priceSort == "desc")
             {
-                query = query.OrderByDescending(c => c.Price);
+                carsQuery = carsQuery.OrderByDescending(c => c.Price);
             }
 
             // Project the query results into CarViewModel
-            var cars = await query
+            var cars = await carsQuery
                 .Select(c => new CarViewModel
                 {
                     CarId = c.CarId,
@@ -415,6 +453,30 @@ namespace CarParts.Services.Data
 
             return cars;
         }
+
+        public async void GetDataFromDatabase()
+        {
+           //get all the data from the database
+           var cars = await this._dbContext.Cars.ToListAsync();
+           var parts = await this._dbContext.Parts.ToListAsync();
+
+           string jsonCars = JsonSerializer.Serialize(cars);
+           string jsonParts = JsonSerializer.Serialize(parts);
+
+           await File.WriteAllTextAsync("cars_24_07_2023.json", jsonCars);
+           await File.WriteAllTextAsync("parts_24_07_2023.json", jsonParts);
+
+           /*
+              string jsonCars = File.ReadAllText("cars_24_07_2023.json.json");
+              var carPartsCars = JsonSerializer.Deserialize<List<CarPart>>(jsonCars);
+              dbContext.CarParts.AddRange(carPartsCars);
+              dbContext.SaveChanges();
+            
+              -||- for parts
+            */
+        }
+
+
     }
 
 }

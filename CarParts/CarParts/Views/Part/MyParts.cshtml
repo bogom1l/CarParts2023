@@ -28,6 +28,11 @@
             {
                 break;
             }
+
+            string newDescription = string.Join(" ", part.Description
+                .Split(new char[] { ' ', '\t', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                .ToList().Take(5)) + "...";
+
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                 <div class="card">
                     <div class="card-body">
@@ -37,7 +42,7 @@
 
                         <h5 class="card-title">@part.Name</h5>
                         <p class="card-text">
-                            <span class="fw-bold">Description:</span> @part.Description
+                            <span class="fw-bold">Description:</span> @newDescription
                         </p>
                         <p class="card-text">
                             <span class="fw-bold">Price:</span> $@part.Price

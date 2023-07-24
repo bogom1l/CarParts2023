@@ -1,0 +1,77 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model ICollection<CarParts.Web.ViewModels.Part.PartViewModel>
+
+<h2>Search Results</h2>
+
+<style>
+    /* Add your custom styles here */
+</style>
+
+<form asp-controller="Part" asp-action="Search" method="get">
+    <div class="form-row">
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="searchTerm" value="@ViewBag.SearchTerm"
+                   placeholder="Search by part name or description">
+        </div>
+        <div class="col-md-4">
+            <select class="form-control" name="category">
+                <option value="">All Categories</option>
+                <!-- Populate the dropdown options with available categories -->
+                <option value="Category1">Category1</option>
+                <option value="Category2">Category2</option>
+                <!-- Add more options here as needed -->
+            </select>
+        </div>
+        <div class="col-md-4">
+            <input type="number" class="form-control" name="fromPrice" value="@ViewBag.FromPrice"
+                   placeholder="From Price">
+        </div>
+        <div class="col-md-4">
+            <input type="number" class="form-control" name="toPrice" value="@ViewBag.ToPrice"
+                   placeholder="To Price">
+        </div>
+
+        <div class="col-md-4">
+            <select class="form-control" name="priceSort">
+                <option value="asc">Price: Low to High</option>
+                <option value="desc">Price: High to Low</option>
+            </select>
+        </div>
+        <div class="col-md-12 mt-2">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Parts</th>
+        </tr>
+    </thead>
+    <tbody>
+        <div class="row">
+            @foreach (var part in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <!-- Part image -->
+                        <img class="card-img-top" src="@part.ImageUrl" alt="Part Image">
+
+                        <div class="card-body">
+                            <!-- Part properties -->
+                            <h5 class="card-title">@part.Name</h5>
+                            <p class="card-text card-text-make-italic"><b>Price</b>: @part.Price</p>
+                            <p class="card-text card-text-make-italic"><b>Category</b>: @part.CategoryName</p>
+                        </div>
+
+                        <a asp-controller="Part" asp-action="Details" asp-route-id="@part.Id" class="btn btn-info btn-block">
+                            View Details
+                        </a>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </tbody>
+</table>

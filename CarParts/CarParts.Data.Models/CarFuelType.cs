@@ -3,7 +3,7 @@ using static CarParts.Common.GlobalConstants.CarProperties;
 
 namespace CarParts.Data.Models
 {
-    public class FuelType
+    public class CarFuelType
     {
         [Key]
         public int Id { get; set; }

@@ -216,5 +216,62 @@ namespace CarParts.Services.Data
             return true;
         }
 
+        public async Task<ICollection<PartViewModel>> SearchPartsAsync(string searchTerm, string category,
+            string priceSort, int? fromPrice, int? toPrice)
+        {
+            var partsQuery = this._dbContext.Parts.AsQueryable();
+
+            
+            // Filter by category
+            if (!string.IsNullOrEmpty(category))
+            {
+                partsQuery = partsQuery.Where(c => c.Category.Name == category);
+            }
+
+            // Search by custom text in part's name/description
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                partsQuery = partsQuery.Where(c =>
+                    c.Name.Contains(searchTerm) ||
+                    c.Description.Contains(searchTerm)
+                );
+            }
+
+            // Filter by price range
+            if (fromPrice != null)
+            {
+                partsQuery = partsQuery.Where(c => c.Price >= fromPrice);
+            }
+
+            if (toPrice != null)
+            {
+                partsQuery = partsQuery.Where(c => c.Price <= toPrice);
+            }
+
+
+            // Sort by price ascending/descending
+            if (priceSort == "asc")
+            {
+                partsQuery = partsQuery.OrderBy(c => c.Price);
+            }
+            else if (priceSort == "desc")
+            {
+                partsQuery = partsQuery.OrderByDescending(c => c.Price);
+            }
+
+            var parts = await partsQuery
+                .Select(p => new PartViewModel
+                {
+                    Id = p.PartId,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Price = p.Price,
+                    CategoryName = p.Category.Name,
+                    Owner = p.User.UserName,
+                    ImageUrl = p.ImageUrl
+                }).ToListAsync();
+
+            return parts;
+        }
     }
 }

@@ -30,7 +30,12 @@ namespace CarParts.Services.Data.Interfaces
         Task<bool> RemoveCarFromMyFavoriteCarsAsync(int carId, string userId);
 
         Task<ICollection<CarViewModel>> SearchCarsAsync(string searchTerm, string category, string priceSort
-            , string transmissionName, string fuelName);
+            , string transmissionName, string fuelName,
+            int? fromYear, int? toYear, int? fromHp, int? toHp,
+            int? fromPrice, int? toPrice);
+
+        void GetDataFromDatabase();
+
 
     }
 }

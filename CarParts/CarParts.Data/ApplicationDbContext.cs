@@ -34,33 +34,33 @@
 
             //FuelTypes
             modelBuilder
-                .Entity<FuelType>()
+                .Entity<CarFuelType>()
                 .HasData(
-                    new FuelType() { Id = 1, Name = "Diesel" },
-                    new FuelType() { Id = 2, Name = "Petrol" },
-                    new FuelType() { Id = 3, Name = "Electric" },
-                    new FuelType() { Id = 4, Name = "Hybrid" });
+                    new CarFuelType() { Id = 1, Name = "Diesel" },
+                    new CarFuelType() { Id = 2, Name = "Petrol" },
+                    new CarFuelType() { Id = 3, Name = "Electric" },
+                    new CarFuelType() { Id = 4, Name = "Hybrid" });
 
             //Transmissions
             modelBuilder
-                .Entity<Transmission>()
+                .Entity<CarTransmission>()
                 .HasData(
-                    new Transmission() { Id = 1, Name = "Automatic" },
-                    new Transmission() { Id = 2, Name = "Manual" });
+                    new CarTransmission() { Id = 1, Name = "Automatic" },
+                    new CarTransmission() { Id = 2, Name = "Manual" });
 
             //Categories
             modelBuilder
-                .Entity<Category>()
+                .Entity<CarCategory>()
                 .HasData(
-                    new Category() { Id = 1, Name = "Sedan" },
-                    new Category() { Id = 2, Name = "Coupe" },
-                    new Category() { Id = 3, Name = "Hatchback" },
-                    new Category() { Id = 4, Name = "SUV" },
-                    new Category() { Id = 5, Name = "Wagon" },
-                    new Category() { Id = 6, Name = "Cabrio" },
-                    new Category() { Id = 7, Name = "Pickup Truck" },
-                    new Category() { Id = 8, Name = "Minivan" },
-                    new Category() { Id = 9, Name = "Jeep" });
+                    new CarCategory() { Id = 1, Name = "Sedan" },
+                    new CarCategory() { Id = 2, Name = "Coupe" },
+                    new CarCategory() { Id = 3, Name = "Hatchback" },
+                    new CarCategory() { Id = 4, Name = "SUV" },
+                    new CarCategory() { Id = 5, Name = "Wagon" },
+                    new CarCategory() { Id = 6, Name = "Cabrio" },
+                    new CarCategory() { Id = 7, Name = "Pickup Truck" },
+                    new CarCategory() { Id = 8, Name = "Minivan" },
+                    new CarCategory() { Id = 9, Name = "Jeep" });
 
             //add OnDelete Restrict to Cars Category Id
 
@@ -108,9 +108,9 @@
 
 
         public DbSet<Car> Cars { get; set; } = null!;
-        public DbSet<FuelType> FuelTypes { get; set; } = null!;
-        public DbSet<Transmission> Transmissions { get; set; } = null!;
-        public DbSet<Category> Categories { get; set; } = null!;
+        public DbSet<CarFuelType> FuelTypes { get; set; } = null!;
+        public DbSet<CarTransmission> Transmissions { get; set; } = null!;
+        public DbSet<CarCategory> Categories { get; set; } = null!;
 
         public DbSet<Part> Parts { get; set; } = null!;
         public DbSet<PartCategory> PartCategories { get; set; } = null!;
