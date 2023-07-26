@@ -1,21 +1,40 @@
 ﻿
+IDEQ: 
+vseki chovek e ili user ili dealer , dealerite mogat SAMO da dobavqt koli v saita, a userite mogat SAMO da gi naemat
 
-SUPERUSER/VIP/Moderator > User
-Rent a car feature da izmislq kak se prawi
-
-IDEQ: da doizmislq ideqta s pari w saita i da moje vseki user koito ne e dealer da naema koli (vseki user si ima spisyk RentedCars)
-vseki chovek e ili user ili dealer , dealerite mogat da dobavqt koli v saita, a userite mogat da gi naemat
-kolata trqbwa da ima samo 1 naematel (user) i samo 1 dealer
 trq da izmislq mn dobre cqlata database sxema - tablici, relacii
 
-da dobawq Dealer , kakto w workshopa ima tam nqkyv podoben (nowa tablichka, nowi relacii, migracii)
 
-|| CQLA DRUGA IDEQ?
-
-
-da naprawq ApplicationUser (ot workshop instrukciite)
+-- Rent A Car --
 
 
---------------------
+	ApplicationUser: (ot workshop instrukciite?)
 
-15:00 - 24.07.2023
+		public double Balance { get; set; } //Money
+		public List<Car> RentedCars { get; set; } = new List<Car>();
+
+		- da moje da naema kolata samo ako ima nujnite pari
+
+	Car:
+
+		public bool IsRented { get; set; }
+		public double RentPrice { get; set; }
+		public DateTime?/string??? RentalStartDate { get; set; }
+		public DateTime?/string??? RentalEndDate { get; set; }
+
+		public string[?] RenterId { get; set; }
+		public ApplicationUser[?] Renter { get; set; }
+
+		- da promenq Ownera na kolata da e ot Role Dealer
+
+	Dealer:
+
+		Add Role "Dealer"
+		Create a "Become a Dealer" Page
+		Implement the "Become a Dealer" Action
+		[Authorize(Roles = "Dealer")] public IActionResult AddCar() { ... }
+
+
+
+-----------------
+12:00 - 26.07.2023
