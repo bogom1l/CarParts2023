@@ -48,12 +48,9 @@ namespace CarParts.Services.Data
                     Horsepower = c.Horsepower,
                     Torque = c.Torque,
                     FuelConsumption = c.FuelConsumption,
-                    Owner = c.User.UserName,
+                    Owner = c.Dealer.User.FirstName,
                     ImageUrl = c.ImageUrl
                 }).ToListAsync();
-
-            int a = 2;
-            int b = 3;
 
             return cars;
         }
@@ -88,14 +85,14 @@ namespace CarParts.Services.Data
             return addCarViewModel;
         }
 
-        public async Task AddCarAsync(AddCarViewModel car, string userId)
+        public async Task AddCarAsync(AddCarViewModel car, int dealerId)
         {
             var carData = new Car
             {
                 Make = car.Make,
                 Model = car.Model,
                 Year = car.Year,
-                UserId = userId,
+                DealerId = dealerId,
                 Description = car.Description,
                 Price = car.Price,
                 Color = car.Color,
@@ -109,7 +106,9 @@ namespace CarParts.Services.Data
                 Horsepower = car.Horsepower,
                 Torque = car.Torque,
                 FuelConsumption = car.FuelConsumption,
-                ImageUrl = car.ImageUrl
+                ImageUrl = car.ImageUrl,
+                IsRented = false,
+                RentPrice = 0
             };
 
             await this._dbContext.Cars.AddAsync(carData);
@@ -232,7 +231,7 @@ namespace CarParts.Services.Data
         {
             var carData = await this._dbContext
                 .Cars
-                .FirstOrDefaultAsync(cu => cu.CarId == id && cu.UserId == userId);
+                .FirstOrDefaultAsync(cu => cu.CarId == id && cu.DealerId.ToString() == userId);
 
             if (carData != null)
             {
@@ -253,7 +252,7 @@ namespace CarParts.Services.Data
         {
             return await this._dbContext
                 .Cars
-                .Where(c => c.UserId == userId)
+                .Where(c => c.DealerId.ToString() == userId)
                 .Select(c => new CarViewModel()
                 {
                     CarId = c.CarId,
@@ -273,7 +272,7 @@ namespace CarParts.Services.Data
                     Horsepower = c.Horsepower,
                     Torque = c.Torque,
                     FuelConsumption = c.FuelConsumption,
-                    Owner = c.User.UserName,
+                    Owner = c.Dealer.User.FirstName,
                     ImageUrl = c.ImageUrl
                 }).ToListAsync();
         }
@@ -302,7 +301,7 @@ namespace CarParts.Services.Data
                     Horsepower = c.Horsepower,
                     Torque = c.Torque,
                     FuelConsumption = c.FuelConsumption,
-                    Owner = c.User.UserName,
+                    Owner = c.Dealer.User.FirstName,
                     ImageUrl = c.ImageUrl
                 }).ToListAsync();
         }
@@ -349,7 +348,7 @@ namespace CarParts.Services.Data
 
         public async Task<ICollection<CarViewModel>> SearchCarsAsync(string searchTerm, string category, string priceSort
             , string transmissionName, string fuelName,
-            int? fromYear, int? toYear, int? fromHp, int? toHp, 
+            int? fromYear, int? toYear, int? fromHp, int? toHp,
             int? fromPrice, int? toPrice)
         {
             var carsQuery = _dbContext.Cars.AsQueryable();
@@ -446,7 +445,7 @@ namespace CarParts.Services.Data
                     Horsepower = c.Horsepower,
                     Torque = c.Torque,
                     FuelConsumption = c.FuelConsumption,
-                    Owner = c.User.UserName,
+                    Owner = c.Dealer.User.FirstName,
                     ImageUrl = c.ImageUrl
                 })
                 .ToListAsync();
@@ -456,24 +455,24 @@ namespace CarParts.Services.Data
 
         public async void GetDataFromDatabase()
         {
-           //get all the data from the database
-           var cars = await this._dbContext.Cars.ToListAsync();
-           var parts = await this._dbContext.Parts.ToListAsync();
+            //get all the data from the database
+            var cars = await this._dbContext.Cars.ToListAsync();
+            var parts = await this._dbContext.Parts.ToListAsync();
 
-           string jsonCars = JsonSerializer.Serialize(cars);
-           string jsonParts = JsonSerializer.Serialize(parts);
+            string jsonCars = JsonSerializer.Serialize(cars);
+            string jsonParts = JsonSerializer.Serialize(parts);
 
-           await File.WriteAllTextAsync("cars_24_07_2023.json", jsonCars);
-           await File.WriteAllTextAsync("parts_24_07_2023.json", jsonParts);
+            await File.WriteAllTextAsync("cars_24_07_2023.json", jsonCars);
+            await File.WriteAllTextAsync("parts_24_07_2023.json", jsonParts);
 
-           /*
-              string jsonCars = File.ReadAllText("cars_24_07_2023.json.json");
-              var carPartsCars = JsonSerializer.Deserialize<List<CarPart>>(jsonCars);
-              dbContext.CarParts.AddRange(carPartsCars);
-              dbContext.SaveChanges();
-            
-              -||- for parts
-            */
+            /*
+               string jsonCars = File.ReadAllText("cars_24_07_2023.json.json");
+               var carPartsCars = JsonSerializer.Deserialize<List<CarPart>>(jsonCars);
+               dbContext.CarParts.AddRange(carPartsCars);
+               dbContext.SaveChanges();
+
+               -||- for parts
+             */
         }
 
 

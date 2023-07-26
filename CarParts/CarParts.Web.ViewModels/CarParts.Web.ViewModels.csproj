@@ -10,4 +10,8 @@
     <ProjectReference Include="..\CarParts.Common\CarParts.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dealer\" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,5 @@
 using CarParts.Data;
+using CarParts.Data.Models;
 using CarParts.Services.Data;
 using CarParts.Services.Data.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -20,7 +21,7 @@ namespace CarParts.Web
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
                 {
                     options.SignIn.RequireConfirmedAccount = false;
                     options.Password.RequireDigit = false;
@@ -40,6 +41,7 @@ namespace CarParts.Web
             
             builder.Services.AddScoped<ICarService, CarService>();
             builder.Services.AddScoped<IPartService, PartService>();
+            builder.Services.AddScoped<IDealerService, DealerService>();
 
             
              

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static CarParts.Common.GlobalConstants.Part;
 
@@ -34,7 +33,7 @@ namespace CarParts.Data.Models
         public string UserId { get; set; } = null!;
         
         [Required]
-        public IdentityUser User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
 
 
 

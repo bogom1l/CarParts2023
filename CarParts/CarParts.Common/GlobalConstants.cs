@@ -39,7 +39,7 @@
 
             public const int CarTopSpeedMinValue = 60;
             public const int CarTopSpeedMaxValue = 350;
-    
+
             public const int CarAccelerationMinValue = 1;
             public const int CarAccelerationMaxValue = 20;
 
@@ -84,5 +84,11 @@
             public const int CategoryMinLength = 2;
         }
 
+        public static class PhoneNumber
+        {
+            public const int PhoneNumberMinLength = 7;
+            public const int PhoneNumberMaxLength = 15;
+        }
     }
+
 }

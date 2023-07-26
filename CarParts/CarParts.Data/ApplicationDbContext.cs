@@ -1,4 +1,6 @@
-﻿namespace CarParts.Data
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace CarParts.Data
 {
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
@@ -18,6 +20,9 @@
 
             builder.Entity<UserFavoriteCar>()
                 .HasKey(ufc => new { ufc.UserId, ufc.CarId});
+
+            //builder.Entity<ApplicationUser>()
+            //    .HasKey(u => new { u.Id });
 
             SeedData(builder);
 
@@ -100,5 +105,9 @@
 
         public DbSet<UserFavoritePart> UsersFavoriteParts { get; set; } = null!;
         public DbSet<UserFavoriteCar> UsersFavoriteCars { get; set; } = null!;
+
+
+        public DbSet<Dealer> Dealers { get; set; } = null!;
+
     }
 }

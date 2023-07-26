@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Identity;
 using static CarParts.Common.GlobalConstants.Car;
 
 namespace CarParts.Data.Models
@@ -22,13 +21,6 @@ namespace CarParts.Data.Models
 
 
         [Required] 
-        [ForeignKey(nameof(User))] 
-        public string UserId { get; set; } = null!;
-
-        [Required] public IdentityUser User { get; set; } = null!; 
-
-
-        [Required] 
         [MaxLength(CarDescriptionMaxLength)]
         public string Description { get; set; } = null!;
 
@@ -42,8 +34,6 @@ namespace CarParts.Data.Models
         [Required]
         public double EngineSize { get; set; }
 
-
-        
 
         [Required]
         [ForeignKey(nameof(FuelType))]
@@ -64,10 +54,7 @@ namespace CarParts.Data.Models
         public int CategoryId { get; set; }
 
         public CarCategory Category { get; set; } = null!;
-
-
-
-
+        
 
         [Required]
         public double Weight { get; set; }
@@ -92,6 +79,33 @@ namespace CarParts.Data.Models
 
 
         public ICollection<UserFavoriteCar> UserFavoriteCars { get; set; } = new List<UserFavoriteCar>();
+
+
+
+        public bool IsRented { get; set; } = false; //TODO?
+        public double RentPrice { get; set; }
+        public DateTime? RentalStartDate { get; set; }
+        public DateTime? RentalEndDate { get; set; }
+
+
+
+        
+        [Required] 
+        [ForeignKey(nameof(Renter))] 
+        public string? RenterId { get; set; } = null!;
+
+        [Required] 
+        public ApplicationUser? Renter { get; set; } = null!; 
+
+
+        [Required]
+        [ForeignKey(nameof(Dealer))]
+        public int DealerId { get; set; }
+
+        [Required]
+        public Dealer Dealer { get; set; } = null!;
+        
+
 
 
     }

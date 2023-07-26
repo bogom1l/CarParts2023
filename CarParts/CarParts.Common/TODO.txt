@@ -7,31 +7,39 @@ trq da izmislq mn dobre cqlata database sxema - tablici, relacii
 
 -- Rent A Car --
 
-	Dealer: (Kris's Agent class in his site) (Workshop: Project Fundamentals)
+	  Dealer: (Kris's Agent class in his site) (Workshop: Project Fundamentals)
 
-		Add Role "Dealer"
+		✔️ Add Role "Dealer"
 		Create a "Become a Dealer" Page
 		Implement the "Become a Dealer" Action
 		[Authorize(Roles = "Dealer")] public IActionResult AddCar() { ... }
 
-	ApplicationUser: (Workshop: Users, Security, App Layers and Web API)
+	  ApplicationUser: (Workshop: Users, Security, App Layers and Web API)
 
-		public double Balance { get; set; } //Money
-		public List<Car> RentedCars { get; set; } = new List<Car>();
+	✔️	public double Balance { get; set; } //Money
+	✔️	public List<Car> RentedCars { get; set; } = new List<Car>();
 
 		- da moje da naema kolata samo ako ima nujnite pari
 
-	Car:
+	✔️ Car:
 
-		public bool IsRented { get; set; }
-		public double RentPrice { get; set; }
-		public DateTime?/string??? RentalStartDate { get; set; }
-		public DateTime?/string??? RentalEndDate { get; set; }
+	✔️	public bool IsRented { get; set; }
+	✔️	public double RentPrice { get; set; }
+	✔️	public DateTime?/string??? RentalStartDate { get; set; }
+	✔️	public DateTime?/string??? RentalEndDate { get; set; }
 
-		public string[?] RenterId { get; set; }
-		public ApplicationUser[?] Renter { get; set; }
+	✔️	//instead of User
+	✔	public int/string RenterId { get; set; }
+	✔	public ApplicationUser/? Renter { get; set; }
+	
+	✔️	//da promenq Ownera(User) na kolata da e ot Role Dealer
+	✔️	public int/string DealerId { get; set; }
+	✔️	public Dealer Dealer { get; set; } = null!;
+		
 
-		- da promenq Ownera na kolata da e ot Role Dealer
+
+
+-> validacii nawsqkyde
 
 -----------------
 12:00 - 26.07.2023

@@ -8,10 +8,13 @@ namespace CarParts.Web.Controllers
     public class CarController : BaseController
     {
         private readonly ICarService _carService;
+        private readonly IDealerService _dealerService;
 
-        public CarController(ICarService carService)
+        public CarController(ICarService carService, IDealerService dealerService)
         {
             this._carService = carService;
+            _dealerService = dealerService;
+
         }
 
 
@@ -34,13 +37,23 @@ namespace CarParts.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddCarViewModel car)
         {
+            bool isDealer = await this._dealerService.AgentExistsByUserIdAsync(GetUserId());
+            if (!isDealer)
+            {
+                TempData["ErrorMessage"] = "You must become a dealer in order to add new cars!"; //TODO: add tempdata in Become View
+
+                return RedirectToAction("Become", "Dealer");
+            }
+
 
             if (!ModelState.IsValid)
             {
                 return View(car);
             }
 
-            await this._carService.AddCarAsync(car, GetUserId());
+            int dealerId = await this._dealerService.GetDealerIdByUserIdAsync(GetUserId());
+
+            await this._carService.AddCarAsync(car, dealerId);
 
             TempData["SuccessMessage"] = "Car successfully added!";
             return RedirectToAction("All");
@@ -69,7 +82,7 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("All");
             }
 
-            if (car.UserId != GetUserId())
+            if (car.DealerId.ToString() != GetUserId())
             {
                 return RedirectToAction("All");
             }
@@ -108,7 +121,7 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("All");
             }
             
-            if (car.UserId != GetUserId())
+            if (car.DealerId.ToString()!= GetUserId())
             {
                 return RedirectToAction("All");
             }

@@ -9,7 +9,7 @@ namespace CarParts.Services.Data.Interfaces
 
         Task<AddCarViewModel> GetAddCarViewModelAsync();
 
-        Task AddCarAsync(AddCarViewModel car, string userId);
+        Task AddCarAsync(AddCarViewModel car, int dealerId);
 
         Task<DetailsCarViewModel?> GetCarDetailsAsync(int id);
 
