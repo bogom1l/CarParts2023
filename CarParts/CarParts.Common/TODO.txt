@@ -1,5 +1,7 @@
 ﻿
 
+SUPERUSER/VIP/Moderator > User
+Rent a car feature da izmislq kak se prawi
 
 IDEQ: da doizmislq ideqta s pari w saita i da moje vseki user koito ne e dealer da naema koli (vseki user si ima spisyk RentedCars)
 vseki chovek e ili user ili dealer , dealerite mogat da dobavqt koli v saita, a userite mogat da gi naemat
