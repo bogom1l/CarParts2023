@@ -27,8 +27,4 @@
     <ProjectReference Include="..\CarParts.Web.ViewModels\CarParts.Web.ViewModels.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Dealer\" />
-  </ItemGroup>
-
 </Project>
