@@ -7,8 +7,14 @@ trq da izmislq mn dobre cqlata database sxema - tablici, relacii
 
 -- Rent A Car --
 
+	Dealer: (Kris's Agent class in his site) (Workshop: Project Fundamentals)
 
-	ApplicationUser: (ot workshop instrukciite?)
+		Add Role "Dealer"
+		Create a "Become a Dealer" Page
+		Implement the "Become a Dealer" Action
+		[Authorize(Roles = "Dealer")] public IActionResult AddCar() { ... }
+
+	ApplicationUser: (Workshop: Users, Security, App Layers and Web API)
 
 		public double Balance { get; set; } //Money
 		public List<Car> RentedCars { get; set; } = new List<Car>();
@@ -26,15 +32,6 @@ trq da izmislq mn dobre cqlata database sxema - tablici, relacii
 		public ApplicationUser[?] Renter { get; set; }
 
 		- da promenq Ownera na kolata da e ot Role Dealer
-
-	Dealer:
-
-		Add Role "Dealer"
-		Create a "Become a Dealer" Page
-		Implement the "Become a Dealer" Action
-		[Authorize(Roles = "Dealer")] public IActionResult AddCar() { ... }
-
-
 
 -----------------
 12:00 - 26.07.2023
