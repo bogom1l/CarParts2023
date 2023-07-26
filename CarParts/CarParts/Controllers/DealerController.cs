@@ -1,4 +1,5 @@
 ﻿using CarParts.Services.Data.Interfaces;
+using CarParts.Web.ViewModels.Dealer;
 
 namespace CarParts.Web.Controllers
 {
@@ -16,7 +17,7 @@ namespace CarParts.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> BecomeDealer()
         {
-            bool isDealer = await this._dealerService.AgentExistsByUserIdAsync(GetUserId());
+            bool isDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
 
             if (isDealer)
             {
@@ -28,7 +29,40 @@ namespace CarParts.Web.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> BecomeDealer(BecomeDealerFormModel dealer)
+        {
+            bool isDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
 
+            if (isDealer)
+            {
+                TempData["ErrorMessage"] = "You are already a dealer!";
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            bool isPhoneNumberTaken =
+                await this._dealerService.DealerExistsByPhoneNumberAsync(dealer.PhoneNumber);
+
+            if (!ModelState.IsValid)
+            {
+                return View(dealer);
+            }
+
+            bool userHasActiveRents = await this._dealerService.HasRentsByUserIdAsync(GetUserId());
+            if (userHasActiveRents)
+            {
+                TempData["ErrorMessage"] = "You must not have any active rents in order to become a dealer!";
+
+                return RedirectToAction("All", "Car");
+                //TODO: return RedirectToAction("MyRentedCars", "Car");
+            }
+
+            await this._dealerService.BecomeDealerAsync(dealer, GetUserId());
+
+            TempData["SuccessMessage"] = "You are now a dealer!";
+            return RedirectToAction("Index", "Home");
+        }
 
 
     }

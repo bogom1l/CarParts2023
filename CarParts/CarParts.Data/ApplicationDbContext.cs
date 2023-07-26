@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace CarParts.Data
+﻿namespace CarParts.Data
 {
+    using CarParts.Data.Models;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
-    using CarParts.Data.Models;
 
 
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

@@ -4,6 +4,7 @@ using CarParts.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarParts.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230726143803_ApplicationDbContextInheritUpdate")]
+    partial class ApplicationDbContextInheritUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -197,7 +199,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("TransmissionId");
 
-                    b.ToTable("Cars", (string)null);
+                    b.ToTable("Cars");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.CarCategory", b =>
@@ -215,7 +217,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -280,7 +282,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FuelTypes", (string)null);
+                    b.ToTable("FuelTypes");
 
                     b.HasData(
                         new
@@ -320,7 +322,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Transmissions", (string)null);
+                    b.ToTable("Transmissions");
 
                     b.HasData(
                         new
@@ -355,7 +357,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Dealers", (string)null);
+                    b.ToTable("Dealers");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.Part", b =>
@@ -396,7 +398,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Parts", (string)null);
+                    b.ToTable("Parts");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.PartCategory", b =>
@@ -414,7 +416,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("PartCategories", (string)null);
+                    b.ToTable("PartCategories");
 
                     b.HasData(
                         new
@@ -466,7 +468,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("UsersFavoriteCars", (string)null);
+                    b.ToTable("UsersFavoriteCars");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.UserFavoritePart", b =>
@@ -481,7 +483,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("PartId");
 
-                    b.ToTable("UsersFavoriteParts", (string)null);
+                    b.ToTable("UsersFavoriteParts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

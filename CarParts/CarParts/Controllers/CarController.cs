@@ -37,12 +37,12 @@ namespace CarParts.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddCarViewModel car)
         {
-            bool isDealer = await this._dealerService.AgentExistsByUserIdAsync(GetUserId());
+            bool isDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
             if (!isDealer)
             {
-                TempData["ErrorMessage"] = "You must become a dealer in order to add new cars!"; //TODO: add tempdata in Become View
+                TempData["ErrorMessage"] = "You must become a dealer in order to add new cars!";
 
-                return RedirectToAction("Become", "Dealer");
+                return RedirectToAction("BecomeDealer", "Dealer");
             }
 
 

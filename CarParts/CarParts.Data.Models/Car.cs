@@ -89,10 +89,9 @@ namespace CarParts.Data.Models
 
 
 
-        
-        [Required] 
-        [ForeignKey(nameof(Renter))] 
-        public string? RenterId { get; set; } = null!;
+        [ForeignKey(nameof(Renter))]
+        public string RenterId { get; set; } = null!;
+
 
         [Required] 
         public ApplicationUser? Renter { get; set; } = null!; 
