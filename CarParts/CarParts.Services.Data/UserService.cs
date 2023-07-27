@@ -1,6 +1,7 @@
 ﻿using CarParts.Data;
 using CarParts.Data.Models;
 using CarParts.Services.Data.Interfaces;
+using CarParts.Web.ViewModels.Car;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -57,6 +58,26 @@ namespace CarParts.Services.Data
             }
 
             user.Balance += 100;
+
+            await this._dbContext.SaveChangesAsync();
+        }
+
+        public async Task RemoveMoney(string userId, RentCarViewModel rentCarViewModel)
+        {
+            var user = await this._dbContext
+                .Users
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                throw new ArgumentException("User with this id does not exist!");
+            }
+
+            //calculate how much days the car is rented and then multiply it by the price per day (RentPrice)
+            var days = (rentCarViewModel.RentalEndDate - rentCarViewModel.RentalStartDate).Days;
+            var totalPrice = days * rentCarViewModel.RentPrice;
+
+            user.Balance -= totalPrice;
 
             await this._dbContext.SaveChangesAsync();
         }

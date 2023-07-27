@@ -18,16 +18,22 @@
 
   ✔️ implement ManageRental
 
-     remove 100euro from user when he rents a car (moje  bi sushtiq metod kato AddMoney, samo che da se kazwa RemoveMoney))
-     *RentPrice na Car trqbva da e za den, vseki den za koito q naemash da se uwelichawa 
-       toest ako primerno q naemesh za 10 dena => TotalRentPrice = 10*RentPrice ili nesh takoz 
+  ✔️ remove 100euro from user when he rents a car (moje bi sushtiq metod kato AddMoney, samo che da se kazwa RemoveMoney))
+
+  ✔️ *RentPrice na Car trqbva da e za den, vseki den za koito q naemash da se uwelichawa, toest ako 
+            primerno q naemesh za 10 dena => TotalRentPrice = 10*RentPrice ili nesh takoz 
+
+  ✔️ proverka StartDay > EndDate
+
+  ✔️ *check if user has enough money, dont allow him to go negative money
 
      implement ManageRental to remove bonus 10euro from user for change in rental
      implement EndRental (remove bonus 5euro from user for change in rental)
 
-     
+     editwam json fileovete s nowite propertyta
+     importwam si wsichkite koli ot json fileovete 
 
-     proverka StartDay > EndDate
+     
 
      validacii nawsqkyde
 

@@ -1,4 +1,5 @@
 ﻿using CarParts.Services.Data.Interfaces;
+using CarParts.Web.ViewModels.Car;
 
 namespace CarParts.Web.Controllers
 {
@@ -20,5 +21,13 @@ namespace CarParts.Web.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public async Task<IActionResult> RemoveMoney(RentCarViewModel rentCarViewModel)
+        {
+            await this._userService.RemoveMoney(GetUserId(), rentCarViewModel);
+
+            return null!; //TODO: ? //return RedirectToAction("Index", "Home");
+        }
+
     }
 }

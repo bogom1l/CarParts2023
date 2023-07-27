@@ -250,17 +250,7 @@ namespace CarParts.Web.Controllers
 
                 return RedirectToAction("All", "Car");
             }
-
-            double userBalance = await this._userService.GetBalance(GetUserId());
-            bool hasUserEnoughMoney = await this._carService.HasUserEnoughMoneyAsync(userBalance, id);
-
-            if (!hasUserEnoughMoney)
-            {
-                TempData["ErrorMessage"] = "You don't have enough money to rent this car!";
-
-                return RedirectToAction("All", "Car");
-            }
-
+            
             var rentCarViewModel = await this._carService.GetRentCarViewModelAsync(id); //+userid?
 
             if (rentCarViewModel == null)
@@ -301,7 +291,26 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            //check if RentalStartDate is before RentalEndDate
+            if (!this._carService.IsStartDateBeforeEndDate(rentCarViewModel))
+            {
+                TempData["ErrorMessage"] = "Rent start time can't be after rent end time!";
+
+                return RedirectToAction("All", "Car");
+            }
+
+            double userBalance = await this._userService.GetBalance(GetUserId());
+            bool hasUserEnoughMoney = await this._carService.HasUserEnoughMoneyAsync(userBalance, rentCarViewModel);
+
+            if (!hasUserEnoughMoney)
+            {
+                TempData["ErrorMessage"] = "You don't have enough money to rent this car!";
+
+                return RedirectToAction("All", "Car");
+            }
+
             await this._carService.RentCarAsync(rentCarViewModel, GetUserId());
+            await this._userService.RemoveMoney(GetUserId(), rentCarViewModel);
 
             TempData["SuccessMessage"] = "You successfully rented the car!";
             return RedirectToAction("MyRentedCars", "Car");
@@ -340,15 +349,12 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-
-
             RentCarViewModel? rentCarViewModel = await this._carService.GetRentCarViewModelAsync(id);
 
             if (rentCarViewModel == null)
             {
                 return RedirectToAction("All");
             }
-
 
             return View(rentCarViewModel);
         }
@@ -360,6 +366,15 @@ namespace CarParts.Web.Controllers
 
             TempData["SuccessMessage"] = "You successfully changed your rental for the car!";
             return RedirectToAction("MyRentedCars", "Car");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EndRental(int id)
+        {
+            await this._carService.EndRentalAsync(id, GetUserId());
+
+            TempData["SuccessMessage"] = "You successfully ended your rental for the car!";
+            return RedirectToAction("All", "Car");
         }
 
 

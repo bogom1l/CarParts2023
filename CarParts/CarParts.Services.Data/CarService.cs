@@ -517,7 +517,7 @@ namespace CarParts.Services.Data
             car.RenterId = userId;
             car.RentalStartDate = rentCarViewModel.RentalStartDate;
             car.RentalEndDate = rentCarViewModel.RentalEndDate;
-
+            car.RentPrice = rentCarViewModel.RentPrice;
 
             await this._dbContext.SaveChangesAsync();
         }
@@ -537,7 +537,10 @@ namespace CarParts.Services.Data
                     ImageUrl = c.ImageUrl,
                     RentalStartDate = DateTime.Now,
                     RentalEndDate = DateTime.Now.AddDays(1),
+                    RenterName = null,
+                    RentPrice = c.RentPrice,
                     Id = c.CarId,
+
                 })
                 .FirstOrDefaultAsync();
 
@@ -569,12 +572,30 @@ namespace CarParts.Services.Data
             return cars;
         }
 
-        public async Task<bool> HasUserEnoughMoneyAsync(double userBalance, int carId)
+        public async Task<bool> HasUserEnoughMoneyAsync(double userBalance, RentCarViewModel rentCarViewModel)
         {
-           var car = await this._dbContext.Cars.FirstAsync(c => c.CarId == carId);
-           return car.RentPrice <= userBalance;
+           var car = await this._dbContext.Cars.FirstAsync(c => c.CarId == rentCarViewModel.Id);
+
+           //calculate how much days the car is rented and then multiply it by the price per day (RentPrice)
+           var days = (rentCarViewModel!.RentalEndDate - rentCarViewModel!.RentalStartDate).Days;
+
+           var totalPrice = days * rentCarViewModel.RentPrice;
+
+           return totalPrice <= userBalance;
         }
 
+        public bool IsStartDateBeforeEndDate(RentCarViewModel rentCarViewModel)
+        {
+            var days = (rentCarViewModel!.RentalEndDate - rentCarViewModel!.RentalStartDate).Days;
+
+            //check if RentalStartDate is before RentalEndDate
+            if (days <= 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
 
         public async Task UpdateRentalForCarAsync(RentCarViewModel rentCarViewModel, string userId)
         {
@@ -585,6 +606,19 @@ namespace CarParts.Services.Data
 
             await this._dbContext.SaveChangesAsync();
         }
+
+        public async Task EndRentalAsync(int carId, string userId)
+        {
+            Car car = await this._dbContext.Cars
+                .FirstAsync(c => c.CarId == carId);
+
+            car.RenterId = null;
+            car.RentalStartDate = null;
+            car.RentalEndDate = null;
+
+            await this._dbContext.SaveChangesAsync();
+        }
+
 
     }
 

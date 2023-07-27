@@ -51,8 +51,17 @@
             <br/>
             <p class="mb-0"><span class="fw-bold">Renter Name: </span>@userName</p>
             <br/>
-
             
+            @*NE SE MAPVAT PRAVILNO!!!! ??? nz zako, ako gi napraq kakto RentPrice po-dolu, shte rabotqt, no e grozno za front end-a*@
+
+            <div class="mb-3">
+                <label asp-for="@Model.RentPrice" class="form-label-add-edit">Rent Price</label>
+                <input asp-for="@Model.RentPrice" class="form-control" aria-required="true" readonly />
+                <span asp-validation-for="@Model.RentPrice" class="text-danger"></span>
+            </div>
+
+            <br/>
+
             <div class="mb-3">
                 <label asp-for="@Model.RentalStartDate" class="form-label-add-edit">Rental Start Date</label>
                 <input asp-for="@Model.RentalStartDate" class="form-control" aria-required="true"/>
@@ -64,6 +73,7 @@
                 <span asp-validation-for="@Model.RentalEndDate" class="text-danger"></span>
             </div>
             
+            <h3>Warning! You cant rent a car for less than a day.</h3>
 
             <div class="mb-3">
                 <input class="btn btn-success mb-2 w-100 p-3 fw-bold" type="submit" value="Rent"/>
