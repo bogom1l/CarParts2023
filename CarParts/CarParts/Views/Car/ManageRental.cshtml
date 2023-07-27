@@ -1,17 +1,13 @@
-﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
-@using CarParts.Services.Data.Interfaces
-@model CarParts.Web.ViewModels.Car.RentCarViewModel
+﻿@model CarParts.Web.ViewModels.Car.RentCarViewModel
 
 @{
-    ViewBag.Title = "Rent Car";
+    ViewBag.Title = "Manage Rental";
 }
-
 
 @{
     // Retrieve messages from TempData
     var errorMessage = TempData["ErrorMessage"] as string;
     var successMessage = TempData["SuccessMessage"] as string;
-
 }
 
 @if (!string.IsNullOrEmpty(errorMessage))
@@ -24,50 +20,45 @@
     <div class="alert alert-success">@successMessage</div>
 }
 
-
-@inject IUserService UserService
-@{
-    string userName = await UserService.GetUserFullNameByEmail(this.User.Identity.Name); //TODO: .Email
-}
-
-
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form asp-action="Rent" method="post">
-            
+        <form asp-action="ManageRental" method="post">
             <div class="image-container">
                 <img src="@Model.ImageUrl" alt="Car Image" class="card-img-top">
             </div>
-            
             <h3>@Model.Make @Model.Model</h3>
             <p class="mb-0"><span class="fw-bold">Year: </span>@Model.Year</p>
-
             <p class="mb-0"><span class="fw-bold">Description: </span>@Model.Description</p>
             <p class="mb-0"><span class="fw-bold">Price: </span>@Model.Price</p>
             <p class="mb-0"><span class="fw-bold">Color: </span>@Model.Color</p>
-            <br/>
-            <p class="mb-0"><span class="fw-bold">Renter Name: </span>@userName</p>
-            <br/>
+            <br />
+            <p class="mb-0"><span class="fw-bold">Renter Name: </span>@Model.RenterName</p>
+            <br />
 
-            
             <div class="mb-3">
                 <label asp-for="@Model.RentalStartDate" class="form-label-add-edit">Rental Start Date</label>
-                <input asp-for="@Model.RentalStartDate" class="form-control" aria-required="true"/>
+                <input asp-for="@Model.RentalStartDate" class="form-control" aria-required="true" disabled />
                 <span asp-validation-for="@Model.RentalStartDate" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="@Model.RentalEndDate" class="form-label-add-edit">Rental End Date</label>
-                <input asp-for="@Model.RentalEndDate" class="form-control" aria-required="true" />
+                <input asp-for="@Model.RentalEndDate" class="form-control" aria-required="true"/>
                 <span asp-validation-for="@Model.RentalEndDate" class="text-danger"></span>
             </div>
             
-
+            <h3>Warning! You will be taxed 10 euro for the rental change, and 5 euro if you cancel the rental.</h3>
+            
             <div class="mb-3">
-                <input class="btn btn-success mb-2 w-100 p-3 fw-bold" type="submit" value="Rent"/>
+                <input class="btn btn-success mb-2 w-100 p-3 fw-bold" type="submit" value="Update Rental" />
             </div>
+
+            <a asp-controller="Car" asp-action="EndRental" asp-route-id="@Model.Id" class="btn btn-danger btn-block">
+                End Rental
+            </a>
+
             
         </form>
     </div>

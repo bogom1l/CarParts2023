@@ -82,16 +82,13 @@ namespace CarParts.Data.Models
 
 
 
-        public bool IsRented { get; set; } = false; //TODO?
         public double RentPrice { get; set; }
         public DateTime? RentalStartDate { get; set; }
         public DateTime? RentalEndDate { get; set; }
 
 
 
-        //[ForeignKey(nameof(Renter))]
         public string? RenterId { get; set; }
-
         public ApplicationUser? Renter { get; set; } = null!; 
 
 

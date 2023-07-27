@@ -237,7 +237,7 @@ namespace CarParts.Web.Controllers
 
             if (isUserDealer) //TODO: && !User.IsAdmin()
             {
-                TempData["ErrorMessage"] = "Dealers can't rent houses. Please register as a user!";
+                TempData["ErrorMessage"] = "Dealers can't rent cars. Please register as a user!";
 
                 return RedirectToAction("Index", "Home");
             }
@@ -261,7 +261,7 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("All", "Car");
             }
 
-            var rentCarViewModel = await this._carService.GetRentCarViewModelAsync(id, GetUserId());
+            var rentCarViewModel = await this._carService.GetRentCarViewModelAsync(id); //+userid?
 
             if (rentCarViewModel == null)
             {
@@ -296,19 +296,14 @@ namespace CarParts.Web.Controllers
 
             if (isUserDealer) //TODO: && !User.IsAdmin()
             {
-                TempData["ErrorMessage"] = "Dealers can't rent houses. Please register as a user!";
+                TempData["ErrorMessage"] = "Dealers can't rent cars. Please register as a user!";
 
                 return RedirectToAction("Index", "Home");
             }
 
-            //if (rentCarViewModel.RentalStartDate <= rentCarViewModel.RentalEndDate)
-            //{
-            //    TempData["ErrorMessage"] = "Start date cannot be after end date!";
-            //    return View(rentCarViewModel);
-            //}
-
             await this._carService.RentCarAsync(rentCarViewModel, GetUserId());
 
+            TempData["SuccessMessage"] = "You successfully rented the car!";
             return RedirectToAction("MyRentedCars", "Car");
         }
 
@@ -321,6 +316,52 @@ namespace CarParts.Web.Controllers
 
             return View(cars);
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> ManageRental(int id) 
+            //MUST be named id, because in the View its: asp-route-id="@car.Id", and not asp-route-carId="@car.Id"
+        {
+            bool carExists = await this._carService.ExistsByIdAsync(id);
+
+            if (!carExists)
+            {
+                TempData["ErrorMessage"] = "Car with provided id does not exist! Please try again!";
+
+                return RedirectToAction("All", "Car");
+            }
+
+            bool isUserDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
+
+            if (isUserDealer) //TODO: && !User.IsAdmin()
+            {
+                TempData["ErrorMessage"] = "Dealers can't rent cars. Please register as a user!";
+
+                return RedirectToAction("Index", "Home");
+            }
+
+
+
+            RentCarViewModel? rentCarViewModel = await this._carService.GetRentCarViewModelAsync(id);
+
+            if (rentCarViewModel == null)
+            {
+                return RedirectToAction("All");
+            }
+
+
+            return View(rentCarViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ManageRental(int id, RentCarViewModel rentCarViewModel)
+        {
+            await this._carService.UpdateRentalForCarAsync(rentCarViewModel, GetUserId());
+
+            TempData["SuccessMessage"] = "You successfully changed your rental for the car!";
+            return RedirectToAction("MyRentedCars", "Car");
+        }
+
 
     }
 }

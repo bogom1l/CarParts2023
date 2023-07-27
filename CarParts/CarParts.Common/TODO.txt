@@ -14,19 +14,27 @@
 
   ✔️ da moje da naema kolata samo ako ima nujnite pari
 
-     REMOVE isRented FROM EVERYWHERE
+  ✔️ REMOVE isRented FROM EVERYWHERE
 
-     implement EndRental, EditRental
+  ✔️ implement ManageRental
+
+     remove 100euro from user when he rents a car (moje  bi sushtiq metod kato AddMoney, samo che da se kazwa RemoveMoney))
+     
+     implement ManageRental to remove bonus 10euro from user for change in rental
+     implement EndRental (remove bonus 5euro from user for change in rental)
+
+     
 
      proverka StartDay > EndDate
 
      validacii nawsqkyde
 
      code cleanup
+      - userId mai ne mi trqbwa w nqkoi metodi w servicite
 
      review/summary of full project
 
      imeplement custom register/login OR just remove .Email or replace with .Username so in Views it works
 
 -----------------
-15:00 - 27.07.2023
+16:00 - 27.07.2023

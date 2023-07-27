@@ -5,6 +5,24 @@
 }
 
 
+@{
+    // Retrieve messages from TempData
+    var errorMessage = TempData["ErrorMessage"] as string;
+    var successMessage = TempData["SuccessMessage"] as string;
+
+}
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <div class="alert alert-success">@successMessage</div>
+}
+
+
 <style>
     /* Add any custom styling as needed */
 </style>
@@ -14,6 +32,11 @@
 
 <div class="container">
     <div class="row d-flex align-items-start">
+        
+        @if (!Model.Any())
+        {
+            <h2>You don't have any current rented cars</h2>
+        }
 
         @foreach (var car in Model)
         {
@@ -45,18 +68,19 @@
                             <span class="fw-bold">Renter Name (delete me from view):</span> @car.RenterName
                         </p>
 
+                        <p class="card-text">
+                            <span class="fw-bold">Car Id (delete me from view):</span> @car.Id
+                        </p>
+
                     </div>
                     <div class="card-footer">
 
-                    
-                        <a asp-controller="Car" asp-action="EditRental" asp-route-id="@car.Id" class="btn btn-warning btn-block">
-                            Edit Rental
+
+                        <a asp-controller="Car" asp-action="ManageRental" asp-route-id="@car.Id" class="btn btn-info btn-block">
+                            Manage Rental
                         </a>
 
-                        <a asp-controller="Car" asp-action="EndRental" asp-route-id="@car.Id" class="btn btn-danger btn-block">
-                            End Rental
-                        </a>
-                    
+
                     </div>
                 </div>
             </div>
@@ -67,27 +91,4 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 
-    <script>
-        // Handle the click event for the delete buttons
-        $('.delete-rental').on('click', function (e) {
-            e.preventDefault();
-            const carId = $(this).data('id');
-
-            // Show SweetAlert confirmation dialog
-            Swal.fire({
-                title: 'Are you sure?',
-                text: 'You are about to end this car rental. This action cannot be undone.',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, end rental!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // If user confirms, redirect to the "EndRental" action with carId as a parameter
-                    window.location.href = `/Car/EndRental/${carId}`;
-                }
-            });
-        });
-    </script>
 }

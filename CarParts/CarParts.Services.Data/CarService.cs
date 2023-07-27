@@ -108,7 +108,6 @@ namespace CarParts.Services.Data
                 Torque = car.Torque,
                 FuelConsumption = car.FuelConsumption,
                 ImageUrl = car.ImageUrl,
-                IsRented = false,
                 RentPrice = car.RentPrice,
                 RenterId = null
             };
@@ -148,7 +147,7 @@ namespace CarParts.Services.Data
             return detailsCarViewModel;
         }
 
-        public async Task<EditCarViewModel?> GetEditCarViewModelAsync(int id, string userId)
+        public async Task<EditCarViewModel?> GetEditCarViewModelAsync(int id, string userId) //TODO: userId neccessary?
         {
             var fuelTypes = await this._dbContext.FuelTypes.Select(f => new CarFuelTypeViewModel
             {
@@ -495,7 +494,6 @@ namespace CarParts.Services.Data
         {
             bool result = await this._dbContext
                 .Cars
-                //.Where(c => c.IsRented == false)
                 .AnyAsync(c => c.CarId == carId);
 
             return result;
@@ -507,7 +505,7 @@ namespace CarParts.Services.Data
                 .Cars
                 .FirstAsync(c => c.CarId == carId);
 
-            return !string.IsNullOrEmpty(car.RenterId); //return car.IsRented;
+            return !string.IsNullOrEmpty(car.RenterId); 
         }
 
         public async Task RentCarAsync(RentCarViewModel rentCarViewModel, string userId)
@@ -517,14 +515,14 @@ namespace CarParts.Services.Data
                 .FirstAsync(c => c.CarId == rentCarViewModel.Id);
 
             car.RenterId = userId;
-            car.IsRented = true;
             car.RentalStartDate = rentCarViewModel.RentalStartDate;
             car.RentalEndDate = rentCarViewModel.RentalEndDate;
+
 
             await this._dbContext.SaveChangesAsync();
         }
 
-        public async Task<RentCarViewModel?> GetRentCarViewModelAsync(int id, string userId)
+        public async Task<RentCarViewModel?> GetRentCarViewModelAsync(int id)
         {
             var rentCarViewModel = await this._dbContext.Cars
                 .Where(c => c.CarId == id)
@@ -537,11 +535,8 @@ namespace CarParts.Services.Data
                     Price = c.Price,
                     Color = c.Color,
                     ImageUrl = c.ImageUrl,
-                    //IsRented = false,
-                    //RentPrice = 0,
                     RentalStartDate = DateTime.Now,
                     RentalEndDate = DateTime.Now.AddDays(1),
-                    //RenterName = c.r
                     Id = c.CarId,
                 })
                 .FirstOrDefaultAsync();
@@ -554,8 +549,7 @@ namespace CarParts.Services.Data
         {
             var cars = await this._dbContext
                 .Cars
-                .Where(c => c.RenterId == userId
-                            && c.RenterId != null) //.ToString()
+                .Where(c => c.RenterId == userId && c.RenterId != null)
                 .Select(c => new RentCarViewModel
                 {
                     Make = c.Make,
@@ -565,7 +559,6 @@ namespace CarParts.Services.Data
                     Price = c.Price,
                     Color = c.Color,
                     ImageUrl = c.ImageUrl,
-                    //IsRented = false,
                     RentPrice = c.RentPrice,
                     RentalStartDate = c.RentalStartDate.HasValue ? c.RentalStartDate.Value : DateTime.Now.AddDays(1),
                     RentalEndDate = c.RentalEndDate ?? DateTime.Now.AddDays(1),
@@ -581,6 +574,19 @@ namespace CarParts.Services.Data
            var car = await this._dbContext.Cars.FirstAsync(c => c.CarId == carId);
            return car.RentPrice <= userBalance;
         }
+
+
+        public async Task UpdateRentalForCarAsync(RentCarViewModel rentCarViewModel, string userId)
+        {
+            Car car = await this._dbContext.Cars
+                .FirstAsync(c => c.CarId == rentCarViewModel.Id);
+
+            car.RentalEndDate = rentCarViewModel.RentalEndDate;
+
+            await this._dbContext.SaveChangesAsync();
+        }
+
     }
+
 
 }

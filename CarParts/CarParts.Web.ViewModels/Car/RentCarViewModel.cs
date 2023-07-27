@@ -19,7 +19,7 @@ namespace CarParts.Web.ViewModels.Car
 
         public string ImageUrl { get; set; } = null!;
 
-        public bool IsRented { get; set; } = false; //TODO REMOVE isRented FROM EVERYWHERE
+
         public double RentPrice { get; set; }
 
         [Display(Name = "Rental Start Date")]
@@ -30,7 +30,7 @@ namespace CarParts.Web.ViewModels.Car
         //[DataType(DataType.Date)]
         public DateTime RentalEndDate { get; set; }
 
-        public string RenterName { get; set; }
+        public string? RenterName { get; set; }
 
 
         public int Id { get; set; }
