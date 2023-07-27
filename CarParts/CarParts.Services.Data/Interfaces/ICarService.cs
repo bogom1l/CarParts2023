@@ -45,6 +45,7 @@ namespace CarParts.Services.Data.Interfaces
 
         Task<RentCarViewModel?> GetRentCarViewModelAsync(int id, string userId);
         Task<ICollection<RentCarViewModel>> GetMyRentedCarsAsync(string getUserId);
+        Task<bool> HasUserEnoughMoneyAsync(double userBalance, int carId);
     }
 
 }

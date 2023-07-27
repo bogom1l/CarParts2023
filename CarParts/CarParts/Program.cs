@@ -2,6 +2,7 @@ using CarParts.Data;
 using CarParts.Data.Models;
 using CarParts.Services.Data;
 using CarParts.Services.Data.Interfaces;
+using CarParts.Web.Controllers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -43,7 +44,6 @@ namespace CarParts.Web
             builder.Services.AddScoped<IPartService, PartService>();
             builder.Services.AddScoped<IDealerService, DealerService>();
             builder.Services.AddScoped<IUserService, UserService>();
-
             
              
             //builder.Services.AddIdentity<CustomUser, IdentityRole>()

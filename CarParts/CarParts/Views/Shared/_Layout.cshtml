@@ -1,4 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@using CarParts.Web.Controllers
+@using CarParts.Services.Data.Interfaces
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using System.Security.Claims
+
+@inject IUserService UserService
+@{
+   // string id = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+    string id2 = await UserService.GetUserIdByEmail(this.User.Identity.Name); //........ BAD AF
+    double balance = await UserService.GetBalance(id2);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -93,12 +105,20 @@
 
                 </div>
                 
-              
-                    <a class="nav-link active" aria-current="page" href="@Url.Action("BecomeDealer", "Dealer")">
-                        Become Dealer
-                    </a>
+                @*add the method AddMoney from UserService to <a> *@
+                <a class="nav-link active" aria-current="page" href="@Url.Action("AddMoney", "User")">
+                    Add 100 euro
+                </a>
+
+
+
+                <a class="nav-link active" aria-current="page" href="@Url.Action("BecomeDealer", "Dealer")">
+                    Become Dealer
+                </a>
                 
-                
+                <a class="nav-link active" aria-current="page">
+                    Balance: @balance
+                </a>
 
                 <span class="navbar-text">
                     <partial name="_LoginPartial" />

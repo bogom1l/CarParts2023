@@ -576,8 +576,11 @@ namespace CarParts.Services.Data
             return cars;
         }
 
-
-
+        public async Task<bool> HasUserEnoughMoneyAsync(double userBalance, int carId)
+        {
+           var car = await this._dbContext.Cars.FirstAsync(c => c.CarId == carId);
+           return car.RentPrice <= userBalance;
+        }
     }
 
 }

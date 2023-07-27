@@ -3,5 +3,11 @@
     public interface IUserService
     {
         Task<string> GetUserFullNameByEmail(string email);
+
+        Task<double> GetBalance(string userId);
+
+        Task AddMoney(string userId);
+
+        Task<string> GetUserIdByEmail(string email);
     }
 }

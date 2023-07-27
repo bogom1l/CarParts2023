@@ -12,7 +12,7 @@
 
   ✔️ Implement Rent Functionality 
 
-     da moje da naema kolata samo ako ima nujnite pari
+  ✔️ da moje da naema kolata samo ako ima nujnite pari
 
      REMOVE isRented FROM EVERYWHERE
 

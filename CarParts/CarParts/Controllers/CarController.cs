@@ -11,12 +11,13 @@ namespace CarParts.Web.Controllers
     {
         private readonly ICarService _carService;
         private readonly IDealerService _dealerService;
+        private readonly IUserService _userService;
 
-        public CarController(ICarService carService, IDealerService dealerService)
+        public CarController(ICarService carService, IDealerService dealerService, IUserService userService)
         {
             this._carService = carService;
-            _dealerService = dealerService;
-
+            this._dealerService = dealerService;
+            this._userService = userService;
         }
 
 
@@ -250,7 +251,16 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("All", "Car");
             }
 
-           
+            double userBalance = await this._userService.GetBalance(GetUserId());
+            bool hasUserEnoughMoney = await this._carService.HasUserEnoughMoneyAsync(userBalance, id);
+
+            if (!hasUserEnoughMoney)
+            {
+                TempData["ErrorMessage"] = "You don't have enough money to rent this car!";
+
+                return RedirectToAction("All", "Car");
+            }
+
             var rentCarViewModel = await this._carService.GetRentCarViewModelAsync(id, GetUserId());
 
             if (rentCarViewModel == null)
