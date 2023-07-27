@@ -19,7 +19,9 @@
   ✔️ implement ManageRental
 
      remove 100euro from user when he rents a car (moje  bi sushtiq metod kato AddMoney, samo che da se kazwa RemoveMoney))
-     
+     *RentPrice na Car trqbva da e za den, vseki den za koito q naemash da se uwelichawa 
+       toest ako primerno q naemesh za 10 dena => TotalRentPrice = 10*RentPrice ili nesh takoz 
+
      implement ManageRental to remove bonus 10euro from user for change in rental
      implement EndRental (remove bonus 5euro from user for change in rental)
 
