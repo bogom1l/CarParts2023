@@ -2,17 +2,19 @@
 
 -- Rent A Car --
 
+  ✔️ Add Role "Dealer"
+  ✔️ Create a "Become a Dealer" Page
+  ✔️ Implement the "Become a Dealer" Action
 
-	✔️ Add Role "Dealer"
-	✔️ Create a "Become a Dealer" Page
-	✔️ Implement the "Become a Dealer" Action
-	[Authorize(Roles = "Dealer")] public IActionResult AddCar() { ... }
+  : ne raboti Add Car v momenta
 
-	Da go napraq s Claima kakto checho kazva
-	Implement Rent Functionality - da moje da naema kolata samo ako ima nujnite pari
+     [Authorize(Roles = "Dealer")] public IActionResult AddCar() { ... }
+  
+     Da go napraq s Claima kakto checho kazva
+     Implement Rent Functionality - da moje da naema kolata samo ako ima nujnite pari
 
 
 -> validacii nawsqkyde
 
 -----------------
-18:30 - 26.07.2023
+09:30 - 27.07.2023
