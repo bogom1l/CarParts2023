@@ -16,11 +16,17 @@
 
      REMOVE isRented FROM EVERYWHERE
 
+     implement EndRental, EditRental
+
+     proverka StartDay > EndDate
+
      validacii nawsqkyde
 
      code cleanup
 
      review/summary of full project
 
+     imeplement custom register/login OR just remove .Email or replace with .Username so in Views it works
+
 -----------------
-13:30 - 27.07.2023
+15:00 - 27.07.2023

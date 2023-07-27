@@ -6,9 +6,28 @@
     ViewBag.Title = "Rent Car";
 }
 
-@inject IUserService _userService
+
 @{
-    string userName = await _userService.GetUserFullNameByEmail(this.User.Identity.Name); //TODO: .Email
+    // Retrieve messages from TempData
+    var errorMessage = TempData["ErrorMessage"] as string;
+    var successMessage = TempData["SuccessMessage"] as string;
+
+}
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <div class="alert alert-success">@successMessage</div>
+}
+
+
+@inject IUserService UserService
+@{
+    string userName = await UserService.GetUserFullNameByEmail(this.User.Identity.Name); //TODO: .Email
 }
 
 
@@ -33,19 +52,18 @@
             <p class="mb-0"><span class="fw-bold">Renter Name: </span>@userName</p>
             <br/>
 
-            @if (!Model.IsRented)
-            {
-                <div class="mb-3">
-                    <label asp-for="@Model.RentalStartDate" class="form-label-add-edit">Rental Start Date</label>
-                    <input asp-for="@Model.RentalStartDate" class="form-control" aria-required="true"/>
-                    <span asp-validation-for="@Model.RentalStartDate" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="@Model.RentalEndDate" class="form-label-add-edit">Rental End Date</label>
-                    <input asp-for="@Model.RentalEndDate" class="form-control" aria-required="true" placeholder="2023-08-02" />
-                    <span asp-validation-for="@Model.RentalEndDate" class="text-danger"></span>
-                </div>
-            }
+            
+            <div class="mb-3">
+                <label asp-for="@Model.RentalStartDate" class="form-label-add-edit">Rental Start Date</label>
+                <input asp-for="@Model.RentalStartDate" class="form-control" aria-required="true"/>
+                <span asp-validation-for="@Model.RentalStartDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.RentalEndDate" class="form-label-add-edit">Rental End Date</label>
+                <input asp-for="@Model.RentalEndDate" class="form-control" aria-required="true" placeholder="2023-08-02" />
+                <span asp-validation-for="@Model.RentalEndDate" class="text-danger"></span>
+            </div>
+            
 
             @if (Model.IsRented)
             {
@@ -63,7 +81,6 @@
         </form>
     </div>
 </div>
-
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

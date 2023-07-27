@@ -291,6 +291,12 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            //if (rentCarViewModel.RentalStartDate <= rentCarViewModel.RentalEndDate)
+            //{
+            //    TempData["ErrorMessage"] = "Start date cannot be after end date!";
+            //    return View(rentCarViewModel);
+            //}
+
             await this._carService.RentCarAsync(rentCarViewModel, GetUserId());
 
             return RedirectToAction("MyRentedCars", "Car");

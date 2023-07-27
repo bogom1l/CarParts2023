@@ -1,4 +1,6 @@
-﻿namespace CarParts.Web.ViewModels.Car
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CarParts.Web.ViewModels.Car
 {
     public class RentCarViewModel
     {
@@ -19,7 +21,13 @@
 
         public bool IsRented { get; set; } = false; //TODO REMOVE isRented FROM EVERYWHERE
         public double RentPrice { get; set; }
+
+        [Display(Name = "Rental Start Date")]
+        //[DataType(DataType.Date)]
         public DateTime RentalStartDate { get; set; }
+
+        [Display(Name = "Rental End Date")]
+        //[DataType(DataType.Date)]
         public DateTime RentalEndDate { get; set; }
 
         public string RenterName { get; set; }

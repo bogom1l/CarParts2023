@@ -48,16 +48,15 @@
                     </div>
                     <div class="card-footer">
 
-                        @if (User.Identity.Name == car.RenterName) //.Email
-                        {
-                            <a asp-controller="Car" asp-action="EditRental" asp-route-id="@car.Id" class="btn btn-warning btn-block">
-                                Edit Rental
-                            </a>
+                    
+                        <a asp-controller="Car" asp-action="EditRental" asp-route-id="@car.Id" class="btn btn-warning btn-block">
+                            Edit Rental
+                        </a>
 
-                            <a href="#" class="btn btn-danger btn-block delete-rental" data-id="@car.Id">
-                                End Rental
-                            </a>
-                        }
+                        <a asp-controller="Car" asp-action="EndRental" asp-route-id="@car.Id" class="btn btn-danger btn-block">
+                            End Rental
+                        </a>
+                    
                     </div>
                 </div>
             </div>
