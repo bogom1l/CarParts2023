@@ -33,8 +33,6 @@
      editwam json fileovete s nowite propertyta
      importwam si wsichkite koli ot json fileovete 
 
-     
-
      validacii nawsqkyde
 
      code cleanup
@@ -42,7 +40,8 @@
 
      review/summary of full project
 
-     imeplement custom register/login OR just remove .Email or replace with .Username so in Views it works
+     implement custom register/login OR just remove .Email or replace with .Username so in Views it works
+     C#WebTxTDesktop
 
 -----------------
-16:00 - 27.07.2023
+22:00 - 27.07.2023
