@@ -10,11 +10,17 @@
 
   ✔️ da opraq wsichki raoti zarad nowiq dealer w MyCars, MyFavCars, ...
 
-     Implement Rent Functionality - da moje da naema kolata samo ako ima nujnite pari
+  ✔️ Implement Rent Functionality 
 
-     //TODO REMOVE isRented FROM EVERYWHERE
+     da moje da naema kolata samo ako ima nujnite pari
 
--> validacii nawsqkyde
+     REMOVE isRented FROM EVERYWHERE
+
+     validacii nawsqkyde
+
+     code cleanup
+
+     review/summary of full project
 
 -----------------
-10:30 - 27.07.2023
+13:30 - 27.07.2023

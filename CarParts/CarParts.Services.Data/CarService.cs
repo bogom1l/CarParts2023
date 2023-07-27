@@ -510,14 +510,16 @@ namespace CarParts.Services.Data
             return !string.IsNullOrEmpty(car.RenterId); //return car.IsRented;
         }
 
-        public async Task RentCarAsync(int carId, string userId)
+        public async Task RentCarAsync(RentCarViewModel rentCarViewModel, string userId)
         {
             Car car = await this._dbContext
                 .Cars
-                .FirstAsync(c => c.CarId == carId);
+                .FirstAsync(c => c.CarId == rentCarViewModel.Id);
 
             car.RenterId = userId;
             car.IsRented = true;
+            car.RentalStartDate = rentCarViewModel.RentalStartDate;
+            car.RentalEndDate = rentCarViewModel.RentalEndDate;
 
             await this._dbContext.SaveChangesAsync();
         }
@@ -538,21 +540,22 @@ namespace CarParts.Services.Data
                     //IsRented = false,
                     //RentPrice = 0,
                     RentalStartDate = DateTime.Now,
-                    //RentalEndDate = null,
-                    //RenterName = c.Renter.FirstName + c.Renter.LastName,
-
+                    RentalEndDate = DateTime.Now.AddDays(1),
+                    //RenterName = c.r
+                    Id = c.CarId,
                 })
                 .FirstOrDefaultAsync();
 
             return rentCarViewModel;
         }
 
-        
+
         public async Task<ICollection<RentCarViewModel>> GetMyRentedCarsAsync(string userId)
         {
-            return await this._dbContext
+            var cars = await this._dbContext
                 .Cars
-                .Where(c => c.Dealer.UserId == userId) //.ToString()
+                .Where(c => c.RenterId == userId
+                            && c.RenterId != null) //.ToString()
                 .Select(c => new RentCarViewModel
                 {
                     Make = c.Make,
@@ -564,10 +567,13 @@ namespace CarParts.Services.Data
                     ImageUrl = c.ImageUrl,
                     //IsRented = false,
                     RentPrice = c.RentPrice,
-                    RentalStartDate = c.RentalStartDate,
-                    RentalEndDate = c.RentalEndDate,
-                    RenterName = c.Renter.FirstName + c.Renter.LastName
+                    RentalStartDate = c.RentalStartDate.HasValue ? c.RentalStartDate.Value : DateTime.Now.AddDays(1),
+                    RentalEndDate = c.RentalEndDate ?? DateTime.Now.AddDays(1),
+                    RenterName = c.Renter.FirstName + " " + c.Renter.LastName,
+                    Id = c.CarId
                 }).ToListAsync();
+
+            return cars;
         }
 
 

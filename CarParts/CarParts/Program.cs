@@ -42,6 +42,7 @@ namespace CarParts.Web
             builder.Services.AddScoped<ICarService, CarService>();
             builder.Services.AddScoped<IPartService, PartService>();
             builder.Services.AddScoped<IDealerService, DealerService>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             
              

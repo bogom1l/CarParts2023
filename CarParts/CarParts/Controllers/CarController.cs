@@ -231,6 +231,15 @@ namespace CarParts.Web.Controllers
 
                 return RedirectToAction("All", "Car");
             }
+
+            bool isUserDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
+
+            if (isUserDealer) //TODO: && !User.IsAdmin()
+            {
+                TempData["ErrorMessage"] = "Dealers can't rent houses. Please register as a user!";
+
+                return RedirectToAction("Index", "Home");
+            }
             
             bool isRented = await this._carService.IsRentedAsync(id);
             
@@ -241,16 +250,7 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("All", "Car");
             }
 
-            bool isUserDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
-
-            if (isUserDealer) //TODO: && !User.IsAdmin()
-            {
-                TempData["ErrorMessage"] = "Dealers can't rent houses. Please register as a user!";
-
-                return RedirectToAction("Index", "Home");
-            }
-
-
+           
             var rentCarViewModel = await this._carService.GetRentCarViewModelAsync(id, GetUserId());
 
             if (rentCarViewModel == null)
@@ -291,9 +291,9 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            await this._carService.RentCarAsync(id, GetUserId());
+            await this._carService.RentCarAsync(rentCarViewModel, GetUserId());
 
-            return RedirectToAction("MyCars");  //TODO: return RedirectToAction("MyRentedCars", "Car");
+            return RedirectToAction("MyRentedCars", "Car");
         }
 
 

@@ -1,0 +1,94 @@
+﻿@model ICollection<CarParts.Web.ViewModels.Car.RentCarViewModel>
+
+@{
+    ViewBag.Title = "My Rented Cars";
+}
+
+
+<style>
+    /* Add any custom styling as needed */
+</style>
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container">
+    <div class="row d-flex align-items-start">
+
+        @foreach (var car in Model)
+        {
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="@car.ImageUrl" alt="Car Image" class="card-img-top">
+                        <h5 class="card-title">@car.Make @car.Model</h5>
+                        <p class="card-text">
+                            <span class="fw-bold">Year:</span> @car.Year
+                        </p>
+                        <p class="card-text">
+                            <span class="fw-bold">Price:</span> $@car.Price
+                        </p>
+                        <p class="card-text">
+                            <span class="fw-bold">Color:</span> @car.Color
+                        </p>
+                        <p class="card-text">
+                            <span class="fw-bold">Description:</span> @car.Description
+                        </p>
+                        <p class="card-text">
+                            <span class="fw-bold">Rental Start Date:</span> @car.RentalStartDate.ToString("yy-MM-dd")
+                        </p>
+                        <p class="card-text">
+                            <span class="fw-bold">Rental End Date:</span> @car.RentalEndDate.ToString("yy-MM-dd")
+                        </p>
+
+                        <p class="card-text">
+                            <span class="fw-bold">Renter Name (delete me from view):</span> @car.RenterName
+                        </p>
+
+                    </div>
+                    <div class="card-footer">
+
+                        @if (User.Identity.Name == car.RenterName) //.Email
+                        {
+                            <a asp-controller="Car" asp-action="EditRental" asp-route-id="@car.Id" class="btn btn-warning btn-block">
+                                Edit Rental
+                            </a>
+
+                            <a href="#" class="btn btn-danger btn-block delete-rental" data-id="@car.Id">
+                                End Rental
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Handle the click event for the delete buttons
+        $('.delete-rental').on('click', function (e) {
+            e.preventDefault();
+            const carId = $(this).data('id');
+
+            // Show SweetAlert confirmation dialog
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You are about to end this car rental. This action cannot be undone.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, end rental!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If user confirms, redirect to the "EndRental" action with carId as a parameter
+                    window.location.href = `/Car/EndRental/${carId}`;
+                }
+            });
+        });
+    </script>
+}
