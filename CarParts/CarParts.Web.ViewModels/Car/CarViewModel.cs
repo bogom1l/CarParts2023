@@ -79,5 +79,12 @@ namespace CarParts.Web.ViewModels.Car
         [Required]
         public string ImageUrl { get; set; } = null!;
 
+
+        [Required] 
+        public string Renter { get; set; } = null!;
+
+        [Required] 
+        public string Email { get; set; } = null!;
+
     }
 }

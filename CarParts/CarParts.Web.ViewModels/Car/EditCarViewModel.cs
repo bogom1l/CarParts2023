@@ -110,6 +110,6 @@ namespace CarParts.Web.ViewModels.Car
         [Required]
         public string ImageUrl { get; set; } = null!;
 
-
+        public double RentPrice { get; set; }   
     }
 }

@@ -25,7 +25,8 @@
     <div class="row d-flex align-items-start">
         @foreach (var car in Model)
         {
-            if (car.Owner != User.Identity.Name)
+            
+            @if (car.Email != User.Identity.Name)
             {
                 break;
             }

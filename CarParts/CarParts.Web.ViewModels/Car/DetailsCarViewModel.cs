@@ -39,5 +39,7 @@
 
         public string ImageUrl { get; set; } = null!;
 
+        public double RentPrice { get; set; }
+
     }
 }

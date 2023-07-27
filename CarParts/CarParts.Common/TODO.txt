@@ -6,15 +6,15 @@
   ✔️ Create a "Become a Dealer" Page
   ✔️ Implement the "Become a Dealer" Action
 
-  : ne raboti Add Car v momenta
+  ✔️ ne raboti Add Car v momenta
 
-     [Authorize(Roles = "Dealer")] public IActionResult AddCar() { ... }
-  
-     Da go napraq s Claima kakto checho kazva
+  ✔️ da opraq wsichki raoti zarad nowiq dealer w MyCars, MyFavCars, ...
+
      Implement Rent Functionality - da moje da naema kolata samo ako ima nujnite pari
 
+     //TODO REMOVE isRented FROM EVERYWHERE
 
 -> validacii nawsqkyde
 
 -----------------
-09:30 - 27.07.2023
+10:30 - 27.07.2023

@@ -43,6 +43,12 @@
         color: white;
         /* Add any additional styling as needed */
     }
+    
+    .btn-lightgreen {
+        background-color: lightgreen;
+        color: white;
+        /* Add any additional styling as needed */
+    }
 </style>
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -81,8 +87,9 @@
                         <a asp-controller="Car" asp-action="Details" asp-route-id="@car.CarId" class="btn btn-info btn-block">
                             View Details
                         </a>
+                        
 
-                        @if (User.Identity.Name == car.Owner)
+                        @if (User.Identity.Name == car.Email)
                         {
                             <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.CarId" class="btn btn-warning btn-block">
                                 Edit
@@ -96,6 +103,11 @@
                        
                         <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@car.CarId" class="btn btn-purple btn-block">
                             Add to favorite cars
+                        </a>
+
+
+                        <a asp-controller="Car" asp-action="Rent" asp-route-id="@car.CarId" class="btn btn-lightgreen btn-block">
+                            Rent
                         </a>
 
                     </div>

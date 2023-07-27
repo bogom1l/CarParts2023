@@ -1,6 +1,8 @@
 ﻿using CarParts.Data.Models;
 using CarParts.Services.Data.Interfaces;
 using CarParts.Web.ViewModels.Car;
+using CarParts.Web.ViewModels.Part;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarParts.Web.Controllers
@@ -29,6 +31,14 @@ namespace CarParts.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
+            bool isDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
+            if (!isDealer)
+            {
+                TempData["ErrorMessage"] = "You must become a dealer in order to add new cars!";
+
+                return RedirectToAction("BecomeDealer", "Dealer");
+            }
+
             AddCarViewModel car = await this._carService.GetAddCarViewModelAsync();
 
             return View(car);
@@ -82,7 +92,7 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("All");
             }
 
-            if (car.DealerId.ToString() != GetUserId())
+            if (car.Dealer.UserId != GetUserId())
             {
                 return RedirectToAction("All");
             }
@@ -121,7 +131,7 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("All");
             }
             
-            if (car.DealerId.ToString()!= GetUserId())
+            if (car.Dealer.UserId != GetUserId())
             {
                 return RedirectToAction("All");
             }
@@ -206,6 +216,92 @@ namespace CarParts.Web.Controllers
             ViewBag.ToHp = toHp;
             ViewBag.FromYear = fromYear;
             ViewBag.ToYear = toYear;  */
+
+            return View(cars);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Rent(int id)
+        {
+            bool carExists = await this._carService.ExistsByIdAsync(id);
+
+            if (!carExists)
+            {
+                TempData["ErrorMessage"] = "Car with provided id does not exist! Please try again!";
+
+                return RedirectToAction("All", "Car");
+            }
+            
+            bool isRented = await this._carService.IsRentedAsync(id);
+            
+            if (isRented)
+            {
+                TempData["ErrorMessage"] = "Car is already rented! Please try again!";
+
+                return RedirectToAction("All", "Car");
+            }
+
+            bool isUserDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
+
+            if (isUserDealer) //TODO: && !User.IsAdmin()
+            {
+                TempData["ErrorMessage"] = "Dealers can't rent houses. Please register as a user!";
+
+                return RedirectToAction("Index", "Home");
+            }
+
+
+            var rentCarViewModel = await this._carService.GetRentCarViewModelAsync(id, GetUserId());
+
+            if (rentCarViewModel == null)
+            {
+                return RedirectToAction("All");
+            }
+
+            return View(rentCarViewModel); 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Rent(int id, RentCarViewModel rentCarViewModel)
+        {
+            bool carExists = await this._carService.ExistsByIdAsync(id);
+
+            if (!carExists)
+            {
+                TempData["ErrorMessage"] = "Car with provided id does not exist! Please try again!";
+
+                return RedirectToAction("All", "Car");
+            }
+            
+            bool isRented = await this._carService.IsRentedAsync(id);
+            
+            if (isRented)
+            {
+                TempData["ErrorMessage"] = "Car is already rented! Please try again!";
+
+                return RedirectToAction("All", "Car");
+            }
+
+            bool isUserDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
+
+            if (isUserDealer) //TODO: && !User.IsAdmin()
+            {
+                TempData["ErrorMessage"] = "Dealers can't rent houses. Please register as a user!";
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            await this._carService.RentCarAsync(id, GetUserId());
+
+            return RedirectToAction("MyCars");  //TODO: return RedirectToAction("MyRentedCars", "Car");
+        }
+
+
+        
+        [HttpGet]
+        public async Task<IActionResult> MyRentedCars()
+        {
+            var cars = await this._carService.GetMyRentedCarsAsync(GetUserId());
 
             return View(cars);
         }

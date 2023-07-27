@@ -1,0 +1,65 @@
+﻿@model CarParts.Web.ViewModels.Car.RentCarViewModel
+
+@{
+    ViewBag.Title = "Rent Car";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form asp-action="Rent" method="post">
+            
+            <div class="image-container">
+                <img src="@Model.ImageUrl" alt="Car Image" class="card-img-top">
+            </div>
+            
+            <h3>@Model.Make @Model.Model</h3>
+            <p class="mb-0"><span class="fw-bold">Year: </span>@Model.Year</p>
+
+            <p class="mb-0"><span class="fw-bold">Description: </span>@Model.Description</p>
+            <p class="mb-0"><span class="fw-bold">Price: </span>@Model.Price</p>
+            <p class="mb-0"><span class="fw-bold">Color: </span>@Model.Color</p>
+            <br/>
+
+            @if (!Model.IsRented)
+            {
+                <div class="mb-3">
+                    <label asp-for="@Model.RenterName" class="form-label-add-edit">Renter Name</label>
+                    <input asp-for="@Model.RenterName" class="form-control" aria-required="true"/>
+                    <span asp-validation-for="@Model.RenterName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.RentalStartDate" class="form-label-add-edit">Rental Start Date</label>
+                    <input asp-for="@Model.RentalStartDate" class="form-control" aria-required="true"/>
+                    <span asp-validation-for="@Model.RentalStartDate" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.RentalEndDate" class="form-label-add-edit">Rental End Date</label>
+                    <input asp-for="@Model.RentalEndDate" class="form-control" aria-required="true"/>
+                    <span asp-validation-for="@Model.RentalEndDate" class="text-danger"></span>
+                </div>
+            }
+
+            @if (Model.IsRented)
+            {
+                <div class="mb-3">
+                    <label class="form-label-add-edit">Car is currently rented</label>
+                </div>
+            }
+
+            @if (!Model.IsRented)
+            {
+                <div class="mb-3">
+                    <input class="btn btn-success mb-2 w-100 p-3 fw-bold" type="submit" value="Rent"/>
+                </div>
+            }
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
