@@ -9,7 +9,6 @@
     // Retrieve messages from TempData
     var errorMessage = TempData["ErrorMessage"] as string;
     var successMessage = TempData["SuccessMessage"] as string;
-
 }
 
 @if (!string.IsNullOrEmpty(errorMessage))
@@ -57,13 +56,15 @@
                         <p class="card-text">
                             <span class="fw-bold">Description:</span> @car.Description
                         </p>
-                        <p class="card-text">
-                            <span class="fw-bold">Rental Start Date:</span> @car.RentalStartDate.ToString("yy-MM-dd")
-                        </p>
-                        <p class="card-text">
-                            <span class="fw-bold">Rental End Date:</span> @car.RentalEndDate.ToString("yy-MM-dd")
-                        </p>
 
+                        @if (car.RentalStartDate != null)
+                        {
+                            <p class="card-text">Rental Start Date: @car.RentalStartDate.Value.ToString("yy-MM-dd")</p>
+                        }
+                        @if (car.RentalEndDate != null)
+                        {
+                            <p class="card-text">Rental End Date: @car.RentalEndDate.Value.ToString("yy-MM-dd")</p>
+                        }
                         <p class="card-text">
                             <span class="fw-bold">Renter Name (delete me from view):</span> @car.RenterName
                         </p>
@@ -71,6 +72,11 @@
                         <p class="card-text">
                             <span class="fw-bold">Car Id (delete me from view):</span> @car.Id
                         </p>
+                        
+                        <p class="card-text">
+                            <span class="fw-bold">Rent Price:</span> @car.RentPrice
+                        </p>
+
 
                     </div>
                     <div class="card-footer">

@@ -14,14 +14,16 @@ namespace CarParts.Web.Controllers
             this._userService = userService;
         }
        
-
+        [HttpGet]
         public async Task<IActionResult> AddMoney()
         {
             await this._userService.AddMoney(GetUserId());
 
+            TempData["SuccessMessage"] = "You added 100euro to your balance.!";
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet]
         public async Task<IActionResult> RemoveMoney(RentCarViewModel rentCarViewModel)
         {
             await this._userService.RemoveMoney(GetUserId(), rentCarViewModel);

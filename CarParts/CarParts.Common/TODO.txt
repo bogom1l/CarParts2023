@@ -27,6 +27,8 @@
 
   ✔️ *check if user has enough money, dont allow him to go negative money
 
+  ✔️ ne se setwa prawilna startdate kato se natisne manage rental
+
      implement ManageRental to remove bonus 10euro from user for change in rental
      implement EndRental (remove bonus 5euro from user for change in rental)
 

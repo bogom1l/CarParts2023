@@ -74,7 +74,7 @@ namespace CarParts.Services.Data
             }
 
             //calculate how much days the car is rented and then multiply it by the price per day (RentPrice)
-            var days = (rentCarViewModel.RentalEndDate - rentCarViewModel.RentalStartDate).Days;
+            var days = ((DateTime)rentCarViewModel.RentalEndDate! - (DateTime)rentCarViewModel.RentalStartDate!).Days;
             var totalPrice = days * rentCarViewModel.RentPrice;
 
             user.Balance -= totalPrice;

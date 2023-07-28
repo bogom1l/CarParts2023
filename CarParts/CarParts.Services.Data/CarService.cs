@@ -535,9 +535,9 @@ namespace CarParts.Services.Data
                     Price = c.Price,
                     Color = c.Color,
                     ImageUrl = c.ImageUrl,
-                    RentalStartDate = DateTime.Now,
-                    RentalEndDate = DateTime.Now.AddDays(1),
-                    RenterName = null,
+                    RentalStartDate = c.RentalStartDate != null ? c.RentalStartDate.Value : DateTime.Now,
+                    RentalEndDate = c.RentalEndDate ?? DateTime.Now.AddDays(1),
+                    RenterName = c.Renter.FirstName + " " + c.Renter.LastName ?? null,
                     RentPrice = c.RentPrice,
                     Id = c.CarId,
 
@@ -577,7 +577,7 @@ namespace CarParts.Services.Data
            var car = await this._dbContext.Cars.FirstAsync(c => c.CarId == rentCarViewModel.Id);
 
            //calculate how much days the car is rented and then multiply it by the price per day (RentPrice)
-           var days = (rentCarViewModel!.RentalEndDate - rentCarViewModel!.RentalStartDate).Days;
+           var days = ((DateTime)rentCarViewModel!.RentalEndDate! - (DateTime)rentCarViewModel!.RentalStartDate!).Days;
 
            var totalPrice = days * rentCarViewModel.RentPrice;
 
@@ -586,7 +586,7 @@ namespace CarParts.Services.Data
 
         public bool IsStartDateBeforeEndDate(RentCarViewModel rentCarViewModel)
         {
-            var days = (rentCarViewModel!.RentalEndDate - rentCarViewModel!.RentalStartDate).Days;
+            var days = ((DateTime)rentCarViewModel!.RentalEndDate! - (DateTime)rentCarViewModel!.RentalStartDate!).Days;
 
             //check if RentalStartDate is before RentalEndDate
             if (days <= 0)
@@ -618,6 +618,7 @@ namespace CarParts.Services.Data
 
             await this._dbContext.SaveChangesAsync();
         }
+        
 
 
     }

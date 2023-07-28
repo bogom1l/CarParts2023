@@ -52,6 +52,7 @@ namespace CarParts.Services.Data.Interfaces
         Task EndRentalAsync(int carId, string userId);
 
         bool IsStartDateBeforeEndDate(RentCarViewModel rentCarViewModel);
+
     }
 
 }

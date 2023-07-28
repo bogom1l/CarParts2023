@@ -24,11 +24,11 @@ namespace CarParts.Web.ViewModels.Car
 
         [Display(Name = "Rental Start Date")]
         //[DataType(DataType.Date)]
-        public DateTime RentalStartDate { get; set; }
+        public DateTime? RentalStartDate { get; set; }
 
         [Display(Name = "Rental End Date")]
         //[DataType(DataType.Date)]
-        public DateTime RentalEndDate { get; set; }
+        public DateTime? RentalEndDate { get; set; }
 
         public string? RenterName { get; set; }
 
