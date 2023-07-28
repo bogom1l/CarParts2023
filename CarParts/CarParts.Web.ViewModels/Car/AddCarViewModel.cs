@@ -17,7 +17,7 @@ namespace CarParts.Web.ViewModels.Car
         [Required]
         [StringLength(CarModelMaxLength,
             MinimumLength = CarModelMinLength,
-            ErrorMessage = "Model can be between 2 and 50 characters.")]
+            ErrorMessage = "Model can be between 1 and 50 characters.")]
         public string Model { get; set; } = null!;
 
         [Required]
@@ -29,7 +29,7 @@ namespace CarParts.Web.ViewModels.Car
         [Required]
         [StringLength(CarDescriptionMaxLength,
             MinimumLength = CarDescriptionMinLength,
-            ErrorMessage = "Description can be between 2 and 2500.")]
+            ErrorMessage = "Description can be between 1 and 3500.")]
         public string Description { get; set; } = null!;
 
 
@@ -42,13 +42,13 @@ namespace CarParts.Web.ViewModels.Car
         [Required]
         [StringLength(CarColorMaxLength,
             MinimumLength = CarColorMinLength,
-            ErrorMessage = "Color can be between 2 and 50 characters.")]
+            ErrorMessage = "Color can be between 1 and 50 characters.")]
         public string Color { get; set; } = null!;
 
         [Required]
         [Range(CarEngineSizeMinValue,
             CarEngineSizeMaxValue,
-            ErrorMessage = "Engine size can be between 500 and 900.")]
+            ErrorMessage = "Engine size can be between 100 and 9000.")]
         public double EngineSize { get; set; }
 
         [Required]
@@ -72,7 +72,7 @@ namespace CarParts.Web.ViewModels.Car
         [Required]
         [Range(CarWeightMinValue,
             CarWeightMaxValue,
-            ErrorMessage = "Weight can be between 500 and 9000.")]
+            ErrorMessage = "Weight can be between 100 and 9000.")]
 
         public double Weight { get; set; }
 

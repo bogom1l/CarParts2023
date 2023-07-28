@@ -33,13 +33,13 @@
 
   ✔️ implement EndRental (remove bonus 5euro from user for change in rental)
      
-     (15min) importwam 10 koli ot json filea
-     (10min) importwam 10 chasti ot json filea
-
-     validacii nawsqkyde
+  ✔️ (15min) importwam 10 koli ot json filea
+  ✔️ (10min) importwam 10 chasti ot json filea
 
      code cleanup
       - userId mai ne mi trqbwa w nqkoi metodi w servicite
+
+     validacii nawsqkyde
 
      review/summary of full project
 
@@ -47,4 +47,4 @@
      C#WebTxTDesktop
 
 -----------------
-17:00 - 28.07.2023
+17:30 - 28.07.2023
