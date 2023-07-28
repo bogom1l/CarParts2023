@@ -26,7 +26,7 @@ namespace CarParts.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> RemoveMoney(RentCarViewModel rentCarViewModel)
         {
-            await this._userService.RemoveMoney(GetUserId(), rentCarViewModel);
+            await this._userService.RemoveMoney(GetUserId(), 1); //TODO:?? kade go polzwam twa izobshto
 
             return null!; //TODO: ? //return RedirectToAction("Index", "Home");
         }

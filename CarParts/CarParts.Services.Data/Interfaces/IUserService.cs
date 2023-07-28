@@ -9,7 +9,7 @@
         Task<double> GetBalance(string userId);
         Task AddMoney(string userId);
 
-        Task RemoveMoney(string userId, RentCarViewModel rentCarViewModel);
+        Task RemoveMoney(string userId, double moneyToRemove);
 
         Task<string> GetUserIdByEmail(string email);
     }

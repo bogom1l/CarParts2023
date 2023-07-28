@@ -29,8 +29,9 @@
 
   ✔️ ne se setwa prawilna startdate kato se natisne manage rental
 
-     implement ManageRental to remove bonus 10euro from user for change in rental
-     implement EndRental (remove bonus 5euro from user for change in rental)
+  ✔️ implement ManageRental to remove bonus 10euro from user for change in rental
+
+  ✔️ implement EndRental (remove bonus 5euro from user for change in rental)
 
      editwam json fileovete s nowite propertyta
      importwam si wsichkite koli ot json fileovete 

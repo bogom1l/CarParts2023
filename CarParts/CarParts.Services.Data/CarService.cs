@@ -572,16 +572,53 @@ namespace CarParts.Services.Data
             return cars;
         }
 
-        public async Task<bool> HasUserEnoughMoneyAsync(double userBalance, RentCarViewModel rentCarViewModel)
+        //public async Task<bool> HasUserEnoughMoneyAsync(double userBalance, RentCarViewModel rentCarViewModel)
+        //{
+        //   var car = await this._dbContext.Cars.FirstAsync(c => c.CarId == rentCarViewModel.Id);
+
+        //   //calculate how much days the car is rented and then multiply it by the price per day (RentPrice)
+        //   var days = ((DateTime)rentCarViewModel!.RentalEndDate! - (DateTime)rentCarViewModel!.RentalStartDate!).Days;
+
+        //   var totalPrice = days * rentCarViewModel.RentPrice;
+
+        //   return totalPrice <= userBalance;
+        //}
+
+        public async Task<double> TotalMoneyToRentAsync(RentCarViewModel rentCarViewModel)
         {
-           var car = await this._dbContext.Cars.FirstAsync(c => c.CarId == rentCarViewModel.Id);
+            var car = await this._dbContext.Cars.FirstAsync(c => c.CarId == rentCarViewModel.Id);
 
-           //calculate how much days the car is rented and then multiply it by the price per day (RentPrice)
-           var days = ((DateTime)rentCarViewModel!.RentalEndDate! - (DateTime)rentCarViewModel!.RentalStartDate!).Days;
+            var days = ((DateTime)rentCarViewModel!.RentalEndDate! - (DateTime)rentCarViewModel!.RentalStartDate!).Days;
 
-           var totalPrice = days * rentCarViewModel.RentPrice;
+            var totalPrice = days * rentCarViewModel.RentPrice;
 
-           return totalPrice <= userBalance;
+            return totalPrice;
+        }
+
+        //public async Task<bool> HasUserEnoughMoneyToRentMoreAsync(double userBalance,
+        //    RentCarViewModel rentCarViewModel, DateTime pastEndDate)
+        //{   
+        //    var car = await this._dbContext.Cars.FirstAsync(c => c.CarId == rentCarViewModel.Id);
+
+        //    //calculate how much days the car is rented and then multiply it by the price per day (RentPrice)
+        //    var days = ((DateTime)rentCarViewModel!.RentalEndDate! - pastEndDate).Days;
+
+        //    var totalPrice = days * rentCarViewModel.RentPrice;
+        //    totalPrice += 10;
+
+        //    return totalPrice <= userBalance;
+        //}
+
+        public async Task<double> TotalMoneyToRentMore(RentCarViewModel rentCarViewModel, DateTime pastEndDate)
+        {   
+            var car = await this._dbContext.Cars.FirstAsync(c => c.CarId == rentCarViewModel.Id);
+
+            var days = ((DateTime)rentCarViewModel!.RentalEndDate! - pastEndDate).Days;
+
+            var totalPrice = days * rentCarViewModel.RentPrice;
+            totalPrice += 10;
+
+            return totalPrice;
         }
 
         public bool IsStartDateBeforeEndDate(RentCarViewModel rentCarViewModel)

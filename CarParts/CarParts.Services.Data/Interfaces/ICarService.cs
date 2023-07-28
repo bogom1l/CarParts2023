@@ -45,14 +45,14 @@ namespace CarParts.Services.Data.Interfaces
 
         Task<RentCarViewModel?> GetRentCarViewModelAsync(int id);
         Task<ICollection<RentCarViewModel>> GetMyRentedCarsAsync(string getUserId);
-        Task<bool> HasUserEnoughMoneyAsync(double userBalance, RentCarViewModel rentCarViewModel);
-
+        Task<double> TotalMoneyToRentAsync(RentCarViewModel rentCarViewModel);
         Task UpdateRentalForCarAsync(RentCarViewModel rentCarViewModel, string userId);
 
         Task EndRentalAsync(int carId, string userId);
 
         bool IsStartDateBeforeEndDate(RentCarViewModel rentCarViewModel);
 
+        Task<double> TotalMoneyToRentMore(RentCarViewModel rentCarViewModel, DateTime endDate);
     }
 
 }

@@ -302,9 +302,9 @@ namespace CarParts.Web.Controllers
             }
 
             double userBalance = await this._userService.GetBalance(GetUserId());
-            bool hasUserEnoughMoney = await this._carService.HasUserEnoughMoneyAsync(userBalance, rentCarViewModel);
+            double totalMoneyToRent = await this._carService.TotalMoneyToRentAsync(rentCarViewModel);
 
-            if (!hasUserEnoughMoney)
+            if (totalMoneyToRent > userBalance)
             {
                 TempData["ErrorMessage"] = "You don't have enough money to rent this car!";
 
@@ -312,7 +312,7 @@ namespace CarParts.Web.Controllers
             }
 
             await this._carService.RentCarAsync(rentCarViewModel, GetUserId());
-            await this._userService.RemoveMoney(GetUserId(), rentCarViewModel);
+            await this._userService.RemoveMoney(GetUserId(), totalMoneyToRent);
 
             TempData["SuccessMessage"] = "You successfully rented the car!";
             return RedirectToAction("MyRentedCars", "Car");
@@ -328,6 +328,7 @@ namespace CarParts.Web.Controllers
             return View(cars);
         }
 
+        private static DateTime _curentEndDate = DateTime.Now.AddYears(-3);
 
         [HttpGet]
         public async Task<IActionResult> ManageRental(int id) 
@@ -358,6 +359,8 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("All");
             }
 
+            _curentEndDate = (DateTime)rentCarViewModel.RentalEndDate!;
+
             return View(rentCarViewModel);
         }
 
@@ -373,9 +376,11 @@ namespace CarParts.Web.Controllers
             }
 
             double userBalance = await this._userService.GetBalance(GetUserId());
-            bool hasUserEnoughMoney = await this._carService.HasUserEnoughMoneyAsync(userBalance, rentCarViewModel);
+            //bool hasUserEnoughMoney = await this._carService.HasUserEnoughMoneyAsync(userBalance, rentCarViewModel);
+            double totalMoneyToRentMore = 
+                await this._carService.TotalMoneyToRentMore(rentCarViewModel, _curentEndDate);
 
-            if (!hasUserEnoughMoney)
+            if (totalMoneyToRentMore > userBalance)
             {
                 TempData["ErrorMessage"] = "You don't have enough money to rent this car!";
 
@@ -383,6 +388,8 @@ namespace CarParts.Web.Controllers
             }
 
             await this._carService.UpdateRentalForCarAsync(rentCarViewModel, GetUserId());
+            await this._userService.RemoveMoney(GetUserId(), totalMoneyToRentMore);
+
 
             TempData["SuccessMessage"] = "You successfully changed your rental for the car!";
             return RedirectToAction("MyRentedCars", "Car");
@@ -391,10 +398,24 @@ namespace CarParts.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> EndRental(int id)
         {
+            double userBalance = await this._userService.GetBalance(GetUserId());
+
+            const double moneyToRemove = 5;
+
+            if (userBalance >= moneyToRemove)
+            {
+                await this._carService.EndRentalAsync(id, GetUserId());
+                await this._userService.RemoveMoney(GetUserId(), moneyToRemove);
+
+                TempData["SuccessMessage"] = "You successfully ended your rental for the car!";
+                return RedirectToAction("MyRentedCars", "Car");
+            }
+
             await this._carService.EndRentalAsync(id, GetUserId());
 
-            TempData["SuccessMessage"] = "You successfully ended your rental for the car!";
-            return RedirectToAction("All", "Car");
+            TempData["SuccessMessage"] = "You don't have enough money to end the rental purchase," +
+                                       "\n so we will end it for you free this time. Consider making more money.";
+            return RedirectToAction("MyRentedCars", "Car");
         }
 
 
