@@ -34,7 +34,7 @@ namespace CarParts.Services.Data.Interfaces
             int? fromYear, int? toYear, int? fromHp, int? toHp,
             int? fromPrice, int? toPrice);
 
-        void GetDataFromDatabase();
+        //void GetDataFromDatabase();
 
         Task<bool> IsCarAlreadyInMyFavoriteCars(int carId, string userId);
 
