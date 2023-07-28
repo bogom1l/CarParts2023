@@ -56,6 +56,12 @@
 
 <div class="container">
     <div class="row">
+        
+        @if (!Model.Any())
+        {
+            <h2>There are no cars at the moment.</h2>
+        }
+
         @foreach (var car in Model)
         {
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
@@ -87,7 +93,7 @@
                         <a asp-controller="Car" asp-action="Details" asp-route-id="@car.CarId" class="btn btn-info btn-block">
                             View Details
                         </a>
-                        
+
 
                         @if (User.Identity.Name == car.Email)
                         {
@@ -100,7 +106,7 @@
                             </a>
                         }
 
-                       
+
                         <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@car.CarId" class="btn btn-purple btn-block">
                             Add to favorite cars
                         </a>

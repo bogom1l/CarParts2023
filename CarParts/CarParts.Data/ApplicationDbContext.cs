@@ -1,4 +1,6 @@
-﻿namespace CarParts.Data
+﻿using System.Text.Json;
+
+namespace CarParts.Data
 {
     using CarParts.Data.Models;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -18,9 +20,6 @@
 
             builder.Entity<UserFavoriteCar>()
                 .HasKey(ufc => new { ufc.UserId, ufc.CarId});
-
-            //builder.Entity<ApplicationUser>()
-            //    .HasKey(u => new { u.Id });
 
             SeedData(builder);
 
@@ -86,8 +85,6 @@
                     new PartCategory { CategoryId = 5, Name = "Interior" },
                     new PartCategory { CategoryId = 6, Name = "Exterior" },
                     new PartCategory { CategoryId = 7, Name = "Electrical" });
-            
-
         }
 
 

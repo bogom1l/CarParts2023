@@ -32,9 +32,9 @@
   ✔️ implement ManageRental to remove bonus 10euro from user for change in rental
 
   ✔️ implement EndRental (remove bonus 5euro from user for change in rental)
-
-     editwam json fileovete s nowite propertyta
-     importwam si wsichkite koli ot json fileovete 
+     
+     (15min) importwam 10 koli ot json filea
+     (10min) importwam 10 chasti ot json filea
 
      validacii nawsqkyde
 
@@ -47,4 +47,4 @@
      C#WebTxTDesktop
 
 -----------------
-22:00 - 27.07.2023
+17:00 - 28.07.2023

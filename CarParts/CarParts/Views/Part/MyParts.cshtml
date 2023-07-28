@@ -46,6 +46,12 @@
 
 <div class="container">
     <div class="row d-flex align-items-start">
+        
+        @if (!Model.Any())
+        {
+            <h2>You haven't added any parts yet.</h2>
+        }
+
         @foreach (var part in Model)
         {
             if (part.Owner != User.Identity.Name)
@@ -94,7 +100,7 @@
                                 Delete
                             </a>
                         }
-                        
+
                         @*<a asp-controller="Part" asp-action="AddToFavoriteParts" asp-route-id="@part.Id" class="btn btn-purple btn-block">
                             Add to favorite parts
                         </a>*@

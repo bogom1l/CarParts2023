@@ -459,55 +459,7 @@ namespace CarParts.Services.Data
             return cars;
         }
 
-        //public async void GetDataFromDatabase()
-        //{
-        //    //get all the data from the database
-        //    var cars = await this._dbContext.Cars.ToListAsync();
-        //    var parts = await this._dbContext.Parts.ToListAsync();
-
-        //    string jsonCars = JsonSerializer.Serialize(cars);
-        //    string jsonParts = JsonSerializer.Serialize(parts);
-
-        //    await File.WriteAllTextAsync("cars_28_07_2023.json", jsonCars);
-        //    await File.WriteAllTextAsync("parts_28_07_2023.json", jsonParts);
-        //}
-
-        //TODO: Ready to use, just uncomment and fill 
-        //public void SeedCarsIntoDatabase()
-        //{
-        //    /*
-        //      string jsonCars = File.ReadAllText("cars_24_07_2023.json.json");
-        //      var carPartsCars = JsonSerializer.Deserialize<List<CarPart>>(jsonCars);
-        //      dbContext.CarParts.AddRange(carPartsCars);
-        //      dbContext.SaveChanges();
-
-        //      //-||- for parts
-        //    */
-
-        //    string jsonCars = File.ReadAllText(""); //TODO: fill
-        //    var cars = JsonSerializer.Deserialize<List<Car>>(jsonCars);
-
-        //    if (cars == null)
-        //    {
-        //        throw new Exception("ko sta we?");
-        //    }
-
-        //    try
-        //    {
-        //        _dbContext.Cars.AddRange(cars);
-        //        _dbContext.SaveChanges();
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //        throw;
-        //    }
-
-        //}
-
-
-
-
+        
         public async Task<bool> IsCarAlreadyInMyFavoriteCars(int carId, string userId)
         {
             return await this._dbContext

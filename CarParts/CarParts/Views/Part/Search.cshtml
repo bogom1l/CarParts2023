@@ -57,28 +57,35 @@
         </tr>
     </thead>
     <tbody>
-        <div class="row">
-            @foreach (var part in Model)
-            {
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <!-- Part image -->
-                        <img class="card-img-top" src="@part.ImageUrl" alt="Part Image">
+    <div class="row">
+        
+        @if (!Model.Any())
+        {
+            <th> <h2>Unfortunately, we couldn't find any parts matching your search filters.</h2> </th>
+        }
 
-                        <div class="card-body">
-                            <!-- Part properties -->
-                            <h5 class="card-title">@part.Name</h5>
-                            <p class="card-text card-text-make-italic"><b>Price</b>: @part.Price</p>
-                            <p class="card-text card-text-make-italic"><b>Category</b>: @part.CategoryName</p>
-                        </div>
 
-                        <a asp-controller="Part" asp-action="Details" asp-route-id="@part.Id" class="btn btn-info btn-block">
-                            View Details
-                        </a>
+        @foreach (var part in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <!-- Part image -->
+                    <img class="card-img-top" src="@part.ImageUrl" alt="Part Image">
 
+                    <div class="card-body">
+                        <!-- Part properties -->
+                        <h5 class="card-title">@part.Name</h5>
+                        <p class="card-text card-text-make-italic"><b>Price</b>: @part.Price</p>
+                        <p class="card-text card-text-make-italic"><b>Category</b>: @part.CategoryName</p>
                     </div>
+
+                    <a asp-controller="Part" asp-action="Details" asp-route-id="@part.Id" class="btn btn-info btn-block">
+                        View Details
+                    </a>
+
                 </div>
-            }
-        </div>
+            </div>
+        }
+    </div>
     </tbody>
 </table>

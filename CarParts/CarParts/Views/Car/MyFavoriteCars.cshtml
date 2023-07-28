@@ -35,6 +35,12 @@
 <hr />
 
 <div class="text-center row">
+    
+    @if (!Model.Any())
+    {
+        <h2>You haven't added any cars in your favorite list.</h2>
+    }
+
     @foreach (var car in Model)
     {
         string newDescription = string.Join(" ", car.Description

@@ -34,7 +34,6 @@ namespace CarParts.Services.Data.Interfaces
             int? fromYear, int? toYear, int? fromHp, int? toHp,
             int? fromPrice, int? toPrice);
 
-        //void GetDataFromDatabase();
 
         Task<bool> IsCarAlreadyInMyFavoriteCars(int carId, string userId);
 
@@ -53,6 +52,8 @@ namespace CarParts.Services.Data.Interfaces
         bool IsStartDateBeforeEndDate(RentCarViewModel rentCarViewModel);
 
         Task<double> TotalMoneyToRentMore(RentCarViewModel rentCarViewModel, DateTime endDate);
+
+      
     }
 
 }

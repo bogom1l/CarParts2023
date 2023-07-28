@@ -134,13 +134,19 @@
 
 <table class="table">
     <thead>
-        <tr>
-            <th>Cars</th> @*//TODO: remove?*@
-        </tr>
+    <tr>
+        <th>Cars</th> @*//TODO: remove?*@
+    </tr>
     </thead>
     <tbody>
         
     <div class="row">
+
+        @if (!Model.Any())
+        {
+           <th> <h2>Unfortunately, we couldn't find any cars matching your search filters.</h2> </th>
+        }
+
         @foreach (var car in Model)
         {
             <div class="col-md-4 mb-4">
@@ -155,7 +161,7 @@
                         <p class="card-text card-text-make-italic"><b>Fuel type</b>: @car.FuelTypeName</p>
                         <p class="card-text card-text-make-italic"><b>Category</b>: @car.CategoryName</p>
                     </div>
-                    
+
                     <a asp-controller="Car" asp-action="Details" asp-route-id="@car.CarId" class="btn btn-info btn-block">
                         View Details
                     </a>
