@@ -1,13 +1,10 @@
-﻿using CarParts.Data;
-using CarParts.Data.Models;
-using CarParts.Services.Data.Interfaces;
-using CarParts.Web.ViewModels.Car;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
-namespace CarParts.Services.Data
+﻿namespace CarParts.Services.Data
 {
+    using CarParts.Data;
+    using CarParts.Data.Models;
+    using Interfaces;
+    using Microsoft.EntityFrameworkCore;
+
     public class UserService : IUserService
     {
         private readonly ApplicationDbContext _dbContext;
@@ -17,7 +14,6 @@ namespace CarParts.Services.Data
             this._dbContext = dbContext;
         }
 
-
         public async Task<string> GetUserFullNameByEmail(string email)
         {
             ApplicationUser? user = await this._dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
@@ -25,12 +21,11 @@ namespace CarParts.Services.Data
             if (user == null)
             {
                 return string.Empty;
-                //throw new ArgumentException("User with this email does not exist!");
+                //? TODO: throw new ArgumentException("User with this email does not exist!");
             }
 
             return $"{user.FirstName} {user.LastName}";
         }
-
 
         public async Task<double> GetBalance(string userId)
         {
@@ -46,7 +41,7 @@ namespace CarParts.Services.Data
             return user.Balance;
         }
 
-        public async Task AddMoney(string userId)
+        public async Task AddMoney(string userId) //adds 100 euro
         {
             var user = await this._dbContext
                 .Users
@@ -61,27 +56,6 @@ namespace CarParts.Services.Data
 
             await this._dbContext.SaveChangesAsync();
         }
-
-        //public async Task RemoveMoney(string userId, RentCarViewModel rentCarViewModel)
-        //{
-        //    var user = await this._dbContext
-        //        .Users
-        //        .FirstOrDefaultAsync(u => u.Id == userId);
-
-        //    if (user == null)
-        //    {
-        //        throw new ArgumentException("User with this id does not exist!");
-        //    }
-
-        //    //calculate how much days the car is rented and then multiply it by the price per day (RentPrice)
-        //    var days = ((DateTime)rentCarViewModel.RentalEndDate! - (DateTime)rentCarViewModel.RentalStartDate!).Days;
-        //    var totalPrice = days * rentCarViewModel.RentPrice;
-
-        //    user.Balance -= totalPrice;
-
-        //    await this._dbContext.SaveChangesAsync();
-        //}
-
 
         public async Task RemoveMoney(string userId, double moneyToRemove)
         {
@@ -106,13 +80,11 @@ namespace CarParts.Services.Data
             if (user == null)
             {
                 return string.Empty;
-                //throw new ArgumentException("User with this email does not exist!");
+                //? TODO: throw new ArgumentException("User with this email does not exist!");
             }
 
             return user.Id;
         }
 
     }
-
-
 }

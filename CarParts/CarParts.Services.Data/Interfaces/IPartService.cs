@@ -1,8 +1,8 @@
-﻿using CarParts.Data.Models;
-using CarParts.Web.ViewModels.Part;
-
-namespace CarParts.Services.Data.Interfaces
+﻿namespace CarParts.Services.Data.Interfaces
 {
+    using CarParts.Data.Models;
+    using Web.ViewModels.Part;
+
     public interface IPartService
     {
         Task<ICollection<PartViewModel>> GetAllPartsAsync();
@@ -26,7 +26,6 @@ namespace CarParts.Services.Data.Interfaces
         Task<ICollection<PartViewModel>> GetMyFavoritePartsAsync(string userId);
 
         Task<bool> AddPartToMyFavoritePartsAsync(int id, string userId);
-
 
         Task<bool> RemovePartFromMyFavoritePartsAsync(int id, string userId);
 

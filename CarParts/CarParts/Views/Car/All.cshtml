@@ -7,34 +7,25 @@
     ViewBag.Title = "All Cars";
 }
 
-
 @{
-    // Retrieve messages from TempData
     var errorMessage = TempData["ErrorMessage"] as string;
     var successMessage = TempData["SuccessMessage"] as string;
 
+    if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+
+    if (!string.IsNullOrEmpty(successMessage))
+    {
+        <div class="alert alert-success">@successMessage</div>
+    }
 }
-
-@if (!string.IsNullOrEmpty(errorMessage))
-{
-    <div class="alert alert-danger">@errorMessage</div>
-}
-
-@if (!string.IsNullOrEmpty(successMessage))
-{
-    <div class="alert alert-success">@successMessage</div>
-}
-
-
-
 
 
 @*SweetAlert CDN*@
 <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
-
-
-
 
 
 <style>
@@ -125,9 +116,6 @@
 
 
 
-
-
-
 <style>
     .card {
         border: 1px solid #ddd;
@@ -182,14 +170,8 @@
 </style>
 
 
-
-
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-
-
-    
-    
+    <partial name="_ValidationScriptsPartial"/>
     
 
     <script>

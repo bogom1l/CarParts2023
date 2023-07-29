@@ -10,7 +10,7 @@
     <div class="card w-100">
         <div class="card-body">
 
-            <img src="@Model.ImageUrl" alt="Car Image" class="card-img-top">
+            <img src="@Model.ImageUrl" alt="Car Image" class="card-img-top"> @*TODO: make image smaller*@
 
             <h3 class="card-title text-center">@Model.Make @Model.Model</h3>
             <p class="mb-0"><span class="fw-bold">Category: </span>@Model.Category</p>
@@ -41,7 +41,6 @@
     </div>
 </div>
 
-
 @section Scripts {
     <script>
         document.getElementById("moreDetailsBtn").addEventListener("click", function () {
@@ -56,5 +55,7 @@
             document.getElementById("lessDetailsBtn").style.display = "none";
         });
     </script>
-    <partial name="_ValidationScriptsPartial" />
+    
+
+    <partial name="_ValidationScriptsPartial"/>
 }

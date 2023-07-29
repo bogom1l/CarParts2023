@@ -1,9 +1,8 @@
-﻿using CarParts.Services.Data.Interfaces;
-using CarParts.Web.ViewModels.Car;
-
-namespace CarParts.Web.Controllers
+﻿namespace CarParts.Web.Controllers
 {
+    using CarParts.Services.Data.Interfaces;
     using Microsoft.AspNetCore.Mvc;
+    using ViewModels.Car;
 
     public class UserController : BaseController
     {
@@ -13,7 +12,7 @@ namespace CarParts.Web.Controllers
         {
             this._userService = userService;
         }
-       
+
         [HttpGet]
         public async Task<IActionResult> AddMoney()
         {

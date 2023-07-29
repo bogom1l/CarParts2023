@@ -4,11 +4,9 @@
     ViewBag.Title = "My Cars";
 }
 
-
 @*SweetAlert CDN*@
 <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
-
 
 <style>
     .btn-purple {
@@ -94,8 +92,10 @@
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-    
+
+    <partial name="_ValidationScriptsPartial"/>
+
+
 
     <script>
         // Handle the click event for the delete buttons
@@ -120,5 +120,4 @@
             });
         });
     </script>
-
 }

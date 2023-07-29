@@ -1,12 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using static CarParts.Common.GlobalConstants.Part;
-
-namespace CarParts.Data.Models
+﻿namespace CarParts.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
+    using static CarParts.Common.GlobalConstants.Part;
+
     public class PartCategory
     {
-        [Key]
-        public int CategoryId { get; set; }
+        [Key] public int CategoryId { get; set; }
 
         [Required]
         [MaxLength(PartNameMaxLength)]

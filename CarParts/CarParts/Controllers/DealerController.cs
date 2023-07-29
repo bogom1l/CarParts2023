@@ -1,9 +1,8 @@
-﻿using CarParts.Services.Data.Interfaces;
-using CarParts.Web.ViewModels.Dealer;
-
-namespace CarParts.Web.Controllers
+﻿namespace CarParts.Web.Controllers
 {
+    using CarParts.Services.Data.Interfaces;
     using Microsoft.AspNetCore.Mvc;
+    using ViewModels.Dealer;
 
     public class DealerController : BaseController
     {
@@ -63,7 +62,6 @@ namespace CarParts.Web.Controllers
             TempData["SuccessMessage"] = "You are now a dealer!";
             return RedirectToAction("Index", "Home");
         }
-
 
     }
 }

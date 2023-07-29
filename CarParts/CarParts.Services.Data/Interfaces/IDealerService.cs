@@ -1,6 +1,6 @@
 ﻿namespace CarParts.Services.Data.Interfaces
 {
-    using CarParts.Web.ViewModels.Dealer;
+    using Web.ViewModels.Dealer;
     using System.Threading.Tasks;
 
     public interface IDealerService

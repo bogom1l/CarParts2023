@@ -1,14 +1,12 @@
-using CarParts.Data;
-using CarParts.Data.Models;
-using CarParts.Services.Data;
-using CarParts.Services.Data.Interfaces;
-using CarParts.Web.Controllers;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
 namespace CarParts.Web
 {
+    using CarParts.Services.Data;
+    using CarParts.Services.Data.Interfaces;
+    using Data;
+    using Data.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -16,7 +14,9 @@ namespace CarParts.Web
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
+                                   throw new InvalidOperationException(
+                                       "Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -39,13 +39,13 @@ namespace CarParts.Web
             {
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
-            
+
             builder.Services.AddScoped<ICarService, CarService>();
             builder.Services.AddScoped<IPartService, PartService>();
             builder.Services.AddScoped<IDealerService, DealerService>();
             builder.Services.AddScoped<IUserService, UserService>();
-            
-             
+
+
             //builder.Services.AddIdentity<CustomUser, IdentityRole>()
             //    .AddEntityFrameworkStores<ApplicationDbContext>()
             //    .AddDefaultTokenProviders();

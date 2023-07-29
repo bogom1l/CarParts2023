@@ -1,13 +1,12 @@
-﻿using System.Diagnostics;
-using CarParts.Web.ViewModels;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
-namespace CarParts.Web.Controllers
+﻿namespace CarParts.Web.Controllers
 {
+    using ViewModels;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Diagnostics;
+
     public class HomeController : BaseController
     {
-        
         [AllowAnonymous]
         public IActionResult Index()
         {
@@ -19,8 +18,6 @@ namespace CarParts.Web.Controllers
         {
             return View();
         }
-
-
 
         public IActionResult Privacy()
         {

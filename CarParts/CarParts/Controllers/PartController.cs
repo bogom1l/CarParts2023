@@ -1,10 +1,10 @@
-﻿using CarParts.Data.Models;
-using CarParts.Services.Data.Interfaces;
-using CarParts.Web.ViewModels.Part;
-using Microsoft.AspNetCore.Mvc;
-
-namespace CarParts.Web.Controllers
+﻿namespace CarParts.Web.Controllers
 {
+    using CarParts.Services.Data.Interfaces;
+    using Data.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using ViewModels.Part;
+
     public class PartController : BaseController
     {
         private readonly IPartService _partService;
@@ -25,7 +25,7 @@ namespace CarParts.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            AddPartViewModel part = await this._partService.GetAddPartViewModelAsync();
+            var part = await this._partService.GetAddPartViewModelAsync();
 
             return View(part);
         }
@@ -57,11 +57,10 @@ namespace CarParts.Web.Controllers
             return View(detailsPartViewModel);
         }
 
-
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            Part? part = await this._partService.GetPartByIdAsync(id);
+            var part = await this._partService.GetPartByIdAsync(id);
 
             if (part == null)
             {
@@ -100,7 +99,7 @@ namespace CarParts.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            Part? part = await this._partService.GetPartByIdAsync(id);
+            var part = await this._partService.GetPartByIdAsync(id);
 
             if (part == null)
             {
@@ -133,7 +132,6 @@ namespace CarParts.Web.Controllers
 
             return View(parts);
         }
-
 
         [HttpGet]
         public async Task<IActionResult> AddToFavoriteParts(int id)
@@ -177,15 +175,14 @@ namespace CarParts.Web.Controllers
             return RedirectToAction("All");
         }
 
-
         [HttpGet]
-        public async Task<IActionResult> Search(string searchTerm, string category, string priceSort, int? fromPrice, int? toPrice)
+        public async Task<IActionResult> Search(string searchTerm, string category,
+            string priceSort, int? fromPrice, int? toPrice)
         {
             var parts = await this._partService.SearchPartsAsync(searchTerm, category, priceSort, fromPrice, toPrice);
 
             return View(parts);
         }
-
 
     }
 }

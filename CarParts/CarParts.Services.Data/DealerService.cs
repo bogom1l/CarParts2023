@@ -1,11 +1,11 @@
-﻿using CarParts.Data;
-using CarParts.Data.Models;
-using CarParts.Services.Data.Interfaces;
-using CarParts.Web.ViewModels.Dealer;
-using Microsoft.EntityFrameworkCore;
-
-namespace CarParts.Services.Data
+﻿namespace CarParts.Services.Data
 {
+    using CarParts.Data;
+    using CarParts.Data.Models;
+    using Interfaces;
+    using Microsoft.EntityFrameworkCore;
+    using Web.ViewModels.Dealer;
+
     public class DealerService : IDealerService
     {
         private readonly ApplicationDbContext _dbContext;
@@ -17,7 +17,7 @@ namespace CarParts.Services.Data
 
         public async Task<int> GetDealerIdByUserIdAsync(string userId)
         {
-            Dealer? dealer = await this._dbContext
+            var dealer = await this._dbContext
                 .Dealers
                 .FirstOrDefaultAsync(d => d.UserId == userId);
 
@@ -45,7 +45,7 @@ namespace CarParts.Services.Data
 
         public async Task<bool> HasRentsByUserIdAsync(string userId)
         {
-            ApplicationUser? user = await this._dbContext
+            var user = await this._dbContext
                 .Users
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
@@ -59,7 +59,7 @@ namespace CarParts.Services.Data
 
         public async Task BecomeDealerAsync(BecomeDealerFormModel dealer, string userId)
         {
-            Dealer dealerData = new Dealer
+            var dealerData = new Dealer
             {
                 PhoneNumber = dealer.PhoneNumber,
                 UserId = userId,

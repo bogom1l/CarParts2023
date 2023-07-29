@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace CarParts.Data.Models
+﻿namespace CarParts.Data.Models
 {
+    using Microsoft.AspNetCore.Identity;
     using System.Collections.Generic;
 
     public class ApplicationUser : IdentityUser
@@ -12,6 +11,6 @@ namespace CarParts.Data.Models
 
         public List<Car> RentedCars { get; set; } = new List<Car>();
 
-        public double Balance { get; set; } //Money
+        public double Balance { get; set; }
     }
 }

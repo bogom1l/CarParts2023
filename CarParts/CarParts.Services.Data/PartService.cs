@@ -1,15 +1,14 @@
-﻿using CarParts.Services.Data.Interfaces;
-using CarParts.Web.ViewModels.Part;
-using CarParts.Web.ViewModels.Part.PartProperties;
-using Microsoft.EntityFrameworkCore;
-
-namespace CarParts.Services.Data
+﻿namespace CarParts.Services.Data
 {
     using CarParts.Data;
     using CarParts.Data.Models;
+    using Interfaces;
+    using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Web.ViewModels.Part;
+    using Web.ViewModels.Part.PartProperties;
 
     public class PartService : IPartService
     {
@@ -52,7 +51,7 @@ namespace CarParts.Services.Data
 
         public async Task AddPartAsync(AddPartViewModel addPartViewModel, string userId)
         {
-            Part part = new Part
+            var part = new Part
             {
                 Name = addPartViewModel.Name,
                 Description = addPartViewModel.Description,
@@ -187,7 +186,7 @@ namespace CarParts.Services.Data
                 return false;
             }
 
-            UserFavoritePart userFavoritePart = new UserFavoritePart
+            var userFavoritePart = new UserFavoritePart
             {
                 PartId = partId,
                 UserId = userId
@@ -201,13 +200,13 @@ namespace CarParts.Services.Data
 
         public async Task<bool> RemovePartFromMyFavoritePartsAsync(int partId, string userId)
         {
-            UserFavoritePart? part = await this._dbContext
+            var part = await this._dbContext
                 .UsersFavoriteParts
                 .FirstOrDefaultAsync(ufp => ufp.PartId == partId && ufp.UserId == userId);
 
             if (part == null)
             {
-                return false; //doesnt exist (for some reason..)
+                return false; //doesnt exist (for some reason..) TODO:
             }
 
             this._dbContext.UsersFavoriteParts.Remove(part);
@@ -216,12 +215,11 @@ namespace CarParts.Services.Data
             return true;
         }
 
-        public async Task<ICollection<PartViewModel>> SearchPartsAsync(string searchTerm, string category,
-            string priceSort, int? fromPrice, int? toPrice)
+        public async Task<ICollection<PartViewModel>> SearchPartsAsync(string searchTerm,
+            string category, string priceSort, int? fromPrice, int? toPrice)
         {
             var partsQuery = this._dbContext.Parts.AsQueryable();
 
-            
             // Filter by category
             if (!string.IsNullOrEmpty(category))
             {
@@ -247,7 +245,6 @@ namespace CarParts.Services.Data
             {
                 partsQuery = partsQuery.Where(c => c.Price <= toPrice);
             }
-
 
             // Sort by price ascending/descending
             if (priceSort == "asc")

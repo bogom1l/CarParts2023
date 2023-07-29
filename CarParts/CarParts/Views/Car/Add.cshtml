@@ -53,26 +53,6 @@
                     <input asp-for="@Model.EngineSize" class="form-control" aria-required="true" step="0.01" value="2993" />
                     <span asp-validation-for="@Model.EngineSize" class="text-danger"></span>
                 </div>
-                
-                
-
-               @* <div class="mb-3">
-                    <label asp-for="@Model.FuelType" class="form-label-add-edit">Fuel Type</label>
-                    <input asp-for="@Model.FuelType" class="form-control" aria-required="true" />
-                    <span asp-validation-for="@Model.FuelType" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="@Model.Transmission" class="form-label-add-edit">Transmission</label>
-                    <input asp-for="@Model.Transmission" class="form-control" aria-required="true" />
-                    <span asp-validation-for="@Model.Transmission" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="@Model.Category" class="form-label-add-edit">Category</label>
-                    <input asp-for="@Model.Category" class="form-control" aria-required="true" />
-                    <span asp-validation-for="@Model.Category" class="text-danger"></span>
-                </div>
-                *@
-
 
                 <div class="mb-3">
                     <label asp-for="@Model.FuelTypeId" class="form-label-add-edit">Fuel Type</label>
@@ -104,7 +84,6 @@
                     </select>
                     <span asp-validation-for="@Model.CategoryId" class="text-danger"></span>
                 </div>
-                
 
 
                 <div class="mb-3">
@@ -132,19 +111,19 @@
                     <input asp-for="@Model.Torque" class="form-control" aria-required="true" step="0.01" value="500" />
                     <span asp-validation-for="@Model.Torque" class="text-danger"></span>
                 </div>
-               <div class="mb-3">
-                   <label asp-for="@Model.FuelConsumption" class="form-label-add-edit">Fuel Consumption</label>
-                   <input asp-for="@Model.FuelConsumption" class="form-control" aria-required="true" step="0.01" value="9.2" />
-                   <span asp-validation-for="@Model.FuelConsumption" class="text-danger"></span>
-               </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.FuelConsumption" class="form-label-add-edit">Fuel Consumption</label>
+                    <input asp-for="@Model.FuelConsumption" class="form-control" aria-required="true" step="0.01" value="9.2" />
+                    <span asp-validation-for="@Model.FuelConsumption" class="text-danger"></span>
+                </div>
                
-               <div class="mb-3">
-                   <label asp-for="@Model.RentPrice" class="form-label-add-edit">Rent Price</label>
+                <div class="mb-3">
+                    <label asp-for="@Model.RentPrice" class="form-label-add-edit">Rent Price</label>
                     <input asp-for="@Model.RentPrice" class="form-control" aria-required="true" value="100" />
                     <span asp-validation-for="@Model.RentPrice" class="text-danger"></span>
-               </div>
+                </div>
                 
-               <div class="mb-3">
+                <div class="mb-3">
                     <input type="submit" value="Add Car" class="btn btn-success w-100" />
                 </div>
             </form>
@@ -153,5 +132,5 @@
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial"/>
 }

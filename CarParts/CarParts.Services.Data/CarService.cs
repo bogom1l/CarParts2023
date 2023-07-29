@@ -1,30 +1,24 @@
-﻿using System.Xml;
-using CarParts.Data;
-using CarParts.Services.Data.Interfaces;
-using CarParts.Web.ViewModels.Car;
-using CarParts.Web.ViewModels.Car.CarProperties;
-using Microsoft.EntityFrameworkCore;
-
-namespace CarParts.Services.Data
+﻿namespace CarParts.Services.Data
 {
+    using CarParts.Data;
     using CarParts.Data.Models;
+    using Interfaces;
+    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Text.Json;
     using System.Threading.Tasks;
+    using Web.ViewModels.Car;
+    using Web.ViewModels.Car.CarProperties;
 
     public class CarService : ICarService
     {
-
         private readonly ApplicationDbContext _dbContext;
 
         public CarService(ApplicationDbContext dbContext)
         {
             this._dbContext = dbContext;
         }
-
 
         public async Task<ICollection<CarViewModel>> GetAllCarsAsync()
         {
@@ -58,23 +52,26 @@ namespace CarParts.Services.Data
 
         public async Task<AddCarViewModel> GetAddCarViewModelAsync()
         {
-            var fuelTypes = await this._dbContext.FuelTypes.Select(f => new CarFuelTypeViewModel
-            {
-                Id = f.Id,
-                Name = f.Name
-            }).ToListAsync();
+            var fuelTypes = await this._dbContext.FuelTypes
+                .Select(f => new CarFuelTypeViewModel
+                {
+                    Id = f.Id,
+                    Name = f.Name
+                }).ToListAsync();
 
-            var transmissions = await this._dbContext.Transmissions.Select(t => new CarTransmissionViewModel
-            {
-                Id = t.Id,
-                Name = t.Name
-            }).ToListAsync();
+            var transmissions = await this._dbContext.Transmissions
+                .Select(t => new CarTransmissionViewModel
+                {
+                    Id = t.Id,
+                    Name = t.Name
+                }).ToListAsync();
 
-            var categories = await this._dbContext.Categories.Select(c => new CarCategoryViewModel
-            {
-                Id = c.Id,
-                Name = c.Name
-            }).ToListAsync();
+            var categories = await this._dbContext.Categories
+                .Select(c => new CarCategoryViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                }).ToListAsync();
 
             var addCarViewModel = new AddCarViewModel()
             {
@@ -118,7 +115,7 @@ namespace CarParts.Services.Data
 
         public async Task<DetailsCarViewModel?> GetCarDetailsAsync(int id)
         {
-            DetailsCarViewModel? detailsCarViewModel = await this._dbContext
+            var detailsCarViewModel = await this._dbContext
                 .Cars
                 .Where(c => c.CarId == id)
                 .Select(c => new DetailsCarViewModel
@@ -149,23 +146,26 @@ namespace CarParts.Services.Data
 
         public async Task<EditCarViewModel?> GetEditCarViewModelAsync(int id, string userId) //TODO: userId neccessary?
         {
-            var fuelTypes = await this._dbContext.FuelTypes.Select(f => new CarFuelTypeViewModel
-            {
-                Id = f.Id,
-                Name = f.Name
-            }).ToListAsync();
+            var fuelTypes = await this._dbContext.FuelTypes
+                .Select(f => new CarFuelTypeViewModel
+                {
+                    Id = f.Id,
+                    Name = f.Name
+                }).ToListAsync();
 
-            var transmissions = await this._dbContext.Transmissions.Select(t => new CarTransmissionViewModel
-            {
-                Id = t.Id,
-                Name = t.Name
-            }).ToListAsync();
+            var transmissions = await this._dbContext.Transmissions
+                .Select(t => new CarTransmissionViewModel
+                {
+                    Id = t.Id,
+                    Name = t.Name
+                }).ToListAsync();
 
-            var categories = await this._dbContext.Categories.Select(c => new CarCategoryViewModel
-            {
-                Id = c.Id,
-                Name = c.Name
-            }).ToListAsync();
+            var categories = await this._dbContext.Categories
+                .Select(c => new CarCategoryViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                }).ToListAsync();
 
             var editCarViewModel = await this._dbContext.Cars
                 .Where(c => c.CarId == id)
@@ -226,15 +226,13 @@ namespace CarParts.Services.Data
 
                 await this._dbContext.SaveChangesAsync();
             }
-
         }
-
 
         public async Task DeleteCarAsync(int id, string userId)
         {
             var carData = await this._dbContext
                 .Cars
-                .FirstOrDefaultAsync(cu => cu.CarId == id && cu.Dealer.UserId == userId);//.ToString()
+                .FirstOrDefaultAsync(cu => cu.CarId == id && cu.Dealer.UserId == userId);
 
             if (carData != null)
             {
@@ -245,7 +243,7 @@ namespace CarParts.Services.Data
 
         public async Task<Car?> GetCarByIdAsync(int id)
         {
-            Car? carData = await this._dbContext.Cars
+            var carData = await this._dbContext.Cars
                 .Include(c => c.Dealer)
                 .FirstOrDefaultAsync(c => c.CarId == id);
 
@@ -256,7 +254,7 @@ namespace CarParts.Services.Data
         {
             return await this._dbContext
                 .Cars
-                .Where(c => c.Dealer.UserId == userId) //.ToString()
+                .Where(c => c.Dealer.UserId == userId)
                 .Select(c => new CarViewModel()
                 {
                     CarId = c.CarId,
@@ -322,7 +320,7 @@ namespace CarParts.Services.Data
                 return false;
             }
 
-            UserFavoriteCar userFavoriteCar = new UserFavoriteCar
+            var userFavoriteCar = new UserFavoriteCar
             {
                 CarId = carId,
                 UserId = userId
@@ -342,7 +340,7 @@ namespace CarParts.Services.Data
 
             if (car == null)
             {
-                return false; //doesnt exist (for some reason...)
+                return false; //doesnt exist (for some reason...) TODO: 
             }
 
             this._dbContext.UsersFavoriteCars.Remove(car);
@@ -351,10 +349,9 @@ namespace CarParts.Services.Data
             return true;
         }
 
-        public async Task<ICollection<CarViewModel>> SearchCarsAsync(string searchTerm, string category, string priceSort
-            , string transmissionName, string fuelName,
-            int? fromYear, int? toYear, int? fromHp, int? toHp,
-            int? fromPrice, int? toPrice)
+        public async Task<ICollection<CarViewModel>> SearchCarsAsync(string searchTerm, string category,
+            string priceSort, string transmissionName, string fuelName, int? fromYear,
+            int? toYear, int? fromHp, int? toHp, int? fromPrice, int? toPrice)
         {
             var carsQuery = _dbContext.Cars.AsQueryable();
 
@@ -376,7 +373,7 @@ namespace CarParts.Services.Data
                 carsQuery = carsQuery.Where(c => c.FuelType.Name == fuelName);
             }
 
-            // Search by custom text in car's name/description
+            // Search by custom text in car's make/model/description
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 carsQuery = carsQuery.Where(c =>
@@ -419,7 +416,6 @@ namespace CarParts.Services.Data
                 carsQuery = carsQuery.Where(c => c.Horsepower <= toHp);
             }
 
-
             // Sort by price ascending/descending
             if (priceSort == "asc")
             {
@@ -430,7 +426,6 @@ namespace CarParts.Services.Data
                 carsQuery = carsQuery.OrderByDescending(c => c.Price);
             }
 
-            // Project the query results into CarViewModel
             var cars = await carsQuery
                 .Select(c => new CarViewModel
                 {
@@ -459,7 +454,6 @@ namespace CarParts.Services.Data
             return cars;
         }
 
-        
         public async Task<bool> IsCarAlreadyInMyFavoriteCars(int carId, string userId)
         {
             return await this._dbContext
@@ -467,14 +461,11 @@ namespace CarParts.Services.Data
                 .AnyAsync(ufc => ufc.CarId == carId && ufc.UserId == userId);
         }
 
-
         public async Task<bool> ExistsByIdAsync(int carId)
         {
-            bool result = await this._dbContext
+            return await this._dbContext
                 .Cars
                 .AnyAsync(c => c.CarId == carId);
-
-            return result;
         }
 
         public async Task<bool> IsRentedAsync(int carId)
@@ -483,12 +474,12 @@ namespace CarParts.Services.Data
                 .Cars
                 .FirstAsync(c => c.CarId == carId);
 
-            return !string.IsNullOrEmpty(car.RenterId); 
+            return !string.IsNullOrEmpty(car.RenterId);
         }
 
         public async Task RentCarAsync(RentCarViewModel rentCarViewModel, string userId)
         {
-            Car car = await this._dbContext
+            var car = await this._dbContext
                 .Cars
                 .FirstAsync(c => c.CarId == rentCarViewModel.Id);
 
@@ -525,7 +516,6 @@ namespace CarParts.Services.Data
             return rentCarViewModel;
         }
 
-
         public async Task<ICollection<RentCarViewModel>> GetMyRentedCarsAsync(string userId)
         {
             var cars = await this._dbContext
@@ -550,18 +540,6 @@ namespace CarParts.Services.Data
             return cars;
         }
 
-        //public async Task<bool> HasUserEnoughMoneyAsync(double userBalance, RentCarViewModel rentCarViewModel)
-        //{
-        //   var car = await this._dbContext.Cars.FirstAsync(c => c.CarId == rentCarViewModel.Id);
-
-        //   //calculate how much days the car is rented and then multiply it by the price per day (RentPrice)
-        //   var days = ((DateTime)rentCarViewModel!.RentalEndDate! - (DateTime)rentCarViewModel!.RentalStartDate!).Days;
-
-        //   var totalPrice = days * rentCarViewModel.RentPrice;
-
-        //   return totalPrice <= userBalance;
-        //}
-
         public async Task<double> TotalMoneyToRentAsync(RentCarViewModel rentCarViewModel)
         {
             var car = await this._dbContext.Cars.FirstAsync(c => c.CarId == rentCarViewModel.Id);
@@ -573,22 +551,8 @@ namespace CarParts.Services.Data
             return totalPrice;
         }
 
-        //public async Task<bool> HasUserEnoughMoneyToRentMoreAsync(double userBalance,
-        //    RentCarViewModel rentCarViewModel, DateTime pastEndDate)
-        //{   
-        //    var car = await this._dbContext.Cars.FirstAsync(c => c.CarId == rentCarViewModel.Id);
-
-        //    //calculate how much days the car is rented and then multiply it by the price per day (RentPrice)
-        //    var days = ((DateTime)rentCarViewModel!.RentalEndDate! - pastEndDate).Days;
-
-        //    var totalPrice = days * rentCarViewModel.RentPrice;
-        //    totalPrice += 10;
-
-        //    return totalPrice <= userBalance;
-        //}
-
         public async Task<double> TotalMoneyToRentMore(RentCarViewModel rentCarViewModel, DateTime pastEndDate)
-        {   
+        {
             var car = await this._dbContext.Cars.FirstAsync(c => c.CarId == rentCarViewModel.Id);
 
             var days = ((DateTime)rentCarViewModel!.RentalEndDate! - pastEndDate).Days;
@@ -614,7 +578,7 @@ namespace CarParts.Services.Data
 
         public async Task UpdateRentalForCarAsync(RentCarViewModel rentCarViewModel, string userId)
         {
-            Car car = await this._dbContext.Cars
+            var car = await this._dbContext.Cars
                 .FirstAsync(c => c.CarId == rentCarViewModel.Id);
 
             car.RentalEndDate = rentCarViewModel.RentalEndDate;
@@ -624,7 +588,7 @@ namespace CarParts.Services.Data
 
         public async Task EndRentalAsync(int carId, string userId)
         {
-            Car car = await this._dbContext.Cars
+            var car = await this._dbContext.Cars
                 .FirstAsync(c => c.CarId == carId);
 
             car.RenterId = null;
@@ -633,10 +597,6 @@ namespace CarParts.Services.Data
 
             await this._dbContext.SaveChangesAsync();
         }
-        
-
 
     }
-
-
 }

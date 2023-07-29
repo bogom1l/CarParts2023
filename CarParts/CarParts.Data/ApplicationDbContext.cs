@@ -1,17 +1,15 @@
-﻿using System.Text.Json;
-
-namespace CarParts.Data
+﻿namespace CarParts.Data
 {
-    using CarParts.Data.Models;
+    using Models;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
-
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
-        { }
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -19,13 +17,12 @@ namespace CarParts.Data
                 .HasKey(ufp => new { ufp.UserId, ufp.PartId });
 
             builder.Entity<UserFavoriteCar>()
-                .HasKey(ufc => new { ufc.UserId, ufc.CarId});
+                .HasKey(ufc => new { ufc.UserId, ufc.CarId });
 
             SeedData(builder);
 
             base.OnModelCreating(builder);
         }
-
 
         private void SeedData(ModelBuilder modelBuilder)
         {
@@ -56,24 +53,20 @@ namespace CarParts.Data
                     new CarCategory() { Id = 8, Name = "Minivan" },
                     new CarCategory() { Id = 9, Name = "Jeep" });
 
-
             modelBuilder.Entity<Car>()
                 .HasOne(c => c.Category)
                 .WithMany(c => c.Cars)
                 .OnDelete(DeleteBehavior.Restrict);
-
 
             modelBuilder.Entity<Car>()
                 .HasOne(c => c.FuelType)
                 .WithMany(c => c.Cars)
                 .OnDelete(DeleteBehavior.Restrict);
 
-
             modelBuilder.Entity<Car>()
                 .HasOne(c => c.Transmission)
                 .WithMany(c => c.Cars)
                 .OnDelete(DeleteBehavior.Restrict);
-
 
             modelBuilder
                 .Entity<PartCategory>()
@@ -87,22 +80,17 @@ namespace CarParts.Data
                     new PartCategory { CategoryId = 7, Name = "Electrical" });
         }
 
-
         public DbSet<Car> Cars { get; set; } = null!;
         public DbSet<CarFuelType> FuelTypes { get; set; } = null!;
         public DbSet<CarTransmission> Transmissions { get; set; } = null!;
         public DbSet<CarCategory> Categories { get; set; } = null!;
 
-
         public DbSet<Part> Parts { get; set; } = null!;
         public DbSet<PartCategory> PartCategories { get; set; } = null!;
-
 
         public DbSet<UserFavoritePart> UsersFavoriteParts { get; set; } = null!;
         public DbSet<UserFavoriteCar> UsersFavoriteCars { get; set; } = null!;
 
-
         public DbSet<Dealer> Dealers { get; set; } = null!;
-
     }
 }

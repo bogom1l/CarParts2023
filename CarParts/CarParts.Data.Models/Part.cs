@@ -1,14 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using static CarParts.Common.GlobalConstants.Part;
-
-
-namespace CarParts.Data.Models
+﻿namespace CarParts.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using static CarParts.Common.GlobalConstants.Part;
+
     public class Part
     {
-        [Key]
-        public int PartId { get; set; }
+        [Key] public int PartId { get; set; }
 
         [Required]
         [MaxLength(PartNameMaxLength)]
@@ -18,30 +16,20 @@ namespace CarParts.Data.Models
         [MaxLength(PartDescriptionMaxLength)]
         public string Description { get; set; } = null!;
 
-        [Required]
-        public double Price { get; set; }
-
+        [Required] public double Price { get; set; }
 
         [Required]
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
+
         public PartCategory Category { get; set; } = null!;
 
+        [Required] [ForeignKey(nameof(User))] public string UserId { get; set; } = null!;
 
-        [Required]
-        [ForeignKey(nameof(User))]
-        public string UserId { get; set; } = null!;
-        
-        [Required]
-        public ApplicationUser User { get; set; } = null!;
-
-
+        [Required] public ApplicationUser User { get; set; } = null!;
 
         public ICollection<UserFavoritePart> UserFavoriteParts { get; set; } = new List<UserFavoritePart>();
 
-
         public string ImageUrl { get; set; } = null!;
-
     }
 }
-

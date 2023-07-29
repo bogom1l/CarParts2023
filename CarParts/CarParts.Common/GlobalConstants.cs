@@ -51,7 +51,6 @@
 
             public const int CarFuelConsumptionMinValue = 0;
             public const int CarFuelConsumptionMaxValue = 50;
-
         }
 
         public static class Part
@@ -89,6 +88,10 @@
             public const int PhoneNumberMinLength = 7;
             public const int PhoneNumberMaxLength = 15;
         }
-    }
 
+        public static class Rental
+        {
+            public const double TaxPriceForEndingRental = 5;
+        }
+    }
 }

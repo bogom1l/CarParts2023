@@ -1,8 +1,8 @@
-﻿using CarParts.Data.Models;
-using CarParts.Web.ViewModels.Car;
-
-namespace CarParts.Services.Data.Interfaces
+﻿namespace CarParts.Services.Data.Interfaces
 {
+    using CarParts.Data.Models;
+    using Web.ViewModels.Car;
+
     public interface ICarService
     {
         Task<ICollection<CarViewModel>> GetAllCarsAsync();
@@ -29,22 +29,24 @@ namespace CarParts.Services.Data.Interfaces
 
         Task<bool> RemoveCarFromMyFavoriteCarsAsync(int carId, string userId);
 
-        Task<ICollection<CarViewModel>> SearchCarsAsync(string searchTerm, string category, string priceSort
-            , string transmissionName, string fuelName,
-            int? fromYear, int? toYear, int? fromHp, int? toHp,
-            int? fromPrice, int? toPrice);
+        Task<ICollection<CarViewModel>> SearchCarsAsync(string searchTerm, string category,
+            string priceSort, string transmissionName, string fuelName, int? fromYear, 
+            int? toYear, int? fromHp, int? toHp, int? fromPrice, int? toPrice);
 
-
-        Task<bool> IsCarAlreadyInMyFavoriteCars(int carId, string userId);
+        Task<bool> IsCarAlreadyInMyFavoriteCars(int carId, string userId); //TODO:
 
         Task<bool> ExistsByIdAsync(int carId);
+
         Task<bool> IsRentedAsync(int carId);
 
         Task RentCarAsync(RentCarViewModel rentCarViewModel, string userId);
 
         Task<RentCarViewModel?> GetRentCarViewModelAsync(int id);
+
         Task<ICollection<RentCarViewModel>> GetMyRentedCarsAsync(string getUserId);
+
         Task<double> TotalMoneyToRentAsync(RentCarViewModel rentCarViewModel);
+
         Task UpdateRentalForCarAsync(RentCarViewModel rentCarViewModel, string userId);
 
         Task EndRentalAsync(int carId, string userId);
@@ -53,7 +55,5 @@ namespace CarParts.Services.Data.Interfaces
 
         Task<double> TotalMoneyToRentMore(RentCarViewModel rentCarViewModel, DateTime endDate);
 
-      
     }
-
 }

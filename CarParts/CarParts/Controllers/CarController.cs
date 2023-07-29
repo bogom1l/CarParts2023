@@ -1,12 +1,10 @@
-﻿using CarParts.Data.Models;
-using CarParts.Services.Data.Interfaces;
-using CarParts.Web.ViewModels.Car;
-using CarParts.Web.ViewModels.Part;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
-namespace CarParts.Web.Controllers
+﻿namespace CarParts.Web.Controllers
 {
+    using CarParts.Services.Data.Interfaces;
+    using Microsoft.AspNetCore.Mvc;
+    using ViewModels.Car;
+    using static Common.GlobalConstants.Rental;
+
     public class CarController : BaseController
     {
         private readonly ICarService _carService;
@@ -20,7 +18,6 @@ namespace CarParts.Web.Controllers
             this._userService = userService;
         }
 
-
         [HttpGet]
         public async Task<IActionResult> All()
         {
@@ -32,15 +29,15 @@ namespace CarParts.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            bool isDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
+            var isDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
+
             if (!isDealer)
             {
                 TempData["ErrorMessage"] = "You must become a dealer in order to add new cars!";
-
                 return RedirectToAction("BecomeDealer", "Dealer");
             }
 
-            AddCarViewModel car = await this._carService.GetAddCarViewModelAsync();
+            var car = await this._carService.GetAddCarViewModelAsync();
 
             return View(car);
         }
@@ -48,7 +45,7 @@ namespace CarParts.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddCarViewModel car)
         {
-            bool isDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
+            var isDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
             if (!isDealer)
             {
                 TempData["ErrorMessage"] = "You must become a dealer in order to add new cars!";
@@ -56,13 +53,12 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("BecomeDealer", "Dealer");
             }
 
-
             if (!ModelState.IsValid)
             {
                 return View(car);
             }
 
-            int dealerId = await this._dealerService.GetDealerIdByUserIdAsync(GetUserId());
+            var dealerId = await this._dealerService.GetDealerIdByUserIdAsync(GetUserId());
 
             await this._carService.AddCarAsync(car, dealerId);
 
@@ -86,7 +82,7 @@ namespace CarParts.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            Car? car = await this._carService.GetCarByIdAsync(id);
+            var car = await this._carService.GetCarByIdAsync(id);
 
             if (car == null)
             {
@@ -116,7 +112,7 @@ namespace CarParts.Web.Controllers
                 return View(car);
             }
 
-            await this._carService.EditCarAsync(id, car); //x
+            await this._carService.EditCarAsync(id, car);
 
             TempData["SuccessMessage"] = "Car successfully edited!";
             return RedirectToAction("All");
@@ -125,13 +121,13 @@ namespace CarParts.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            Car? car = await this._carService.GetCarByIdAsync(id);
+            var car = await this._carService.GetCarByIdAsync(id);
 
             if (car == null)
             {
                 return RedirectToAction("All");
             }
-            
+
             if (car.Dealer.UserId != GetUserId())
             {
                 return RedirectToAction("All");
@@ -163,7 +159,7 @@ namespace CarParts.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> AddToFavoriteCars(int id)
         {
-            var car = await this._carService.GetCarByIdAsync(id); 
+            var car = await this._carService.GetCarByIdAsync(id);
 
             if (car == null)
             {
@@ -171,12 +167,12 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("All");
             }
 
-            if (!await this._carService.AddCarToMyFavoriteCarsAsync(id, GetUserId())) //false = car already in favorite cars
+            if (!await this._carService.AddCarToMyFavoriteCarsAsync(id, GetUserId()))
             {
                 TempData["ErrorMessage"] = "The car is already in your favorite cars.";
                 return RedirectToAction("All");
             }
-            
+
             TempData["SuccessMessage"] = "Car added to favorite cars!";
             return RedirectToAction("MyFavoriteCars");
         }
@@ -184,7 +180,7 @@ namespace CarParts.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> RemoveFromFavoriteCars(int id)
         {
-            var car = await this._carService.GetCarByIdAsync(id); 
+            var car = await this._carService.GetCarByIdAsync(id);
 
             if (car == null)
             {
@@ -203,13 +199,15 @@ namespace CarParts.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Search(string searchTerm, string category, string priceSort, string transmissionName,
-            string fuelName, int? fromYear, int? toYear, int? fromHp, int? toHp, int? fromPrice, int? toPrice)
+        public async Task<IActionResult> Search(string searchTerm, string category,
+            string priceSort, string transmissionName, string fuelName, int? fromYear,
+            int? toYear, int? fromHp, int? toHp, int? fromPrice, int? toPrice)
         {
             var cars = await _carService.SearchCarsAsync(searchTerm, category, priceSort,
-                 transmissionName, fuelName, fromYear, toYear, fromHp, toHp, fromPrice, toPrice);
+                transmissionName, fuelName, fromYear, toYear, fromHp, toHp, fromPrice, toPrice);
+            /*
+            if i want to keep the search term in the search box:
 
-            /*  if i want to keep the search term in the search box
             ViewBag.SearchTerm = searchTerm;
             ViewBag.FromPrice = fromPrice;
             ViewBag.ToPrice = toPrice;
@@ -224,7 +222,7 @@ namespace CarParts.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Rent(int id)
         {
-            bool carExists = await this._carService.ExistsByIdAsync(id);
+            var carExists = await this._carService.ExistsByIdAsync(id);
 
             if (!carExists)
             {
@@ -233,7 +231,7 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("All", "Car");
             }
 
-            bool isUserDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
+            var isUserDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
 
             if (isUserDealer) //TODO: && !User.IsAdmin()
             {
@@ -241,16 +239,15 @@ namespace CarParts.Web.Controllers
 
                 return RedirectToAction("Index", "Home");
             }
-            
-            bool isRented = await this._carService.IsRentedAsync(id);
-            
+
+            var isRented = await this._carService.IsRentedAsync(id);
+
             if (isRented)
             {
                 TempData["ErrorMessage"] = "Car is already rented! Please try again!";
 
                 return RedirectToAction("All", "Car");
             }
-
 
             var rentCarViewModel = await this._carService.GetRentCarViewModelAsync(id); //+userid?
 
@@ -259,14 +256,13 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("All");
             }
 
-
-            return View(rentCarViewModel); 
+            return View(rentCarViewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> Rent(int id, RentCarViewModel rentCarViewModel)
         {
-            bool carExists = await this._carService.ExistsByIdAsync(id);
+            var carExists = await this._carService.ExistsByIdAsync(id);
 
             if (!carExists)
             {
@@ -274,9 +270,9 @@ namespace CarParts.Web.Controllers
 
                 return RedirectToAction("All", "Car");
             }
-            
-            bool isRented = await this._carService.IsRentedAsync(id);
-            
+
+            var isRented = await this._carService.IsRentedAsync(id);
+
             if (isRented)
             {
                 TempData["ErrorMessage"] = "Car is already rented! Please try again!";
@@ -284,7 +280,7 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("All", "Car");
             }
 
-            bool isUserDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
+            var isUserDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
 
             if (isUserDealer) //TODO: && !User.IsAdmin()
             {
@@ -293,7 +289,6 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            //check if RentalStartDate is before RentalEndDate
             if (!this._carService.IsStartDateBeforeEndDate(rentCarViewModel))
             {
                 TempData["ErrorMessage"] = "Rent start time can't be after rent end time!";
@@ -301,8 +296,8 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("All", "Car");
             }
 
-            double userBalance = await this._userService.GetBalance(GetUserId());
-            double totalMoneyToRent = await this._carService.TotalMoneyToRentAsync(rentCarViewModel);
+            var userBalance = await this._userService.GetBalance(GetUserId());
+            var totalMoneyToRent = await this._carService.TotalMoneyToRentAsync(rentCarViewModel);
 
             if (totalMoneyToRent > userBalance)
             {
@@ -318,8 +313,6 @@ namespace CarParts.Web.Controllers
             return RedirectToAction("MyRentedCars", "Car");
         }
 
-
-        
         [HttpGet]
         public async Task<IActionResult> MyRentedCars()
         {
@@ -328,13 +321,13 @@ namespace CarParts.Web.Controllers
             return View(cars);
         }
 
-        private static DateTime _curentEndDate = DateTime.Now.AddYears(-3);
+        private static DateTime _curentEndDate = DateTime.Now.AddYears(-3); //TODO: ?
 
         [HttpGet]
-        public async Task<IActionResult> ManageRental(int id) 
+        public async Task<IActionResult> ManageRental(int id)
             //MUST be named id, because in the View its: asp-route-id="@car.Id", and not asp-route-carId="@car.Id"
         {
-            bool carExists = await this._carService.ExistsByIdAsync(id);
+            var carExists = await this._carService.ExistsByIdAsync(id);
 
             if (!carExists)
             {
@@ -343,7 +336,7 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("All", "Car");
             }
 
-            bool isUserDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
+            var isUserDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
 
             if (isUserDealer) //TODO: && !User.IsAdmin()
             {
@@ -352,8 +345,8 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            RentCarViewModel? rentCarViewModel = await this._carService.GetRentCarViewModelAsync(id);
-            
+            var rentCarViewModel = await this._carService.GetRentCarViewModelAsync(id);
+
             if (rentCarViewModel == null)
             {
                 return RedirectToAction("All");
@@ -367,7 +360,6 @@ namespace CarParts.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> ManageRental(int id, RentCarViewModel rentCarViewModel)
         {
-            //check if RentalStartDate is before RentalEndDate
             if (!this._carService.IsStartDateBeforeEndDate(rentCarViewModel))
             {
                 TempData["ErrorMessage"] = "Rent start time can't be after rent end time!";
@@ -375,9 +367,8 @@ namespace CarParts.Web.Controllers
                 return RedirectToAction("MyRentedCars", "Car");
             }
 
-            double userBalance = await this._userService.GetBalance(GetUserId());
-            //bool hasUserEnoughMoney = await this._carService.HasUserEnoughMoneyAsync(userBalance, rentCarViewModel);
-            double totalMoneyToRentMore = 
+            var userBalance = await this._userService.GetBalance(GetUserId());
+            var totalMoneyToRentMore =
                 await this._carService.TotalMoneyToRentMore(rentCarViewModel, _curentEndDate);
 
             if (totalMoneyToRentMore > userBalance)
@@ -390,22 +381,29 @@ namespace CarParts.Web.Controllers
             await this._carService.UpdateRentalForCarAsync(rentCarViewModel, GetUserId());
             await this._userService.RemoveMoney(GetUserId(), totalMoneyToRentMore);
 
+            if (totalMoneyToRentMore > 0)
+            {
+                TempData["SuccessMessage"] =
+                    $"You successfully changed your rental for the car for price {totalMoneyToRentMore} euro!";
+            }
+            else
+            {
+                TempData["SuccessMessage"] = $"You successfully changed your rental. " +
+                                             $"You received back your money: {-totalMoneyToRentMore} euro!";
+            }
 
-            TempData["SuccessMessage"] = "You successfully changed your rental for the car!";
             return RedirectToAction("MyRentedCars", "Car");
         }
 
         [HttpPost]
         public async Task<IActionResult> EndRental(int id)
         {
-            double userBalance = await this._userService.GetBalance(GetUserId());
+            var userBalance = await this._userService.GetBalance(GetUserId());
 
-            const double moneyToRemove = 5;
-
-            if (userBalance >= moneyToRemove)
+            if (userBalance >= TaxPriceForEndingRental)
             {
                 await this._carService.EndRentalAsync(id, GetUserId());
-                await this._userService.RemoveMoney(GetUserId(), moneyToRemove);
+                await this._userService.RemoveMoney(GetUserId(), TaxPriceForEndingRental);
 
                 TempData["SuccessMessage"] = "You successfully ended your rental for the car!";
                 return RedirectToAction("MyRentedCars", "Car");
@@ -414,10 +412,8 @@ namespace CarParts.Web.Controllers
             await this._carService.EndRentalAsync(id, GetUserId());
 
             TempData["SuccessMessage"] = "You don't have enough money to end the rental purchase," +
-                                       "\n so we will end it for you free this time. Consider making more money.";
+                                         "\n so we will end it for you free this time. Consider making more money.";
             return RedirectToAction("MyRentedCars", "Car");
         }
-
-
     }
 }
