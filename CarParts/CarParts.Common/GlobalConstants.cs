@@ -91,7 +91,8 @@
 
         public static class Rental
         {
-            public const double TaxPriceForEndingRental = 5;
+            public const double TaxPriceForCancelingRental = 5;
+            public const double TaxPriceForAdjustingRental = 10;
         }
     }
 }

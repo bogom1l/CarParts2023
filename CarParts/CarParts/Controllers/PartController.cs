@@ -1,8 +1,7 @@
 ﻿namespace CarParts.Web.Controllers
 {
-    using CarParts.Services.Data.Interfaces;
-    using Data.Models;
     using Microsoft.AspNetCore.Mvc;
+    using Services.Data.Interfaces;
     using ViewModels.Part;
 
     public class PartController : BaseController
@@ -11,13 +10,13 @@
 
         public PartController(IPartService partService)
         {
-            this._partService = partService;
+            _partService = partService;
         }
 
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            var parts = await this._partService.GetAllPartsAsync();
+            var parts = await _partService.GetAllPartsAsync();
 
             return View(parts);
         }
@@ -25,7 +24,7 @@
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            var part = await this._partService.GetAddPartViewModelAsync();
+            var part = await _partService.GetAddPartViewModelAsync();
 
             return View(part);
         }
@@ -38,7 +37,7 @@
                 return View(addPartViewModel);
             }
 
-            await this._partService.AddPartAsync(addPartViewModel, GetUserId());
+            await _partService.AddPartAsync(addPartViewModel, GetUserId());
 
             TempData["SuccessMessage"] = "Part successfully added!";
             return RedirectToAction("All");
@@ -47,7 +46,7 @@
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            var detailsPartViewModel = await this._partService.GetPartDetailsAsync(id);
+            var detailsPartViewModel = await _partService.GetPartDetailsAsync(id);
 
             if (detailsPartViewModel == null)
             {
@@ -60,7 +59,7 @@
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var part = await this._partService.GetPartByIdAsync(id);
+            var part = await _partService.GetPartByIdAsync(id);
 
             if (part == null)
             {
@@ -72,7 +71,7 @@
                 return RedirectToAction("All");
             }
 
-            var editPartViewModel = await this._partService.GetEditPartViewModelAsync(id, GetUserId());
+            var editPartViewModel = await _partService.GetEditPartViewModelAsync(id, GetUserId());
 
             if (editPartViewModel == null)
             {
@@ -90,7 +89,7 @@
                 return View(part);
             }
 
-            await this._partService.EditPartAsync(id, part);
+            await _partService.EditPartAsync(id, part);
 
             TempData["SuccessMessage"] = "Part successfully edited!";
             return RedirectToAction("All");
@@ -99,7 +98,7 @@
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var part = await this._partService.GetPartByIdAsync(id);
+            var part = await _partService.GetPartByIdAsync(id);
 
             if (part == null)
             {
@@ -111,7 +110,7 @@
                 return RedirectToAction("All");
             }
 
-            await this._partService.DeletePartAsync(id, GetUserId());
+            await _partService.DeletePartAsync(id, GetUserId());
 
             TempData["SuccessMessage"] = "Part successfully deleted!";
             return RedirectToAction("All");
@@ -120,7 +119,7 @@
         [HttpGet]
         public async Task<IActionResult> MyParts()
         {
-            var parts = await this._partService.GetMyPartsAsync(GetUserId());
+            var parts = await _partService.GetMyPartsAsync(GetUserId());
 
             return View(parts);
         }
@@ -128,7 +127,7 @@
         [HttpGet]
         public async Task<IActionResult> MyFavoriteParts()
         {
-            var parts = await this._partService.GetMyFavoritePartsAsync(GetUserId());
+            var parts = await _partService.GetMyFavoritePartsAsync(GetUserId());
 
             return View(parts);
         }
@@ -136,7 +135,7 @@
         [HttpGet]
         public async Task<IActionResult> AddToFavoriteParts(int id)
         {
-            var part = await this._partService.GetPartByIdAsync(id);
+            var part = await _partService.GetPartByIdAsync(id);
 
             if (part == null)
             {
@@ -144,7 +143,7 @@
                 return RedirectToAction("All");
             }
 
-            if (!await this._partService.AddPartToMyFavoritePartsAsync(id, GetUserId()))
+            if (!await _partService.AddPartToMyFavoritePartsAsync(id, GetUserId()))
             {
                 TempData["ErrorMessage"] = "The part is already in your favorite parts.";
                 return RedirectToAction("All");
@@ -157,7 +156,7 @@
         [HttpGet]
         public async Task<IActionResult> RemoveFromFavoriteParts(int id)
         {
-            var part = await this._partService.GetPartByIdAsync(id);
+            var part = await _partService.GetPartByIdAsync(id);
 
             if (part == null)
             {
@@ -165,7 +164,7 @@
                 return RedirectToAction("MyFavoriteParts");
             }
 
-            if (!await this._partService.RemovePartFromMyFavoritePartsAsync(id, GetUserId()))
+            if (!await _partService.RemovePartFromMyFavoritePartsAsync(id, GetUserId()))
             {
                 TempData["ErrorMessage"] = "The part does not exist.";
                 return RedirectToAction("MyFavoriteParts");
@@ -179,10 +178,9 @@
         public async Task<IActionResult> Search(string searchTerm, string category,
             string priceSort, int? fromPrice, int? toPrice)
         {
-            var parts = await this._partService.SearchPartsAsync(searchTerm, category, priceSort, fromPrice, toPrice);
+            var parts = await _partService.SearchPartsAsync(searchTerm, category, priceSort, fromPrice, toPrice);
 
             return View(parts);
         }
-
     }
 }

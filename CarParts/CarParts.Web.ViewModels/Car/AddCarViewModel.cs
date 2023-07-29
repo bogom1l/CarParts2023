@@ -1,10 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using CarParts.Common;
-using CarParts.Web.ViewModels.Car.CarProperties;
-
-namespace CarParts.Web.ViewModels.Car
+﻿namespace CarParts.Web.ViewModels.Car
 {
-    using static GlobalConstants.Car;
+    using System.ComponentModel.DataAnnotations;
+    using CarProperties;
+    using static Common.GlobalConstants.Car;
 
     public class AddCarViewModel
     {
@@ -59,13 +57,13 @@ namespace CarParts.Web.ViewModels.Car
 
         [Required]
         //TODO: Validation?
-        public int TransmissionId { get; set; }  
+        public int TransmissionId { get; set; }
 
         public ICollection<CarTransmissionViewModel> Transmissions { get; set; } = new List<CarTransmissionViewModel>();
 
         [Required]
         //TODO: Validation?
-        public int CategoryId { get; set; } 
+        public int CategoryId { get; set; }
 
         public ICollection<CarCategoryViewModel> Categories { get; set; } = new List<CarCategoryViewModel>();
 
@@ -85,7 +83,7 @@ namespace CarParts.Web.ViewModels.Car
         [Required]
         [Range(CarAccelerationMinValue,
             CarAccelerationMaxValue,
-            ErrorMessage = "Acceleration can be between 1 and 20.")]  
+            ErrorMessage = "Acceleration can be between 1 and 20.")]
         public double Acceleration { get; set; } //seconds
 
         [Required]
@@ -105,13 +103,9 @@ namespace CarParts.Web.ViewModels.Car
             CarFuelConsumptionMaxValue,
             ErrorMessage = "Fuel consumption can be between 2 and 50.")]
         public double FuelConsumption { get; set; }
-        
-        
-        [Required]
-        public string ImageUrl { get; set; } = null!;
 
-        [Required]
-        public double RentPrice { get; set; }
+        [Required] public string ImageUrl { get; set; } = null!;
 
+        [Required] public double RentPrice { get; set; }
     }
 }

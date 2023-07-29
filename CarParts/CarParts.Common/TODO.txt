@@ -36,7 +36,7 @@
   ✔️ (15min) importwam 10 koli ot json filea
   ✔️ (10min) importwam 10 chasti ot json filea
 
-     code cleanup
+  ✔️  code cleanup
       - userId mai ne mi trqbwa w nqkoi metodi w servicite
       - search "TODO:" kydet ima da go dooprawq 
       - da potyrsq w logikite kyde moje da imam neshto ,koeto ne mi trqbwa weche ili da refactorna
@@ -50,4 +50,4 @@
      C#WebTxTDesktop
 
 -----------------
-12:00 - 29.07.2023
+12:30 - 29.07.2023

@@ -1,6 +1,5 @@
 ﻿namespace CarParts.Data.Models
 {
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,6 +12,6 @@
         [ForeignKey(nameof(User))] public string UserId { get; set; } = null!;
         public ApplicationUser User { get; set; } = null!;
 
-        public List<Car> OwnedCars { get; set; } = new List<Car>();
+        public List<Car> OwnedCars { get; set; } = new();
     }
 }

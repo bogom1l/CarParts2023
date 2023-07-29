@@ -1,7 +1,7 @@
 ﻿namespace CarParts.Web.Controllers
 {
-    using CarParts.Services.Data.Interfaces;
     using Microsoft.AspNetCore.Mvc;
+    using Services.Data.Interfaces;
     using ViewModels.Car;
 
     public class UserController : BaseController
@@ -10,13 +10,13 @@
 
         public UserController(IUserService userService)
         {
-            this._userService = userService;
+            _userService = userService;
         }
 
         [HttpGet]
         public async Task<IActionResult> AddMoney()
         {
-            await this._userService.AddMoney(GetUserId());
+            await _userService.AddMoney(GetUserId());
 
             TempData["SuccessMessage"] = "You added 100euro to your balance.!";
             return RedirectToAction("Index", "Home");
@@ -25,10 +25,9 @@
         [HttpGet]
         public async Task<IActionResult> RemoveMoney(RentCarViewModel rentCarViewModel)
         {
-            await this._userService.RemoveMoney(GetUserId(), 1); //TODO:?? kade go polzwam twa izobshto
+            await _userService.RemoveMoney(GetUserId(), 1); //TODO:?? kade go polzwam twa izobshto
 
             return null!; //TODO: ? //return RedirectToAction("Index", "Home");
         }
-
     }
 }

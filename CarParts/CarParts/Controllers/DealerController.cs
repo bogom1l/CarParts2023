@@ -1,7 +1,7 @@
 ﻿namespace CarParts.Web.Controllers
 {
-    using CarParts.Services.Data.Interfaces;
     using Microsoft.AspNetCore.Mvc;
+    using Services.Data.Interfaces;
     using ViewModels.Dealer;
 
     public class DealerController : BaseController
@@ -16,7 +16,7 @@
         [HttpGet]
         public async Task<IActionResult> BecomeDealer()
         {
-            bool isDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
+            var isDealer = await _dealerService.DealerExistsByUserIdAsync(GetUserId());
 
             if (isDealer)
             {
@@ -31,7 +31,7 @@
         [HttpPost]
         public async Task<IActionResult> BecomeDealer(BecomeDealerFormModel dealer)
         {
-            bool isDealer = await this._dealerService.DealerExistsByUserIdAsync(GetUserId());
+            var isDealer = await _dealerService.DealerExistsByUserIdAsync(GetUserId());
 
             if (isDealer)
             {
@@ -40,15 +40,22 @@
                 return RedirectToAction("Index", "Home");
             }
 
-            bool isPhoneNumberTaken =
-                await this._dealerService.DealerExistsByPhoneNumberAsync(dealer.PhoneNumber);
+            var isPhoneNumberTaken =
+                await _dealerService.DealerExistsByPhoneNumberAsync(dealer.PhoneNumber);
+
+            if (isPhoneNumberTaken)
+            {
+                TempData["ErrorMessage"] = "Dealer with the provided phone number already exists!";
+
+                return RedirectToAction("Index", "Home");
+            }
 
             if (!ModelState.IsValid)
             {
                 return View(dealer);
             }
 
-            bool userHasActiveRents = await this._dealerService.HasRentsByUserIdAsync(GetUserId());
+            var userHasActiveRents = await _dealerService.HasRentsByUserIdAsync(GetUserId());
             if (userHasActiveRents)
             {
                 TempData["ErrorMessage"] = "You must not have any active rents in order to become a dealer!";
@@ -57,11 +64,10 @@
                 //TODO: return RedirectToAction("MyRentedCars", "Car");
             }
 
-            await this._dealerService.BecomeDealerAsync(dealer, GetUserId());
+            await _dealerService.BecomeDealerAsync(dealer, GetUserId());
 
             TempData["SuccessMessage"] = "You are now a dealer!";
             return RedirectToAction("Index", "Home");
         }
-
     }
 }

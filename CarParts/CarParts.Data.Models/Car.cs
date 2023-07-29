@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using static CarParts.Common.GlobalConstants.Car;
+    using static Common.GlobalConstants.Car;
 
     public class Car
     {

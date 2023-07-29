@@ -18,9 +18,9 @@
 
         public double EngineSize { get; set; }
 
-        public string FuelType { get; set; } = null!; 
+        public string FuelType { get; set; } = null!;
 
-        public string Transmission { get; set; } = null!; 
+        public string Transmission { get; set; } = null!;
 
         public string Category { get; set; } = null!;
 
@@ -36,10 +36,8 @@
 
         public double FuelConsumption { get; set; }
 
-
         public string ImageUrl { get; set; } = null!;
 
         public double RentPrice { get; set; }
-
     }
 }

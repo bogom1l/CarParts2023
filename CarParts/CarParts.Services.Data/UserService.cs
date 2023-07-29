@@ -1,7 +1,6 @@
 ﻿namespace CarParts.Services.Data
 {
     using CarParts.Data;
-    using CarParts.Data.Models;
     using Interfaces;
     using Microsoft.EntityFrameworkCore;
 
@@ -11,12 +10,12 @@
 
         public UserService(ApplicationDbContext dbContext)
         {
-            this._dbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         public async Task<string> GetUserFullNameByEmail(string email)
         {
-            ApplicationUser? user = await this._dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
 
             if (user == null)
             {
@@ -29,7 +28,7 @@
 
         public async Task<double> GetBalance(string userId)
         {
-            var user = await this._dbContext
+            var user = await _dbContext
                 .Users
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
@@ -43,7 +42,7 @@
 
         public async Task AddMoney(string userId) //adds 100 euro
         {
-            var user = await this._dbContext
+            var user = await _dbContext
                 .Users
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
@@ -54,12 +53,12 @@
 
             user.Balance += 100;
 
-            await this._dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task RemoveMoney(string userId, double moneyToRemove)
         {
-            var user = await this._dbContext
+            var user = await _dbContext
                 .Users
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
@@ -70,12 +69,12 @@
 
             user.Balance -= moneyToRemove;
 
-            await this._dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<string> GetUserIdByEmail(string email)
         {
-            ApplicationUser? user = await this._dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
 
             if (user == null)
             {
@@ -85,6 +84,5 @@
 
             return user.Id;
         }
-
     }
 }

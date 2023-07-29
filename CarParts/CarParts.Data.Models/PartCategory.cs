@@ -1,7 +1,7 @@
 ﻿namespace CarParts.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
-    using static CarParts.Common.GlobalConstants.Part;
+    using static Common.GlobalConstants.Part;
 
     public class PartCategory
     {

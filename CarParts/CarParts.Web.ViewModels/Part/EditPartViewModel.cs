@@ -1,10 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using CarParts.Common;
-using CarParts.Web.ViewModels.Part.PartProperties;
-
-namespace CarParts.Web.ViewModels.Part
+﻿namespace CarParts.Web.ViewModels.Part
 {
-    using static GlobalConstants.Part;
+    using PartProperties;
+    using System.ComponentModel.DataAnnotations;
+    using static Common.GlobalConstants.Part;
 
     public class EditPartViewModel
     {
@@ -21,18 +19,15 @@ namespace CarParts.Web.ViewModels.Part
         public string Description { get; set; } = null!;
 
         [Required]
-        [Range(PartPriceMinValue, 
+        [Range(PartPriceMinValue,
             PartPriceMaxValue,
             ErrorMessage = "Part price can be between 0.01 and 10 000")]
         public double Price { get; set; }
 
+        [Required] public int CategoryId { get; set; }
 
-        [Required]
-        public int CategoryId { get; set; }
         public ICollection<PartCategoryViewModel> Categories { get; set; } = new List<PartCategoryViewModel>();
 
-
-        
         public string ImageUrl { get; set; } = null!;
     }
 }

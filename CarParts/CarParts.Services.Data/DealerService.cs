@@ -12,12 +12,12 @@
 
         public DealerService(ApplicationDbContext dbContext)
         {
-            this._dbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         public async Task<int> GetDealerIdByUserIdAsync(string userId)
         {
-            var dealer = await this._dbContext
+            var dealer = await _dbContext
                 .Dealers
                 .FirstOrDefaultAsync(d => d.UserId == userId);
 
@@ -31,21 +31,21 @@
 
         public async Task<bool> DealerExistsByUserIdAsync(string userId)
         {
-            return await this._dbContext
+            return await _dbContext
                 .Dealers
                 .AnyAsync(d => d.UserId == userId); //TODO: .ToString() necessary?
         }
 
         public async Task<bool> DealerExistsByPhoneNumberAsync(string phoneNumber)
         {
-            return await this._dbContext
+            return await _dbContext
                 .Dealers
                 .AnyAsync(d => d.PhoneNumber == phoneNumber);
         }
 
         public async Task<bool> HasRentsByUserIdAsync(string userId)
         {
-            var user = await this._dbContext
+            var user = await _dbContext
                 .Users
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
@@ -62,11 +62,11 @@
             var dealerData = new Dealer
             {
                 PhoneNumber = dealer.PhoneNumber,
-                UserId = userId,
+                UserId = userId
             };
 
-            await this._dbContext.Dealers.AddAsync(dealerData);
-            await this._dbContext.SaveChangesAsync();
+            await _dbContext.Dealers.AddAsync(dealerData);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

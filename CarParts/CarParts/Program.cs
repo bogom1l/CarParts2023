@@ -1,11 +1,11 @@
 namespace CarParts.Web
 {
-    using CarParts.Services.Data;
-    using CarParts.Services.Data.Interfaces;
     using Data;
     using Data.Models;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+    using Services.Data;
+    using Services.Data.Interfaces;
 
     public class Program
     {
@@ -74,8 +74,8 @@ namespace CarParts.Web
             app.UseAuthorization();
 
             app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                "default",
+                "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
 
             app.Run();
