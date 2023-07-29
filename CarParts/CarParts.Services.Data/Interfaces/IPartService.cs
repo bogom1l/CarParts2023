@@ -11,23 +11,23 @@
 
         Task AddPartAsync(AddPartViewModel addPartViewModel, string userId);
 
-        Task<DetailsPartViewModel?> GetPartDetailsAsync(int id);
+        Task<DetailsPartViewModel?> GetDetailsPartViewModelAsync(int partId);
 
-        Task<Part?> GetPartByIdAsync(int id);
+        Task<Part?> GetPartByIdAsync(int partId);
 
-        Task<EditPartViewModel?> GetEditPartViewModelAsync(int id, string userId);
+        Task<EditPartViewModel?> GetEditPartViewModelAsync(int partId);
 
-        Task EditPartAsync(int id, EditPartViewModel editPartViewModel);
+        Task EditPartAsync(int partId, EditPartViewModel editPartViewModel);
 
-        Task DeletePartAsync(int id, string userId);
+        Task DeletePartAsync(int partId, string userId);
 
         Task<ICollection<PartViewModel>> GetMyPartsAsync(string userId);
 
         Task<ICollection<PartViewModel>> GetMyFavoritePartsAsync(string userId);
 
-        Task<bool> AddPartToMyFavoritePartsAsync(int id, string userId);
+        Task<bool> AddPartToMyFavoritePartsAsync(int partId, string userId);
 
-        Task<bool> RemovePartFromMyFavoritePartsAsync(int id, string userId);
+        Task<bool> RemovePartFromMyFavoritePartsAsync(int partId, string userId);
 
         Task<ICollection<PartViewModel>> SearchPartsAsync(string searchTerm, string category,
             string priceSort, int? fromPrice, int? toPrice);

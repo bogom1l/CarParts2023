@@ -110,7 +110,7 @@
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<DetailsCarViewModel?> GetCarDetailsAsync(int carId)
+        public async Task<DetailsCarViewModel?> GetDetailsCarViewModelAsync(int carId)
         {
             var detailsCarViewModel = await _dbContext
                 .Cars
@@ -141,7 +141,7 @@
             return detailsCarViewModel;
         }
 
-        public async Task<EditCarViewModel?> GetEditCarViewModelAsync(int carId, string userId) //TODO: userId neccessary?
+        public async Task<EditCarViewModel?> GetEditCarViewModelAsync(int carId)
         {
             var fuelTypes = await _dbContext.FuelTypes
                 .Select(f => new CarFuelTypeViewModel
@@ -540,7 +540,7 @@
             return totalPrice;
         }
 
-        public async Task<double> TotalMoneyToRentMoreAsync(RentCarViewModel rentCarViewModel, DateTime pastEndDate)
+        public async Task<double> TotalMoneyToExtendRentAsync(RentCarViewModel rentCarViewModel, DateTime pastEndDate)
         {
             var car = await _dbContext.Cars.FirstAsync(c => c.CarId == rentCarViewModel.Id);
 
@@ -552,20 +552,14 @@
             return totalPrice;
         }
 
-        public bool IsStartDateBeforeEndDate(RentCarViewModel rentCarViewModel)
+        public bool IsRentalPeriodValid(RentCarViewModel rentCarViewModel)
         {
             var days = ((DateTime)rentCarViewModel!.RentalEndDate! - (DateTime)rentCarViewModel!.RentalStartDate!).Days;
 
-            //check if RentalStartDate is before RentalEndDate
-            if (days <= 0)
-            {
-                return false;
-            }
-
-            return true;
+            return days > 0;
         }
 
-        public async Task UpdateRentalForCarAsync(RentCarViewModel rentCarViewModel, string userId)
+        public async Task UpdateCarRentalAsync(RentCarViewModel rentCarViewModel)
         {
             var car = await _dbContext.Cars
                 .FirstAsync(c => c.CarId == rentCarViewModel.Id);
@@ -575,7 +569,7 @@
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task EndRentalAsync(int carId, string userId)
+        public async Task EndCarRentalAsync(int carId)
         {
             var car = await _dbContext.Cars
                 .FirstAsync(c => c.CarId == carId);

@@ -68,7 +68,7 @@
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            var detailsCarViewModel = await _carService.GetCarDetailsAsync(id);
+            var detailsCarViewModel = await _carService.GetDetailsCarViewModelAsync(id);
 
             if (detailsCarViewModel == null)
             {
@@ -96,7 +96,7 @@
                 return RedirectToAction("All", "Car");
             }
 
-            var editCarViewModel = await _carService.GetEditCarViewModelAsync(id, GetUserId());
+            var editCarViewModel = await _carService.GetEditCarViewModelAsync(id);
 
             if (editCarViewModel == null)
             {
@@ -265,7 +265,7 @@
         [HttpPost]
         public async Task<IActionResult> Rent(RentCarViewModel rentCarViewModel)
         {
-            if (!_carService.IsStartDateBeforeEndDate(rentCarViewModel))
+            if (!_carService.IsRentalPeriodValid(rentCarViewModel))
             {
                 TempData["ErrorMessage"] = "Your rental period was invalid! Please try again with correct data.";
                 return RedirectToAction("All", "Car");
@@ -330,7 +330,7 @@
         [HttpPost]
         public async Task<IActionResult> ManageRental(RentCarViewModel rentCarViewModel)
         {
-            if (!_carService.IsStartDateBeforeEndDate(rentCarViewModel))
+            if (!_carService.IsRentalPeriodValid(rentCarViewModel))
             {
                 TempData["ErrorMessage"] = "Please check and alter your rental period.";
                 return View(rentCarViewModel);
@@ -338,7 +338,7 @@
 
             var userBalance = await _userService.GetBalance(GetUserId());
             var totalMoneyToRentMore =
-                await _carService.TotalMoneyToRentMoreAsync(rentCarViewModel, _curentEndDate);
+                await _carService.TotalMoneyToExtendRentAsync(rentCarViewModel, _curentEndDate);
 
             if (totalMoneyToRentMore > userBalance)
             {
@@ -346,7 +346,7 @@
                 return RedirectToAction("MyRentedCars", "Car");
             }
 
-            await _carService.UpdateRentalForCarAsync(rentCarViewModel, GetUserId());
+            await _carService.UpdateCarRentalAsync(rentCarViewModel);
             await _userService.RemoveMoney(GetUserId(), totalMoneyToRentMore);
 
             if (totalMoneyToRentMore > 0)
@@ -370,7 +370,7 @@
 
             if (userBalance >= TaxPriceForCancelingRental)
             {
-                await _carService.EndRentalAsync(id, GetUserId());
+                await _carService.EndCarRentalAsync(id);
                 await _userService.RemoveMoney(GetUserId(), TaxPriceForCancelingRental);
 
                 TempData["SuccessMessage"] = "You have successfully ended the car rental! " +
@@ -378,7 +378,7 @@
                 return RedirectToAction("MyRentedCars", "Car");
             }
 
-            await _carService.EndRentalAsync(id, GetUserId());
+            await _carService.EndCarRentalAsync(id);
 
             TempData["SuccessMessage"] = "You currently don't have enough money to end the rental purchase," +
                                          "\n so we will end it for you free this time. Consider making more money.";

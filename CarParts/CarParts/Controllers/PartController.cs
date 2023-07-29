@@ -40,17 +40,17 @@
             await _partService.AddPartAsync(addPartViewModel, GetUserId());
 
             TempData["SuccessMessage"] = "Part successfully added!";
-            return RedirectToAction("All");
+            return RedirectToAction("All", "Part");
         }
 
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            var detailsPartViewModel = await _partService.GetPartDetailsAsync(id);
+            var detailsPartViewModel = await _partService.GetDetailsPartViewModelAsync(id);
 
             if (detailsPartViewModel == null)
             {
-                RedirectToPage("All");
+                RedirectToPage("All", "Part");
             }
 
             return View(detailsPartViewModel);
@@ -63,19 +63,22 @@
 
             if (part == null)
             {
-                return RedirectToAction("All");
+                TempData["ErrorMessage"] = "Part with provided id does not exist! Please try again.";
+                return RedirectToAction("All", "Part");
             }
 
             if (part.UserId != GetUserId())
             {
-                return RedirectToAction("All");
+                TempData["ErrorMessage"] = "You are not authorized to edit this part!";
+                return RedirectToAction("All", "Part");
             }
 
-            var editPartViewModel = await _partService.GetEditPartViewModelAsync(id, GetUserId());
+            var editPartViewModel = await _partService.GetEditPartViewModelAsync(id);
 
             if (editPartViewModel == null)
             {
-                RedirectToPage("All");
+                TempData["ErrorMessage"] = "Part with provided id does not exist! Please try again.";
+                RedirectToPage("All", "Part");
             }
 
             return View(editPartViewModel);
@@ -102,18 +105,20 @@
 
             if (part == null)
             {
-                return RedirectToAction("All");
+                TempData["ErrorMessage"] = "Part with provided id does not exist! Please try again.";
+                return RedirectToAction("All", "Part");
             }
 
             if (part.UserId != GetUserId())
             {
-                return RedirectToAction("All");
+                TempData["ErrorMessage"] = "You are not authorized to delete this part!";
+                return RedirectToAction("All", "Part");
             }
 
             await _partService.DeletePartAsync(id, GetUserId());
 
             TempData["SuccessMessage"] = "Part successfully deleted!";
-            return RedirectToAction("All");
+            return RedirectToAction("All", "Part");
         }
 
         [HttpGet]
@@ -139,18 +144,18 @@
 
             if (part == null)
             {
-                TempData["ErrorMessage"] = "The part does not exist.";
-                return RedirectToAction("All");
+                TempData["ErrorMessage"] = "Part with provided id does not exist! Please try again.";
+                return RedirectToAction("All", "Part");
             }
 
             if (!await _partService.AddPartToMyFavoritePartsAsync(id, GetUserId()))
             {
                 TempData["ErrorMessage"] = "The part is already in your favorite parts.";
-                return RedirectToAction("All");
+                return RedirectToAction("All", "Part");
             }
 
-            TempData["SuccessMessage"] = "Part successfully added to favorite parts!";
-            return RedirectToAction("MyFavoriteParts");
+            TempData["SuccessMessage"] = "Part has been successfully added to favorite parts!";
+            return RedirectToAction("MyFavoriteParts", "Part");
         }
 
         [HttpGet]
@@ -160,23 +165,24 @@
 
             if (part == null)
             {
-                TempData["ErrorMessage"] = "The part does not exist.";
-                return RedirectToAction("MyFavoriteParts");
+                TempData["ErrorMessage"] = "Part with provided id does not exist! Please try again.";
+                return RedirectToAction("MyFavoriteParts", "Part");
             }
 
             if (!await _partService.RemovePartFromMyFavoritePartsAsync(id, GetUserId()))
             {
-                TempData["ErrorMessage"] = "The part does not exist.";
-                return RedirectToAction("MyFavoriteParts");
+                TempData["ErrorMessage"] =
+                    "Part with provided id does not exist in your favorite list! Please try again.";
+                return RedirectToAction("MyFavoriteParts", "Part");
             }
 
-            TempData["SuccessMessage"] = "Part successfully removed from favorite parts!";
-            return RedirectToAction("All");
+            TempData["SuccessMessage"] = "Part has been successfully removed from favorite parts!";
+            return RedirectToAction("All", "Part");
         }
 
         [HttpGet]
-        public async Task<IActionResult> Search(string searchTerm, string category,
-            string priceSort, int? fromPrice, int? toPrice)
+        public async Task<IActionResult> Search(string searchTerm, string category, string priceSort,
+            int? fromPrice, int? toPrice)
         {
             var parts = await _partService.SearchPartsAsync(searchTerm, category, priceSort, fromPrice, toPrice);
 

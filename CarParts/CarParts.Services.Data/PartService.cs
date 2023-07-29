@@ -62,10 +62,10 @@
             await _dbContext.SaveChangesAsync();
         }
 
-        public Task<DetailsPartViewModel?> GetPartDetailsAsync(int id)
+        public Task<DetailsPartViewModel?> GetDetailsPartViewModelAsync(int partId)
         {
             return _dbContext.Parts
-                .Where(p => p.PartId == id)
+                .Where(p => p.PartId == partId)
                 .Select(p => new DetailsPartViewModel
                 {
                     Id = p.PartId,
@@ -78,13 +78,13 @@
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Part?> GetPartByIdAsync(int id)
+        public async Task<Part?> GetPartByIdAsync(int partId)
         {
             return await _dbContext.Parts
-                .FirstOrDefaultAsync(p => p.PartId == id);
+                .FirstOrDefaultAsync(p => p.PartId == partId);
         }
 
-        public async Task<EditPartViewModel?> GetEditPartViewModelAsync(int id, string userId)
+        public async Task<EditPartViewModel?> GetEditPartViewModelAsync(int partId)
         {
             var categories = await _dbContext.PartCategories
                 .Select(c => new PartCategoryViewModel
@@ -94,7 +94,7 @@
                 }).ToListAsync();
 
             var editCarViewModel = await _dbContext.Parts
-                .Where(p => p.PartId == id)
+                .Where(p => p.PartId == partId)
                 .Select(p => new EditPartViewModel
                 {
                     Name = p.Name,
@@ -108,10 +108,10 @@
             return editCarViewModel;
         }
 
-        public async Task EditPartAsync(int id, EditPartViewModel editPartViewModel)
+        public async Task EditPartAsync(int partId, EditPartViewModel editPartViewModel)
         {
             var part = _dbContext.Parts
-                .FirstOrDefault(p => p.PartId == id);
+                .FirstOrDefault(p => p.PartId == partId);
 
             if (part != null)
             {
@@ -125,11 +125,11 @@
             }
         }
 
-        public async Task DeletePartAsync(int id, string userId)
+        public async Task DeletePartAsync(int partId, string userId)
         {
             var partToDelete = await _dbContext
                 .Parts
-                .FirstOrDefaultAsync(p => p.PartId == id && p.UserId == userId);
+                .FirstOrDefaultAsync(p => p.PartId == partId && p.UserId == userId);
 
             if (partToDelete != null)
             {
@@ -203,7 +203,7 @@
 
             if (part == null)
             {
-                return false; //doesnt exist (for some reason..) TODO:
+                return false;
             }
 
             _dbContext.UsersFavoriteParts.Remove(part);

@@ -33,7 +33,7 @@
         {
             return await _dbContext
                 .Dealers
-                .AnyAsync(d => d.UserId == userId); //TODO: .ToString() necessary?
+                .AnyAsync(d => d.UserId == userId);
         }
 
         public async Task<bool> DealerExistsByPhoneNumberAsync(string phoneNumber)

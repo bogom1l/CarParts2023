@@ -37,18 +37,22 @@
   ✔️ (10min) importwam 10 chasti ot json filea
 
   ✔️  code cleanup
-      - userId mai ne mi trqbwa w nqkoi metodi w servicite
-      - search "TODO:" kydet ima da go dooprawq 
-      - da potyrsq w logikite kyde moje da imam neshto ,koeto ne mi trqbwa weche ili da refactorna
 
-     validacii nawsqkyde
+  ✔️  da potyrsq w logikite kyde moje da imam neshto ,koeto ne mi trqbwa weche ili da refactorna
+
+     validacii Data
+     validacii ViewModels
+     validacii nawsqkyde?
 
      review/summary of full project
-      *chastite da mogat samo da se prodavat, bez da se naemat
+      *?chastite da mogat samo da se prodavat, bez da se naemat
 
-      tempdata error messageite da gi naprawq na konstanti
+     tempdata error messageite da gi naprawq na konstanti
 
      implement custom register/login OR just remove .Email or replace with .Username so in Views it works
+
+     search "TODO:" kydet ima da go dooprawq 
+
      C#WebTxTDesktop
 
      **

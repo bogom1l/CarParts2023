@@ -21,7 +21,6 @@
             if (isDealer)
             {
                 TempData["ErrorMessage"] = "You are already a dealer!";
-
                 return RedirectToAction("Index", "Home");
             }
 
@@ -36,7 +35,6 @@
             if (isDealer)
             {
                 TempData["ErrorMessage"] = "You are already a dealer!";
-
                 return RedirectToAction("Index", "Home");
             }
 
@@ -46,8 +44,7 @@
             if (isPhoneNumberTaken)
             {
                 TempData["ErrorMessage"] = "Dealer with the provided phone number already exists!";
-
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("BecomeDealer", "Dealer");
             }
 
             if (!ModelState.IsValid)
@@ -56,17 +53,16 @@
             }
 
             var userHasActiveRents = await _dealerService.HasRentsByUserIdAsync(GetUserId());
+
             if (userHasActiveRents)
             {
-                TempData["ErrorMessage"] = "You must not have any active rents in order to become a dealer!";
-
-                return RedirectToAction("All", "Car");
-                //TODO: return RedirectToAction("MyRentedCars", "Car");
+                TempData["ErrorMessage"] = "You should have no active rents in order to become a dealer!";
+                return RedirectToAction("MyRentedCars", "Car");
             }
 
             await _dealerService.BecomeDealerAsync(dealer, GetUserId());
 
-            TempData["SuccessMessage"] = "You are now a dealer!";
+            TempData["SuccessMessage"] = "You are now a dealer.";
             return RedirectToAction("Index", "Home");
         }
     }

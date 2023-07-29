@@ -11,9 +11,9 @@
 
         Task AddCarAsync(AddCarViewModel car, int dealerId);
 
-        Task<DetailsCarViewModel?> GetCarDetailsAsync(int carId);
+        Task<DetailsCarViewModel?> GetDetailsCarViewModelAsync(int carId);
 
-        Task<EditCarViewModel?> GetEditCarViewModelAsync(int carId, string userId);
+        Task<EditCarViewModel?> GetEditCarViewModelAsync(int carId);
 
         Task EditCarAsync(int carId, EditCarViewModel car);
 
@@ -43,14 +43,14 @@
 
         Task<ICollection<RentCarViewModel>> GetMyRentedCarsAsync(string getUserId);
 
+        Task UpdateCarRentalAsync(RentCarViewModel rentCarViewModel);
+
+        Task EndCarRentalAsync(int carId);
+
+        bool IsRentalPeriodValid(RentCarViewModel rentCarViewModel);
+
         Task<double> TotalMoneyToRentAsync(RentCarViewModel rentCarViewModel);
 
-        Task UpdateRentalForCarAsync(RentCarViewModel rentCarViewModel, string userId);
-
-        Task EndRentalAsync(int carId, string userId);
-
-        bool IsStartDateBeforeEndDate(RentCarViewModel rentCarViewModel);
-
-        Task<double> TotalMoneyToRentMoreAsync(RentCarViewModel rentCarViewModel, DateTime endDate);
+        Task<double> TotalMoneyToExtendRentAsync(RentCarViewModel rentCarViewModel, DateTime endDate);
     }
 }
