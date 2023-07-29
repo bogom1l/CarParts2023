@@ -11,15 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{FA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{FDE24B50-D9BA-4CB0-AC28-E6B3F0AAFF83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarParts.Data", "CarParts.Data\CarParts.Data.csproj", "{68D71EBD-9261-434D-9606-A708FBF937C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarParts.Data", "CarParts.Data\CarParts.Data.csproj", "{68D71EBD-9261-434D-9606-A708FBF937C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarParts.Data.Models", "CarParts.Data.Models\CarParts.Data.Models.csproj", "{133FECAA-49E0-4EDC-89A8-D614D1DBF826}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarParts.Data.Models", "CarParts.Data.Models\CarParts.Data.Models.csproj", "{133FECAA-49E0-4EDC-89A8-D614D1DBF826}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarParts.Services.Data", "CarParts.Services.Data\CarParts.Services.Data.csproj", "{254813A0-A09D-4278-B837-F1CAC7070294}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarParts.Services.Data", "CarParts.Services.Data\CarParts.Services.Data.csproj", "{254813A0-A09D-4278-B837-F1CAC7070294}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarParts.Web.ViewModels", "CarParts.Web.ViewModels\CarParts.Web.ViewModels.csproj", "{F647CF2E-3351-4EC5-AC11-6D6602A44181}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarParts.Web.ViewModels", "CarParts.Web.ViewModels\CarParts.Web.ViewModels.csproj", "{F647CF2E-3351-4EC5-AC11-6D6602A44181}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarParts.Common", "CarParts.Common\CarParts.Common.csproj", "{887F7B37-68DB-4B49-B32D-DFE23BDB75D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarParts.Common", "CarParts.Common\CarParts.Common.csproj", "{887F7B37-68DB-4B49-B32D-DFE23BDB75D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

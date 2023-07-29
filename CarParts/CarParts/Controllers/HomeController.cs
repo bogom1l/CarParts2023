@@ -1,9 +1,9 @@
 ﻿namespace CarParts.Web.Controllers
 {
-    using ViewModels;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Diagnostics;
+    using ViewModels.Error;
 
     public class HomeController : BaseController
     {

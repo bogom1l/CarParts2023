@@ -40,16 +40,13 @@ namespace CarParts.Web
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
 
-            builder.Services.AddScoped<ICarService, CarService>();
-            builder.Services.AddScoped<IPartService, PartService>();
-            builder.Services.AddScoped<IDealerService, DealerService>();
-            builder.Services.AddScoped<IUserService, UserService>();
+            //builder.Services.AddScoped<ICarService, CarService>();
+            //builder.Services.AddScoped<IPartService, PartService>();
+            //builder.Services.AddScoped<IDealerService, DealerService>();
+            //builder.Services.AddScoped<IUserService, UserService>();
 
-
-            //builder.Services.AddIdentity<CustomUser, IdentityRole>()
-            //    .AddEntityFrameworkStores<ApplicationDbContext>()
-            //    .AddDefaultTokenProviders();
-
+            builder.Services.RegisterServiceReflection(typeof(ICarService)); //reflection for services
+            
 
             var app = builder.Build();
 
