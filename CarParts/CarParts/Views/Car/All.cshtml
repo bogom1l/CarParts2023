@@ -101,11 +101,20 @@
                         <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@car.CarId" class="btn btn-purple btn-block">
                             Add to favorite cars
                         </a>
+                        
+                        @if (User.Identity.Name == car.Email)
+                        {
+                            
+                        }
 
+                        <a asp-controller="Car" asp-action="Rent" asp-route-id="@car.CarId" class="btn btn-lightgreen btn-block">
+                            @User.Identity.Name - @car.Owner
+                        </a>
 
                         <a asp-controller="Car" asp-action="Rent" asp-route-id="@car.CarId" class="btn btn-lightgreen btn-block">
                             Rent
                         </a>
+                        
 
                     </div>
                 </div>

@@ -44,10 +44,11 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="@Url.Action("Add", "Car")">Add a car</a></li>
-                            <li><a class="dropdown-item" href="@Url.Action("Search", "Car")">Search cars</a></li>
+                  
                             <li><a class="dropdown-item" href="@Url.Action("MyFavoriteCars", "Car")">My favorite cars</a></li>
                             <li><a class="dropdown-item" href="@Url.Action("MyCars", "Car")">My cars</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("MyRentedCars", "Car")">My rented cars</a></li>
+                            <li><a class="dropdown-item" href="@Url.Action("Search", "Car")">Search cars</a></li>
                         </ul>
                     </li>
                         
@@ -83,12 +84,7 @@
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
                     </li>
-                        
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="@Url.Action("TestView", "Home")">
-                            TEST VIEW
-                        </a>
-                    </li>
+
                         
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="@Url.Action("MyRentedCars", "Car")">
@@ -148,4 +144,3 @@
 @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-

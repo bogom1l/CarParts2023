@@ -43,11 +43,12 @@
   ✔️ validacii Data
   ✔️ validacii ViewModels
   ✔️ add-migration -> update-database
-     validacii nawsqkyde?
      oprawqm leko View-tata front-end
 
      review/summary of full project
       *?chastite da mogat samo da se prodavat, bez da se naemat
+
+     [Authorize(Dealer)]
 
      tempdata error messageite da gi naprawq na konstanti
 
@@ -56,6 +57,8 @@
      implement custom register/login OR just remove .Email or replace with .Username so in Views it works
 
      search "TODO:" kydet ima da go dooprawq 
+
+     custom error page, kato napisha nqkvo nevalidno url naprimer /Home/asd
 
      C#WebTxTDesktop
 

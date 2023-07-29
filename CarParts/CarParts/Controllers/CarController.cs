@@ -1,5 +1,6 @@
 ﻿namespace CarParts.Web.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Data.Interfaces;
     using ViewModels.Car;
@@ -44,6 +45,7 @@
         }
 
         [HttpPost]
+        //TODO: [Authorize(Dealer)]
         public async Task<IActionResult> Add(AddCarViewModel car)
         {
             if (!ModelState.IsValid)
@@ -291,6 +293,14 @@
         public async Task<IActionResult> MyRentedCars()
         {
             var cars = await _carService.GetMyRentedCarsAsync(GetUserId());
+
+            var isUserDealer = await _dealerService.DealerExistsByUserIdAsync(GetUserId());
+
+            if (isUserDealer) //TODO: && !User.IsAdmin()
+            {
+                TempData["ErrorMessage"] = "Dealers don't have access here! They are not allowed to rent cars.";
+                return RedirectToAction("Index", "Home");
+            }
 
             return View(cars);
         }
