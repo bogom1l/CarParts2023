@@ -62,12 +62,14 @@
 
         [Required] public double FuelConsumption { get; set; }
 
-        public string ImageUrl { get; set; } = null!;
+        [Required] public string ImageUrl { get; set; } = null!;
 
         public ICollection<UserFavoriteCar> UserFavoriteCars { get; set; } = new List<UserFavoriteCar>();
 
         public double RentPrice { get; set; }
+
         public DateTime? RentalStartDate { get; set; }
+
         public DateTime? RentalEndDate { get; set; }
 
         public string? RenterId { get; set; }

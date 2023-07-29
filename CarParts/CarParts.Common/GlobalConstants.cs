@@ -29,7 +29,7 @@
             public const int CarDescriptionMaxLength = 3500;
 
             public const int CarPriceMinValue = 1;
-            public const int CarPriceMaxValue = 999999;
+            public const int CarPriceMaxValue = 999_999;
 
             public const int CarEngineSizeMinValue = 10;
             public const int CarEngineSizeMaxValue = 9000;
@@ -40,17 +40,23 @@
             public const int CarTopSpeedMinValue = 10;
             public const int CarTopSpeedMaxValue = 350;
 
-            public const int CarAccelerationMinValue = 1;
-            public const int CarAccelerationMaxValue = 20;
+            public const int CarAccelerationMinValue = 0;
+            public const int CarAccelerationMaxValue = 30;
 
             public const int CarHorsepowerMinValue = 1;
-            public const int CarHorsepowerMaxValue = 2000;
+            public const int CarHorsepowerMaxValue = 3000;
 
             public const int CarTorqueMinValue = 1;
-            public const int CarTorqueMaxValue = 2000;
+            public const int CarTorqueMaxValue = 3000;
 
             public const int CarFuelConsumptionMinValue = 0;
             public const int CarFuelConsumptionMaxValue = 50;
+
+            public const int CarRentPriceMinValue = 1;
+            public const int CarRentPriceMaxValue = 30_000;
+
+            public const double TaxPriceForCancelingRental = 5;
+            public const double TaxPriceForAdjustingRental = 10;
         }
 
         public static class Part
@@ -62,37 +68,27 @@
             public const int PartDescriptionMaxLength = 3500;
 
             public const int PartPriceMinValue = 1;
-            public const int PartPriceMaxValue = 100000;
+            public const int PartPriceMaxValue = 300_000;
+
+            public const int PartCategoryNameMinLength = 1;
+            public const int PartCategoryNameMaxLength = 50;
         }
 
-        public static class PartProperties
+        public static class User
         {
-            public const int CategoryNameMinLength = 2;
-            public const int CategoryNameMaxLength = 50;
-        }
+            public const int FirstNameMinLength = 1;
+            public const int FirstNameMaxLength = 50;
 
-        public static class CarProperties
-        {
-            public const int FuelTypeMaxLength = 30;
-            public const int FuelTypeMinLength = 2;
+            public const int LastNameMinLength = 1;
+            public const int LastNameMaxLength = 50;
 
-            public const int TransmissionMaxLength = 30;
-            public const int TransmissionMinLength = 2;
+            public const int BalanceMinValue = 0;
+            public const int BalanceMaxValue = 10_000_000;
 
-            public const int CategoryMaxLength = 40;
-            public const int CategoryMinLength = 2;
-        }
-
-        public static class PhoneNumber
-        {
             public const int PhoneNumberMinLength = 7;
             public const int PhoneNumberMaxLength = 15;
         }
 
-        public static class Rental
-        {
-            public const double TaxPriceForCancelingRental = 5;
-            public const double TaxPriceForAdjustingRental = 10;
-        }
+        
     }
 }

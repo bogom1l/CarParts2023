@@ -6,7 +6,7 @@
     using Microsoft.EntityFrameworkCore;
     using Web.ViewModels.Car;
     using Web.ViewModels.Car.CarProperties;
-    using static Common.GlobalConstants.Rental;
+    using static Common.GlobalConstants.Car;
 
     public class CarService : ICarService
     {
@@ -16,7 +16,7 @@
         {
             _dbContext = dbContext;
         }
-
+        
         public async Task<ICollection<CarViewModel>> GetAllCarsAsync()
         {
             var cars = await _dbContext.Cars
@@ -496,7 +496,7 @@
                     ImageUrl = c.ImageUrl,
                     RentalStartDate = c.RentalStartDate != null ? c.RentalStartDate.Value : DateTime.Now,
                     RentalEndDate = c.RentalEndDate ?? DateTime.Now.AddDays(1),
-                    RenterName = c.Renter.FirstName + " " + c.Renter.LastName ?? null,
+                    RenterName = c.Renter.FirstName + " " + c.Renter.LastName,
                     RentPrice = c.RentPrice,
                     Id = c.CarId
                 })

@@ -26,85 +26,70 @@
     string userName = await UserService.GetUserFullNameByEmail(this.User.Identity.Name); //TODO: .Email
 }
 
-
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        
         <form asp-action="Rent" method="post">
 
-            <div class="image-container">
-                <label asp-for="@Model.ImageUrl" class="form-label-add-edit">Image</label>
-                <img src="@Model.ImageUrl" alt="Car Image" class="card-img-top">
-                <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
-            </div>
 
+            <div class="mb-3">
+                <label asp-for="@Model.ImageUrl" class="form-label-add-edit">Image URL</label>
+                <input asp-for="@Model.ImageUrl" class="form-control" aria-required="true" readonly />
+                <img src="@Model.ImageUrl" alt="Car Image" class="img-fluid mt-2" />
+            </div>
             
-            @*NE SE MAPVAT PRAVILNO!!!!*@
-        
+            
             <div class="mb-3">
                 <label asp-for="@Model.Make" class="form-label-add-edit">Make</label>
-                <input asp-for="@Model.Make" class="form-control" aria-required="true" readonly />  @* value="@Model.Make"*@
-                <span asp-validation-for="@Model.Make" class="text-danger"></span>
+                <input asp-for="@Model.Make" class="form-control" aria-required="true" readonly />
             </div>
-        
             <div class="mb-3">
                 <label asp-for="@Model.Model" class="form-label-add-edit">Model</label>
                 <input asp-for="@Model.Model" class="form-control" aria-required="true" readonly />
-                <span asp-validation-for="@Model.Model" class="text-danger"></span>
             </div>
-        
-            <div class="mb-3">
-                <label asp-for="@Model.Description" class="form-label-add-edit">Description</label>
-                <textarea asp-for="@Model.Description" class="form-control" rows="5" aria-required="true" readonly>@Model.Description</textarea>
-                <span asp-validation-for="@Model.Description" class="text-danger"></span>
-            </div>
-        
-            <div class="mb-3">
-                <label asp-for="@Model.Price" class="form-label-add-edit">Price</label>
-                <input asp-for="@Model.Price" class="form-control" aria-required="true"  readonly />
-                <span asp-validation-for="@Model.Price" class="text-danger"></span>
-            </div>
-        
-            <div class="mb-3">
-                <label asp-for="@Model.Color" class="form-label-add-edit">Color</label>
-                <input asp-for="@Model.Color" class="form-control" aria-required="true"  readonly />
-                <span asp-validation-for="@Model.Color" class="text-danger"></span>
-            </div>
+            
 
-        
             <div class="mb-3">
                 <label asp-for="@Model.Year" class="form-label-add-edit">Year</label>
                 <input asp-for="@Model.Year" class="form-control" aria-required="true" readonly />
-                <span asp-validation-for="@Model.Year" class="text-danger"></span>
             </div>
-
-        
+         
             <div class="mb-3">
-                <label asp-for="@Model.RentPrice" class="form-label-add-edit">Rent Price</label>
-                <input asp-for="@Model.RentPrice" class="form-control" aria-required="true" readonly/>
-                <span asp-validation-for="@Model.RentPrice" class="text-danger"></span>
+                <label asp-for="@Model.Description" class="form-label-add-edit">Description</label>
+                <textarea asp-for="@Model.Description" class="form-control" rows="6" aria-required="true" readonly>@Model.Description</textarea>
             </div>
-
-            <br/>
-
+            
+            <div class="mb-3">
+                <label asp-for="@Model.Price" class="form-label-add-edit">Price</label>
+                <input asp-for="@Model.Price" class="form-control" aria-required="true" readonly />
+            </div>
+            
+            <div class="mb-3">
+                <label asp-for="@Model.Color" class="form-label-add-edit">Color</label>
+                <input asp-for="@Model.Color" class="form-control" aria-required="true" readonly />
+            </div>
+            
+            <div class="mb-3">
+                <label asp-for="@Model.RentPrice" class="form-label-add-edit">Rent Price (eur) </label>
+                <input asp-for="@Model.RentPrice" class="form-control" aria-required="true" readonly />
+            </div>
+   
             <div class="mb-3">
                 <label asp-for="@Model.RentalStartDate" class="form-label-add-edit">Rental Start Date</label>
-                <input asp-for="@Model.RentalStartDate" class="form-control" aria-required="true"/>
+                <input asp-for="@Model.RentalStartDate" class="form-control" aria-required="true" />
                 <span asp-validation-for="@Model.RentalStartDate" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="@Model.RentalEndDate" class="form-label-add-edit">Rental End Date</label>
-                <input asp-for="@Model.RentalEndDate" class="form-control" aria-required="true"/>
+                <input asp-for="@Model.RentalEndDate" class="form-control" aria-required="true" />
                 <span asp-validation-for="@Model.RentalEndDate" class="text-danger"></span>
             </div>
-
-            <h3>Warning! You cant rent a car for less than a day.</h3>
+  
 
             <div class="mb-3">
-                <input class="btn btn-success mb-2 w-100 p-3 fw-bold" type="submit" value="Rent"/>
+                <input class="btn btn-warning mb-2 w-100 p-3 fw-bold" type="submit" value="Rent now!" />
             </div>
 
         </form>

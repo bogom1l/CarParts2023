@@ -28,8 +28,8 @@
 
         [Required] public ApplicationUser User { get; set; } = null!;
 
-        public ICollection<UserFavoritePart> UserFavoriteParts { get; set; } = new List<UserFavoritePart>();
-
         public string ImageUrl { get; set; } = null!;
+
+        public ICollection<UserFavoritePart> UserFavoriteParts { get; set; } = new List<UserFavoritePart>();
     }
 }

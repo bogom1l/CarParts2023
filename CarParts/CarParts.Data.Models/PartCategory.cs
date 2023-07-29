@@ -8,7 +8,7 @@
         [Key] public int CategoryId { get; set; }
 
         [Required]
-        [MaxLength(PartNameMaxLength)]
+        [MaxLength(PartCategoryNameMaxLength)]
         public string Name { get; set; } = null!;
 
         public ICollection<Part> Parts { get; set; } = new List<Part>();

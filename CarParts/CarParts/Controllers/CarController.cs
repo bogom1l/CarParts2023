@@ -3,7 +3,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Services.Data.Interfaces;
     using ViewModels.Car;
-    using static Common.GlobalConstants.Rental;
+    using static Common.GlobalConstants.Car;
 
     public class CarController : BaseController
     {
@@ -268,7 +268,7 @@
             if (!_carService.IsRentalPeriodValid(rentCarViewModel))
             {
                 TempData["ErrorMessage"] = "Your rental period was invalid! Please try again with correct data.";
-                return RedirectToAction("All", "Car");
+                return View(rentCarViewModel);
             }
 
             var userBalance = await _userService.GetBalance(GetUserId());
@@ -283,7 +283,7 @@
             await _carService.RentCarAsync(rentCarViewModel, GetUserId());
             await _userService.RemoveMoney(GetUserId(), totalMoneyToRent);
 
-            TempData["SuccessMessage"] = "You have successfully rented the car!";
+            TempData["SuccessMessage"] = $"You have successfully rented the car to date {rentCarViewModel.RentalEndDate!.Value.ToShortDateString()}.";
             return RedirectToAction("MyRentedCars", "Car");
         }
 
@@ -352,12 +352,14 @@
             if (totalMoneyToRentMore > 0)
             {
                 TempData["SuccessMessage"] =
-                    $"You have successfully changed the car rental for the price of {totalMoneyToRentMore} euros.";
+                    $"You have successfully changed the car rental for the price of {totalMoneyToRentMore} euros. " +
+                    $"Your new rental end date is {rentCarViewModel.RentalEndDate!.Value.ToShortDateString()}.";
             }
             else
             {
                 TempData["SuccessMessage"] = $"You have successfully changed the car rental. " +
-                                             $"You received back: {-totalMoneyToRentMore} euros!";
+                                             $"You received back: {-totalMoneyToRentMore} euros! " +
+                                             $"Your new rental end date is {rentCarViewModel.RentalEndDate!.Value.ToShortDateString()}.";
             }
 
             return RedirectToAction("MyRentedCars", "Car");

@@ -2,16 +2,20 @@
 {
     using System.ComponentModel.DataAnnotations;
     using Microsoft.AspNetCore.Identity;
+    using static Common.GlobalConstants.User;
 
     public class ApplicationUser : IdentityUser
     {
         [Required]
+        [MaxLength(FirstNameMaxLength)]
         public string FirstName { get; set; } = null!;
 
+        [Required]
+        [MaxLength(LastNameMaxLength)]
         public string LastName { get; set; } = null!;
 
-        public List<Car> RentedCars { get; set; } = new();
-
         public double Balance { get; set; }
+
+        public List<Car> RentedCars { get; set; } = new();
     }
 }

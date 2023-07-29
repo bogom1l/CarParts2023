@@ -10,9 +10,11 @@
     <div class="card w-100">
         <div class="card-body">
 
-            <img src="@Model.ImageUrl" alt="Car Image" class="card-img-top"> @*TODO: make image smaller*@
+            <img src="@Model.ImageUrl" alt="Car Image" class="card-img-top img-fluid" style="max-width: 300px;">
 
-            <h3 class="card-title text-center">@Model.Make @Model.Model</h3>
+            <h4 class="card-title">@Model.Make @Model.Model</h4>
+
+
             <p class="mb-0"><span class="fw-bold">Category: </span>@Model.Category</p>
             <p class="mb-0"><span class="fw-bold">Year: </span>@Model.Year</p>
             <p class="mb-0"><span class="fw-bold">Fuel Type: </span>@Model.FuelType</p>

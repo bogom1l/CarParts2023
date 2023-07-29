@@ -9,7 +9,7 @@
         [Required]
         [StringLength(CarMakeMaxLength,
             MinimumLength = CarMakeMinLength,
-            ErrorMessage = "Make can be between 2 and 50 characters.")]
+            ErrorMessage = "Make can be between 1 and 50 characters.")]
         public string Make { get; set; } = null!;
 
         [Required]
@@ -34,7 +34,7 @@
         [Required]
         [Range(CarPriceMinValue,
             CarPriceMaxValue,
-            ErrorMessage = "Price can be between 0 and 999 999.")]
+            ErrorMessage = "Price can be between 0 and 999 999 euro.")]
         public double Price { get; set; }
 
         [Required]
@@ -46,23 +46,23 @@
         [Required]
         [Range(CarEngineSizeMinValue,
             CarEngineSizeMaxValue,
-            ErrorMessage = "Engine size can be between 100 and 9000.")]
+            ErrorMessage = "Engine size can be between 10 and 9000.")]
         public double EngineSize { get; set; }
 
-        [Required]
-        //TODO: Validation?
+
+        [Required(ErrorMessage = "Please select a fuel type.")]
         public int FuelTypeId { get; set; }
 
         public ICollection<CarFuelTypeViewModel> FuelTypes { get; set; } = new List<CarFuelTypeViewModel>();
 
-        [Required]
-        //TODO: Validation?
+
+        [Required(ErrorMessage = "Please select a transmission type.")]
         public int TransmissionId { get; set; }
 
         public ICollection<CarTransmissionViewModel> Transmissions { get; set; } = new List<CarTransmissionViewModel>();
 
-        [Required]
-        //TODO: Validation?
+
+        [Required(ErrorMessage = "Please select a category type.")]
         public int CategoryId { get; set; }
 
         public ICollection<CarCategoryViewModel> Categories { get; set; } = new List<CarCategoryViewModel>();
@@ -77,35 +77,39 @@
         [Required]
         [Range(CarTopSpeedMinValue,
             CarTopSpeedMaxValue,
-            ErrorMessage = "Top speed can be between 60 and 350.")]
+            ErrorMessage = "Top speed can be between 10 and 350.")]
         public double TopSpeed { get; set; }
 
         [Required]
         [Range(CarAccelerationMinValue,
             CarAccelerationMaxValue,
-            ErrorMessage = "Acceleration can be between 1 and 20.")]
-        public double Acceleration { get; set; } //seconds
+            ErrorMessage = "Acceleration can be between 0 and 30 seconds.")]
+        public double Acceleration { get; set; }
 
         [Required]
         [Range(CarHorsepowerMinValue,
             CarHorsepowerMaxValue,
-            ErrorMessage = "Horsepower can be between 20 and 2000.")]
+            ErrorMessage = "Horsepower can be between 1 and 3000.")]
         public double Horsepower { get; set; }
 
         [Required]
         [Range(CarTorqueMinValue,
             CarTorqueMaxValue,
-            ErrorMessage = "Torque can be between 50 and 2000.")]
+            ErrorMessage = "Torque can be between 1 and 3000.")]
         public double Torque { get; set; }
 
         [Required]
         [Range(CarFuelConsumptionMinValue,
             CarFuelConsumptionMaxValue,
-            ErrorMessage = "Fuel consumption can be between 2 and 50.")]
+            ErrorMessage = "Fuel consumption can be between 0 and 50.")]
         public double FuelConsumption { get; set; }
 
-        [Required] public string ImageUrl { get; set; } = null!;
+        [Required] [Url] public string ImageUrl { get; set; } = null!;
 
-        [Required] public double RentPrice { get; set; }
+        [Required]
+        [Range(CarRentPriceMinValue,
+            CarRentPriceMaxValue,
+            ErrorMessage = "Car rent price can be between 1 and 30 000 eur.")]
+        public double RentPrice { get; set; }
     }
 }

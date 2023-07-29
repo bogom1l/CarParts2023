@@ -1,9 +1,9 @@
 ﻿namespace CarParts.Web.ViewModels.Car
 {
-    using System.ComponentModel.DataAnnotations;
-
     public class RentCarViewModel
     {
+        public int Id { get; set; }
+
         public string Make { get; set; } = null!;
 
         public string Model { get; set; } = null!;
@@ -20,16 +20,10 @@
 
         public double RentPrice { get; set; }
 
-        [Display(Name = "Rental Start Date")]
-        //[DataType(DataType.Date)] TODO:
         public DateTime? RentalStartDate { get; set; }
 
-        [Display(Name = "Rental End Date")]
-        //[DataType(DataType.Date)] TODO:
         public DateTime? RentalEndDate { get; set; }
 
         public string? RenterName { get; set; }
-
-        public int Id { get; set; }
     }
 }

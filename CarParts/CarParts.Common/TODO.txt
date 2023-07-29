@@ -40,14 +40,18 @@
 
   ✔️  da potyrsq w logikite kyde moje da imam neshto ,koeto ne mi trqbwa weche ili da refactorna
 
-     validacii Data
-     validacii ViewModels
+  ✔️ validacii Data
+  ✔️ validacii ViewModels
+  ✔️ add-migration -> update-database
      validacii nawsqkyde?
+     oprawqm leko View-tata front-end
 
      review/summary of full project
       *?chastite da mogat samo da se prodavat, bez da se naemat
 
      tempdata error messageite da gi naprawq na konstanti
+
+     canceling rental to return money, and to cost 20 eur
 
      implement custom register/login OR just remove .Email or replace with .Username so in Views it works
 
@@ -60,4 +64,4 @@
      **
 
 -----------------
-12:30 - 29.07.2023
+17:00 - 29.07.2023
