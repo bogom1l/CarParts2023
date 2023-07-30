@@ -4,7 +4,6 @@ namespace CarParts.Web
     using Data.Models;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
-    using Services.Data;
     using Services.Data.Interfaces;
 
     public class Program
@@ -46,7 +45,7 @@ namespace CarParts.Web
             //builder.Services.AddScoped<IUserService, UserService>();
 
             builder.Services.RegisterServiceReflection(typeof(ICarService)); //reflection for services
-            
+
 
             var app = builder.Build();
 
