@@ -47,6 +47,8 @@
 
   ✔️ backup napraihh
 
+    obmislqm mn vnimatelno vsi4ki propertyta w viewmodelite zakwo gi polzwam i dali sa mi nujni, i  w data modelite
+
      review/summary of full project
      + kydet ima "TODO:" w proekta da go dooprawq / iztriq
 
@@ -54,15 +56,15 @@
       trq promenq twa da stawash dilar da e po drug nachin moje bi ne samo s telefon ? nz
       ne setwam phone number kato horata w aspnet users pri deallerite? da go baram li izobshto?
 
-     [Idea] Part Seller (Role/Entity): 
-      chastite da mogat samo da se prodavat, bez da se naemat (da ima Seller Role ?)
-
-     [Idea] Administrator Role
+     Review ideas in C# Proj txt 
+     
+     Administrator Role
 
 
      implement custom register/login OR just remove .Email or replace with .Username so in Views it works [workshop]
      custom error page, kato napisha nqkvo nevalidno url naprimer /Home/asd
      oprawqm View-tata front-end
+     add automapper[kris]
      C#WebTxTDesktop
 
 

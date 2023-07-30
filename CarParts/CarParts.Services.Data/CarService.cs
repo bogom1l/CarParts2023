@@ -3,6 +3,7 @@
     using CarParts.Data;
     using CarParts.Data.Models;
     using Interfaces;
+    using Mapping;
     using Microsoft.EntityFrameworkCore;
     using Web.ViewModels.Car;
     using Web.ViewModels.Car.CarProperties;
@@ -19,7 +20,7 @@
         
         public async Task<ICollection<CarViewModel>> GetAllCarsAsync()
         {
-            var cars = await _dbContext.Cars
+            var cars = await _dbContext.Cars //.To<CarViewModel>()
                 .Select(c => new CarViewModel
                 {
                     CarId = c.CarId,
@@ -42,7 +43,8 @@
                     Owner = c.Dealer.User.FirstName,
                     ImageUrl = c.ImageUrl,
                     Email = c.Dealer.User.Email
-                }).ToListAsync();
+                })
+                .ToListAsync();
 
             return cars;
         }

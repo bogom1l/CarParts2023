@@ -1,6 +1,6 @@
 ﻿namespace CarParts.Web.ViewModels.Car
 {
-    public class CarViewModel
+    public class CarViewModel //: IMapFrom<Car>
     {
         public int CarId { get; set; }
 
