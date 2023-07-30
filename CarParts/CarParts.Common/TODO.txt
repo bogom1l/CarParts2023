@@ -43,7 +43,9 @@
   ✔️ validacii Data
   ✔️ validacii ViewModels
   ✔️ add-migration -> update-database
-     oprawqm leko View-tata front-end
+  ✔️ oprawqm leko View-tata front-end
+
+  backup napraih
 
      review/summary of full project
       *?chastite da mogat samo da se prodavat, bez da se naemat
