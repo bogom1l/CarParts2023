@@ -45,7 +45,7 @@
   ✔️ add-migration -> update-database
   ✔️ oprawqm leko View-tata front-end
 
-  ✔️ backup napraih
+  ✔️ backup napraihh
 
      review/summary of full project
      + kydet ima "TODO:" w proekta da go dooprawq / iztriq
