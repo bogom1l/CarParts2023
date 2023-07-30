@@ -1,6 +1,5 @@
 ﻿namespace CarParts.Web.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Data.Interfaces;
     using ViewModels.Car;
@@ -285,7 +284,8 @@
             await _carService.RentCarAsync(rentCarViewModel, GetUserId());
             await _userService.RemoveMoney(GetUserId(), totalMoneyToRent);
 
-            TempData["SuccessMessage"] = $"You have successfully rented the car to date {rentCarViewModel.RentalEndDate!.Value.ToShortDateString()}.";
+            TempData["SuccessMessage"] =
+                $"You have successfully rented the car to date {rentCarViewModel.RentalEndDate!.Value.ToShortDateString()}.";
             return RedirectToAction("MyRentedCars", "Car");
         }
 

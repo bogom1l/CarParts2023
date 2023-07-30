@@ -195,7 +195,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("TransmissionId");
 
-                    b.ToTable("Cars");
+                    b.ToTable("Cars", (string)null);
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.CarCategory", b =>
@@ -213,7 +213,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
 
                     b.HasData(
                         new
@@ -278,7 +278,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FuelTypes");
+                    b.ToTable("FuelTypes", (string)null);
 
                     b.HasData(
                         new
@@ -318,7 +318,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Transmissions");
+                    b.ToTable("Transmissions", (string)null);
 
                     b.HasData(
                         new
@@ -353,7 +353,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Dealers");
+                    b.ToTable("Dealers", (string)null);
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.Part", b =>
@@ -394,7 +394,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Parts");
+                    b.ToTable("Parts", (string)null);
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.PartCategory", b =>
@@ -412,7 +412,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("PartCategories");
+                    b.ToTable("PartCategories", (string)null);
 
                     b.HasData(
                         new
@@ -464,7 +464,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("UsersFavoriteCars");
+                    b.ToTable("UsersFavoriteCars", (string)null);
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.UserFavoritePart", b =>
@@ -479,7 +479,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("PartId");
 
-                    b.ToTable("UsersFavoriteParts");
+                    b.ToTable("UsersFavoriteParts", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

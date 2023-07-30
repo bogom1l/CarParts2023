@@ -48,25 +48,23 @@
   ✔️ backup napraih
 
      review/summary of full project
-      *?chastite da mogat samo da se prodavat, bez da se naemat
+     + kydet ima "TODO:" w proekta da go dooprawq / iztriq
 
-     [Authorize(Dealer)]
+      canceling rental to return money, and to cost 20 eur
+      trq promenq twa da stawash dilar da e po drug nachin moje bi ne samo s telefon ? nz
+      ne setwam phone number kato horata w aspnet users pri deallerite? da go baram li izobshto?
 
-     tempdata error messageite da gi naprawq na konstanti
+     [Idea] Part Seller (Role/Entity): 
+      chastite da mogat samo da se prodavat, bez da se naemat (da ima Seller Role ?)
 
-     canceling rental to return money, and to cost 20 eur
+     [Idea] Administrator Role
 
-     implement custom register/login OR just remove .Email or replace with .Username so in Views it works
 
-     search "TODO:" kydet ima da go dooprawq 
-
+     implement custom register/login OR just remove .Email or replace with .Username so in Views it works [workshop]
      custom error page, kato napisha nqkvo nevalidno url naprimer /Home/asd
-
+     oprawqm View-tata front-end
      C#WebTxTDesktop
 
-     **
-     //MUST be named id, because in the View its: asp-route-id="@car.Id", and not asp-route-carId="@car.Id"
-     **
 
 -----------------
-17:00 - 29.07.2023
+14:20 - 30.07.2023
