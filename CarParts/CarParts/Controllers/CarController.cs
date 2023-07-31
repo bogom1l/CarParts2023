@@ -385,33 +385,16 @@
         [HttpPost]
         public async Task<IActionResult> EndRental(int id)
         {
-            var userBalance = await _userService.GetUserBalanceById(GetUserId());
-
             //return user the money that he spent for the rental
             var moneyToReturn = await _carService.TotalMoneyToReturnForEndingRental(id);
             await _userService.AddCustomAmountMoney(GetUserId(), moneyToReturn);
-
-            if (userBalance >= TaxPriceForCancelingRental)
-            {
-                await _carService.EndCarRentalAsync(id);
-                await _userService.RemoveMoney(GetUserId(), TaxPriceForCancelingRental);
-                
-                TempData["SuccessMessage"] = "You have successfully ended the car rental! " +
-                                             $"You have been taxed {TaxPriceForCancelingRental} euros." +
-                                             $"You received back {moneyToReturn} euros.";
-                return RedirectToAction("MyRentedCars", "Car");
-            }
 
             await _carService.EndCarRentalAsync(id);
             await _userService.RemoveMoney(GetUserId(), TaxPriceForCancelingRental);
 
             TempData["SuccessMessage"] = "You have successfully ended the car rental! " +
-                                             $"You have been taxed {TaxPriceForCancelingRental} euros." +
-                                             $"You received back {moneyToReturn} euros.";
-
-            //TempData["SuccessMessage"] = "You didn't have enough money to pay the tax for ending the rental," +
-            //                             $"\n so we took all that you have left (${userBalance} euro). "+
-            //                             $"You received back {moneyToReturn} euros.";
+                                         $"You received back {moneyToReturn} euros " +
+                                         $"and you have been taxed {TaxPriceForCancelingRental} euros.";
             return RedirectToAction("MyRentedCars", "Car");
         }
     }
