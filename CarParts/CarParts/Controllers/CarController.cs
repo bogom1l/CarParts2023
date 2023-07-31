@@ -44,7 +44,6 @@
         }
 
         [HttpPost]
-        //TODO: [Authorize(Dealer)]
         public async Task<IActionResult> Add(AddCarViewModel car)
         {
             if (!ModelState.IsValid)
@@ -244,14 +243,22 @@
                 return RedirectToAction("Index", "Home");
             }
 
+            var isRentedByMe = await _carService.IsRentedByMeAsync(id, GetUserId());
+
+            if (isRentedByMe)
+            {
+                TempData["ErrorMessage"] = "You have already rented this car!";
+                return RedirectToAction("MyRentedCars", "Car");
+            }
+
             var isRented = await _carService.IsRentedAsync(id);
 
             if (isRented)
             {
-                TempData["ErrorMessage"] = "Car is already rented. Please try again.";
+                TempData["ErrorMessage"] = "Car is already rented by another user. Please choose a different car.";
                 return RedirectToAction("All", "Car");
             }
-
+            
             var rentCarViewModel = await _carService.GetRentCarViewModelAsync(id);
 
             if (rentCarViewModel == null)
@@ -272,7 +279,7 @@
                 return View(rentCarViewModel);
             }
 
-            var userBalance = await _userService.GetBalance(GetUserId());
+            var userBalance = await _userService.GetUserBalanceById(GetUserId());
             var totalMoneyToRent = await _carService.TotalMoneyToRentAsync(rentCarViewModel);
 
             if (totalMoneyToRent > userBalance)
@@ -346,7 +353,7 @@
                 return View(rentCarViewModel);
             }
 
-            var userBalance = await _userService.GetBalance(GetUserId());
+            var userBalance = await _userService.GetUserBalanceById(GetUserId());
             var totalMoneyToRentMore =
                 await _carService.TotalMoneyToExtendRentAsync(rentCarViewModel, _curentEndDate);
 
@@ -378,22 +385,33 @@
         [HttpPost]
         public async Task<IActionResult> EndRental(int id)
         {
-            var userBalance = await _userService.GetBalance(GetUserId());
+            var userBalance = await _userService.GetUserBalanceById(GetUserId());
+
+            //return user the money that he spent for the rental
+            var moneyToReturn = await _carService.TotalMoneyToReturnForEndingRental(id);
+            await _userService.AddCustomAmountMoney(GetUserId(), moneyToReturn);
 
             if (userBalance >= TaxPriceForCancelingRental)
             {
                 await _carService.EndCarRentalAsync(id);
                 await _userService.RemoveMoney(GetUserId(), TaxPriceForCancelingRental);
-
+                
                 TempData["SuccessMessage"] = "You have successfully ended the car rental! " +
-                                             $"You have been taxed {TaxPriceForCancelingRental} euros.";
+                                             $"You have been taxed {TaxPriceForCancelingRental} euros." +
+                                             $"You received back {moneyToReturn} euros.";
                 return RedirectToAction("MyRentedCars", "Car");
             }
 
             await _carService.EndCarRentalAsync(id);
+            await _userService.RemoveMoney(GetUserId(), TaxPriceForCancelingRental);
 
-            TempData["SuccessMessage"] = "You currently don't have enough money to end the rental purchase," +
-                                         "\n so we will end it for you free this time. Consider making more money.";
+            TempData["SuccessMessage"] = "You have successfully ended the car rental! " +
+                                             $"You have been taxed {TaxPriceForCancelingRental} euros." +
+                                             $"You received back {moneyToReturn} euros.";
+
+            //TempData["SuccessMessage"] = "You didn't have enough money to pay the tax for ending the rental," +
+            //                             $"\n so we took all that you have left (${userBalance} euro). "+
+            //                             $"You received back {moneyToReturn} euros.";
             return RedirectToAction("MyRentedCars", "Car");
         }
     }

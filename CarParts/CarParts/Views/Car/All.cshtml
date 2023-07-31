@@ -67,16 +67,16 @@
                             <span class="fw-bold">Year:</span> @car.Year
                         </p>
                         <p class="card-text">
-                            <span class="fw-bold">Price:</span> $@car.Price
-                        </p>
-                        <p class="card-text">
-                            <span class="fw-bold">Fuel Type:</span> @car.FuelTypeName
-                        </p>
-                        <p class="card-text">
                             <span class="fw-bold">Category:</span> @car.CategoryName
                         </p>
                         <p class="card-text">
                             <span class="fw-bold">Horsepower:</span> @car.Horsepower
+                        </p>
+                        <p class="card-text">
+                            <span class="fw-bold">Price:</span> @car.Price euro
+                        </p>
+                        <p class="card-text">
+                            <span class="fw-bold">Rent price:</span> @car.RentPrice euro
                         </p>
                     </div>
 
@@ -84,9 +84,13 @@
                         <a asp-controller="Car" asp-action="Details" asp-route-id="@car.CarId" class="btn btn-info btn-block">
                             View Details
                         </a>
+                        
+                        
+                        <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@car.CarId" class="btn btn-purple btn-block">
+                            Add to favorite cars
+                        </a>
 
-
-                        @if (User.Identity.Name == car.Email)
+                        @if (User.Identity.Name == car.Owner)
                         {
                             <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.CarId" class="btn btn-warning btn-block">
                                 Edit
@@ -96,24 +100,15 @@
                                 Delete
                             </a>
                         }
-
-
-                        <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@car.CarId" class="btn btn-purple btn-block">
-                            Add to favorite cars
-                        </a>
-                        
-                        @if (User.Identity.Name == car.Email)
+                        else
                         {
-                            
+                            <a asp-controller="Car" asp-action="Rent" asp-route-id="@car.CarId" class="btn btn-lightgreen btn-block">
+                                Rent
+                            </a>
                         }
 
-                        <a asp-controller="Car" asp-action="Rent" asp-route-id="@car.CarId" class="btn btn-lightgreen btn-block">
-                            @User.Identity.Name - @car.Owner
-                        </a>
 
-                        <a asp-controller="Car" asp-action="Rent" asp-route-id="@car.CarId" class="btn btn-lightgreen btn-block">
-                            Rent
-                        </a>
+                        <p> RenterEmail : @car.RenterEmail</p>
                         
 
                     </div>

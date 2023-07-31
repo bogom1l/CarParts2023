@@ -58,11 +58,11 @@
 
                         @if (car.RentalStartDate != null)
                         {
-                            <p class="card-text">Rental Start Date: @car.RentalStartDate.Value.ToString("yy-MM-dd")</p>
+                            <p class="card-text">Rental Start Date: @car.RentalStartDate.Value.ToString("dd-MM-yyyy")</p>
                         }
                         @if (car.RentalEndDate != null)
                         {
-                            <p class="card-text">Rental End Date: @car.RentalEndDate.Value.ToString("yy-MM-dd")</p>
+                            <p class="card-text">Rental End Date: @car.RentalEndDate.Value.ToString("dd-MM-yyyy")</p>
                         }
                         <p class="card-text">
                             <span class="fw-bold">Renter Name (delete me from view):</span> @car.RenterName

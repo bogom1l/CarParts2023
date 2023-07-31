@@ -67,7 +67,7 @@
                 return RedirectToAction("All", "Part");
             }
 
-            if (part.UserId != GetUserId())
+            if (part.OwnerId != GetUserId())
             {
                 TempData["ErrorMessage"] = "You are not authorized to edit this part!";
                 return RedirectToAction("All", "Part");
@@ -109,7 +109,7 @@
                 return RedirectToAction("All", "Part");
             }
 
-            if (part.UserId != GetUserId())
+            if (part.OwnerId != GetUserId())
             {
                 TempData["ErrorMessage"] = "You are not authorized to delete this part!";
                 return RedirectToAction("All", "Part");

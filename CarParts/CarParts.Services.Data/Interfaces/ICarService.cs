@@ -5,52 +5,56 @@
 
     public interface ICarService
     {
-        Task<ICollection<CarViewModel>> GetAllCarsAsync();
+        public Task<ICollection<CarViewModel>> GetAllCarsAsync();
 
-        Task<AddCarViewModel> GetAddCarViewModelAsync();
+        public Task<AddCarViewModel> GetAddCarViewModelAsync();
 
-        Task AddCarAsync(AddCarViewModel car, int dealerId);
+        public Task AddCarAsync(AddCarViewModel car, int dealerId);
 
-        Task<DetailsCarViewModel?> GetDetailsCarViewModelAsync(int carId);
+        public Task<DetailsCarViewModel?> GetDetailsCarViewModelAsync(int carId);
 
-        Task<EditCarViewModel?> GetEditCarViewModelAsync(int carId);
+        public Task<EditCarViewModel?> GetEditCarViewModelAsync(int carId);
 
-        Task EditCarAsync(int carId, EditCarViewModel car);
+        public Task EditCarAsync(int carId, EditCarViewModel car);
 
-        Task DeleteCarAsync(int carId, string userId);
+        public Task DeleteCarAsync(int carId, string userId);
 
-        Task<Car?> GetCarByIdAsync(int carId);
+        public Task<Car?> GetCarByIdAsync(int carId);
 
-        Task<ICollection<CarViewModel>> GetMyCarsAsync(string userId);
+        public Task<ICollection<CarViewModel>> GetMyCarsAsync(string userId);
 
-        Task<ICollection<CarViewModel>> GetMyFavoriteCarsAsync(string userId);
+        public Task<ICollection<CarViewModel>> GetMyFavoriteCarsAsync(string userId);
 
-        Task<bool> AddCarToMyFavoriteCarsAsync(int carId, string userId);
+        public Task<bool> AddCarToMyFavoriteCarsAsync(int carId, string userId);
 
-        Task<bool> RemoveCarFromMyFavoriteCarsAsync(int carId, string userId);
+        public Task<bool> RemoveCarFromMyFavoriteCarsAsync(int carId, string userId);
 
-        Task<ICollection<CarViewModel>> SearchCarsAsync(string searchTerm, string category,
+        public Task<ICollection<CarViewModel>> SearchCarsAsync(string searchTerm, string category,
             string priceSort, string transmissionName, string fuelName, int? fromYear,
             int? toYear, int? fromHp, int? toHp, int? fromPrice, int? toPrice);
 
-        Task<bool> ExistsByIdAsync(int carId);
+        public Task<bool> ExistsByIdAsync(int carId);
 
-        Task<bool> IsRentedAsync(int carId);
+        public Task<bool> IsRentedAsync(int carId);
 
-        Task RentCarAsync(RentCarViewModel rentCarViewModel, string userId);
+        public Task<bool> IsRentedByMeAsync(int carId, string userId);
 
-        Task<RentCarViewModel?> GetRentCarViewModelAsync(int carId);
+        public Task RentCarAsync(RentCarViewModel rentCarViewModel, string userId);
 
-        Task<ICollection<RentCarViewModel>> GetMyRentedCarsAsync(string getUserId);
+        public Task<RentCarViewModel?> GetRentCarViewModelAsync(int carId);
 
-        Task UpdateCarRentalAsync(RentCarViewModel rentCarViewModel);
+        public Task<ICollection<RentCarViewModel>> GetMyRentedCarsAsync(string getUserId);
 
-        Task EndCarRentalAsync(int carId);
+        public Task UpdateCarRentalAsync(RentCarViewModel rentCarViewModel);
 
-        bool IsRentalPeriodValid(RentCarViewModel rentCarViewModel);
+        public Task EndCarRentalAsync(int carId);
 
-        Task<double> TotalMoneyToRentAsync(RentCarViewModel rentCarViewModel);
+        public bool IsRentalPeriodValid(RentCarViewModel rentCarViewModel);
 
-        Task<double> TotalMoneyToExtendRentAsync(RentCarViewModel rentCarViewModel, DateTime endDate);
+        public Task<double> TotalMoneyToRentAsync(RentCarViewModel rentCarViewModel);
+
+        public Task<double> TotalMoneyToExtendRentAsync(RentCarViewModel rentCarViewModel, DateTime endDate);
+
+        public Task<double> TotalMoneyToReturnForEndingRental(int carId);
     }
 }

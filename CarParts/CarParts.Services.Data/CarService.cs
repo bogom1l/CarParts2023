@@ -40,9 +40,10 @@
                     Horsepower = c.Horsepower,
                     Torque = c.Torque,
                     FuelConsumption = c.FuelConsumption,
-                    Owner = c.Dealer.User.FirstName,
+                    Owner = c.Dealer.User.Email,
                     ImageUrl = c.ImageUrl,
-                    Email = c.Dealer.User.Email
+                    RentPrice = c.RentPrice,
+                    RenterEmail = c.Renter.Email ?? null,
                 })
                 .ToListAsync();
 
@@ -105,7 +106,9 @@
                 FuelConsumption = car.FuelConsumption,
                 ImageUrl = car.ImageUrl,
                 RentPrice = car.RentPrice,
-                RenterId = null
+                RenterId = null,
+                RentalStartDate = null,
+                RentalEndDate = null
             };
 
             await _dbContext.Cars.AddAsync(carData);
@@ -137,7 +140,9 @@
                     Torque = c.Torque,
                     FuelConsumption = c.FuelConsumption,
                     ImageUrl = c.ImageUrl,
-                    RentPrice = c.RentPrice
+                    RentPrice = c.RentPrice,
+                    RenterEmail = c.Renter.Email ?? null,
+                    Owner = c.Dealer.User.Email
                 }).FirstOrDefaultAsync();
 
             return detailsCarViewModel;
@@ -273,9 +278,8 @@
                     Horsepower = c.Horsepower,
                     Torque = c.Torque,
                     FuelConsumption = c.FuelConsumption,
-                    Owner = c.Dealer.User.FirstName,
-                    ImageUrl = c.ImageUrl,
-                    Email = c.Dealer.User.Email
+                    Owner = c.Dealer.User.Email,
+                    ImageUrl = c.ImageUrl
                 }).ToListAsync();
         }
 
@@ -469,6 +473,15 @@
             return !string.IsNullOrEmpty(car.RenterId);
         }
 
+        public async Task<bool> IsRentedByMeAsync(int carId, string userId)
+        {
+            var car = await _dbContext
+                .Cars
+                .FirstAsync(c => c.CarId == carId);
+
+            return car.RenterId == userId;
+        }
+
         public async Task RentCarAsync(RentCarViewModel rentCarViewModel, string userId)
         {
             var car = await _dbContext
@@ -581,6 +594,22 @@
             car.RentalEndDate = null;
 
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<double> TotalMoneyToReturnForEndingRental(int carId)
+        {
+            var car = await _dbContext.Cars.FirstAsync(c => c.CarId == carId);
+
+            if (car.RentalEndDate.HasValue && car.RentalStartDate.HasValue)
+            {
+                //var days = ((DateTime)car!.RentalEndDate!.Value - (DateTime)car!.RentalStartDate!.Value).Days;
+                var days = (car!.RentalEndDate!.Value - car!.RentalStartDate!.Value).Days;
+                var totalPrice = days * car.RentPrice;
+
+                return totalPrice;
+            }
+
+            return 0;
         }
     }
 }

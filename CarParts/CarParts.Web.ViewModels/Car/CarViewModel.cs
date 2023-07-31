@@ -40,8 +40,8 @@
 
         public string ImageUrl { get; set; } = null!;
 
-        public string Renter { get; set; } = null!;
+        public string RenterEmail { get; set; } = null!;
 
-        public string Email { get; set; } = null!;
+        public double RentPrice { get; set; }
     }
 }

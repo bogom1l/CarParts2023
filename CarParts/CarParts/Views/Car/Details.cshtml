@@ -3,6 +3,26 @@
     ViewBag.Title = "Car Details";
 }
 
+
+@*SweetAlert CDN*@
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
+
+
+<style>
+    .btn-purple {
+        background-color: purple;
+        color: white;
+        /* Add any additional styling as needed */
+    }
+
+    .btn-lightgreen {
+        background-color: lightgreen;
+        color: white;
+        /* Add any additional styling as needed */
+    }
+</style>
+
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
@@ -32,15 +52,36 @@
                 <p class="mb-0"><span class="fw-bold">Torque: </span>@Model.Torque</p>
                 <p class="mb-0"><span class="fw-bold">Fuel Consumption: </span>@Model.FuelConsumption</p>
                 <p></p>
+                <p class="mb-0"><span class="fw-bold">Renter Email: </span>@Model.RenterEmail</p>
                 <p class="mb-0"><span class="fw-bold">Rent Price: </span>@Model.RentPrice</p>
             </div>
 
             <button id="moreDetailsBtn" class="btn btn-link text-info btn-lg">More Details</button>
             <button id="lessDetailsBtn" class="btn btn-link text-info btn-lg" style="display: none;">Less Details</button>
         </div>
+        
+        @if (User.Identity.Name == @Model.Owner)
+        {
+            <a asp-controller="Car" asp-action="Edit" asp-route-id="@Model.CarId" class="btn btn-warning btn-block">
+                Edit
+            </a>
 
-        <a asp-controller="Car" asp-action="All" class="btn btn-warning mb-2 w-100 p-3 fw-bold">Back to All Cars</a>
+            <a href="#" class="btn btn-danger btn-block delete-car" data-id="@Model.CarId">
+                Delete
+            </a>
+        }
+           
+        <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@Model.CarId" class="btn btn-purple btn-block">
+            Add to favorite cars
+        </a>
+
+        
     </div>
+
+    <a asp-controller="Car" asp-action="All" class="btn btn-success mb-2 w-100 p-3 fw-bold">
+        Back to All Cars
+    </a>
+
 </div>
 
 @section Scripts {
@@ -57,7 +98,35 @@
             document.getElementById("lessDetailsBtn").style.display = "none";
         });
     </script>
+
+
+    <script>
+        // Handle the click event for the delete buttons
+        $('.delete-car').on('click', function (e) {
+            e.preventDefault();
+            const carId = $(this).data('id');
+
+            // Show SweetAlert confirmation dialog
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You are about to delete this car. This action cannot be undone.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If user confirms, redirect to the "Delete" action with carId as a parameter
+                    window.location.href = `/Car/Delete/${carId}`;
+                }
+            });
+        });
+    </script>
+
     
 
     <partial name="_ValidationScriptsPartial"/>
 }
+
+

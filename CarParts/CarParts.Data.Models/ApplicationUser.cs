@@ -15,7 +15,5 @@
         public string LastName { get; set; } = null!;
 
         public double Balance { get; set; }
-
-        public List<Car> RentedCars { get; set; } = new();
     }
 }

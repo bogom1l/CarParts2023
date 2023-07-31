@@ -23,11 +23,11 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> RemoveMoney(RentCarViewModel rentCarViewModel)
+        public async Task<IActionResult> ResetMoney()
         {
-            await _userService.RemoveMoney(GetUserId(), 1); //TODO:?? kade go polzwam twa izobshto
+            await _userService.ResetMoney(GetUserId()); 
 
-            return null!; //TODO: ? //return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

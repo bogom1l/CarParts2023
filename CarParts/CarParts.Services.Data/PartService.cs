@@ -25,7 +25,7 @@
                 Description = p.Description,
                 Price = p.Price,
                 CategoryName = p.Category.Name,
-                Owner = p.User.UserName,
+                Owner = p.Owner.Email,
                 ImageUrl = p.ImageUrl
             }).ToListAsync();
         }
@@ -54,7 +54,7 @@
                 Description = addPartViewModel.Description,
                 Price = addPartViewModel.Price,
                 CategoryId = addPartViewModel.CategoryId,
-                UserId = userId,
+                OwnerId = userId,
                 ImageUrl = addPartViewModel.ImageUrl
             };
 
@@ -73,7 +73,8 @@
                     Description = p.Description,
                     Price = p.Price,
                     Category = p.Category.Name,
-                    ImageUrl = p.ImageUrl
+                    ImageUrl = p.ImageUrl,
+                    Owner = p.Owner.Email
                 })
                 .FirstOrDefaultAsync();
         }
@@ -129,7 +130,7 @@
         {
             var partToDelete = await _dbContext
                 .Parts
-                .FirstOrDefaultAsync(p => p.PartId == partId && p.UserId == userId);
+                .FirstOrDefaultAsync(p => p.PartId == partId && p.OwnerId == userId);
 
             if (partToDelete != null)
             {
@@ -142,7 +143,7 @@
         {
             return await _dbContext
                 .Parts
-                .Where(p => p.UserId == userId)
+                .Where(p => p.OwnerId == userId)
                 .Select(p => new PartViewModel
                 {
                     Id = p.PartId,
@@ -150,7 +151,7 @@
                     Description = p.Description,
                     Price = p.Price,
                     CategoryName = p.Category.Name,
-                    Owner = p.User.UserName,
+                    Owner = p.Owner.Email,
                     ImageUrl = p.ImageUrl
                 }).ToListAsync();
         }
@@ -167,7 +168,7 @@
                     Description = p.Description,
                     Price = p.Price,
                     CategoryName = p.Category.Name,
-                    Owner = p.User.UserName,
+                    Owner = p.Owner.Email,
                     ImageUrl = p.ImageUrl
                 }).ToListAsync();
         }
@@ -261,7 +262,7 @@
                     Description = p.Description,
                     Price = p.Price,
                     CategoryName = p.Category.Name,
-                    Owner = p.User.UserName,
+                    Owner = p.Owner.Email,
                     ImageUrl = p.ImageUrl
                 }).ToListAsync();
 

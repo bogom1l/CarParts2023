@@ -2,14 +2,14 @@
 {
     public interface IUserService
     {
-        Task<string> GetUserFullNameByEmail(string email);
+       public Task<double> GetUserBalanceById(string userId);
 
-        Task<double> GetBalance(string userId);
+       public Task AddMoney(string userId);
 
-        Task AddMoney(string userId);
+       public Task RemoveMoney(string userId, double moneyToRemove);
 
-        Task RemoveMoney(string userId, double moneyToRemove);
+       public Task ResetMoney(string userId);
 
-        Task<string> GetUserIdByEmail(string email);
+       public Task AddCustomAmountMoney(string userId, double amount);
     }
 }

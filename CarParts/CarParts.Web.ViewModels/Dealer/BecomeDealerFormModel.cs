@@ -1,16 +1,16 @@
 ﻿namespace CarParts.Web.ViewModels.Dealer
 {
     using System.ComponentModel.DataAnnotations;
-    using static Common.GlobalConstants.User;
+    using static Common.GlobalConstants.Dealer;
 
     public class BecomeDealerFormModel
     {
+
         [Required]
-        [StringLength(PhoneNumberMaxLength, 
-            MinimumLength = PhoneNumberMinLength,
-            ErrorMessage = "Please enter a valid phone number.")]
-        [Phone]
-        [Display(Name = "Phone")]
-        public string PhoneNumber { get; set; } = null!;
+        [StringLength(DealerAddressMaxLength,
+            MinimumLength = DealerAddressMinLength,
+            ErrorMessage = "Please enter a valid address.")]
+        [Display(Name = "Address")]
+        public string Address { get; set; } = null!;
     }
 }

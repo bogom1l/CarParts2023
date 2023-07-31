@@ -21,10 +21,6 @@
     }
 }
 
-@inject IUserService UserService
-@{
-    string userName = await UserService.GetUserFullNameByEmail(this.User.Identity.Name); //TODO: .Email
-}
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
@@ -62,7 +58,7 @@
             </div>
             
             <div class="mb-3">
-                <label asp-for="@Model.Price" class="form-label-add-edit">Price</label>
+                <label asp-for="@Model.Price" class="form-label-add-edit">Price (eur)</label>
                 <input asp-for="@Model.Price" class="form-control" aria-required="true" readonly />
             </div>
             

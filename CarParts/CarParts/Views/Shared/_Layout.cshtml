@@ -1,11 +1,13 @@
 ﻿@using CarParts.Services.Data.Interfaces
+@using CarParts.Web.Extensions
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 
 @inject IUserService UserService
 @{
-   // string id = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-    string id2 = await UserService.GetUserIdByEmail(this.User.Identity.Name); //........ BAD AF TODO:
-    double balance = await UserService.GetBalance(id2);
+    //string id = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+    //string id2 = await UserService.GetUserIdByEmail(this.User.Identity.Name);
+    string id = this.User.GetId();
+    double balance = await UserService.GetUserBalanceById(id);
 }
 
 <!DOCTYPE html>
@@ -103,7 +105,10 @@
             <a class="nav-link active" aria-current="page" href="@Url.Action("AddMoney", "User")">
                 Add 100 euro
             </a>
-
+            
+            <a class="nav-link active" aria-current="page" href="@Url.Action("ResetMoney", "User")">
+                Reset money
+            </a>
 
             <a class="nav-link active" aria-current="page" href="@Url.Action("BecomeDealer", "Dealer")">
                 Become Dealer

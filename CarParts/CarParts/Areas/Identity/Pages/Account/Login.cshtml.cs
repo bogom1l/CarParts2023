@@ -33,7 +33,9 @@ namespace CarParts.Web.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required] [EmailAddress] public string Email { get; set; }
+            [Required] 
+            [EmailAddress] 
+            public string Email { get; set; }
 
 
             [Required]

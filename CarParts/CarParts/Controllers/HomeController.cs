@@ -12,13 +12,8 @@
         {
             return View();
         }
-
+        
         [AllowAnonymous]
-        public IActionResult TestView()
-        {
-            return View();
-        }
-
         public IActionResult Privacy()
         {
             return View();

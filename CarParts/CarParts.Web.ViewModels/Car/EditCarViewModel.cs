@@ -109,7 +109,7 @@
         [Required]
         [Range(CarRentPriceMinValue,
             CarRentPriceMaxValue,
-            ErrorMessage = "Car rent price can be between 1 and 30 000 eur.")]
+            ErrorMessage = "Car rent price can be between 20 and 30 000 eur.")]
         public double RentPrice { get; set; }
     }
 }

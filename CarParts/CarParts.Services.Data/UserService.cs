@@ -13,20 +13,8 @@
             _dbContext = dbContext;
         }
 
-        public async Task<string> GetUserFullNameByEmail(string email)
-        {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
 
-            if (user == null)
-            {
-                return string.Empty;
-                //? TODO: throw new ArgumentException("User with this email does not exist!");
-            }
-
-            return $"{user.FirstName} {user.LastName}";
-        }
-
-        public async Task<double> GetBalance(string userId)
+        public async Task<double> GetUserBalanceById(string userId)
         {
             var user = await _dbContext
                 .Users
@@ -56,6 +44,22 @@
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task AddCustomAmountMoney(string userId, double amount)
+        {
+            var user = await _dbContext
+                .Users
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                throw new ArgumentException("User with this id does not exist!");
+            }
+
+            user.Balance += amount;
+
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task RemoveMoney(string userId, double moneyToRemove)
         {
             var user = await _dbContext
@@ -72,17 +76,20 @@
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<string> GetUserIdByEmail(string email)
+        public async Task ResetMoney(string userId)
         {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+            var user = await _dbContext
+                .Users
+                .FirstOrDefaultAsync(u => u.Id == userId);
 
             if (user == null)
             {
-                return string.Empty;
-                //? TODO: throw new ArgumentException("User with this email does not exist!");
+                throw new ArgumentException("User with this id does not exist!");
             }
 
-            return user.Id;
+            user.Balance = 0;
+
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

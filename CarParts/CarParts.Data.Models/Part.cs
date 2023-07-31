@@ -24,9 +24,9 @@
 
         public PartCategory Category { get; set; } = null!;
 
-        [Required] [ForeignKey(nameof(User))] public string UserId { get; set; } = null!;
+        [Required] [ForeignKey(nameof(Owner))] public string OwnerId { get; set; } = null!;
 
-        [Required] public ApplicationUser User { get; set; } = null!;
+        [Required] public ApplicationUser Owner { get; set; } = null!;
 
         public string ImageUrl { get; set; } = null!;
 

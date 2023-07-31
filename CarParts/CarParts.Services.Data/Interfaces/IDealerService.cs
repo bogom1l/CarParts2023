@@ -8,7 +8,7 @@
 
         public Task<bool> DealerExistsByUserIdAsync(string userId);
 
-        public Task<bool> DealerExistsByPhoneNumberAsync(string phoneNumber);
+        public Task<bool> DealerExistsByAddressAsync(string phoneNumber);
 
         public Task<bool> HasRentsByUserIdAsync(string userId);
 

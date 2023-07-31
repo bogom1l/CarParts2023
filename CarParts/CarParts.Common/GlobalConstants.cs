@@ -52,10 +52,10 @@
             public const int CarFuelConsumptionMinValue = 0;
             public const int CarFuelConsumptionMaxValue = 50;
 
-            public const int CarRentPriceMinValue = 1;
+            public const int CarRentPriceMinValue = 20;
             public const int CarRentPriceMaxValue = 30_000;
 
-            public const double TaxPriceForCancelingRental = 5;
+            public const double TaxPriceForCancelingRental = 20;
             public const double TaxPriceForAdjustingRental = 10;
         }
 
@@ -87,6 +87,12 @@
 
             public const int PhoneNumberMinLength = 7;
             public const int PhoneNumberMaxLength = 15;
+        }
+
+        public static class Dealer
+        {
+            public const int DealerAddressMinLength = 1;
+            public const int DealerAddressMaxLength = 80;
         }
 
         

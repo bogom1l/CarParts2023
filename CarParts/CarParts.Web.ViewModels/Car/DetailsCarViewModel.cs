@@ -39,5 +39,9 @@
         public string ImageUrl { get; set; } = null!;
 
         public double RentPrice { get; set; }
+
+        public string RenterEmail { get; set; } = null!;
+
+        public string Owner { get; set; } = null!;
     }
 }

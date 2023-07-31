@@ -1,5 +1,6 @@
 ﻿@using CarParts.Services.Data.Interfaces
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using static CarParts.Common.GlobalConstants.Car;
 @model CarParts.Web.ViewModels.Car.RentCarViewModel
 
 @{
@@ -22,10 +23,11 @@
 }
 
 
-@inject IUserService UserService
-@{
-    string userName = await UserService.GetUserFullNameByEmail(this.User.Identity.Name); //TODO: .Email
-}
+@*SweetAlert CDN*@
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
+
+
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
@@ -42,10 +44,9 @@
             <p class="mb-0"><span class="fw-bold">Price: </span>@Model.Price</p>
             <p class="mb-0"><span class="fw-bold">Color: </span>@Model.Color</p>
             <br />
-            <p class="mb-0"><span class="fw-bold">Renter Name: </span>@userName</p>
+            <p class="mb-0"><span class="fw-bold">Renter Name: </span>@Model.RenterName</p>
             <br />
-            
-            @*NE SE MAPVAT PRAVILNO!!!! ??? nz zako, ako gi napraq kakto RentPrice po-dolu, shte rabotqt, no e grozno za front end-a*@
+
             <input type="hidden" asp-for="@Model.Make" />
             <input type="hidden" asp-for="@Model.Model" />
             <input type="hidden" asp-for="@Model.Year" />
@@ -74,18 +75,24 @@
                 <span asp-validation-for="@Model.RentalEndDate" class="text-danger"></span>
             </div>
             
-            <h3>Warning! You will be taxed 10 euro for the rental change, and 5 euro if you cancel the rental.</h3>
+            <h3>Warning! You will be taxed @TaxPriceForAdjustingRental euro for the rental change,
+                and @TaxPriceForCancelingRental euro if you cancel the rental.</h3>
             
             <div class="mb-3">
                 <input class="btn btn-success mb-2 w-100 p-3 fw-bold" type="submit" value="Update Rental" />
             </div>
 
         </form>
-        
 
-        <form asp-action="EndRental" method="post">
+       
+        @*<form asp-action="EndRental" method="post">
             <input type="hidden" asp-for="@Model.Id" />
             <button type="submit" class="btn btn-danger btn-block">End Rental</button>
+        </form>*@
+        
+        <form asp-action="EndRental" method="post" id="endRentalForm">
+            <input type="hidden" asp-for="@Model.Id" />
+            <button type="submit" class="btn btn-danger btn-block" id="endRentalButton">End Rental</button>
         </form>
 
     </div>
@@ -95,4 +102,29 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial"/>
+
+    <script>
+        $(document).ready(function () {
+            // Handle click event for the "End Rental" button
+            $("#endRentalButton").click(function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Show the confirmation dialog using SweetAlert2
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You want to end your rental",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, end it!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If the user clicks "OK" in the SweetAlert2 confirmation dialog, submit the form
+                        $("#endRentalForm").submit();
+                    }
+                });
+            });
+        });
+    </script>
 }

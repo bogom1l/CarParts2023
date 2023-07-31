@@ -38,12 +38,12 @@
                 return RedirectToAction("Index", "Home");
             }
 
-            var isPhoneNumberTaken =
-                await _dealerService.DealerExistsByPhoneNumberAsync(dealer.PhoneNumber);
+            var isAddressTaken =
+                await _dealerService.DealerExistsByAddressAsync(dealer.Address);
 
-            if (isPhoneNumberTaken)
+            if (isAddressTaken)
             {
-                TempData["ErrorMessage"] = "Dealer with the provided phone number already exists!";
+                TempData["ErrorMessage"] = "Dealer with the provided address already exists!";
                 return RedirectToAction("BecomeDealer", "Dealer");
             }
 

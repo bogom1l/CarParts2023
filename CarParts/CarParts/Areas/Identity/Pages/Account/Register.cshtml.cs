@@ -76,6 +76,7 @@ namespace CarParts.Web.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
         }
 
 
@@ -93,10 +94,11 @@ namespace CarParts.Web.Areas.Identity.Pages.Account
             {
                 var user = new ApplicationUser
                 {
-                    UserName = Input.Email,
                     Email = Input.Email,
+                    PhoneNumber = null,
                     FirstName = Input.FirstName,
-                    LastName = Input.LastName
+                    LastName = Input.LastName,
+                    Balance = 0
                 };
 
                 //Before: var user = CreateUser();

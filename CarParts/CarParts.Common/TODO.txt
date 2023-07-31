@@ -1,60 +1,22 @@
 ﻿
-
 -- Rent A Car --
 
-  ✔️ Add Role "Dealer"
-  ✔️ Create a "Become a Dealer" Page
-  ✔️ Implement the "Become a Dealer" Action
+  ✔️ backup napraih
+  ✔️ obmislqm mn vnimatelno vsi4ki propertyta w viewmodelite zakwo gi polzwam i dali sa mi nujni, i  w data modelite
 
-  ✔️ ne raboti Add Car v momenta
+  ✔️ kydet ima "TODO:" w proekta da go dooprawq / iztriq
 
-  ✔️ da opraq wsichki raoti zarad nowiq dealer w MyCars, MyFavCars, ...
+  ✔️  review/summary of full project :
+  ✔️      -vseki user moje da dobavq chasti
+  ✔️      -vseki dealer moje da dobavq koli
+  ✔️      -vseki user moje da naema koli
 
-  ✔️ Implement Rent Functionality 
-
-  ✔️ da moje da naema kolata samo ako ima nujnite pari
-
-  ✔️ REMOVE isRented FROM EVERYWHERE
-
-  ✔️ implement ManageRental
-
-  ✔️ remove 100euro from user when he rents a car (moje bi sushtiq metod kato AddMoney, samo che da se kazwa RemoveMoney))
-
-  ✔️ *RentPrice na Car trqbva da e za den, vseki den za koito q naemash da se uwelichawa, toest ako 
-            primerno q naemesh za 10 dena => TotalRentPrice = 10*RentPrice ili nesh takoz 
-
-  ✔️ proverka StartDay > EndDate
-
-  ✔️ *check if user has enough money, dont allow him to go negative money
-
-  ✔️ ne se setwa prawilna startdate kato se natisne manage rental
-
-  ✔️ implement ManageRental to remove bonus 10euro from user for change in rental
-
-  ✔️ implement EndRental (remove bonus 5euro from user for change in rental)
      
-  ✔️ (15min) importwam 10 koli ot json filea
-  ✔️ (10min) importwam 10 chasti ot json filea
-
-  ✔️  code cleanup
-
-  ✔️  da potyrsq w logikite kyde moje da imam neshto ,koeto ne mi trqbwa weche ili da refactorna
-
-  ✔️ validacii Data
-  ✔️ validacii ViewModels
-  ✔️ add-migration -> update-database
-  ✔️ oprawqm leko View-tata front-end
-
-  ✔️ backup napraihh
-
-    obmislqm mn vnimatelno vsi4ki propertyta w viewmodelite zakwo gi polzwam i dali sa mi nujni, i  w data modelite
-
-     review/summary of full project
-     + kydet ima "TODO:" w proekta da go dooprawq / iztriq
-
-      canceling rental to return money, and to cost 20 eur
-      trq promenq twa da stawash dilar da e po drug nachin moje bi ne samo s telefon ? nz
-      ne setwam phone number kato horata w aspnet users pri deallerite? da go baram li izobshto?
+  ✔️  Add check n message "car is already rented : by YOU, or by someone else"
+  ✔️  canceling rental to return money, and to cost 20 eur
+  ✔️  are you sure you want to end you rental? - message
+      changing rental to not be able if u didnt change dates
+      you cant add a car to your favorites if you are the owner of the car - message
 
      Review ideas in C# Proj txt 
      
@@ -66,7 +28,6 @@
      oprawqm View-tata front-end
      add automapper[kris]
      C#WebTxTDesktop
-
 
 -----------------
 14:20 - 30.07.2023

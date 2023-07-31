@@ -4,6 +4,37 @@
     ViewBag.Title = "Part Details";
 }
 
+@{
+    var errorMessage = TempData["ErrorMessage"] as string;
+    var successMessage = TempData["SuccessMessage"] as string;
+
+    if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+
+    if (!string.IsNullOrEmpty(successMessage))
+    {
+        <div class="alert alert-success">@successMessage</div>
+    }
+}
+
+
+<style>
+    .btn-purple {
+        background-color: purple;
+        color: white;
+        /* Add any additional styling as needed */
+    }
+</style>
+
+
+@*SweetAlert CDN*@
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
+
+
+
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
@@ -19,15 +50,59 @@
                 <p class="mb-0"><span class="fw-bold">Category: </span>@Model.Category</p>
                 <p class="mb-0"><span class="fw-bold">Price: </span>@Model.Price</p>
                 <p class="mb-0"><span class="fw-bold">Description: </span>@Model.Description</p>
+                
+                <a asp-controller="Part" asp-action="AddToFavoriteParts" asp-route-id="@Model.Id" class="btn btn-purple btn-block">
+                    Add to favorite parts
+                </a>
+                
+                @if (User.Identity.Name == Model.Owner)
+                {
+                    <a asp-controller="Part" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-block">
+                        Edit
+                    </a>
 
-                <div class="text-center mt-4">
-                    <a asp-controller="Part" asp-action="All" class="btn btn-warning p-3 fw-bold">Back to All Parts</a>
-                </div>
+                    <a href="#" class="btn btn-danger btn-block delete-part" data-id="@Model.Id">
+                        Delete
+                    </a>
+                }
+
             </div>
+
+        </div>
+        <div class="text-center mt-4">
+            <a asp-controller="Part" asp-action="All" class="btn btn-success p-3 fw-bold">Back to All Parts</a>
         </div>
     </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    
+    
+    
+    <script>
+        // Handle the click event for the delete buttons
+        $('.delete-part').on('click', function (e) {
+            e.preventDefault();
+            const partId = $(this).data('id');
+            
+            // Show SweetAlert confirmation dialog
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You are about to delete this part. This action cannot be undone.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If user confirms, redirect to the "Delete" action with partId as a parameter
+                    window.location.href = `/Part/Delete/${partId}`;
+                }
+            });
+        });
+    </script>
+    
+
 }

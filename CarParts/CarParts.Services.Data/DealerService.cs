@@ -36,32 +36,30 @@
                 .AnyAsync(d => d.UserId == userId);
         }
 
-        public async Task<bool> DealerExistsByPhoneNumberAsync(string phoneNumber)
+        public async Task<bool> DealerExistsByAddressAsync(string address)
         {
             return await _dbContext
                 .Dealers
-                .AnyAsync(d => d.PhoneNumber == phoneNumber);
+                .AnyAsync(d => d.Address == address);
         }
 
         public async Task<bool> HasRentsByUserIdAsync(string userId)
         {
-            var user = await _dbContext
-                .Users
-                .FirstOrDefaultAsync(u => u.Id == userId);
+            var cars = await _dbContext
+                .Cars
+                .Where(c => c.RenterId == userId)
+                .ToListAsync();
 
-            if (user == null)
-            {
-                return false;
-            }
+            var a = 2;
 
-            return user.RentedCars.Any();
+            return cars.Any();
         }
 
         public async Task BecomeDealerAsync(BecomeDealerFormModel dealer, string userId)
         {
             var dealerData = new Dealer
             {
-                PhoneNumber = dealer.PhoneNumber,
+                Address = dealer.Address,
                 UserId = userId
             };
 
