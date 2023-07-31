@@ -25,6 +25,8 @@
 
         public Task<ICollection<CarViewModel>> GetMyFavoriteCarsAsync(string userId);
 
+        public Task<bool> IsCarMine(int carId, string userId);
+
         public Task<bool> AddCarToMyFavoriteCarsAsync(int carId, string userId);
 
         public Task<bool> RemoveCarFromMyFavoriteCarsAsync(int carId, string userId);

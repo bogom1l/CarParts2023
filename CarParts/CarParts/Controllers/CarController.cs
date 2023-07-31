@@ -171,6 +171,13 @@
                 return RedirectToAction("All", "Car");
             }
 
+            bool isCarInMyFavoriteCars = await _carService.IsCarMine(id, GetUserId());
+            if (isCarInMyFavoriteCars)
+            {
+                TempData["ErrorMessage"] = "You can't add a car in your favorite list if you are the owner of the car.";
+                return RedirectToAction("All", "Car");
+            }
+
             if (!await _carService.AddCarToMyFavoriteCarsAsync(id, GetUserId()))
             {
                 TempData["ErrorMessage"] = "The car is already in your favorite cars.";
@@ -347,6 +354,14 @@
         [HttpPost]
         public async Task<IActionResult> ManageRental(RentCarViewModel rentCarViewModel)
         {
+            bool hasUserMadeAnyChanges = _curentEndDate != rentCarViewModel.RentalEndDate;
+
+            if (!hasUserMadeAnyChanges)
+            {
+                TempData["ErrorMessage"] = "You haven't made changes to the rental period! Please try again.";
+                return RedirectToAction("MyRentedCars", "Car");
+            }
+
             if (!_carService.IsRentalPeriodValid(rentCarViewModel))
             {
                 TempData["ErrorMessage"] = "Please check and alter your rental period.";

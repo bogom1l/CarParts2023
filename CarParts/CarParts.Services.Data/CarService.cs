@@ -312,6 +312,13 @@
                 }).ToListAsync();
         }
 
+        public async Task<bool> IsCarMine(int carId, string userId)
+        {
+            return await _dbContext
+                .Cars
+                .AnyAsync(c => c.CarId == carId && c.Dealer.UserId == userId);
+        }
+
         public async Task<bool> AddCarToMyFavoriteCarsAsync(int carId, string userId)
         {
             var isCarAlreadyInMyFavoriteCars = await _dbContext

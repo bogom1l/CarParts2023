@@ -15,8 +15,8 @@
   ✔️  Add check n message "car is already rented : by YOU, or by someone else"
   ✔️  canceling rental to return money, and to cost 20 eur
   ✔️  are you sure you want to end you rental? - message
-      you cant add a car to your favorites if you are the owner of the car - message
-      changing rental to not be able if u didnt change dates
+  ✔️  you cant add a car to your favorites if you are the owner of the car - message
+  ✔️  changing rental to not be able if u didnt change dates
 
 
      Review ideas in C# Proj txt 
