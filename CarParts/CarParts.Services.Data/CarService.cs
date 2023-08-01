@@ -241,11 +241,11 @@
             }
         }
 
-        public async Task DeleteCarAsync(int carId, string userId)
+        public async Task DeleteCarAsync(int carId)
         {
             var carData = await _dbContext
                 .Cars
-                .FirstOrDefaultAsync(cu => cu.CarId == carId && cu.Dealer.UserId == userId);
+                .FirstOrDefaultAsync(cu => cu.CarId == carId);
 
             if (carData != null)
             {

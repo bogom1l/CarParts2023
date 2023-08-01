@@ -1,4 +1,4 @@
-﻿namespace CarParts.Web
+﻿namespace CarParts.Web.Extensions
 {
     using System.Reflection;
 

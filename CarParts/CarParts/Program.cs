@@ -1,14 +1,15 @@
 namespace CarParts.Web
 {
     using System.Reflection;
-    using CarParts.Web.ViewModels.Error;
     using Data;
     using Data.Models;
+    using Extensions;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Services.Data.Interfaces;
     using Services.Mapping;
+    using ViewModels.Error;
 
     public class Program
     {
@@ -31,9 +32,8 @@ namespace CarParts.Web
                     options.Password.RequireDigit = false;
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
-                    options.Password.RequireLowercase = false;
                 })
-                //.AddRoles<IdentityRole<string>>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             //?
@@ -53,6 +53,8 @@ namespace CarParts.Web
 
 
             var app = builder.Build();
+
+            app.SeedAdmin();
 
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 

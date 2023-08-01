@@ -17,7 +17,7 @@
 
         public Task EditCarAsync(int carId, EditCarViewModel car);
 
-        public Task DeleteCarAsync(int carId, string userId);
+        public Task DeleteCarAsync(int carId); //, string userId (used to be)
 
         public Task<Car?> GetCarByIdAsync(int carId);
 

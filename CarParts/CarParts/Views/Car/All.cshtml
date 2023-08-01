@@ -1,4 +1,5 @@
 ﻿@using CarParts.Services.Data.Interfaces
+@using CarParts.Web.Extensions
 @model ICollection<CarParts.Web.ViewModels.Car.CarViewModel>
 
 @inject ICarService CarService
@@ -90,7 +91,21 @@
                             Add to favorite cars
                         </a>
 
-                        @if (User.Identity.Name == car.Owner)
+                        
+                        @if (User.IsAdmin())
+                        {
+                            <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.CarId" class="btn btn-warning btn-block">
+                                Edit
+                            </a>
+
+                            <a href="#" class="btn btn-danger btn-block delete-car" data-id="@car.CarId">
+                                Delete
+                            </a>
+                            <a asp-controller="Car" asp-action="Rent" asp-route-id="@car.CarId" class="btn btn-lightgreen btn-block">
+                                Rent
+                            </a>
+                        }
+                        else if (User.Identity.Name == car.Owner)
                         {
                             <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.CarId" class="btn btn-warning btn-block">
                                 Edit
@@ -107,8 +122,9 @@
                             </a>
                         }
                         
-                        @*//TODO: proverka s nqkoi service - isUserDealer, za da ne wijda butoncheto Rent*@
-
+                        @*//TODO: proverka s nqkoi service - isUserDealer, za da ne wijda butoncheto Rent na drugite hora kolite*@
+                        
+                        
 
                         <p> RenterEmail : @car.RenterEmail</p>
                         

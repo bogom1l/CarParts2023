@@ -95,6 +95,15 @@
             public const int DealerAddressMaxLength = 80;
         }
 
+        public static class AdminUser
+        {
+            public const string AdminRoleName = "Administrator";
+            public const string AdminEmail = "admin@mail.com";
+            public const string AdminPassword = "admin123";
+            public const string AdminFirstName = "ADMINISTRATOR";
+            public const string AdminLastName = "ADMINISTRATOR";
+            public const string AdminAddress = "ADMIN_ADDRESS";
+        }
         
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace CarParts.Web.Controllers
 {
+    using Extensions;
     using Microsoft.AspNetCore.Mvc;
     using Services.Data.Interfaces;
     using ViewModels.Car;
@@ -90,7 +91,7 @@
                 return RedirectToAction("All", "Car");
             }
 
-            if (car.Dealer.UserId != GetUserId())
+            if (car.Dealer.UserId != GetUserId() && !User.IsAdmin())
             {
                 TempData["ErrorMessage"] = "You are not authorized to edit this car!";
                 return RedirectToAction("All", "Car");
@@ -132,13 +133,13 @@
                 return RedirectToAction("All", "Car");
             }
 
-            if (car.Dealer.UserId != GetUserId())
+            if (car.Dealer.UserId != GetUserId() && !User.IsAdmin())
             {
                 TempData["ErrorMessage"] = "You are not authorized to delete this car!";
                 return RedirectToAction("All", "Car");
             }
 
-            await _carService.DeleteCarAsync(id, GetUserId());
+            await _carService.DeleteCarAsync(id);
 
             TempData["SuccessMessage"] = "Car has been successfully deleted!";
             return RedirectToAction("All", "Car");
@@ -244,7 +245,7 @@
 
             var isUserDealer = await _dealerService.DealerExistsByUserIdAsync(GetUserId());
 
-            if (isUserDealer) //TODO: && !User.IsAdmin()
+            if (isUserDealer && !User.IsAdmin())
             {
                 TempData["ErrorMessage"] = "Dealers can't rent cars! Please register as a user.";
                 return RedirectToAction("Index", "Home");
@@ -310,7 +311,7 @@
 
             var isUserDealer = await _dealerService.DealerExistsByUserIdAsync(GetUserId());
 
-            if (isUserDealer) //TODO: && !User.IsAdmin()
+            if (isUserDealer && !User.IsAdmin()) 
             {
                 TempData["ErrorMessage"] = "Dealers don't have access here! They are not allowed to rent cars.";
                 return RedirectToAction("Index", "Home");
@@ -332,7 +333,7 @@
 
             var isUserDealer = await _dealerService.DealerExistsByUserIdAsync(GetUserId());
 
-            if (isUserDealer) //TODO: && !User.IsAdmin()
+            if (isUserDealer && !User.IsAdmin()) 
             {
                 TempData["ErrorMessage"] = "Dealers can't rent cars. Please register as a user.";
                 return RedirectToAction("Index", "Home");
@@ -389,9 +390,10 @@
             }
             else
             {
-                TempData["SuccessMessage"] = $"You have successfully changed the car rental. " +
-                                             $"You received back: {-totalMoneyToRentMore} euros! " +
-                                             $"Your new rental end date is {rentCarViewModel.RentalEndDate!.Value.ToShortDateString()}.";
+                TempData["SuccessMessage"] =
+                    $"You have successfully changed the car rental. " +
+                    $"You received back: {-totalMoneyToRentMore} euros! " +
+                    $"Your new rental end date is {rentCarViewModel.RentalEndDate!.Value.ToShortDateString()}.";
             }
 
             return RedirectToAction("MyRentedCars", "Car");

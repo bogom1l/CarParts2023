@@ -1,8 +1,12 @@
 ﻿namespace CarParts.Data
 {
+    using Common;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using Models;
+
+    using static Common.GlobalConstants.AdminUser;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -26,6 +30,15 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            
+            //TODO: da iznesa seedwaneto w drug class
+            //TODO: da iznesa seedwaneto w drug class
+            //TODO: da iznesa seedwaneto w drug class
+
+            //seed first administrator
+            SeedAdministrator(builder);
+
+            //-----------------------------------------------------
             builder.Entity<UserFavoritePart>()
                 .HasKey(ufp => new { ufp.UserId, ufp.PartId });
 
@@ -91,6 +104,39 @@
                     new PartCategory { CategoryId = 5, Name = "Interior" },
                     new PartCategory { CategoryId = 6, Name = "Exterior" },
                     new PartCategory { CategoryId = 7, Name = "Electrical" });
+        }
+
+        private void SeedAdministrator(ModelBuilder modelBuilder)
+        {
+            PasswordHasher<ApplicationUser> hasher = new PasswordHasher<ApplicationUser>();
+
+            var adminUser = new ApplicationUser
+            {
+                Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
+                Email = AdminEmail,
+                NormalizedEmail = AdminEmail.ToUpper(),
+                UserName = AdminEmail,
+                NormalizedUserName = AdminEmail.ToUpper(),
+                FirstName = AdminFirstName,
+                LastName = AdminLastName,
+                Balance = 9_999_999,
+            };
+
+            adminUser.PasswordHash = hasher.HashPassword(adminUser, AdminPassword);
+
+            modelBuilder
+                .Entity<ApplicationUser>()
+                .HasData(adminUser);
+
+            modelBuilder
+                .Entity<Dealer>()
+                .HasData(
+                    new Dealer { 
+                        Id = 14, //careful, what is my last
+                        Address = AdminAddress,
+                        UserId = adminUser.Id
+                    });
+
         }
     }
 }
