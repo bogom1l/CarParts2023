@@ -3,6 +3,8 @@
     using CarParts.Data;
     using Interfaces;
     using Microsoft.EntityFrameworkCore;
+    using Web.ViewModels.Dealer;
+    using Web.ViewModels.User;
 
     public class UserService : IUserService
     {
@@ -104,6 +106,39 @@
             }
 
             return user.FirstName + " " + user.LastName;
+        }
+
+        public async Task<ICollection<UserViewModel>> GetAllUsersAsync()
+        {
+            var allUsers = new List<UserViewModel>();
+
+            var dealers = await _dbContext
+                .Dealers
+                .Include(d => d.User)
+                .Select(d => new UserViewModel
+                {
+                    Email = d.User.Email,
+                    FullName = d.User.FirstName + " " + d.User.LastName,
+                    Address = d.Address
+                })
+                .ToListAsync();
+
+            allUsers.AddRange(dealers);
+
+            var users = await _dbContext
+                .Users
+                //TODO: .Where(u => !_dbContext.Dealers.Any(d => d.UserId == u.Id))
+                .Select(u => new UserViewModel
+                {
+                    Email = u.Email,
+                    FullName = u.FirstName + " " + u.LastName,
+                    Address = string.Empty
+                })
+                .ToListAsync();
+
+            allUsers.AddRange(users);
+
+            return allUsers;
         }
     }
 }
