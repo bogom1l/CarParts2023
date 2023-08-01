@@ -173,7 +173,7 @@
             }
 
             bool isCarInMyFavoriteCars = await _carService.IsCarMine(id, GetUserId());
-            if (isCarInMyFavoriteCars)
+            if (isCarInMyFavoriteCars && !User.IsAdmin())
             {
                 TempData["ErrorMessage"] = "You can't add a car in your favorite list if you are the owner of the car.";
                 return RedirectToAction("All", "Car");

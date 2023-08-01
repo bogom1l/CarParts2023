@@ -28,4 +28,8 @@
     <ProjectReference Include="..\CarParts.Web.ViewModels\CarParts.Web.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Models\" />
+  </ItemGroup>
+
 </Project>

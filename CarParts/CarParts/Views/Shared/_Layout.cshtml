@@ -1,6 +1,7 @@
 ﻿@using CarParts.Services.Data.Interfaces
 @using CarParts.Web.Extensions
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using static CarParts.Common.GlobalConstants.AdminUser;
 
 @inject IUserService UserService
 @{
@@ -34,66 +35,79 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                         
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="@Url.Action("All", "Car")">
-                            All Cars
-                        </a>
-                    </li>
-                        
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Cars
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="@Url.Action("Add", "Car")">Add a car</a></li>
-                  
-                            <li><a class="dropdown-item" href="@Url.Action("MyFavoriteCars", "Car")">My favorite cars</a></li>
-                            <li><a class="dropdown-item" href="@Url.Action("MyCars", "Car")">My cars</a></li>
-                            <li><a class="dropdown-item" href="@Url.Action("MyRentedCars", "Car")">My rented cars</a></li>
-                            <li><a class="dropdown-item" href="@Url.Action("Search", "Car")">Search cars</a></li>
-                        </ul>
-                    </li>
-                        
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="@Url.Action("All", "Part")">
-                            All Parts
-                        </a>
-                    </li>
-                        
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Parts
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="@Url.Action("Add", "Part")">Add a part</a></li>
-                            <li><a class="dropdown-item" href="@Url.Action("Search", "Part")">Search part</a></li>
-                            <li><a class="dropdown-item" href="@Url.Action("MyFavoriteParts", "Part")">
-                                My favorite parts
-                            </a></li>
-                            <li><a class="dropdown-item" href="@Url.Action("MyParts", "Part")">My parts</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
+                    @if (!User.IsInRole(AdminRoleName))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="@Url.Action("All", "Car")">
+                                All Cars
+                            </a>
+                        </li>
 
-                       
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            About us
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="@Url.Action("Reviews", "Car")">Reviews</a></li>
-                            <li><a class="dropdown-item" href="@Url.Action("Contacts", "Car")">Contact us</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Cars
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="@Url.Action("Add", "Car")">Add a car</a></li>
 
-                        
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="@Url.Action("MyRentedCars", "Car")">
-                            My Rented Cars
+                                <li><a class="dropdown-item" href="@Url.Action("MyFavoriteCars", "Car")">My favorite cars</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("MyCars", "Car")">My cars</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("MyRentedCars", "Car")">My rented cars</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Search", "Car")">Search cars</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="@Url.Action("All", "Part")">
+                                All Parts
+                            </a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Parts
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="@Url.Action("Add", "Part")">Add a part</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Search", "Part")">Search part</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="@Url.Action("MyFavoriteParts", "Part")">
+                                        My favorite parts
+                                    </a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("MyParts", "Part")">My parts</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                About us
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="@Url.Action("Reviews", "Car")">Reviews</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Contacts", "Car")">Contact us</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="@Url.Action("MyRentedCars", "Car")">
+                                My Rented Cars
+                            </a>
+                        </li>
+
+                        <a class="nav-link active" aria-current="page" href="@Url.Action("BecomeDealer", "Dealer")">
+                            Become Dealer
                         </a>
-                    </li>
-                       
+                    }
+                    else
+                    {
+                        <a class="nav-link active" aria-current="page" href="@Url.Action("Index", "Home", new { area="Admin" })">
+                                <b>ADMIN AREA</b>
+                        </a>
+                    }
 
                 </ul>
                  
@@ -110,13 +124,11 @@
                 Reset money
             </a>
 
-            <a class="nav-link active" aria-current="page" href="@Url.Action("BecomeDealer", "Dealer")">
-                Become Dealer
-            </a>
-                
             <a class="nav-link active" aria-current="page">
                 Balance: @balance eur
             </a>
+            
+            
 
             <span class="navbar-text">
                 <partial name="_LoginPartial" />
@@ -125,11 +137,10 @@
         </div>
             
     </nav>
-        
-        
-        
-        
-        
+
+
+
+
 
 </header>
 <div class="container">

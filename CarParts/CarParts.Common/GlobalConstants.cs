@@ -103,6 +103,7 @@
             public const string AdminFirstName = "ADMINISTRATOR";
             public const string AdminLastName = "ADMINISTRATOR";
             public const string AdminAddress = "ADMIN_ADDRESS";
+            public const string AdminAreaName = "Admin";
         }
         
     }

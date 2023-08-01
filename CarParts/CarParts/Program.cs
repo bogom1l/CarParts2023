@@ -78,10 +78,29 @@ namespace CarParts.Web
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.MapControllerRoute(
-                "default",
-                "{controller=Home}/{action=Index}/{id?}");
-            app.MapRazorPages();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "Areas",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "Car Details",
+                    pattern: "/Cars/Details/{id}/{information}",
+                    defaults: new { controller = "Car", action = "Details" });
+
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
+            });
+
+
+
+            //app.MapControllerRoute(
+            //    "default",
+            //    "{controller=Home}/{action=Index}/{id?}");
+
+
+            //app.MapRazorPages();
 
             app.Run();
         }
