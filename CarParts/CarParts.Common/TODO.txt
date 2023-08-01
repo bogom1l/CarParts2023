@@ -23,11 +23,14 @@
 
   ✔️  dealerite ne wijdat Rent na chujdi koli v Cars/All View-to            
    
+  ✔ custom login/register pages
+  ✔ make background color to almost white
 
-     Implement ideas from C# Proj txt 
+     ?
+     ?
+     ?
 
-     
-     C#WebTxTDesktop
+
 
 -----------------
-17:00 - 01.08.2023
+17:50 - 01.08.2023
