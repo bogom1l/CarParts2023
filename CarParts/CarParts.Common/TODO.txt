@@ -18,7 +18,8 @@
   ✔️  you cant add a car to your favorites if you are the owner of the car - message
   ✔️  changing rental to not be able if u didnt change dates
 
-     Administrator Role
+  ✔️  Administrator Role
+      Administrator Area
 
      Implement ideas from C# Proj txt 
 
