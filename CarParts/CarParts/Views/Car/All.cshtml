@@ -104,6 +104,16 @@
                             <a asp-controller="Car" asp-action="Rent" asp-route-id="@car.CarId" class="btn btn-lightgreen btn-block">
                                 Rent
                             </a>
+                            <p> RenterEmail: 
+                                @if (@car.RenterEmail == null)
+                                {
+                                   <span class="fw-bold">No renter</span>
+                                }
+                                else
+                                {
+                                    <span class="fw-bold">@car.RenterEmail</span>
+                                }
+                            </p>
                         }
                         else if (User.Identity.Name == car.Owner)
                         {
@@ -122,12 +132,10 @@
                             </a>
                         }
                         
-                        @*//TODO: proverka s nqkoi service - isUserDealer, za da ne wijda butoncheto Rent na drugite hora kolite*@
                         
                         
 
-                        <p> RenterEmail : @car.RenterEmail</p>
-                        
+                       
 
                     </div>
                 </div>

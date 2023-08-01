@@ -23,6 +23,7 @@
 
      Implement ideas from C# Proj txt 
 
+     proverka s nqkoi service - isUserDealer, za da ne wijda butoncheto Rent na drugite hora kolite v Cars/All View-to            
      implement custom register/login OR just remove .Email or replace with .Username so in Views it works [workshop]
      custom error page, kato napisha nqkvo nevalidno url naprimer /Home/asd
      oprawqm View-tata front-end
