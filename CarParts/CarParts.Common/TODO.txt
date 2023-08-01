@@ -19,7 +19,7 @@
   ✔️  changing rental to not be able if u didnt change dates
 
   ✔️  Administrator Role
-      Administrator Area
+  ✔️  Administrator Area
 
      Implement ideas from C# Proj txt 
 
