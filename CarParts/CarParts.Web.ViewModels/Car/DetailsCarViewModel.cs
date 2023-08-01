@@ -1,5 +1,7 @@
 ﻿namespace CarParts.Web.ViewModels.Car
 {
+    using Dealer;
+
     public class DetailsCarViewModel
     {
         public int CarId { get; set; }
@@ -43,5 +45,7 @@
         public string RenterEmail { get; set; } = null!;
 
         public string Owner { get; set; } = null!;
+
+        public DetailsDealerViewModel DetailsDealerViewModel { get; set; } = null!;
     }
 }

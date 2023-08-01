@@ -3,10 +3,10 @@
     using CarParts.Data;
     using CarParts.Data.Models;
     using Interfaces;
-    using Mapping;
     using Microsoft.EntityFrameworkCore;
     using Web.ViewModels.Car;
     using Web.ViewModels.Car.CarProperties;
+    using Web.ViewModels.Dealer;
     using static Common.GlobalConstants.Car;
 
     public class CarService : ICarService
@@ -17,7 +17,7 @@
         {
             _dbContext = dbContext;
         }
-        
+
         public async Task<ICollection<CarViewModel>> GetAllCarsAsync()
         {
             var cars = await _dbContext.Cars //.To<CarViewModel>()
@@ -43,7 +43,7 @@
                     Owner = c.Dealer.User.Email,
                     ImageUrl = c.ImageUrl,
                     RentPrice = c.RentPrice,
-                    RenterEmail = c.Renter.Email ?? null,
+                    RenterEmail = c.Renter.Email ?? null
                 })
                 .ToListAsync();
 
@@ -142,7 +142,16 @@
                     ImageUrl = c.ImageUrl,
                     RentPrice = c.RentPrice,
                     RenterEmail = c.Renter.Email ?? null,
-                    Owner = c.Dealer.User.Email
+                    Owner = c.Dealer.User.Email,
+                    DetailsDealerViewModel = new DetailsDealerViewModel
+                    {
+                        //FullName = _userService.GetUserFullNameById(c.Dealer.UserId).ToString()!,
+                        //taka gyrmi A second operation was started on this context instance before a previous operation completed.
+                        //This is usually caused by different threads concurrently using the same instance of DbContext. 
+                        FullName = c.Dealer.User.FirstName + " " + c.Dealer.User.LastName,
+                        Address = c.Dealer.Address,
+                        Email = c.Dealer.User.Email
+                    }
                 }).FirstOrDefaultAsync();
 
             return detailsCarViewModel;

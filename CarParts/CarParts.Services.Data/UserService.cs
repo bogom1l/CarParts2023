@@ -60,6 +60,7 @@
             await _dbContext.SaveChangesAsync();
         }
 
+
         public async Task RemoveMoney(string userId, double moneyToRemove)
         {
             var user = await _dbContext
@@ -90,6 +91,19 @@
             user.Balance = 0;
 
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<string> GetUserFullNameById(string userId)
+        {
+            var user = await _dbContext.Users.FindAsync(userId);
+
+            if (string.IsNullOrEmpty(user.FirstName)
+                || string.IsNullOrEmpty(user.LastName))
+            {
+                return null;
+            }
+
+            return user.FirstName + " " + user.LastName;
         }
     }
 }

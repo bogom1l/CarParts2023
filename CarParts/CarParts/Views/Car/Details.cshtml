@@ -60,6 +60,19 @@
             <button id="lessDetailsBtn" class="btn btn-link text-info btn-lg" style="display: none;">Less Details</button>
         </div>
         
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Dealer Info</h5>
+                @if(Model.DetailsDealerViewModel.FullName != null)
+                {
+                    <p class="card-text">Full Name: @Model.DetailsDealerViewModel.FullName</p>
+                }
+                <p class="card-text">Email: @Model.DetailsDealerViewModel.Email</p>
+                <p class="card-text">Address: @Model.DetailsDealerViewModel.Address</p>
+            </div>
+        </div>
+        
+
         @if (User.Identity.Name == @Model.Owner)
         {
             <a asp-controller="Car" asp-action="Edit" asp-route-id="@Model.CarId" class="btn btn-warning btn-block">

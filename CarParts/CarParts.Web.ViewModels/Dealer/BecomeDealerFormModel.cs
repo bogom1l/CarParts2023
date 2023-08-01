@@ -5,7 +5,6 @@
 
     public class BecomeDealerFormModel
     {
-
         [Required]
         [StringLength(DealerAddressMaxLength,
             MinimumLength = DealerAddressMinLength,

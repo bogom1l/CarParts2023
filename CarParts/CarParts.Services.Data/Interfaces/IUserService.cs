@@ -11,5 +11,7 @@
        public Task ResetMoney(string userId);
 
        public Task AddCustomAmountMoney(string userId, double amount);
+
+       public Task<string> GetUserFullNameById(string userId);
     }
 }
