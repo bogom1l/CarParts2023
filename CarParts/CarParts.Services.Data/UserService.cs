@@ -127,7 +127,7 @@
 
             var users = await _dbContext
                 .Users
-                //TODO: .Where(u => !_dbContext.Dealers.Any(d => d.UserId == u.Id))
+                .Where(u => !_dbContext.Dealers.Any(d => d.UserId == u.Id))
                 .Select(u => new UserViewModel
                 {
                     Email = u.Email,
@@ -139,6 +139,22 @@
             allUsers.AddRange(users);
 
             return allUsers;
+        }
+
+        public async Task<bool> IsUserDealerOfCar(string userId, int carId)
+        {
+            var dealer = await _dbContext
+                .Dealers
+                .FirstOrDefaultAsync(d => d.UserId == userId);
+
+            return await _dbContext.Cars.AnyAsync(c => c.CarId == carId && c.DealerId == dealer!.Id);
+        }
+
+        public async Task<bool> IsUserDealer(string userId)
+        {
+            return await _dbContext
+                .Dealers
+                .AnyAsync(d => d.UserId == userId);
         }
     }
 }

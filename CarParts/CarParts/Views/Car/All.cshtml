@@ -3,6 +3,7 @@
 @model ICollection<CarParts.Web.ViewModels.Car.CarViewModel>
 
 @inject ICarService CarService
+@inject IUserService UserService
 
 @{
     ViewBag.Title = "All Cars";
@@ -90,7 +91,9 @@
                         <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@car.CarId" class="btn btn-purple btn-block">
                             Add to favorite cars
                         </a>
-
+                        
+                        
+                        
                         
                         @if (User.IsAdmin())
                         {
@@ -125,7 +128,7 @@
                                 Delete
                             </a>
                         }
-                        else
+                        else if(!await UserService.IsUserDealer(User.GetId()))  @*(!await UserService.IsUserDealerOfCar(User.GetId(), car.CarId))*@
                         {
                             <a asp-controller="Car" asp-action="Rent" asp-route-id="@car.CarId" class="btn btn-lightgreen btn-block">
                                 Rent

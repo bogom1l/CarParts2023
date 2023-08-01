@@ -17,5 +17,9 @@
        public Task<string> GetUserFullNameById(string userId);
 
        public Task<ICollection<UserViewModel>> GetAllUsersAsync();
+
+       public Task<bool> IsUserDealerOfCar(string userId, int carId);
+
+       public Task<bool> IsUserDealer(string userId);
     }
 }
