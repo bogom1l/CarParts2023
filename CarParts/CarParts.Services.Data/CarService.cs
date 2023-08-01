@@ -145,9 +145,6 @@
                     Owner = c.Dealer.User.Email,
                     DetailsDealerViewModel = new DetailsDealerViewModel
                     {
-                        //FullName = _userService.GetUserFullNameById(c.Dealer.UserId).ToString()!,
-                        //taka gyrmi A second operation was started on this context instance before a previous operation completed.
-                        //This is usually caused by different threads concurrently using the same instance of DbContext. 
                         FullName = c.Dealer.User.FirstName + " " + c.Dealer.User.LastName,
                         Address = c.Dealer.Address,
                         Email = c.Dealer.User.Email

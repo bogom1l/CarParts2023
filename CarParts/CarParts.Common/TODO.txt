@@ -26,7 +26,7 @@
   ✔ custom login/register pages
   ✔ make background color to almost white
 
-     ?
+     add reviews (only for users, not for dealers))
      ?
      ?
 
