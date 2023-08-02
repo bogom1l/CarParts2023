@@ -1,7 +1,9 @@
 ﻿@{
+    Layout = "_Layout";
+}
+@{
     ViewData["Title"] = "Home";
 }
-
 @{
     var errorMessage = TempData["ErrorMessage"] as string;
     var successMessage = TempData["SuccessMessage"] as string;
@@ -17,195 +19,10 @@
     }
 }
 
-
-<!DOCTYPE html>
-<html>
 <head>
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-
-        body {
-            /*padding: 0;
-                    margin: 0;*/
-            background-color: #f2f2f2;
-        }
-
-        .container {
-            padding: 0;
-            margin: 0;
-            padding-left: 20px;
-        }
-
-
-
-        .btn-group-vertical {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-left: 10px;
-        }
-
-            .btn-group-vertical .btn {
-                width: 200px;
-                margin: 5px;
-                border-radius: 25px;
-            }
-
-            .btn-group-vertical .btn-primary {
-                background-color: #1E90FF;
-                color: #fff;
-            }
-
-            .btn-group-vertical .btn-secondary {
-                background-color: #f0f0f0;
-                color: #000;
-            }
-
-            .btn-group-vertical .btn-colored {
-                background-color: #1e20ff;
-                color: #fff;
-            }
-
-            .btn-group-vertical .btn-contactus {
-                background-color: #013220;
-                color: #fff;
-            }
-
-        .main-content {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-            text-align: center;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-            width: 300%; /* Increase the width of the container */
-            height: 650px; /* Increase the height of the container */
-        }
-
-        .catalog-title {
-            font-size: 36px; /* Set the font size to make it big */
-            font-weight: bold; /* Set the font weight to bold */
-            color: #1E90FF; /* Set the color to the desired blue */
-            margin-bottom: 20px; /* Add some space at the bottom */
-            margin-left: 0; /* Remove left margin */
-        }
-
-
-
-        .car-image {
-            max-width: 75%;
-            border-radius: 5px;
-        }
-
-        .car-description {
-            margin-top: 10px;
-            font-size: 20px;
-            color: #1E90FF;
-        }
-
-
-        body {
-            background-color: #FEFEFE; /* Set the dark background color for the body */
-            /*color: #fff;*/ /* Set the text color to white for better contrast */
-        }
-
-       
-
-
-    </style>
+   
 </head>
-<body>
-
-<div class="container">
-
-    <div class="row">
-
-        <div class="col-lg-2 col-md-3 col-sm-6">
-            <div class="btn-group-vertical">
-                <a href="@Url.Action("All", "Car")" class="btn btn-primary">View All Cars</a>
-                <a href="@Url.Action("MyCars", "Car")" class="btn btn-secondary">My Cars</a>
-                <a href="@Url.Action("MyFavoriteCars", "Car")" class="btn btn-secondary">My favorite cars</a>
-                <a href="@Url.Action("Add", "Car")" class="btn btn-secondary">Add Car</a>
-                <br />
-                <a href="@Url.Action("Search", "Car")" class="btn btn-colored">Search Cars</a>
-
-                <br />
-
-                <a href="@Url.Action("All", "Part")" class="btn btn-primary">View All Parts</a>
-                <a href="@Url.Action("MyParts", "Part")" class="btn btn-secondary">My Parts</a>
-                <a href="@Url.Action("MyFavoriteParts", "Part")" class="btn btn-secondary">My favorite parts</a>
-                <a href="@Url.Action("Add", "Part")" class="btn btn-secondary">Add Part</a>
-                <br />
-                <a href="@Url.Action("Search", "Part")" class="btn btn-colored">Search Parts</a>
-
-                <br />
-
-                <a href="@Url.Action("ContactUs", "Home")" class="btn btn-contactus">Contact Us</a>
-                <a href="@Url.Action("Reviews", "Home")" class="btn btn-contactus">Reviews</a>
 
 
-            </div>
-        </div>
-
-
-        <div class="col-lg-8 col-md-6 col-sm-6" style="padding-left: 302px;">
-
-            <div class="catalog-title">Car Catalog 2023</div>
-            <div class="main-content">
-                <div class="row">
-
-                    <div class="col-md-6">
-
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://www.nastarta.com/wp-content/uploads/2017/12/25360533_10203959402102183_1121707332_n.jpg" class="card-img-top" alt="BMW E60 M5">
-                            <div class="card-body">
-                                <h5 class="card-title">BMW E60 M5</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a class="btn btn-primary" href="@Url.Action("All", "Car")">View all Cars</a>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-6">
-
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://i.ebayimg.com/images/g/3WMAAOSwu~BhnX29/s-l1200.jpg" class="card-img-top" alt="stoplight e60">
-                            <div class="card-body">
-                                <h5 class="card-title"> BMW 5 Series E60 LED Tail Lights 03-10 Red Rear Lamps Dynamic Signal</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a class="btn btn-primary" href="@Url.Action("All", "Part")">View all Parts</a>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-
-                </div>
-            </div>
-        </div>
-
-        <!-- One column for the other text -->
-
-
-
-
-
-    </div>
-</div>
-
-
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
-
-</body>
-</html>
+@await Html.PartialAsync("IndexHomePagePartial");
