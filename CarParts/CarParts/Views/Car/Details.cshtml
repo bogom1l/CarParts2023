@@ -1,7 +1,28 @@
 ﻿@using CarParts.Web.Extensions
+@using CarParts.Web.ViewModels.Review
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using CarParts.Services.Data
+@using CarParts.Services.Data.Interfaces
 @model CarParts.Web.ViewModels.Car.DetailsCarViewModel
 @{
     ViewBag.Title = "Car Details";
+}
+
+@inject IUserService UserService
+
+@{
+    var errorMessage = TempData["ErrorMessage"] as string;
+    var successMessage = TempData["SuccessMessage"] as string;
+
+    if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+
+    if (!string.IsNullOrEmpty(successMessage))
+    {
+        <div class="alert alert-success">@successMessage</div>
+    }
 }
 
 
@@ -73,70 +94,74 @@
             </div>
         </div>
         
+    @if (User.Identity!.IsAuthenticated && (!await UserService.IsUserDealer(User.GetId())))
+    {
         <div class="card" style="width: 18rem;">
             <div class="card-body">
                 
-                @*@if (User.Identity.IsAuthenticated)
-                {
-                    <h2>Add a Review</h2>
-                    <hr />
-
-                    <form asp-controller="Review" asp-action="Create" method="post">
-                        <input type="hidden" asp-for="@Model.Model" value="@Model.CarId" />
-                        <div class="form-group">
-                            <label for="Username">Your Name:</label>
-                            <input type="text" id="Username" name="Username" class="form-control" value="Your username..." required />
-                        </div>
-                        <div class="form-group">
-                            <label for="ReviewText">Review:</label>
-                            <textarea id="ReviewText" name="ReviewText" class="form-control" value="Your review..." rows="6" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit Review</button>
-                    </form>
-                }*@
+                
+                    @{ await Html.RenderPartialAsync("ReviewFormPartial", new ReviewViewModel()
+                       {
+                           CarId = Model.CarId
+                       });
+                    }
+               
 
             </div>
         </div>
+    }
         
-        @*<h2>Reviews: </h2>
-        <hr />
-        @if (Model.Reviews.Any())
-        {
-            @foreach (var review in Model.Reviews)
+        <div>
+            
+            <h2>Reviews: </h2>
+            <hr />
+            @if (Model.Reviews.Any())
             {
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <p class="mb-0"><span class="fw-bold">Username: </span>@review.Username</p>
-                        <p class="mb-0"><span class="fw-bold">Review: </span>@review.Text</p>
-                        <p class="mb-0"><span class="fw-bold">Date: </span>@review.CreatedOn.ToString("dd/MM/yyyy")</p>
+                @foreach (var review in Model.Reviews)
+                {
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <p class="mb-0"><span class="fw-bold">Username: </span>@review.Username</p>
+                            <p class="mb-0"><span class="fw-bold">Review: </span>@review.Content</p>
+                            <p class="mb-0"><span class="fw-bold">Rating: </span>@review.Rating</p>
+                            <p class="mb-0"><span class="fw-bold">Date: </span>@review.DatePosted.ToString("dd/MM/yyyy")</p>
+                        </div>
                     </div>
-                </div>
+                }
             }
-        }
-        else
-        {
-            <p>No reviews available.</p>
-        }*@
-        
+            else
+            {
+                <p>No reviews available.</p>
+            }
 
-        @if (User.Identity.Name == @Model.Owner || User.IsAdmin())
-        {
-            <a asp-controller="Car" asp-action="Edit" asp-route-id="@Model.CarId" class="btn btn-warning btn-block">
-                Edit
-            </a>
-
-            <a href="#" class="btn btn-danger btn-block delete-car" data-id="@Model.CarId">
-                Delete
-            </a>
-        }
-
-        <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@Model.CarId" class="btn btn-purple btn-block">
-            Add to favorite cars
-        </a>
-        
+        </div>
         
         
     </div>
+    
+
+
+    @if (User.Identity.Name == @Model.Owner || User.IsAdmin())
+    {
+        <a asp-controller="Car" asp-action="Edit" asp-route-id="@Model.CarId" class="btn btn-warning btn-block">
+            Edit
+        </a>
+
+        <a href="#" class="btn btn-danger btn-block delete-car" data-id="@Model.CarId">
+            Delete
+        </a>
+    }
+    
+    @if (User.IsAdmin())
+    {
+        <a asp-area="Admin" asp-controller="User" asp-action="DeleteAllReviewsForCar" asp-route-id="@Model.CarId" class="btn btn-danger btn-block">
+            Delete all reviews for this car
+        </a>
+    }
+
+    <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@Model.CarId" class="btn btn-purple btn-block">
+        Add to favorite cars
+    </a>
 
     <a asp-controller="Car" asp-action="All" class="btn btn-success mb-2 w-100 p-3 fw-bold">
         Back to All Cars

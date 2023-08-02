@@ -80,5 +80,8 @@
         public int DealerId { get; set; }
 
         [Required] public Dealer Dealer { get; set; } = null!;
+
+
+        public ICollection<Review> Reviews { get; set; } = new List<Review>();
     }
 }

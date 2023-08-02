@@ -21,5 +21,9 @@
        public Task<bool> IsUserDealerOfCar(string userId, int carId);
 
        public Task<bool> IsUserDealer(string userId);
+
+       public Task DeleteAllReviewsForCar(int id);
+
+       public Task DeleteAllReviews();
     }
 }

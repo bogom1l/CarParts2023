@@ -2,6 +2,7 @@
 {
     using CarParts.Data.Models;
     using Web.ViewModels.Car;
+    using Web.ViewModels.Review;
 
     public interface ICarService
     {
@@ -58,5 +59,8 @@
         public Task<double> TotalMoneyToExtendRentAsync(RentCarViewModel rentCarViewModel, DateTime endDate);
 
         public Task<double> TotalMoneyToReturnForEndingRental(int carId);
+
+        public Task AddReview(ReviewViewModel reviewViewModel, string userId);
+        public Task<bool> HasUserAlreadyReviewedThisCar(int carId, string userId);
     }
 }

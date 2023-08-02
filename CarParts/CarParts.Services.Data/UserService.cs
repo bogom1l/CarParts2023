@@ -3,7 +3,6 @@
     using CarParts.Data;
     using Interfaces;
     using Microsoft.EntityFrameworkCore;
-    using Web.ViewModels.Dealer;
     using Web.ViewModels.User;
 
     public class UserService : IUserService
@@ -155,6 +154,25 @@
             return await _dbContext
                 .Dealers
                 .AnyAsync(d => d.UserId == userId);
+        }
+
+        public async Task DeleteAllReviewsForCar(int id)
+        {
+            var reviews = await _dbContext
+                .Reviews
+                .Where(r => r.CarId == id)
+                .ToListAsync();
+
+            _dbContext.Reviews.RemoveRange(reviews);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteAllReviews()
+        {
+            var reviews = await _dbContext.Reviews.ToListAsync();
+
+            _dbContext.Reviews.RemoveRange(reviews);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

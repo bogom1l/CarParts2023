@@ -81,6 +81,10 @@
                     <div class="card-footer">
 
 
+                        <a asp-controller="Car" asp-action="Details" asp-route-id="@car.Id" class="btn btn-success btn-block">
+                            Details
+                        </a>
+
                         <a asp-controller="Car" asp-action="ManageRental" asp-route-id="@car.Id" class="btn btn-info btn-block">
                             Manage Rental
                         </a>

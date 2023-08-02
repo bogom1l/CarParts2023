@@ -105,6 +105,12 @@
             public const string AdminAddress = "ADMIN_ADDRESS";
             public const string AdminAreaName = "Admin";
         }
-        
+
+        public static class Review
+        {
+            public const int ReviewContentMinLength = 1;
+            public const int ReviewContentMaxLength = 3000;
+        }
+
     }
 }

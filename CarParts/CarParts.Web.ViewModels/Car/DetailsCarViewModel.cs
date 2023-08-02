@@ -1,6 +1,7 @@
 ﻿namespace CarParts.Web.ViewModels.Car
 {
     using Dealer;
+    using Review;
 
     public class DetailsCarViewModel
     {
@@ -47,5 +48,9 @@
         public string Owner { get; set; } = null!;
 
         public DetailsDealerViewModel DetailsDealerViewModel { get; set; } = null!;
+
+        public List<ReviewViewModel> Reviews { get; set; } = null!;
+
+        
     }
 }

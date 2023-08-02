@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Services.Data.Interfaces;
     using ViewModels.Car;
+    using ViewModels.Review;
     using static Common.GlobalConstants.Car;
 
     public class CarController : BaseController
@@ -414,5 +415,22 @@
                                          $"and you have been taxed {TaxPriceForCancelingRental} euros.";
             return RedirectToAction("MyRentedCars", "Car");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddReview(ReviewViewModel reviewViewModel)
+        {
+            var hasUserAlreadyReviewedThisCar = await _carService.HasUserAlreadyReviewedThisCar(reviewViewModel.CarId, GetUserId());
+            if (hasUserAlreadyReviewedThisCar)
+            {
+                TempData["ErrorMessage"] = "Sending more than one review per car is not allowed.";
+                return RedirectToAction("Details", "Car", new { id = reviewViewModel.CarId });
+            }
+
+            await _carService.AddReview(reviewViewModel, GetUserId());
+
+            TempData["SuccessMessage"] = "Review has been successfully added.";
+            return RedirectToAction("Details", "Car", new { id = reviewViewModel.CarId });
+        }
+
     }
 }

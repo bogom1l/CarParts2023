@@ -24,6 +24,8 @@
 
         public DbSet<Dealer> Dealers { get; set; } = null!;
 
+        public DbSet<Review> Reviews { get; set; } = null!;
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             //SeedAdministrator(builder); //seed first administrator
@@ -35,6 +37,9 @@
 
             builder.Entity<UserFavoriteCar>()
                 .HasKey(ufc => new { ufc.UserId, ufc.CarId });
+
+            builder.Entity<Review>()
+                .HasKey(r => new { r.UserId, r.CarId });
 
             //SeedData(builder);
 

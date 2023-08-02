@@ -2,11 +2,13 @@
 {
     using CarParts.Data;
     using CarParts.Data.Models;
+    using Common;
     using Interfaces;
     using Microsoft.EntityFrameworkCore;
     using Web.ViewModels.Car;
     using Web.ViewModels.Car.CarProperties;
     using Web.ViewModels.Dealer;
+    using Web.ViewModels.Review;
     using static Common.GlobalConstants.Car;
 
     public class CarService : ICarService
@@ -148,7 +150,16 @@
                         FullName = c.Dealer.User.FirstName + " " + c.Dealer.User.LastName,
                         Address = c.Dealer.Address,
                         Email = c.Dealer.User.Email
-                    }
+                    },
+                    Reviews = c.Reviews.Select(r => new ReviewViewModel
+                    {
+                        Content = r.Content,    
+                        Rating = r.Rating,
+                        DatePosted = r.DatePosted,
+                        UserId = r.UserId,
+                        Username = r.User.FirstName + " " + r.User.LastName,
+                        CarId = r.CarId
+                    }).ToList()
                 }).FirstOrDefaultAsync();
 
             return detailsCarViewModel;
@@ -623,6 +634,27 @@
             }
 
             return 0;
+        }
+
+
+        public async Task AddReview(ReviewViewModel reviewViewModel, string userId)
+        {
+            var review = new Review
+            {
+                Content = reviewViewModel.Content,
+                Rating = reviewViewModel.Rating,
+                DatePosted = DateTime.Now,
+                UserId = userId,
+                CarId = reviewViewModel.CarId
+            };
+
+            await _dbContext.Reviews.AddAsync(review);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> HasUserAlreadyReviewedThisCar(int carId, string userId)
+        {
+            return await _dbContext.Reviews.AnyAsync(r => r.CarId == carId && r.UserId == userId);
         }
     }
 }

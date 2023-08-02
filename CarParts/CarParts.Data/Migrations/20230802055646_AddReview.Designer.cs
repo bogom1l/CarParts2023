@@ -4,6 +4,7 @@ using CarParts.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarParts.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230802055646_AddReview")]
+    partial class AddReview
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,7 +107,7 @@ namespace CarParts.Data.Migrations
                             Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
                             AccessFailedCount = 0,
                             Balance = 9999999.0,
-                            ConcurrencyStamp = "1e8b2520-9284-4e6f-aef1-eae16b9bb084",
+                            ConcurrencyStamp = "64aeec9d-c565-4ff6-bd6b-1a2e3f1aa827",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "ADMINISTRATOR",
@@ -113,9 +115,9 @@ namespace CarParts.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJirY2wYmtVyC8bgFrangPj9VEjyU/17e96wZ3AtfDyYErEDVBB3ycsq7Ml3K5sDUg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECfhXAtOT+9nnxRz5dlw0MNkFm1y8qvDrw34wMJj7//E9xS42Id0jdBVZZWjY31Rhw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7664ff25-55d3-40ad-aa16-081129a672bf",
+                            SecurityStamp = "837e193a-8fac-44ae-9563-4a7ed2d04d89",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
@@ -498,14 +500,17 @@ namespace CarParts.Data.Migrations
                     b.Property<DateTime>("DatePosted")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("Rating")
-                        .HasColumnType("float");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
 
                     b.HasKey("UserId", "CarId");
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Review");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.UserFavoriteCar", b =>

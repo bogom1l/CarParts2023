@@ -1,6 +1,23 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+
+
+@{
+    var errorMessage = TempData["ErrorMessage"] as string;
+    var successMessage = TempData["SuccessMessage"] as string;
+
+    if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+
+    if (!string.IsNullOrEmpty(successMessage))
+    {
+        <div class="alert alert-success">@successMessage</div>
+    }
+}
+
 <div class="mt-4 p-5 bg-light text-center">
     <h2 class="display-4">Hello, Admin!</h2>
     <p class="lead mb-1 mt-3">
@@ -28,4 +45,13 @@
        class="btn btn-primary btn-lg">All Rentals</a>
     <a asp-area="Admin" asp-controller="User" asp-action="All"
        class="btn btn-primary btn-lg">All Users</a>
+    
+    <br/>
+
+    <a asp-area="Admin" asp-controller="User" asp-action="DeleteAllReviews" class="btn btn-warning btn-block">
+        Delete all reviews
+    </a>
+
+    
+
 </div>

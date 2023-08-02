@@ -2,7 +2,6 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using Services.Data.Interfaces;
-    using ViewModels.Car;
 
     public class UserController : BaseController
     {
@@ -25,9 +24,11 @@
         [HttpGet]
         public async Task<IActionResult> ResetMoney()
         {
-            await _userService.ResetMoney(GetUserId()); 
+            await _userService.ResetMoney(GetUserId());
 
             return RedirectToAction("Index", "Home");
         }
+
+       
     }
 }
