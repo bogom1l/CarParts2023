@@ -1,0 +1,175 @@
+﻿<style>
+
+    #map {
+        width: 100%;
+    }
+
+    body {
+        /*padding: 0;
+        margin: 0;*/
+        background-color: #f2f2f2;
+    }
+
+
+   
+    .btn-group-vertical {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        
+    }
+
+        .btn-group-vertical .btn {
+            width: 200px;
+            border-radius: 25px;
+        }
+
+        .btn-group-vertical .btn-primary {
+            background-color: #1E90FF;
+            color: #fff;
+        }
+
+        .btn-group-vertical .btn-secondary {
+            background-color: #f0f0f0;
+            color: #000;
+        }
+
+        .btn-group-vertical .btn-colored {
+            background-color: #1e20ff;
+            color: #fff;
+        }
+
+        .btn-group-vertical .btn-contactus {
+            background-color: #013220;
+            color: #fff;
+        }
+
+
+    .custom-padding {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+
+</style>
+
+
+
+@*-------------------------------------------------------------------------------------------------------*@
+@*-------------------------------------------------------------------------------------------------------*@
+@*-------------------------------------------------------------------------------------------------------*@
+@*-------------------------------------------------------------------------------------------------------*@
+@*-------------------------------------------------------------------------------------------------------*@
+
+
+
+
+<div class="container">
+    
+    <div class="row">
+        
+        <!-- First Part: Vertical Button Group -->
+        <div class="col-md-2">
+            <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                <button type="button" class="btn btn-primary">Button 1</button>
+                <a href="@Url.Action("All", "Car")" class="btn btn-primary">View All Cars</a>
+                <a href="@Url.Action("MyCars", "Car")" class="btn btn-secondary">My Cars</a>
+                <a href="@Url.Action("MyFavoriteCars", "Car")" class="btn btn-secondary">My favorite cars</a>
+                <a href="@Url.Action("Add", "Car")" class="btn btn-secondary">Add Car</a>
+                <br/>
+                <a href="@Url.Action("Search", "Car")" class="btn btn-colored">Search Cars</a>
+
+                <br/>
+
+                <a href="@Url.Action("All", "Part")" class="btn btn-primary">View All Parts</a>
+                <a href="@Url.Action("MyParts", "Part")" class="btn btn-secondary">My Parts</a>
+                <a href="@Url.Action("MyFavoriteParts", "Part")" class="btn btn-secondary">My favorite parts</a>
+                <a href="@Url.Action("Add", "Part")" class="btn btn-secondary">Add Part</a>
+                <br/>
+                <a href="@Url.Action("Search", "Part")" class="btn btn-colored">Search Parts</a>
+
+                <br/>
+
+                <a href="@Url.Action("ContactUs", "Home")" class="btn btn-contactus">Contact Us</a>
+                <a href="@Url.Action("Reviews", "Home")" class="btn btn-contactus">Reviews</a>
+                <button type="button" class="btn btn-primary">Button 2</button>
+            </div>
+        </div>
+
+        <!-- Second Part: Two Cards Side by Side -->
+        <div class="col-md-7">
+            <div class="row">
+                
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <img class="card-img-top" style="height: 222px; width:222px;" src="https://collectingcars.imgix.net/011570/10-ww-4.jpg?w=1263&fit=fillmax&crop=edges&auto=format,compress&cs=srgb&q=85" alt="Car image">
+                            <h5 class="card-title text-center"><b>BMW M5 E60</b></h5>
+                            <p class="card-text">
+                                The BMW M5 E60 is a high-performance luxury sports sedan produced by BMW from 2005 to 2010.
+                                It is the fifth generation of the BMW M5 series and is known for its powerful performance, stylish design, and advanced technology.
+                            </p>
+                            <a class="btn btn-primary" href="@Url.Action("All", "Car")">View all Cars</a>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <img class="card-img-top" style="height: 222px; width:222px;" src="https://i.ebayimg.com/images/g/u7YAAOSwh-VjQVN3/s-l1200.webp" alt="Part image">
+                            <h5 class="card-title text-center"> <b>BMW 5 Series E60 LED Tail Lights 03-10 Red Rear Lamps Dynamic Signal</b></h5>
+                            <p class="card-text">
+                                The stop light system of the BMW M5 E60 is overall design is sleek and aggressive, with the LED technology also
+                                including additional features, such as adaptive brake lights.
+                            </p>
+                            <a class="btn btn-primary" href="@Url.Action("All", "Part")">View all Parts</a>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+        <!-- Third Part: Map -->
+        <div class="col-md-3">
+
+            <div id="map" style="height:430px; width:430px;"></div>
+            <script type="text/javascript">
+
+            let map;
+
+            function initMap() {
+                map = new google.maps.Map(document.getElementById("map"), {
+                            center: { lat: 43.214649269728916, lng: 27.91792350129014 }, zoom: 12,
+                        });
+
+                // Add a marker for the specified coordinates.
+                const markerCoordinates = { lat: 43.214649269728916, lng: 27.91792350129014 };
+                userMarker = new google.maps.Marker({
+                    position: markerCoordinates,
+                    map: map,
+                    title: "Marker Title", // Set your desired title for the marker
+                });
+            }
+
+            </script>
+            <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5iPOeXN1nNaCDQ_poRNw1Pj5SaroOPMc&callback=initMap">
+            </script>
+
+        </div>
+
+
+
+
+    </div>
+</div>

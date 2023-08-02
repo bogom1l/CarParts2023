@@ -28,7 +28,8 @@
 
   ✔ add reviews (only for users, not for dealers))
   ✔ gorna granica na ratinga && zakruglqne
-     ?
+     
+     front end
      ?
 
 
