@@ -27,8 +27,7 @@
   ✔ make background color to almost white
 
   ✔ add reviews (only for users, not for dealers))
-     //TODO: add renter full name property in DetailsCarviewModel to display in the "name" field in the form
-     gorna granica na ratinga
+  ✔ gorna granica na ratinga && zakruglqne
      ?
      ?
 

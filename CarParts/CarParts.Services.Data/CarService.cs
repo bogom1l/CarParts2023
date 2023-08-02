@@ -642,7 +642,7 @@
             var review = new Review
             {
                 Content = reviewViewModel.Content,
-                Rating = reviewViewModel.Rating,
+                Rating = Math.Round(reviewViewModel.Rating, 1),
                 DatePosted = DateTime.Now,
                 UserId = userId,
                 CarId = reviewViewModel.CarId
