@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Contacts";
+}
+
+<style>
+
+    .my-custom-background-color {
+        background-color: #e6f9ff;
+    }
+
+</style>
+
+
+<div class="container my-custom-background-color">
+    <h1>@ViewData["Title"]</h1>
+    <p>TODO</p>
+    <p>Last updated - 03-Aug-2023</p>
+    <br />
+    <!-- Third Part: Map -->
+    <div class="col-md-3">
+
+        <div id="map" style="height:430px; width:430px;"></div>
+        <script type="text/javascript">
+
+            let map;
+
+            function initMap() {
+                map = new google.maps.Map(document.getElementById("map"), {
+                            center: { lat: 43.214649269728916, lng: 27.91792350129014 }, zoom: 12,
+                        });
+
+                // Add a marker for the specified coordinates.
+                const markerCoordinates = { lat: 43.214649269728916, lng: 27.91792350129014 };
+                userMarker = new google.maps.Marker({
+                    position: markerCoordinates,
+                    map: map,
+                    title: "Marker Title", // Set your desired title for the marker
+                });
+            }
+
+            </script>
+        <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5iPOeXN1nNaCDQ_poRNw1Pj5SaroOPMc&callback=initMap">
+            </script>
+
+    </div>
+
+</div>

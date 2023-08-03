@@ -37,5 +37,12 @@
             return View();
         }
 
+        [AllowAnonymous]
+        public IActionResult Contacts()
+        {
+            return View();
+        }
+
+
     }
 }
