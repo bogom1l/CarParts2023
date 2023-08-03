@@ -1,9 +1,12 @@
 ﻿@model ICollection<CarParts.Web.ViewModels.Car.CarViewModel>
 
 @{
-    ViewBag.Title = "My Favorite Cars";
+    Layout = "../Shared/_Layout";
 }
 
+@{
+    ViewBag.Title = "My Favorite Cars";
+}
 
 @{
     var errorMessage = TempData["ErrorMessage"] as string;
@@ -25,66 +28,80 @@
     .btn-customColor {
         background-color: darkolivegreen;
         color: white;
-        /* Add any additional styling as needed */
+    }
+
+    .my-custom-background-color {
+        background-color: #ccf2ff;
+    }
+
+    .my-custom-car-image-props {
+        height: 200px; 
+        object-fit: cover; 
     }
 </style>
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
-
-<div class="text-center row">
+<div class="container my-custom-background-color">
+    <div class="row">
     
-    @if (!Model.Any())
-    {
-        <h2>You haven't added any cars in your favorite list.</h2>
-    }
+        <p><h2 class="text-center">@ViewBag.Title</h2></p>
 
-    @foreach (var car in Model)
-    {
-        string newDescription = string.Join(" ", car.Description
-            .Split(new char[] { ' ', '\t', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-            .ToList().Take(5)) + "...";
 
-        <div class="card col-4" style="width: 20rem;">
-            <div class="card-body">
-
-                <img src="@car.ImageUrl" alt="Car Image" class="card-img-top">
-
-                <h5 class="card-title mt-1">@car.Make @car.Model</h5>
-                <p class="mb-0"><span class="fw-bold">Year: </span>@car.Year</p>
-                <p class="mb-0"><span class="fw-bold">Description: </span>@newDescription</p>
-                <p class="mb-0"><span class="fw-bold">Price: </span>@car.Price</p>
-                <p class="mb-0"><span class="fw-bold">Color: </span>@car.Color</p>
-                <p class="mb-0"><span class="fw-bold">Engine Size: </span>@car.EngineSize</p>
-                <p class="mb-0"><span class="fw-bold">Fuel Type: </span>@car.FuelTypeName</p>
-                <p class="mb-0"><span class="fw-bold">Transmission: </span>@car.TransmissionName</p>
-                <p class="mb-0"><span class="fw-bold">Category: </span>@car.CategoryName</p>
-                <p class="mb-0"><span class="fw-bold">Weight: </span>@car.Weight</p>
-                <p class="mb-0"><span class="fw-bold">Top Speed: </span>@car.TopSpeed</p>
-                <p class="mb-0"><span class="fw-bold">Acceleration: </span>@car.Acceleration</p>
-                <p class="mb-0"><span class="fw-bold">Horsepower: </span>@car.Horsepower</p>
-                <p class="mb-0"><span class="fw-bold">Torque: </span>@car.Torque</p>
-                <p class="mb-0"><span class="fw-bold">Fuel Consumption: </span>@car.FuelConsumption</p>
-            </div>
-
-            <div class="card-footer">
-                <a asp-controller="Car" asp-action="Details" asp-route-id="@car.CarId" class="btn btn-success mb-2 w-100 p-3 fw-bold">
-                    View Details
-                </a>
-
-                @if (User.Identity.Name == car.Owner)
-                {
-                    <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.CarId" class="btn btn-warning mb-2 w-100 p-3 fw-bold">
-                        Edit
+        @if (!Model.Any())
+        {
+            <h2>You haven't added any cars in your favorite list.</h2>
+            <div class="d-flex justify-content-center">
+                <p>
+                    <a asp-controller="Car" asp-action="All" class="btn btn-success btn-lg fw-bold" style="width:350px">
+                        View catalogue of cars
                     </a>
-                }
-
-                <a asp-controller="Car" asp-action="RemoveFromFavoriteCars" asp-route-id="@car.CarId" class="btn btn-customColor btn-block">
-                    Remove from favorite cars
-                </a>
+                </p>
             </div>
-        </div>
-    }
+        }
+
+        @foreach (var car in Model)
+        {
+            string newDescription = string.Join(" ", car.Description
+                .Split(new char[] { ' ', '\t', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                .ToList().Take(4)) + "...";
+
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="card">
+
+                    <img class="card-img-top img-fluid img-thumbnail my-custom-car-image-props" src="@car.ImageUrl" alt="Car Image">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title text-center">@car.Make @car.Model</h5>
+
+                        <p class="mb-1"><span class="fw-bold">Year: </span>@car.Year</p>
+                        <p class="mb-1"><span class="fw-bold">Category: </span>@car.CategoryName</p>
+                        <p class="mb-1"><span class="fw-bold">Horsepower: </span>@car.Horsepower</p>
+                        <p class="mb-1"><span class="fw-bold">Price (EUR): </span>@car.Price</p>
+                    </div>
+
+                    <div class="card-footer">
+                        <a asp-controller="Car" asp-action="Details" asp-route-id="@car.CarId" class="btn btn-success fw-bold">
+                            View Details
+                        </a>
+
+                        @if (User.Identity!.Name == car.Owner)
+                        {
+                            <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.CarId" class="btn btn-warning fw-bold">
+                                Edit
+                            </a>
+                        }
+
+                        <a asp-controller="Car" asp-action="RemoveFromFavoriteCars" asp-route-id="@car.CarId" class="btn btn-customColor">
+                            Remove from favorite cars
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        }
+    </div>
+     
 </div>
 
 
