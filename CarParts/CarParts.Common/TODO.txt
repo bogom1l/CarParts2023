@@ -29,10 +29,10 @@
   ✔ add reviews (only for users, not for dealers))
   ✔ gorna granica na ratinga && zakruglqne
      
-  -> front end
+  -> front end . . .
      ?
 
 
 
 ------------------
-18:00 - 02.08.2023
+17:00 - 03.08.2023
