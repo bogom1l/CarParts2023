@@ -1,6 +1,10 @@
 ﻿@model ICollection<CarParts.Web.ViewModels.Part.PartViewModel>
 
 @{
+    Layout = "../Shared/_Layout";
+}
+
+@{
     ViewBag.Title = "My favorite Parts";
 }
 
@@ -21,59 +25,94 @@
 }
 
 
-
 <style>
-    .btn-customColor {
-        background-color: darkolivegreen;
-        color: white;
-        /* Add any additional styling as needed */
-    }
+        .btn-customColor {
+            background-color: darkolivegreen;
+            color: white;
+        }
+    
+        .my-custom-background-color {
+            background-color: #ccf2ff;
+        }
+    
+        .my-custom-car-image-props {
+            height: 200px; 
+            object-fit: cover; 
+        }
 </style>
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
 
-<div class="text-center row">
+
+<div class="container my-custom-background-color">
+    <div class="row">
+        
+        <p><h2 class="text-center">@ViewBag.Title</h2></p>
+
+        @if (!Model.Any())
+        {
+            <h2>You haven't added any parts in your favorite list.</h2>
+            <div class="d-flex justify-content-center">
+                <p>
+                    <a asp-controller="Part" asp-action="All" class="btn btn-success btn-lg fw-bold" style="width:350px">
+                        View catalogue of parts
+                    </a>
+                </p>
+            </div>
+        }
+
+        @foreach (var part in Model)
+        {
+            string newDescription = string.Join(" ", part.Description
+                .Split(new char[] { ' ', '\t', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                .ToList().Take(5)) + "...";
+
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="card">
     
-    @if (!Model.Any())
-    {
-        <h2>You haven't added any parts in your favorite list.</h2>
-    }
+                    <img class="card-img-top img-fluid img-thumbnail my-custom-car-image-props" src="@part.ImageUrl" alt="Part Image">
+    
+                    <div class="card-body">
+    
+                        <h5 class="card-title text-center">@part.Name</h5>
+                    
+                        <p class="mb-0"><span class="fw-bold">Category: </span>@part.CategoryName</p>
 
-    @foreach (var part in Model)
-    {
-        string newDescription = string.Join(" ", part.Description
-            .Split(new char[] { ' ', '\t', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-            .ToList().Take(5)) + "...";
+                        <p class="mb-0"><span class="fw-bold">Price (EUR): </span>@part.Price</p>
 
-        <div class="card col-4" style="width: 20rem; ">
-            <div class="card-body">
+                        <p class="mb-0"><span class="fw-bold">Description: </span>@newDescription</p>
+                
+                    </div>
+            
+                    <div class="card-footer">
 
-                <img src="@part.ImageUrl" alt="Part Image" class="card-img-top">
+                        @if (User.Identity!.Name == part.Owner)
+                        {
+                            <p>
+                                <a asp-controller="Part" asp-action="Edit" asp-route-id="@part.Id" class="btn btn-warning fw-bold">
+                                    Edit
+                                </a>
+                            </p>
+                        }
 
-                <h5 class="card-title mt-1">@part.Name</h5>
-                <p class="mb-0"><span class="fw-bold">Description: </span>@newDescription</p>
-                <p class="mb-0"><span class="fw-bold">Price: </span>@part.Price</p>
-                <p class="mb-0"><span class="fw-bold">Category: </span>@part.CategoryName</p>
+                        <a asp-controller="Part" asp-action="Details" asp-route-id="@part.Id" class="btn btn-success fw-bold">
+                            View Details
+                        </a>
+                        
+                        
+                        <p>
+                            <br/>
+                            <a asp-controller="Part" asp-action="RemoveFromFavoriteParts" asp-route-id="@part.Id" class="btn btn-customColor">
+                                Remove from favorite parts
+                            </a>
+                        </p>
+                    </div>
+                </div>
             </div>
 
+        }
 
-            <a asp-controller="Part" asp-action="Details" asp-route-id="@part.Id" class="btn btn-success mb-2 w-100 p-3 fw-bold">
-                View Details
-            </a>
-
-            <a asp-controller="Part" asp-action="Edit" asp-route-id="@part.Id" class="btn btn-warning mb-2 w-100 p-3 fw-bold">
-                Edit
-            </a>
-
-            <a asp-controller="Part" asp-action="RemoveFromFavoriteParts" asp-route-id="@part.Id" class="btn btn-customColor btn-block">
-                Remove from favorite parts
-            </a>
-
-        </div>
-    }
+    </div>
 </div>
-
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
