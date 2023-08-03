@@ -1,19 +1,10 @@
 ﻿@model CarParts.Web.ViewModels.Car.EditCarViewModel
 
-@{
-    Layout = "../Shared/_Layout";
-}
+
 
 @{
     ViewBag.Title = "Edit Car Info";
 }
-
-<style>
-    .my-custom-background-color {
-        background-color: #e6f9ff;
-    }
-</style>
-
 
 
 <div class="container my-custom-background-color">
@@ -147,4 +138,5 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial"/>
+    <partial name="CommonView" />
 }

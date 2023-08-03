@@ -1,5 +1,125 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿
+@*
+    SweetAlert CDN
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script> 
 *@
+
+@*
 @{
+    var errorMessage = TempData["ErrorMessage"] as string;
+    var successMessage = TempData["SuccessMessage"] as string;
+
+    if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger" role="alert">
+            @errorMessage
+        </div>
+    }
+
+    if (!string.IsNullOrEmpty(successMessage))
+    {
+        <div class="alert alert-success" role="alert">
+            @successMessage
+        </div>
+    }
 }
+*@
+
+<style>
+
+    .btn-purple {
+        background-color: purple;
+        color: white;
+    }
+
+    .btn-lightgreen {
+        background-color: lightgreen;
+        color: white;
+    }
+
+    .my-custom-car-image-props {
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .my-custom-background-color {
+        background-color: #e6f9ff;
+    }
+
+    .my-custom-background-color-v2 {
+        background-color: #ccfff5;
+    }
+
+    .my-custom-background-color-v3 {
+        background-color: #b3fff0;
+    }
+
+    .btn-customColor {
+        background-color: darkolivegreen;
+        color: white;
+    }
+
+    .btn-orange {
+        background-color: orangered;
+        color: white;
+    }
+
+</style>
+
+
+
+
+@*DELETE Part BUTTON*@
+<script>
+        // Handle the click event for the delete button
+        $('.delete-part').on('click', function (e) {
+            e.preventDefault();
+            const partId = $(this).data('id');
+            
+            // Show SweetAlert confirmation dialog
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You are about to delete this part. This action cannot be undone.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `/Part/Delete/${partId}`;
+                }
+            });
+        });
+</script>
+    
+
+
+
+@*DELETE Car BUTTON*@
+<script>
+        // Handle the click event for the delete button
+        $('.delete-car').on('click', function (e) {
+            e.preventDefault();
+            const carId = $(this).data('id');
+
+            // Show SweetAlert confirmation dialog
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You are about to delete this car. This action cannot be undone.',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `/Car/Delete/${carId}`;
+                }
+            });
+        });
+</script>
+
+                
+                
+                

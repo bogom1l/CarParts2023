@@ -1,27 +1,8 @@
 ﻿@model ICollection<CarParts.Web.ViewModels.Car.CarViewModel>
 
 @{
-    Layout = "../Shared/_Layout";
-}
-
-@{
     ViewBag.Title = "My Cars";
 }
-
-@*SweetAlert CDN*@
-<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
-
-<style>
-    .my-custom-background-color {
-        background-color: #ccf2ff;
-    }
-
-    .my-custom-car-image-props {
-        height: 200px; /* Set the desired height for the car images */
-        object-fit: cover; /* Maintain aspect ratio and crop if necessary */
-    }
-</style>
 
 
 <div class="container my-custom-background-color">
@@ -110,29 +91,5 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial"/>
-
-    <script>
-        // Handle the click event for the delete buttons
-        $('.delete-car').on('click', function (e) {
-            e.preventDefault();
-            const carId = $(this).data('id');
-
-            // Show SweetAlert confirmation dialog
-            Swal.fire({
-                title: 'Are you sure?',
-                text: 'You are about to delete this car. This action cannot be undone.',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // If user confirms, redirect to the "Delete" action with carId as a parameter
-                    window.location.href = `/Car/Delete/${carId}`;
-                }
-            });
-        });
-    </script>
-
+    <partial name="CommonView" />
 }

@@ -17,7 +17,7 @@
         {
             await _userService.AddMoney(GetUserId());
 
-            TempData["SuccessMessage"] = "You added 100euro to your balance.!";
+            TempData["SuccessMessage"] = "You added 100euro to your balance!";
             return RedirectToAction("Index", "Home");
         }
 

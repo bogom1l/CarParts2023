@@ -2,50 +2,11 @@
 @using static CarParts.Common.GlobalConstants.Car;
 @model CarParts.Web.ViewModels.Car.RentCarViewModel
 
-@{
-    Layout = "../Shared/_Layout";
-}
 
 @{
     ViewBag.Title = "Manage Rental";
 }
 
-@{
-    var errorMessage = TempData["ErrorMessage"] as string;
-    var successMessage = TempData["SuccessMessage"] as string;
-
-    if (!string.IsNullOrEmpty(errorMessage))
-    {
-        <div class="alert alert-danger">@errorMessage</div>
-    }
-
-    if (!string.IsNullOrEmpty(successMessage))
-    {
-        <div class="alert alert-success">@successMessage</div>
-    }
-}
-
-
-@*SweetAlert CDN*@
-<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
-
-
-<style>
-
-    .my-custom-background-color {
-        background-color: #e6f9ff;
-    }
-
-    .my-custom-background-color-v2 {
-        background-color: #ccfff5;
-    }
-
-    .my-custom-background-color-v3 {
-        background-color: #b3fff0;
-    }
-
-</style>
 
 
 <div class="container my-custom-background-color">
@@ -129,29 +90,5 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial"/>
-
-    <script>
-        $(document).ready(function () {
-            // Handle click event for the "End Rental" button
-            $("#endRentalButton").click(function (event) {
-                event.preventDefault(); // Prevent the default form submission
-
-                // Show the confirmation dialog using SweetAlert2
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "You want to end your rental",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, end it!",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // If the user clicks "OK" in the SweetAlert2 confirmation dialog, submit the form
-                        $("#endRentalForm").submit();
-                    }
-                });
-            });
-        });
-    </script>
+    <partial name="CommonView"/>
 }

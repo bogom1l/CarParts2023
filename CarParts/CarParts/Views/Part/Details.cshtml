@@ -4,50 +4,6 @@
     ViewBag.Title = "Part Details";
 }
 
-@{
-    var errorMessage = TempData["ErrorMessage"] as string;
-    var successMessage = TempData["SuccessMessage"] as string;
-
-    if (!string.IsNullOrEmpty(errorMessage))
-    {
-        <div class="alert alert-danger">@errorMessage</div>
-    }
-
-    if (!string.IsNullOrEmpty(successMessage))
-    {
-        <div class="alert alert-success">@successMessage</div>
-    }
-}
-
-
-
-<style>
-    .btn-purple {
-        background-color: purple;
-        color: white;
-    }
-
-    .my-custom-background-color {
-        background-color: #e6f9ff;
-    }
-
-    .my-custom-background-color-v2 {
-        background-color: #ccfff5;
-    }
-
-    .my-custom-background-color-v3 {
-        background-color: #b3fff0;
-    }
-
-</style>
-
-
-@*SweetAlert CDN*@
-<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
-
-
-
 
 <div class="container my-custom-background-color">
     <hr/>
@@ -131,7 +87,7 @@
 <div class="d-flex justify-content-center">
 
     <p>
-        @if (User.Identity.Name == Model.Owner)
+        @if (User.Identity!.Name == Model.Owner)
         {
             <a asp-controller="Part" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-lg fw-bold">
                 Edit
@@ -157,7 +113,7 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-
+    <partial name="CommonView"/>
 
     <script>
         document.getElementById("moreDetailsBtn").addEventListener("click", function () {
@@ -173,30 +129,4 @@
         });
     </script>
     
-    
-    <script>
-        // Handle the click event for the delete buttons
-        $('.delete-part').on('click', function (e) {
-            e.preventDefault();
-            const partId = $(this).data('id');
-            
-            // Show SweetAlert confirmation dialog
-            Swal.fire({
-                title: 'Are you sure?',
-                text: 'You are about to delete this part. This action cannot be undone.',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // If user confirms, redirect to the "Delete" action with partId as a parameter
-                    window.location.href = `/Part/Delete/${partId}`;
-                }
-            });
-        });
-    </script>
-    
-
 }

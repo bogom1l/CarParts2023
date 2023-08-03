@@ -1,26 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model CarParts.Web.ViewModels.Dealer.BecomeDealerFormModel
 
-@{
-    Layout = "_Layout";
-}
+
 @{
     ViewData["Title"] = "Become a Dealer";
-}
-
-@{
-    var errorMessage = TempData["ErrorMessage"] as string;
-    var successMessage = TempData["SuccessMessage"] as string;
-
-    if (!string.IsNullOrEmpty(errorMessage))
-    {
-        <div class="alert alert-danger">@errorMessage</div>
-    }
-
-    if (!string.IsNullOrEmpty(successMessage))
-    {
-        <div class="alert alert-success">@successMessage</div>
-    }
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -42,4 +25,5 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <partial name="CommonView" />
 }

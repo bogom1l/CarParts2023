@@ -1,44 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model CarParts.Web.ViewModels.Car.RentCarViewModel
 
-@{
-    Layout = "../Shared/_Layout";
-}
 
 @{
     ViewBag.Title = "Rent Car";
 }
 
-@{
-    var errorMessage = TempData["ErrorMessage"] as string;
-    var successMessage = TempData["SuccessMessage"] as string;
-
-    if (!string.IsNullOrEmpty(errorMessage))
-    {
-        <div class="alert alert-danger">@errorMessage</div>
-    }
-
-    if (!string.IsNullOrEmpty(successMessage))
-    {
-        <div class="alert alert-success">@successMessage</div>
-    }
-}
-
-<style>
-   
-    .my-custom-background-color {
-        background-color: #e6f9ff;
-    }
-
-    .my-custom-background-color-v2 {
-        background-color: #ccfff5;
-    }
-
-    .my-custom-background-color-v3 {
-        background-color: #b3fff0;
-    }
-
-</style>
 
 
 <div class="container my-custom-background-color">
@@ -143,4 +110,5 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <partial name="CommonView" />
 }

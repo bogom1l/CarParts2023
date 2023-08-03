@@ -183,7 +183,7 @@
             if (!await _carService.AddCarToMyFavoriteCarsAsync(id, GetUserId()))
             {
                 TempData["ErrorMessage"] = "The car is already in your favorite cars.";
-                return RedirectToAction("All", "Car");
+                return RedirectToAction("MyFavoriteCars", "Car");
             }
 
             TempData["SuccessMessage"] = "Car has been successfully added to favorite cars!";

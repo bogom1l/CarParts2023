@@ -1,44 +1,9 @@
 ﻿@model ICollection<CarParts.Web.ViewModels.Car.CarViewModel>
 
 @{
-    Layout = "../Shared/_Layout";
-}
-
-@{
     ViewBag.Title = "My Favorite Cars";
 }
 
-@{
-    var errorMessage = TempData["ErrorMessage"] as string;
-    var successMessage = TempData["SuccessMessage"] as string;
-
-    if (!string.IsNullOrEmpty(errorMessage))
-    {
-        <div class="alert alert-danger">@errorMessage</div>
-    }
-
-    if (!string.IsNullOrEmpty(successMessage))
-    {
-        <div class="alert alert-success">@successMessage</div>
-    }
-}
-
-
-<style>
-    .btn-customColor {
-        background-color: darkolivegreen;
-        color: white;
-    }
-
-    .my-custom-background-color {
-        background-color: #ccf2ff;
-    }
-
-    .my-custom-car-image-props {
-        height: 200px; 
-        object-fit: cover; 
-    }
-</style>
 
 <div class="container my-custom-background-color">
     <div class="row">
@@ -113,4 +78,5 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial"/>
+    <partial name="CommonView" />
 }

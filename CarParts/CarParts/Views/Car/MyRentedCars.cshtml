@@ -6,34 +6,6 @@
 }
 
 
-@{
-    var errorMessage = TempData["ErrorMessage"] as string;
-    var successMessage = TempData["SuccessMessage"] as string;
-
-    if (!string.IsNullOrEmpty(errorMessage))
-    {
-        <div class="alert alert-danger">@errorMessage</div>
-    }
-
-    if (!string.IsNullOrEmpty(successMessage))
-    {
-        <div class="alert alert-success">@successMessage</div>
-    }
-}
-
-
-<style>
-   
-    .my-custom-background-color {
-        background-color: #ccf2ff;
-    }
-
-    .my-custom-car-image-props {
-        height: 200px; /* Set the desired height for the car images */
-        object-fit: cover; /* Maintain aspect ratio and crop if necessary */
-    }
-
-</style>
 
 
 <div class="container my-custom-background-color">
@@ -129,4 +101,5 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial"/>
+    <partial name="CommonView" />
 }

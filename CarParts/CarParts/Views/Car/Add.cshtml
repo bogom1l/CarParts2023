@@ -1,17 +1,9 @@
 ﻿@model CarParts.Web.ViewModels.Car.AddCarViewModel
-@{
-    Layout = "../Shared/_Layout";
-}
+
 
 @{
     ViewBag.Title = "Add a New Car";
 }
-
-<style>
-    .my-custom-background-color {
-        background-color: #e6f9ff;
-    }
-</style>
 
 <div class="container my-custom-background-color">
     <hr/>
@@ -146,4 +138,5 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial"/>
+    <partial name="CommonView"/>
 }

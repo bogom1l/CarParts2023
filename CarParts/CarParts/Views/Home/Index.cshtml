@@ -4,25 +4,13 @@
 @{
     ViewData["Title"] = "Home";
 }
-@{
-    var errorMessage = TempData["ErrorMessage"] as string;
-    var successMessage = TempData["SuccessMessage"] as string;
-
-    if (!string.IsNullOrEmpty(errorMessage))
-    {
-        <div class="alert alert-danger">@errorMessage</div>
-    }
-
-    if (!string.IsNullOrEmpty(successMessage))
-    {
-        <div class="alert alert-success">@successMessage</div>
-    }
-}
 
 <head>
     <title>@ViewData["Title"]</title>
-   
 </head>
 
-
 @await Html.PartialAsync("IndexHomePagePartial");
+
+@section Scripts {
+    <partial name="CommonView" />
+}
