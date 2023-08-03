@@ -1,6 +1,10 @@
 ﻿@model ICollection<CarParts.Web.ViewModels.Car.CarViewModel>
 
 @{
+    Layout = "../Shared/_Layout";
+}
+
+@{
     ViewBag.Title = "My Cars";
 }
 
@@ -9,61 +13,80 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
 
 <style>
-    .btn-purple {
-        background-color: purple;
-        color: white;
-        /* Add any additional styling as needed */
+    .my-custom-background-color {
+        background-color: #ccf2ff;
+    }
+
+    .my-custom-car-image-props {
+        height: 200px; /* Set the desired height for the car images */
+        object-fit: cover; /* Maintain aspect ratio and crop if necessary */
     }
 </style>
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
 
-<div class="container">
-    <div class="row d-flex align-items-start">
+<div class="container my-custom-background-color">
+    <div class="row">
+
+        <p><h2 class="text-center">@ViewBag.Title</h2></p>
+
         
         @if (!Model.Any())
         {
             <h2>You haven't added any cars yet.</h2>
+            <div class="d-flex justify-content-center">
+                <p>
+                    <a asp-controller="Car" asp-action="Add" class="btn btn-success btn-lg fw-bold" style="width:350px">
+                        Add a car
+                    </a>
+                </p>
+            </div>
         }
 
         @foreach (var car in Model)
         {
-
-            @if (car.Owner != User.Identity.Name)
+           @* @if (car.Owner != User.Identity!.Name) //why did i add this ? :D:D
             {
                 break;
-            }
+            }*@
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                 <div class="card">
+                    
+                    <img class="card-img-top img-fluid img-thumbnail my-custom-car-image-props" src="@car.ImageUrl" alt="Car Image">
+
                     <div class="card-body">
 
-                        <img src="@car.ImageUrl" alt="Car Image" class="card-img-top">
+                        <h5 class="card-title text-center">@car.Make @car.Model</h5>
 
-
-                        <h5 class="card-title">@car.Make @car.Model</h5>
                         <p class="card-text">
                             <span class="fw-bold">Year:</span> @car.Year
                         </p>
+
                         <p class="card-text">
-                            <span class="fw-bold">Price:</span> $@car.Price
+                            <span class="fw-bold">Price (EUR):</span> $@car.Price
                         </p>
+
                         <p class="card-text">
                             <span class="fw-bold">Fuel Type:</span> @car.FuelTypeName
                         </p>
+
                         <p class="card-text">
                             <span class="fw-bold">Category:</span> @car.CategoryName
                         </p>
+
                         <p class="card-text">
                             <span class="fw-bold">Horsepower:</span> @car.Horsepower
                         </p>
+
                     </div>
+                    
+
+
                     <div class="card-footer">
                         <a asp-controller="Car" asp-action="Details" asp-route-id="@car.CarId" class="btn btn-info btn-block">
                             View Details
                         </a>
 
-                        @if (User.Identity.Name == car.Owner)
+                        @if (User.Identity!.Name == car.Owner)
                         {
                             <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.CarId" class="btn btn-warning btn-block">
                                 Edit
@@ -74,19 +97,19 @@
                             </a>
                         }
 
-
                     </div>
+
                 </div>
+
             </div>
         }
+
     </div>
 </div>
 
+
 @section Scripts {
-
     <partial name="_ValidationScriptsPartial"/>
-
-
 
     <script>
         // Handle the click event for the delete buttons
@@ -111,4 +134,5 @@
             });
         });
     </script>
+
 }
