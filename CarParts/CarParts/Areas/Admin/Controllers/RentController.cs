@@ -15,7 +15,7 @@
         }
 
 
-        [Route("Rent/All")]
+        //[Route("Rent/All")]
         public async Task<IActionResult> All()
         {
             var rents = await _rentService.GetAllRentsAsync();

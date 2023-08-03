@@ -25,17 +25,6 @@
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [AllowAnonymous]
-        public IActionResult TestView()
-        {
-            return View();
-        }
-
-        [AllowAnonymous]
-        public IActionResult TestView2()
-        {
-            return View();
-        }
 
         [AllowAnonymous]
         public IActionResult Contacts()

@@ -2,7 +2,6 @@
 {
     using CarParts.Data;
     using CarParts.Data.Models;
-    using Common;
     using Interfaces;
     using Microsoft.EntityFrameworkCore;
     using Web.ViewModels.Car;
@@ -153,7 +152,7 @@
                     },
                     Reviews = c.Reviews.Select(r => new ReviewViewModel
                     {
-                        Content = r.Content,    
+                        Content = r.Content,
                         Rating = r.Rating,
                         DatePosted = r.DatePosted,
                         UserId = r.UserId,

@@ -1,38 +1,13 @@
-﻿
--- Rent A Car --
-
-  ✔️ backup napraih
-  ✔️ obmislqm mn vnimatelno vsi4ki propertyta w viewmodelite zakwo gi polzwam i dali sa mi nujni, i  w data modelite
-
-  ✔️ kydet ima "TODO:" w proekta da go dooprawq / iztriq
-
-  ✔️  review/summary of full project :
-  ✔️      -vseki user moje da dobavq chasti
-  ✔️      -vseki dealer moje da dobavq koli
-  ✔️      -vseki user moje da naema koli
-
-     
-  ✔️  Add check n message "car is already rented : by YOU, or by someone else"
-  ✔️  canceling rental to return money, and to cost 20 eur
-  ✔️  are you sure you want to end you rental? - message
-  ✔️  you cant add a car to your favorites if you are the owner of the car - message
-  ✔️  changing rental to not be able if u didnt change dates
-
-  ✔️  Administrator Role
-  ✔️  Administrator Area
-
-  ✔️  dealerite ne wijdat Rent na chujdi koli v Cars/All View-to            
+﻿  
    
-  ✔ custom login/register pages
-  ✔ make background color to almost white
+  ✔ front end . . .
+  ✔ full project review -> clean
 
-  ✔ add reviews (only for users, not for dealers))
-  ✔ gorna granica na ratinga && zakruglqne
-     
-  -> front end . . .
-     ?
+
+
+
 
 
 
 ------------------
-22:30 - 03.08.2023
+00:01 - 04.08.2023

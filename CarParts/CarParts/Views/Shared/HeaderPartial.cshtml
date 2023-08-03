@@ -1,7 +1,7 @@
 ﻿@inject IUserService UserService
 
 @{
-    var userBalance = await UserService.GetUserBalanceById(User.GetId());
+    var userBalance = await UserService.GetUserBalanceById(User.GetId()!);
 }
 
 <style>

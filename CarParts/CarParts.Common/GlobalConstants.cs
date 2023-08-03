@@ -111,6 +111,5 @@
             public const int ReviewContentMinLength = 1;
             public const int ReviewContentMaxLength = 3000;
         }
-
     }
 }

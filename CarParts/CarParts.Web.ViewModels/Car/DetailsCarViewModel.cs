@@ -50,7 +50,5 @@
         public DetailsDealerViewModel DetailsDealerViewModel { get; set; } = null!;
 
         public List<ReviewViewModel> Reviews { get; set; } = null!;
-
-        
     }
 }

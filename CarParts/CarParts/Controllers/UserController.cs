@@ -17,7 +17,7 @@
         {
             await _userService.AddMoney(GetUserId());
 
-            TempData["SuccessMessage"] = "You added 100euro to your balance!";
+            TempData["SuccessMessage"] = "You added 100 euro to your balance!";
             return RedirectToAction("Index", "Home");
         }
 
@@ -29,6 +29,14 @@
             return RedirectToAction("Index", "Home");
         }
 
-       
+        [HttpGet]
+        public async Task<IActionResult> AddCustomAmountMoney(double amount)
+        {
+            await _userService.AddCustomAmountMoney(GetUserId(), amount);
+
+            TempData["SuccessMessage"] = $"You added {amount} euro to your balance!";
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }

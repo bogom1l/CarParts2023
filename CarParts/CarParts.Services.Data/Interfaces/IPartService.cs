@@ -5,31 +5,31 @@
 
     public interface IPartService
     {
-        Task<ICollection<PartViewModel>> GetAllPartsAsync();
+        public Task<ICollection<PartViewModel>> GetAllPartsAsync();
 
-        Task<AddPartViewModel> GetAddPartViewModelAsync();
+        public Task<AddPartViewModel> GetAddPartViewModelAsync();
 
-        Task AddPartAsync(AddPartViewModel addPartViewModel, string userId);
+        public Task AddPartAsync(AddPartViewModel addPartViewModel, string userId);
 
-        Task<DetailsPartViewModel?> GetDetailsPartViewModelAsync(int partId);
+        public Task<DetailsPartViewModel?> GetDetailsPartViewModelAsync(int partId);
 
-        Task<Part?> GetPartByIdAsync(int partId);
+        public Task<Part?> GetPartByIdAsync(int partId);
 
-        Task<EditPartViewModel?> GetEditPartViewModelAsync(int partId);
+        public Task<EditPartViewModel?> GetEditPartViewModelAsync(int partId);
 
-        Task EditPartAsync(int partId, EditPartViewModel editPartViewModel);
+        public Task EditPartAsync(int partId, EditPartViewModel editPartViewModel);
 
-        Task DeletePartAsync(int partId, string userId);
+        public Task DeletePartAsync(int partId, string userId);
 
-        Task<ICollection<PartViewModel>> GetMyPartsAsync(string userId);
+        public Task<ICollection<PartViewModel>> GetMyPartsAsync(string userId);
 
-        Task<ICollection<PartViewModel>> GetMyFavoritePartsAsync(string userId);
+        public Task<ICollection<PartViewModel>> GetMyFavoritePartsAsync(string userId);
 
-        Task<bool> AddPartToMyFavoritePartsAsync(int partId, string userId);
+        public Task<bool> AddPartToMyFavoritePartsAsync(int partId, string userId);
 
-        Task<bool> RemovePartFromMyFavoritePartsAsync(int partId, string userId);
+        public Task<bool> RemovePartFromMyFavoritePartsAsync(int partId, string userId);
 
-        Task<ICollection<PartViewModel>> SearchPartsAsync(string searchTerm, string category,
+        public Task<ICollection<PartViewModel>> SearchPartsAsync(string searchTerm, string category,
             string priceSort, int? fromPrice, int? toPrice);
     }
 }

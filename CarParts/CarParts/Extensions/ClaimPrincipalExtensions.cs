@@ -14,6 +14,5 @@
         {
             return user.IsInRole(AdminRoleName);
         }
-
     }
 }

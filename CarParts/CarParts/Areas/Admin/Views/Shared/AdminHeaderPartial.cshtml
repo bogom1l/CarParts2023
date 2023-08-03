@@ -1,0 +1,52 @@
+﻿@inject IUserService UserService
+
+@{
+    string id = this.User.GetId();
+    double balance = await UserService.GetUserBalanceById(id);
+    var userBalance = await UserService.GetUserBalanceById(User.GetId());
+}
+
+<style>
+    .lightblue-color {
+        background-color: #99e6ff;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg lightblue-color bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="@Url.Action("Index", "Home", new {area = ""} )">Home Page</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                
+            </ul>
+
+            <ul class="navbar-nav align-self-end">
+                
+                <li class="nav-item" style="margin-top: 8px">
+                    <a class="nav-link active" aria-current="page">
+                        Balance: @balance eur
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link active" style="margin-top:7%" 
+                       aria-current="page" href="@Url.Action("Index", "Home", new { area="Admin" })"><b>ADMIN AREA</b></a>
+                </li>
+
+                <span class="navbar-text">
+                    <partial name="_LoginPartial"/>
+                </span>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>

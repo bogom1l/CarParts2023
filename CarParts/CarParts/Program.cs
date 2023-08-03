@@ -81,18 +81,17 @@ namespace CarParts.Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "Areas",
-                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    "Areas",
+                    "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
-                    name: "Car Details",
-                    pattern: "/Cars/Details/{id}/{information}",
-                    defaults: new { controller = "Car", action = "Details" });
+                    "Car Details",
+                    "/Cars/Details/{id}/{information}",
+                    new { controller = "Car", action = "Details" });
 
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
             });
-
 
 
             //app.MapControllerRoute(

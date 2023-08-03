@@ -2,18 +2,52 @@
 @{
     ViewBag.Title = "All Rentals";
 }
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
-<div class="row">
-    @foreach (var rent in Model)
-    {
-        <div class="card mb-3 col-4">
-            <img class="card-img-top" src="@rent.CarImageUrl" alt="Car Image">
-            <div class="card-body text-center">
-                <h4>@rent.CarMake @rent.CarModel</h4>
-                <h6>Dealer: @rent.DealerFullName <b>(@rent.DealerEmail)</b></h6>
-                <h6>Rented By: <b>@rent.RenterFullName (@rent.RenterEmail)</b></h6>
+    
+<div class="container my-custom-background-color">
+    <div class="row">
+    
+        <p><h2 class="text-center">@ViewBag.Title</h2></p>
+    
+        @if (!Model.Any())
+        {
+            <h2 class="text-center">There are no rented cars at the moment.</h2>
+            <div class="d-flex justify-content-center">
+                <p>
+                    <a asp-area="" asp-controller="Rent" asp-action="All" class="btn btn-success btn-lg fw-bold" style="width:350px">
+                        Go to the car catalogue
+                    </a>
+                </p>
             </div>
-        </div>
-    }
+    
+        }
+
+        @foreach (var rent in Model)
+        {
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="card">
+    
+                    <img class="card-img-top img-fluid img-thumbnail my-custom-car-image-props" src="@rent.CarImageUrl" alt="Car Image">
+    
+                    <div class="card-body">
+    
+                        <h4 class="card-title text-center">@rent.CarMake @rent.CarModel</h4>
+                 
+                        <p class="card-text">
+                            <span class="fw-bold">Dealer:</span> @rent.DealerFullName <b>(@rent.DealerEmail)</b>
+                        </p>
+                 
+                        <p class="card-text">
+                            <span class="fw-bold">Rented By:</span> @rent.RenterFullName <b>(@rent.RenterEmail)</b>
+                        </p>
+
+                        @*<div class="card-footer">
+                            
+                        </div>*@
+
+                       
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>

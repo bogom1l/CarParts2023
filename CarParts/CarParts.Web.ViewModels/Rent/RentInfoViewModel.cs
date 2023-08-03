@@ -13,7 +13,6 @@
 
         public string RenterFullName { get; set; } = null!;
 
-        public string RenterEmail { get; set;} = null!;
-
+        public string RenterEmail { get; set; } = null!;
     }
 }

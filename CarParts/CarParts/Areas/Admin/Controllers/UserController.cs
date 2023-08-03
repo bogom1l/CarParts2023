@@ -12,7 +12,7 @@
             _userService = userService;
         }
 
-        [Route("User/All")]
+        //[Route("User/All")]
         public async Task<IActionResult> All()
         {
             var users = await _userService.GetAllUsersAsync();
@@ -23,7 +23,7 @@
         public async Task<IActionResult> DeleteAllReviews()
         {
             await _userService.DeleteAllReviews();
-           
+
             TempData["SuccessMessage"] = "You have successfully deleted all reviews!";
             return RedirectToAction("Index", "Home");
         }
@@ -32,10 +32,9 @@
         public async Task<IActionResult> DeleteAllReviewsForCar(int id)
         {
             await _userService.DeleteAllReviewsForCar(id);
-           
-            TempData["SuccessMessage"] = $"You have successfully deleted all reviews for car with id: {id}!";
-            return RedirectToAction("All", "Car", new {area = ""});
-        }
 
+            TempData["SuccessMessage"] = $"You have successfully deleted all reviews for car with id: {id}!";
+            return RedirectToAction("All", "Car", new { area = "" });
+        }
     }
 }

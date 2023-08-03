@@ -173,7 +173,7 @@
                 return RedirectToAction("All", "Car");
             }
 
-            bool isCarInMyFavoriteCars = await _carService.IsCarMine(id, GetUserId());
+            var isCarInMyFavoriteCars = await _carService.IsCarMine(id, GetUserId());
             if (isCarInMyFavoriteCars && !User.IsAdmin())
             {
                 TempData["ErrorMessage"] = "You can't add a car in your favorite list if you are the owner of the car.";
@@ -267,7 +267,7 @@
                 TempData["ErrorMessage"] = "Car is already rented by another user. Please choose a different car.";
                 return RedirectToAction("All", "Car");
             }
-            
+
             var rentCarViewModel = await _carService.GetRentCarViewModelAsync(id);
 
             if (rentCarViewModel == null)
@@ -312,7 +312,7 @@
 
             var isUserDealer = await _dealerService.DealerExistsByUserIdAsync(GetUserId());
 
-            if (isUserDealer && !User.IsAdmin()) 
+            if (isUserDealer && !User.IsAdmin())
             {
                 TempData["ErrorMessage"] = "Dealers don't have access here! They are not allowed to rent cars.";
                 return RedirectToAction("Index", "Home");
@@ -334,7 +334,7 @@
 
             var isUserDealer = await _dealerService.DealerExistsByUserIdAsync(GetUserId());
 
-            if (isUserDealer && !User.IsAdmin()) 
+            if (isUserDealer && !User.IsAdmin())
             {
                 TempData["ErrorMessage"] = "Dealers can't rent cars. Please register as a user.";
                 return RedirectToAction("Index", "Home");
@@ -356,7 +356,7 @@
         [HttpPost]
         public async Task<IActionResult> ManageRental(RentCarViewModel rentCarViewModel)
         {
-            bool hasUserMadeAnyChanges = _curentEndDate != rentCarViewModel.RentalEndDate;
+            var hasUserMadeAnyChanges = _curentEndDate != rentCarViewModel.RentalEndDate;
 
             if (!hasUserMadeAnyChanges)
             {
@@ -419,7 +419,8 @@
         [HttpPost]
         public async Task<IActionResult> AddReview(ReviewViewModel reviewViewModel)
         {
-            var hasUserAlreadyReviewedThisCar = await _carService.HasUserAlreadyReviewedThisCar(reviewViewModel.CarId, GetUserId());
+            var hasUserAlreadyReviewedThisCar =
+                await _carService.HasUserAlreadyReviewedThisCar(reviewViewModel.CarId, GetUserId());
             if (hasUserAlreadyReviewedThisCar)
             {
                 TempData["ErrorMessage"] = "Sending more than one review per car is not allowed.";
@@ -431,6 +432,5 @@
             TempData["SuccessMessage"] = "Review has been successfully added.";
             return RedirectToAction("Details", "Car", new { id = reviewViewModel.CarId });
         }
-
     }
 }
