@@ -1,91 +1,207 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using CarParts.Services.Data.Interfaces
+@using CarParts.Web.Extensions
 @model ICollection<CarParts.Web.ViewModels.Part.PartViewModel>
 
-<h2>Search Results</h2>
+@{
+    Layout = "../Shared/_Layout";
+}
+
+@inject IUserService UserService
+
+@{
+    ViewBag.Title = "Search Parts";
+}
+
+
+@*SweetAlert CDN*@
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
+
+
 
 <style>
-    /* Add your custom styles here */
+    .btn-purple {
+        background-color: purple;
+        color: white;
+    }
+
+    .btn-lightgreen {
+        background-color: lightgreen;
+        color: white;
+    }
+
+    .my-custom-background-color {
+        background-color: #ccf2ff;
+    }
+
+    .my-custom-car-image-props {
+        height: 200px;
+        object-fit: cover; 
+    }
+
 </style>
 
-<form asp-controller="Part" asp-action="Search" method="get">
-    <div class="form-row">
-        <div class="col-md-4">
-            <input type="text" class="form-control" name="searchTerm" value="@ViewBag.SearchTerm"
-                   placeholder="Search by part name or description">
-        </div>
-        <div class="col-md-4">
-            <select class="form-control" name="category">
-                <option value="">All Categories</option>
-                <!-- Populate the dropdown options with available categories -->
-                <option value="Engine">Engine</option>
-                <option value="Transmission">Transmission</option>
-                <option value="Brakes">Brakes</option>
-                <option value="Suspension">Suspension</option>
-                <option value="Interior">Interior</option>
-                <option value="Exterior">Exterior</option>
-                <option value="Electrical">Electrical</option>
 
 
-                <!-- Add more options here as needed -->
-            </select>
-        </div>
-        <div class="col-md-4">
-            <input type="number" class="form-control" name="fromPrice" value="@ViewBag.FromPrice"
-                   placeholder="From Price">
-        </div>
-        <div class="col-md-4">
-            <input type="number" class="form-control" name="toPrice" value="@ViewBag.ToPrice"
-                   placeholder="To Price">
-        </div>
 
-        <div class="col-md-4">
-            <select class="form-control" name="priceSort">
-                <option value="asc">Price: Low to High</option>
-                <option value="desc">Price: High to Low</option>
-            </select>
-        </div>
-        <div class="col-md-12 mt-2">
-            <button type="submit" class="btn btn-primary">Search</button>
-        </div>
+<section class="search-sec">
+    <div class="container my-custom-background-color border border-info">
+        <h2 class="text-center">@ViewBag.Title</h2>
+        <form asp-controller="Part" asp-action="Search" method="get">
+            <table class="table table-borderless">
+                <tr>
+
+                    <td>
+                        <label class="fw-bold">Name/description</label>
+                        <input type="text" class="form-control search-slt" name="searchTerm"
+                               value="@ViewBag.SearchTerm" placeholder="Search by part model or description">
+                    </td>
+                    <td>
+                        <label class="fw-bold">Category</label>
+                        <select class="form-control search-slt" name="category">
+                            <option value="">All Categories</option>
+                            <option value="Engine">Engine</option>
+                            <option value="Transmission">Transmission</option>
+                            <option value="Brakes">Brakes</option>
+                            <option value="Suspension">Suspension</option>
+                            <option value="Interior">Interior</option>
+                            <option value="Exterior">Exterior</option>
+                            <option value="Electrical">Electrical</option>
+                        </select>
+                    </td>
+                    
+
+                    <td>
+                        <label class="fw-bold">From price</label>
+                        <input type="number" class="form-control search-slt" name="fromPrice" value="@ViewBag.FromPrice"
+                               placeholder="From Price">
+                    </td>
+                    <td>
+                        <label class="fw-bold">To price</label>
+                        <input type="number" class="form-control search-slt" name="toPrice" value="@ViewBag.ToPrice"
+                               placeholder="To Price">
+                    </td>
+                    <td>
+                        <label class="fw-bold">Sort by price</label>
+                        <select class="form-control search-slt" name="priceSort">
+                            <option value="asc">Price: Low to High</option>
+                            <option value="desc">Price: High to Low</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5" class="text-center">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
     </div>
-</form>
 
-<table class="table">
-    <thead>
-    <tr>
-        <th>Parts</th>
-    </tr>
-    </thead>
-    <tbody>
-    <div class="row">
-        
-        @if (!Model.Any())
-        {
-            <th> <h2>Unfortunately, we couldn't find any parts matching your search filters.</h2> </th>
-        }
+    <br />
+
+</section>
 
 
-        @foreach (var part in Model)
-        {
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <!-- Part image -->
-                    <img class="card-img-top" src="@part.ImageUrl" alt="Part Image">
 
-                    <div class="card-body">
-                        <!-- Part properties -->
-                        <h5 class="card-title">@part.Name</h5>
-                        <p class="card-text card-text-make-italic"><b>Price</b>: @part.Price</p>
-                        <p class="card-text card-text-make-italic"><b>Category</b>: @part.CategoryName</p>
+<section class="search-results">
+    <div class="container my-custom-background-color border border-warning">
+
+        <div class="row">
+
+            @if (!Model.Any())
+            {
+                <th>
+                    <h2 class="text-center">Unfortunately, we couldn't find any parts matching your search filters.</h2>
+                </th>
+            }
+
+            @foreach (var part in Model)
+            {
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="card">
+                        <span class="border border-danger-subtle">
+
+                            <img class="card-img-top img-fluid img-thumbnail my-custom-car-image-props" src="@part.ImageUrl" alt="Car Image">
+
+                            <div class="card-body">
+
+                                <h5 class="card-title text-center">@part.Name</h5>
+
+                                <p class="card-text">
+                                    <span class="fw-bold">Category:</span> @part.CategoryName
+                                </p>
+
+                                <p class="card-text">
+                                    <span class="fw-bold">Price:</span> @part.Price (EUR)
+                                </p>
+
+                            </div>
+
+                            <div class="card-footer">
+                                <a asp-controller="Part" asp-action="Details" asp-route-id="@part.Id" class="btn btn-info btn-block">
+                                    View Details
+                                </a>
+
+                                <a asp-controller="Part" asp-action="AddToFavoriteParts" asp-route-id="@part.Id" class="btn btn-purple btn-block">
+                                    Add to favorite parts
+                                </a>
+
+                                @if (User.IsAdmin())
+                                {
+                                    <a asp-controller="Part" asp-action="Edit" asp-route-id="@part.Id" class="btn btn-warning btn-block">
+                                        Edit
+                                    </a>
+
+                                    <a href="#" class="btn btn-danger btn-block delete-part" data-id="@part.Id">
+                                        Delete
+                                    </a>
+                                }
+                                else if (!await UserService.IsUserDealer(User.GetId()!))
+                                {
+                                    @*TODO SELL BUTTON*@
+                                }
+                            </div>
+
+
+                        </span>
                     </div>
-
-                    <a asp-controller="Part" asp-action="Details" asp-route-id="@part.Id" class="btn btn-info btn-block">
-                        View Details
-                    </a>
-
                 </div>
-            </div>
-        }
+            }
+
+        </div>
+
     </div>
-    </tbody>
-</table>
+
+</section>
+
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Handle the click event for the delete button
+        $('.delete-part').on('click', function (e) {
+            e.preventDefault();
+            const partId = $(this).data('id');
+
+            // Show SweetAlert confirmation dialog
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You are about to delete this part. This action cannot be undone.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `/Part/Delete/${partId}`;
+                }
+            });
+        });
+    </script>
+}
