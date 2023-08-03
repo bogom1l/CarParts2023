@@ -2,6 +2,11 @@
 @using CarParts.Web.Extensions
 @model ICollection<CarParts.Web.ViewModels.Car.CarViewModel>
 
+
+@{
+    Layout = "../Shared/_Layout";
+}
+
 @inject ICarService CarService
 @inject IUserService UserService
 
@@ -25,31 +30,44 @@
 }
 
 
+
 @*SweetAlert CDN*@
 <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
+@*--------------*@
 
 
 <style>
     .btn-purple {
         background-color: purple;
         color: white;
-        /* Add any additional styling as needed */
     }
     
     .btn-lightgreen {
         background-color: lightgreen;
         color: white;
-        /* Add any additional styling as needed */
     }
+
+    .my-custom-background-color {
+        background-color: #ccf2ff;
+    }
+
+    .my-custom-car-image-props {
+        height: 200px; /* Set the desired height for the car images */
+        object-fit: cover; /* Maintain aspect ratio and crop if necessary */
+    }
+
 </style>
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
 
-<div class="container">
+
+<div class="container my-custom-background-color">
     <div class="row">
-        
+       
+    
+        <p><h2 class="text-center">@ViewBag.Title</h2></p>
+      
+       
         @if (!Model.Any())
         {
             <h2>There are no cars at the moment.</h2>
@@ -59,156 +77,109 @@
         {
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                 <div class="card">
-                    <div class="image-container">
-                        <img src="@car.ImageUrl" alt="Car Image" class="card-img-top">
-                    </div>
+                    <span class="border border-danger-subtle">
 
-                    <div class="card-body">
-                        <h5 class="card-title">@car.Make @car.Model</h5>
-                        <p class="card-text">
-                            <span class="fw-bold">Year:</span> @car.Year
-                        </p>
-                        <p class="card-text">
-                            <span class="fw-bold">Category:</span> @car.CategoryName
-                        </p>
-                        <p class="card-text">
-                            <span class="fw-bold">Horsepower:</span> @car.Horsepower
-                        </p>
-                        <p class="card-text">
-                            <span class="fw-bold">Price:</span> @car.Price euro
-                        </p>
-                        <p class="card-text">
-                            <span class="fw-bold">Rent price:</span> @car.RentPrice euro (per day)
-                        </p>
-                    </div>
+                        <img class="card-img-top img-fluid img-thumbnail my-custom-car-image-props" src="@car.ImageUrl" alt="Car Image">
 
-                    <div class="card-footer">
-                        <a asp-controller="Car" asp-action="Details" asp-route-id="@car.CarId" class="btn btn-info btn-block">
-                            View Details
-                        </a>
-                        
-                        
-                        <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@car.CarId" class="btn btn-purple btn-block">
-                            Add to favorite cars
-                        </a>
-                        
-                        
-                        
-                        
-                        @if (User.IsAdmin())
-                        {
-                            <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.CarId" class="btn btn-warning btn-block">
-                                Edit
-                            </a>
+                        <div class="card-body">
 
-                            <a href="#" class="btn btn-danger btn-block delete-car" data-id="@car.CarId">
-                                Delete
-                            </a>
-                            <a asp-controller="Car" asp-action="Rent" asp-route-id="@car.CarId" class="btn btn-lightgreen btn-block">
-                                Rent
-                            </a>
-                            <p> RenterEmail: 
-                                @if (@car.RenterEmail == null)
-                                {
-                                   <span class="fw-bold">No renter</span>
-                                }
-                                else
-                                {
-                                    <span class="fw-bold">@car.RenterEmail</span>
-                                }
+                            <h5 class="card-title text-center">@car.Make @car.Model</h5>
+
+                            <p class="card-text">
+                                <span class="fw-bold">Year:</span> @car.Year
                             </p>
-                        }
-                        else if (User.Identity.Name == car.Owner)
-                        {
-                            <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.CarId" class="btn btn-warning btn-block">
-                                Edit
+
+                            <p class="card-text">
+                                <span class="fw-bold">Category:</span> @car.CategoryName
+                            </p>
+
+                            <p class="card-text">
+                                <span class="fw-bold">Horsepower:</span> @car.Horsepower
+                            </p>
+
+                            <p class="card-text">
+                                <span class="fw-bold">Price:</span> @car.Price (EUR)
+                            </p>
+
+                            <p class="card-text">
+                                <span class="fw-bold">Rent price / day:</span> @car.RentPrice (EUR)
+                            </p>
+
+                        </div>
+
+                        <div class="card-footer">
+                            <a asp-controller="Car" asp-action="Details" asp-route-id="@car.CarId" class="btn btn-info btn-block">
+                                View Details
                             </a>
 
-                            <a href="#" class="btn btn-danger btn-block delete-car" data-id="@car.CarId">
-                                Delete
+                            <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@car.CarId" class="btn btn-purple btn-block">
+                                Add to favorite cars
                             </a>
-                        }
-                        else if(!await UserService.IsUserDealer(User.GetId()))  @*(!await UserService.IsUserDealerOfCar(User.GetId(), car.CarId))*@
-                        {
-                            <a asp-controller="Car" asp-action="Rent" asp-route-id="@car.CarId" class="btn btn-lightgreen btn-block">
-                                Rent
-                            </a>
-                        }
-                        
-                        
-                        
 
-                       
+                            @if (User.IsAdmin())
+                            {
+                                <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.CarId" class="btn btn-warning btn-block">
+                                    Edit
+                                </a>
 
-                    </div>
+                                <a href="#" class="btn btn-danger btn-block delete-car" data-id="@car.CarId">
+                                    Delete
+                                </a>
+                                <a asp-controller="Car" asp-action="Rent" asp-route-id="@car.CarId" class="btn btn-lightgreen btn-block">
+                                    Rent
+                                </a>
+                                <p>
+                                    <i>RenterEmail</i>:
+                                    @if (@car.RenterEmail == null)
+                                    {
+                                        <span class="fw-bold">No renter</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold">@car.RenterEmail</span>
+                                    }
+                                </p>
+                            }
+                            else if (User.Identity!.Name == car.Owner)
+                            {
+                                <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.CarId" class="btn btn-warning btn-block">
+                                    Edit
+                                </a>
+
+                                <a href="#" class="btn btn-danger btn-block delete-car" data-id="@car.CarId">
+                                    Delete
+                                </a>
+                            }
+                            else if (!await UserService.IsUserDealer(User.GetId()!))
+                            {
+                                <a asp-controller="Car" asp-action="Rent" asp-route-id="@car.CarId" class="btn btn-lightgreen btn-block">
+                                    Rent
+                                </a>
+                            }
+
+
+
+                        </div>
+
+
+                    </span>
                 </div>
             </div>
         }
+
+
     </div>
 </div>
 
 
 
-<style>
-    .card {
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: box-shadow 0.3s ease-in-out;
-    }
-
-        .card:hover {
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-    .image-container {
-        height: 200px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 10px 10px 0 0;
-        overflow: hidden;
-    }
-
-        .image-container img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-    .card-body {
-        padding: 15px;
-    }
-
-    .card-title {
-        font-size: 1.4rem;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-
-    .card-text {
-        color: #555;
-    }
-
-    .card-footer {
-        padding: 15px;
-        background-color: #f9f9f9;
-        border-radius: 0 0 10px 10px;
-    }
-
-    .btn-block {
-        display: block;
-        width: 100%;
-    }
-</style>
-
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial"/>
-    
+
 
     <script>
-        // Handle the click event for the delete buttons
+        // Handle the click event for the delete button
         $('.delete-car').on('click', function (e) {
             e.preventDefault();
             const carId = $(this).data('id');
@@ -217,14 +188,12 @@
             Swal.fire({
                 title: 'Are you sure?',
                 text: 'You are about to delete this car. This action cannot be undone.',
-                icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // If user confirms, redirect to the "Delete" action with carId as a parameter
                     window.location.href = `/Car/Delete/${carId}`;
                 }
             });
