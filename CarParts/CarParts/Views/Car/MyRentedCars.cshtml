@@ -1,4 +1,5 @@
-﻿@model ICollection<CarParts.Web.ViewModels.Car.RentCarViewModel>
+﻿@using CarParts.Web.Extensions
+@model ICollection<CarParts.Web.ViewModels.Car.RentCarViewModel>
 
 @{
     ViewBag.Title = "My Rented Cars";
@@ -22,65 +23,93 @@
 
 
 <style>
-    /* Add any custom styling as needed */
+   
+    .my-custom-background-color {
+        background-color: #ccf2ff;
+    }
+
+    .my-custom-car-image-props {
+        height: 200px; /* Set the desired height for the car images */
+        object-fit: cover; /* Maintain aspect ratio and crop if necessary */
+    }
+
 </style>
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
 
-<div class="container">
-    <div class="row d-flex align-items-start">
-        
+<div class="container my-custom-background-color">
+    <div class="row">
+
+        <p><h2 class="text-center">@ViewBag.Title</h2></p>
+
         @if (!Model.Any())
         {
-            <h2>You don't have any current rented cars</h2>
+            <h2 class="text-center">You don't have any rented cars at the moment.</h2>
+            <div class="d-flex justify-content-center">
+                <p>
+                    <a asp-controller="Car" asp-action="All" class="btn btn-success btn-lg fw-bold" style="width:350px">
+                        Back to the catalogue
+                    </a>
+                </p>
+            </div>
+
         }
 
         @foreach (var car in Model)
         {
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                 <div class="card">
+
+                    <img class="card-img-top img-fluid img-thumbnail my-custom-car-image-props" src="@car.ImageUrl" alt="Car Image">
+
                     <div class="card-body">
-                        <img src="@car.ImageUrl" alt="Car Image" class="card-img-top">
-                        <h5 class="card-title">@car.Make @car.Model</h5>
+
+                        <h4 class="card-title text-center">@car.Make @car.Model</h4>
+
                         <p class="card-text">
                             <span class="fw-bold">Year:</span> @car.Year
                         </p>
+
                         <p class="card-text">
-                            <span class="fw-bold">Price:</span> $@car.Price
+                            <span class="fw-bold">Price:</span> @car.Price (EUR)
                         </p>
+
                         <p class="card-text">
                             <span class="fw-bold">Color:</span> @car.Color
                         </p>
+
                         <p class="card-text">
-                            <span class="fw-bold">Description:</span> @car.Description
+                            <span class="fw-bold" style="color:lightseagreen;">Rent Price / day:</span> @car.RentPrice (EUR)
                         </p>
 
                         @if (car.RentalStartDate != null)
                         {
-                            <p class="card-text">Rental Start Date: @car.RentalStartDate.Value.ToString("dd-MM-yyyy")</p>
+                            <p class="card-text">
+                                <span class="fw-bold" style="color:lightseagreen;"> Rental Start Date: </span>
+                                @car.RentalStartDate.Value.ToString("dd-MM-yyyy")
+                            </p>
                         }
                         @if (car.RentalEndDate != null)
                         {
-                            <p class="card-text">Rental End Date: @car.RentalEndDate.Value.ToString("dd-MM-yyyy")</p>
+                            <p class="card-text">
+                                <span class="fw-bold" style="color:lightseagreen;"> Rental End Date: </span>
+                                @car.RentalEndDate.Value.ToString("dd-MM-yyyy")
+                            </p>
                         }
-                        <p class="card-text">
-                            <span class="fw-bold">Renter Name (delete me from view):</span> @car.RenterName
-                        </p>
-
-                        <p class="card-text">
-                            <span class="fw-bold">Car Id (delete me from view):</span> @car.Id
-                        </p>
                         
-                        <p class="card-text">
-                            <span class="fw-bold">Rent Price:</span> @car.RentPrice eur (per day)
-                        </p>
+                        @if (User.IsAdmin())
+                        {
+                            <p class="card-text">
+                                <span class="fw-bold">Renter Name:</span> @car.RenterName
+                            </p>
 
+                            <p class="card-text">
+                                <span class="fw-bold">Car Id:</span> @car.Id
+                            </p>
+                        }
 
                     </div>
+
                     <div class="card-footer">
-
-
                         <a asp-controller="Car" asp-action="Details" asp-route-id="@car.Id" class="btn btn-success btn-block">
                             Details
                         </a>
@@ -88,12 +117,13 @@
                         <a asp-controller="Car" asp-action="ManageRental" asp-route-id="@car.Id" class="btn btn-info btn-block">
                             Manage Rental
                         </a>
-
-
                     </div>
+
                 </div>
+
             </div>
         }
+
     </div>
 </div>
 

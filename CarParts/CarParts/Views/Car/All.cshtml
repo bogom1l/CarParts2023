@@ -62,14 +62,20 @@
 
 <div class="container my-custom-background-color">
     <div class="row">
-       
-    
+
         <p><h2 class="text-center">@ViewBag.Title</h2></p>
-      
-       
+
         @if (!Model.Any())
         {
-            <h2>There are no cars at the moment.</h2>
+            <h2 class="text-center">There are no cars at the moment.</h2>
+            <div class="d-flex justify-content-center">
+                <p>
+                    <a asp-controller="Car" asp-action="Add" class="btn btn-success btn-lg fw-bold" style="width:350px">
+                        Add a car
+                    </a>
+                </p>
+            </div>
+
         }
 
         @foreach (var car in Model)
