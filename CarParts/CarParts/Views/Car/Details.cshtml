@@ -35,141 +35,242 @@
     .btn-purple {
         background-color: purple;
         color: white;
-        /* Add any additional styling as needed */
     }
 
     .btn-lightgreen {
         background-color: lightgreen;
         color: white;
-        /* Add any additional styling as needed */
+    }
+
+    .my-custom-background-color {
+        background-color: #e6f9ff;
+    }
+
+    .my-custom-background-color-v2 {
+        background-color: #ccfff5;
+    }
+    .my-custom-background-color-v3 {
+        background-color: #b3fff0;
+    }
+
+    .btn-orange {
+        background-color: orangered;
+        color: white;
     }
 </style>
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
 
-<div class="row">
-    <div class="card w-100">
-        <div class="card-body">
+<div class="container my-custom-background-color">
+    <hr/>
+    <h2 class="text-center">@ViewBag.Title</h2>
+    <br/>
 
-            <img src="@Model.ImageUrl" alt="Car Image" class="card-img-top img-fluid" style="max-width: 300px;">
+    <div class="row">
+        <div class="col-sm-12 offset-lg-3 col-lg-8 offset-xl-2 col-xl-8">
 
-            <h4 class="card-title">@Model.Make @Model.Model</h4>
+            <div class="card w-100">
+                <div class="card-body">
+                    <div class="card-body d-flex justify-content-center">
+                        <img src="@Model.ImageUrl" alt="Car Image" class="card-img-top img-fluid">
+                    </div>
+                    <h3 class="card-title text-center fw-bold">@Model.Make @Model.Model</h3>
+
+                    <div>
+
+                        <p class="mb-1"><span class="fw-bold" style="color:deepskyblue;">Category: </span>@Model.Category</p>
+                        <p class="mb-1"><span class="fw-bold" style="color:deepskyblue;">Year: </span>@Model.Year</p>
+                        <p class="mb-1"><span class="fw-bold" style="color:deepskyblue;">Fuel Type: </span>@Model.FuelType</p>
+                        <p class="mb-1"><span class="fw-bold" style="color:deepskyblue;">Transmission: </span>@Model.Transmission</p>
+                        <p class="mb-1"><span class="fw-bold" style="color:deepskyblue;">Price: </span>@Model.Price (EUR)</p>
+                        <p class="mb-1"><span class="fw-bold" style="color:deepskyblue;">Rent Price / day: </span>@Model.RentPrice (EUR)</p>
+                        @if (User.IsAdmin())
+                        {
+                            <br/>
+                            @if (@Model.RenterEmail == null)
+                            {
+                                <p class="mb-0"><span class="fw-bold" style="color:orangered;">Renter Email:<i> No renter </i> </span> </p>
 
 
-            <p class="mb-0"><span class="fw-bold">Category: </span>@Model.Category</p>
-            <p class="mb-0"><span class="fw-bold">Year: </span>@Model.Year</p>
-            <p class="mb-0"><span class="fw-bold">Fuel Type: </span>@Model.FuelType</p>
-            <p class="mb-0"><span class="fw-bold">Transmission: </span>@Model.Transmission</p>
-            <p class="mb-0"><span class="fw-bold">Price: </span>@Model.Price</p>
+                            }
+                            else
+                            {
+                                <p class="mb-0"><span class="fw-bold" style="color:orangered;">Renter Email:<i> @Model.RenterEmail </i></span></p>
+                            }
+                        }
 
-            <div id="moreDetails" style="display: none;">
-                <p class="mb-0"><span class="fw-bold">Description: </span>@Model.Description</p>
-                <p class="mb-0"><span class="fw-bold">Color: </span>@Model.Color</p>
-                <p class="mb-0"><span class="fw-bold">Engine Size: </span>@Model.EngineSize</p>
-                <p class="mb-0"><span class="fw-bold">Weight: </span>@Model.Weight</p>
-                <p class="mb-0"><span class="fw-bold">Top Speed: </span>@Model.TopSpeed</p>
-                <p class="mb-0"><span class="fw-bold">Acceleration: </span>@Model.Acceleration</p>
-                <p class="mb-0"><span class="fw-bold">Horsepower: </span>@Model.Horsepower</p>
-                <p class="mb-0"><span class="fw-bold">Torque: </span>@Model.Torque</p>
-                <p class="mb-0"><span class="fw-bold">Fuel Consumption: </span>@Model.FuelConsumption</p>
-                <p></p>
-                <p class="mb-0"><span class="fw-bold">Renter Email: </span>@Model.RenterEmail</p>
-                <p class="mb-0"><span class="fw-bold">Rent Price: </span>@Model.RentPrice eur (per day)</p>
-            </div>
+                        <br/>
 
-            <button id="moreDetailsBtn" class="btn btn-link text-info btn-lg">More Details</button>
-            <button id="lessDetailsBtn" class="btn btn-link text-info btn-lg" style="display: none;">Less Details</button>
-        </div>
-        
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Dealer Info</h5>
-                @if(Model.DetailsDealerViewModel.FullName != null)
-                {
-                    <p class="card-text">Full Name: @Model.DetailsDealerViewModel.FullName</p>
-                }
-                <p class="card-text">Email: @Model.DetailsDealerViewModel.Email</p>
-                <p class="card-text">Address: @Model.DetailsDealerViewModel.Address</p>
-            </div>
-        </div>
-        
-    @if (User.Identity!.IsAuthenticated && (!await UserService.IsUserDealer(User.GetId())))
-    {
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                
-                
-                    @{ await Html.RenderPartialAsync("ReviewFormPartial", new ReviewViewModel()
-                       {
-                           CarId = Model.CarId
-                       });
-                    }
-               
+                        <div id="moreDetails" style="display: none;">
+                            <p class="mb-1"><span class="fw-bold" style="color:deepskyblue;">Description: </span>@Model.Description</p>
+                            <p class="mb-1"><span class="fw-bold" style="color:deepskyblue;">Color: </span>@Model.Color</p>
+                            <p class="mb-1"><span class="fw-bold" style="color:deepskyblue;">Engine Size (cc): </span>@Model.EngineSize</p>
+                            <p class="mb-1"><span class="fw-bold" style="color:deepskyblue;">Weight (kg): </span>@Model.Weight</p>
+                            <p class="mb-1"><span class="fw-bold" style="color:deepskyblue;">Top Speed (km/h): </span>@Model.TopSpeed</p>
+                            <p class="mb-1"><span class="fw-bold" style="color:deepskyblue;">Acceleration (0-100 km/h): </span>@Model.Acceleration</p>
+                            <p class="mb-1"><span class="fw-bold" style="color:deepskyblue;">Horsepower: </span>@Model.Horsepower</p>
+                            <p class="mb-1"><span class="fw-bold" style="color:deepskyblue;">Torque: </span>@Model.Torque</p>
+                            <p class="mb-1"><span class="fw-bold" style="color:deepskyblue;">Fuel Consumption (L/100 km): </span>@Model.FuelConsumption</p>
 
-            </div>
-        </div>
-    }
-        
-        <div>
-            
-            <h2>Reviews: </h2>
-            <hr />
-            @if (Model.Reviews.Any())
-            {
-                @foreach (var review in Model.Reviews)
-                {
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <p class="mb-0"><span class="fw-bold">Username: </span>@review.Username</p>
-                            <p class="mb-0"><span class="fw-bold">Review: </span>@review.Content</p>
-                            <p class="mb-0"><span class="fw-bold">Rating: </span>@review.Rating</p>
-                            <p class="mb-0"><span class="fw-bold">Date: </span>@review.DatePosted.ToString("dd/MM/yyyy")</p>
                         </div>
                     </div>
-                }
-            }
-            else
-            {
-                <p>No reviews available.</p>
-            }
+
+                    <button id="moreDetailsBtn" class="btn btn-info">Show more details</button>
+                    <button id="lessDetailsBtn" class="btn btn-info" style="display: none;">Show less details</button>
+                </div>
+                
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title" style="color:darkred;">Dealer Info:</h4>
+                    
+                    <p class="mb-2"><span class="fw-bold" style="color:darkred;">Full Name: </span>
+                        <span style="font-family: Lucida Handwriting, Cursive;">
+                            @Model.DetailsDealerViewModel.FullName
+                        </span>
+                    </p>
+                    <p class="mb-2"><span class="fw-bold" style="color:darkred;">Email: </span>
+                        <span style="font-family: Lucida Handwriting, Cursive;">
+                            @Model.DetailsDealerViewModel.Email
+                        </span>
+                    </p>
+                    <p class="mb-2"><span class="fw-bold" style="color:darkred;">Address: </span>
+                        <span style="font-family: Lucida Handwriting, Cursive;">
+                            @Model.DetailsDealerViewModel.Address
+                        </span>
+                    </p>
+
+                </div>
+            </div>
 
         </div>
         
+       
+
+        <div class="col-sm-4 offset-xl-3 col-xl-7 mt-xxl-5 mx-auto">
+
+            <div class="card my-custom-background-color-v2">
+                <div class="card-body">
+
+                    <h2 class="text-center" style="color: mediumpurple">Reviews: </h2>
+                    <br/>
+                    @if (Model.Reviews.Any())
+                    {
+                        @foreach (var review in Model.Reviews)
+                        {
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <p class="mb-0"><span class="fw-bold">Username: </span>@review.Username</p>
+                                    <p class="mb-0"><span class="fw-bold">Review: </span>@review.Content</p>
+                                    <p class="mb-0"><span class="fw-bold">Rating: </span>@review.Rating</p>
+                                    <p class="mb-0"><span class="fw-bold">Date: </span> <i>@review.DatePosted.ToString("dd/MM/yyyy")</i></p>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <h5 class="text-center">
+                            There are still no reviews for this car.
+                            <p>Be the first to write a review!</p>
+                        </h5>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-sm-5 offset-xl-1 col-xl-6 mt-xxl-5 mx-auto">
+
+            @if ((User.Identity!.IsAuthenticated && !await UserService.IsUserDealer(User.GetId()!)) || User.IsAdmin())
+            {
+                <div class="card my-custom-background-color-v2">
+                    <div class="card-body">
+
+                        @{ await Html.RenderPartialAsync("ReviewFormPartial",
+                               new ReviewViewModel() { CarId = Model.CarId }); }
+
+                    </div>
+                </div>
+            }
+
+            <br/>
+            <br/>
+
+        </div>
         
+     
+
     </div>
-    
+</div>
 
+<br/>
 
-    @if (User.Identity.Name == @Model.Owner || User.IsAdmin())
-    {
-        <a asp-controller="Car" asp-action="Edit" asp-route-id="@Model.CarId" class="btn btn-warning btn-block">
-            Edit
-        </a>
+<div class="d-flex justify-content-center">
 
-        <a href="#" class="btn btn-danger btn-block delete-car" data-id="@Model.CarId">
-            Delete
-        </a>
-    }
-    
+    <p>
+        @if (User.Identity.Name == @Model.Owner || User.IsAdmin())
+        {
+            <a asp-controller="Car" asp-action="Edit" asp-route-id="@Model.CarId" class="btn btn-warning btn-lg fw-bold">
+                Edit
+            </a>
+
+            <a href="#" class="btn btn-danger btn-lg fw-bold delete-car" data-id="@Model.CarId">
+                Delete
+            </a>
+        }
+    </p>
+</div>
+<div class="d-flex justify-content-center">
+
     @if (User.IsAdmin())
     {
-        <a asp-area="Admin" asp-controller="User" asp-action="DeleteAllReviewsForCar" asp-route-id="@Model.CarId" class="btn btn-danger btn-block">
-            Delete all reviews for this car
-        </a>
+        <p>
+            <a asp-area="Admin" asp-controller="User" asp-action="DeleteAllReviewsForCar" asp-route-id="@Model.CarId" class="btn btn-secondary btn-lg fw-bold">
+                Delete all reviews for this car
+            </a>
+        </p>
     }
-
-    <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@Model.CarId" class="btn btn-purple btn-block">
-        Add to favorite cars
-    </a>
-
-    <a asp-controller="Car" asp-action="All" class="btn btn-success mb-2 w-100 p-3 fw-bold">
-        Back to All Cars
-    </a>
 
 </div>
 
+<div class="d-flex justify-content-center">
+
+    <p>
+        <a asp-controller="Car" asp-action="Rent" asp-route-id="@Model.CarId" class="btn btn-orange btn-lg fw-bold">
+            Rent
+        </a>
+    </p>
+
+</div>
+
+<div class="d-flex justify-content-center">
+
+    <p>
+        <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@Model.CarId" class="btn btn-purple btn-lg fw-bold">
+            Add to favorite cars
+        </a>
+    </p>
+    
+</div>
+
+
+<div class="d-flex justify-content-center">
+    <p>
+        <a asp-controller="Car" asp-action="All" class="btn btn-success btn-lg fw-bold" style="width:350px">
+            Back to All Cars
+        </a>
+    </p>
+</div>
+
+
+
+
+
 @section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+
+
     <script>
         document.getElementById("moreDetailsBtn").addEventListener("click", function () {
             document.getElementById("moreDetails").style.display = "block";
@@ -186,7 +287,7 @@
 
 
     <script>
-        // Handle the click event for the delete buttons
+        // Handle the click event for the delete button
         $('.delete-car').on('click', function (e) {
             e.preventDefault();
             const carId = $(this).data('id');
@@ -202,16 +303,10 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // If user confirms, redirect to the "Delete" action with carId as a parameter
                     window.location.href = `/Car/Delete/${carId}`;
                 }
             });
         });
     </script>
 
-    
-
-    <partial name="_ValidationScriptsPartial"/>
 }
-
-
