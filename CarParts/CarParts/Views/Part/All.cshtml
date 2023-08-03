@@ -72,7 +72,7 @@
         {
             string newDescription = string.Join(" ", part.Description
                 .Split(new char[] { ' ', '\t', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-                .ToList().Take(5)) + "...";
+                .ToList().Take(2)) + "...";
 
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                 <div class="card">
@@ -85,15 +85,15 @@
                             <h5 class="card-title text-center">@part.Name</h5>
 
                             <p class="card-text">
-                                <span class="fw-bold">Description:</span> @newDescription
+                                <span class="fw-bold">Category:</span> @part.CategoryName
                             </p>
 
                             <p class="card-text">
                                 <span class="fw-bold">Price:</span> @part.Price
                             </p>
-
+                            
                             <p class="card-text">
-                                <span class="fw-bold">Category:</span> @part.CategoryName
+                                <span class="fw-bold">Description:</span> @newDescription
                             </p>
                             
                             @if (User.IsAdmin())
