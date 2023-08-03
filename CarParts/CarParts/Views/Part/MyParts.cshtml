@@ -1,6 +1,10 @@
 ﻿@model ICollection<CarParts.Web.ViewModels.Part.PartViewModel>
 
 @{
+    Layout = "../Shared/_Layout";
+}
+
+@{
     ViewBag.Title = "My Parts";
 }
 
@@ -27,83 +31,96 @@
 
 
 <style>
-    .btn-purple {
-        background-color: purple;
-        color: white;
-        /* Add any additional styling as needed */
+    .my-custom-background-color {
+        background-color: #ccf2ff;
+    }
+    
+    .my-custom-car-image-props {
+        height: 200px; 
+        object-fit: cover; 
     }
 </style>
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
 
-<div class="container">
-    <div class="row d-flex align-items-start">
-        
+
+<div class="container my-custom-background-color">
+    <div class="row">
+    
+        <p><h2 class="text-center">@ViewBag.Title</h2></p>
+
+
         @if (!Model.Any())
         {
             <h2>You haven't added any parts yet.</h2>
+            <div class="d-flex justify-content-center">
+                <p>
+                    <a asp-controller="Part" asp-action="Add" class="btn btn-success btn-lg fw-bold" style="width:350px">
+                        Add a part
+                    </a>
+                </p>
+            </div>
         }
 
         @foreach (var part in Model)
         {
-            if (part.Owner != User.Identity.Name)
-            {
-                break;
-            }
-
             string newDescription = string.Join(" ", part.Description
                 .Split(new char[] { ' ', '\t', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
                 .ToList().Take(5)) + "...";
 
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                 <div class="card">
+                        
+                    <img class="card-img-top img-fluid img-thumbnail my-custom-car-image-props" src="@part.ImageUrl" alt="Part Image">
+    
                     <div class="card-body">
 
-                        <img src="@part.ImageUrl" alt="Part Image" class="card-img-top">
+                        <h5 class="card-title text-center">@part.Name</h5>
 
-
-                        <h5 class="card-title">@part.Name</h5>
-                        <p class="card-text">
-                            <span class="fw-bold">Description:</span> @newDescription
-                        </p>
-                        <p class="card-text">
-                            <span class="fw-bold">Price:</span> $@part.Price
-                        </p>
                         <p class="card-text">
                             <span class="fw-bold">Category:</span> @part.CategoryName
                         </p>
+
+                        <p class="card-text">
+                            <span class="fw-bold">Description:</span> @newDescription
+                        </p>
+
+                        <p class="card-text">
+                            <span class="fw-bold">Price (EUR):</span> @part.Price
+                        </p>
+                        
                     </div>
+
+    
                     <div class="card-footer">
-                        <a asp-controller="Part" asp-action="Details" asp-route-id="@part.Id" class="btn btn-success btn-block">
+
+                        <a asp-controller="Part" asp-action="Details" asp-route-id="@part.Id" class="btn btn-info btn-block">
                             View Details
                         </a>
 
-                        @if (User.Identity.Name == part.Owner)
+
+                        @if (User.Identity!.Name == part.Owner)
                         {
                             <a asp-controller="Part" asp-action="Edit" asp-route-id="@part.Id" class="btn btn-warning btn-block">
                                 Edit
                             </a>
 
-                           @* <a asp-controller="Part" asp-action="Delete" asp-route-id="@part.Id" class="btn btn-danger btn-block">
-                                Delete
-                            </a>*@
-
                             <a href="#" class="btn btn-danger btn-block delete-part" data-id="@part.Id">
                                 Delete
                             </a>
                         }
-
-                        @*<a asp-controller="Part" asp-action="AddToFavoriteParts" asp-route-id="@part.Id" class="btn btn-purple btn-block">
-                            Add to favorite parts
-                        </a>*@
-
+    
                     </div>
+    
                 </div>
+    
             </div>
         }
+    
     </div>
 </div>
+
+
+
 
 @section Scripts {
 
@@ -127,7 +144,6 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // If user confirms, redirect to the "Delete" action with partId as a parameter
                     window.location.href = `/Part/Delete/${partId}`;
                 }
             });
