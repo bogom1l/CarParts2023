@@ -1,7 +1,10 @@
-﻿@using CarParts.Services.Data.Interfaces
-@using Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 @using static CarParts.Common.GlobalConstants.Car;
 @model CarParts.Web.ViewModels.Car.RentCarViewModel
+
+@{
+    Layout = "../Shared/_Layout";
+}
 
 @{
     ViewBag.Title = "Manage Rental";
@@ -28,77 +31,101 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
 
 
+<style>
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
+    .my-custom-background-color {
+        background-color: #e6f9ff;
+    }
 
-<div class="row">
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form asp-action="ManageRental" method="post">
-            <div class="image-container">
-                <img src="@Model.ImageUrl" alt="Car Image" class="card-img-top">
+    .my-custom-background-color-v2 {
+        background-color: #ccfff5;
+    }
+
+    .my-custom-background-color-v3 {
+        background-color: #b3fff0;
+    }
+
+</style>
+
+
+<div class="container my-custom-background-color">
+    <hr/>
+    <h2 class="text-center">@ViewBag.Title</h2>
+    <br/>
+
+    <div class="row">
+        <div class="col-sm-12 offset-lg-3 col-lg-8 offset-xl-2 col-xl-8">
+
+
+            <form asp-action="ManageRental" method="post">
+
+                <div class="card w-100">
+                    <div class="card-body">
+                        <div class="card-body d-flex justify-content-center">
+                            <img src="@Model.ImageUrl" alt="Car Image" class="card-img-top img-fluid">
+                        </div>
+
+                        <h3 class="card-title text-center fw-bold">@Model.Make @Model.Model</h3>
+
+                        <p class="mb-1"><span class="fw-bold" style="color:darkolivegreen;">Year: </span>@Model.Year</p>
+                        <p class="mb-1"><span class="fw-bold" style="color:darkolivegreen;">Description: </span>@Model.Description</p>
+                        <p class="mb-1"><span class="fw-bold" style="color:darkolivegreen;">Price: </span>@Model.Price</p>
+                        <p class="mb-1"><span class="fw-bold" style="color:darkolivegreen;">Color: </span>@Model.Color</p>
+                        <p class="mb-1"><span class="fw-bold" style="color:darkolivegreen;">Renter Name: </span>@Model.RenterName</p>
+
+                        <br/>
+
+                        <input type="hidden" asp-for="@Model.Make"/>
+                        <input type="hidden" asp-for="@Model.Model"/>
+                        <input type="hidden" asp-for="@Model.Year"/>
+                        <input type="hidden" asp-for="@Model.Description"/>
+                        <input type="hidden" asp-for="@Model.Price"/>
+                        <input type="hidden" asp-for="@Model.Color"/>
+                        <input type="hidden" asp-for="@Model.ImageUrl"/>
+                        <input type="hidden" asp-for="@Model.Id"/>
+                        <input type="hidden" asp-for="@Model.RenterName"/>
+
+
+                        <div class="mb-3">
+                            <label asp-for="@Model.RentPrice" class="form-label-add-edit fw-bold">Rent Price / day (EUR)</label>
+                            <input asp-for="@Model.RentPrice" class="form-control" aria-required="true" readonly/>
+                            <span asp-validation-for="@Model.RentPrice" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="@Model.RentalStartDate" class="form-label-add-edit fw-bold">Rental Start Date</label>
+                            <input asp-for="@Model.RentalStartDate" class="form-control" aria-required="true" readonly/>
+                            <span asp-validation-for="@Model.RentalStartDate" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="@Model.RentalEndDate" class="form-label-add-edit fw-bold">Rental End Date</label>
+                            <input asp-for="@Model.RentalEndDate" class="form-control" aria-required="true"/>
+                            <span asp-validation-for="@Model.RentalEndDate" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="text-center">
+                            <h4 class="text-warning">Warning!</h4><h5 class="text-warning"> You will be taxed @TaxPriceForAdjustingRental euro for the rental change,
+                                and @TaxPriceForCancelingRental euro if you cancel the rental.</h5>
+                        </div>
+
+                        <div class="mb-3 text-center">
+                            <input class="btn btn-success btn-lg fw-bold" type="submit" value="Update Rental"/>
+                        </div>
+                
+                    </div>
+                </div>
+            </form>
+
+            <div class="d-flex justify-content-end">
+                <form asp-action="EndRental" method="post" id="endRentalForm">
+                    <input type="hidden" asp-for="@Model.Id" />
+                    <button type="submit" class="btn btn-danger btn-lg fw-bold" id="endRentalButton">End Rental</button>
+                </form>
             </div>
-            <h3>@Model.Make @Model.Model</h3>
-            <p class="mb-0"><span class="fw-bold">Year: </span>@Model.Year</p>
-            <p class="mb-0"><span class="fw-bold">Description: </span>@Model.Description</p>
-            <p class="mb-0"><span class="fw-bold">Price: </span>@Model.Price</p>
-            <p class="mb-0"><span class="fw-bold">Color: </span>@Model.Color</p>
-            <br />
-            <p class="mb-0"><span class="fw-bold">Renter Name: </span>@Model.RenterName</p>
-            <br />
 
-            <input type="hidden" asp-for="@Model.Make" />
-            <input type="hidden" asp-for="@Model.Model" />
-            <input type="hidden" asp-for="@Model.Year" />
-            <input type="hidden" asp-for="@Model.Description" />
-            <input type="hidden" asp-for="@Model.Price" />
-            <input type="hidden" asp-for="@Model.Color" />
-            <input type="hidden" asp-for="@Model.ImageUrl" />
-            <input type="hidden" asp-for="@Model.Id" />
-            <input type="hidden" asp-for="@Model.RenterName" />
-            
-
-            <div class="mb-3">
-                <label asp-for="@Model.RentPrice" class="form-label-add-edit">Rent Price (per day)</label>
-                <input asp-for="@Model.RentPrice" class="form-control" aria-required="true" readonly />
-                <span asp-validation-for="@Model.RentPrice" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="@Model.RentalStartDate" class="form-label-add-edit">Rental Start Date</label>
-                <input asp-for="@Model.RentalStartDate" class="form-control" aria-required="true" readonly />
-                <span asp-validation-for="@Model.RentalStartDate" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="@Model.RentalEndDate" class="form-label-add-edit">Rental End Date</label>
-                <input asp-for="@Model.RentalEndDate" class="form-control" aria-required="true"/>
-                <span asp-validation-for="@Model.RentalEndDate" class="text-danger"></span>
-            </div>
-            
-            <h3>Warning! You will be taxed @TaxPriceForAdjustingRental euro for the rental change,
-                and @TaxPriceForCancelingRental euro if you cancel the rental.</h3>
-            
-            <div class="mb-3">
-                <input class="btn btn-success mb-2 w-100 p-3 fw-bold" type="submit" value="Update Rental" />
-            </div>
-
-        </form>
-
-       
-        @*<form asp-action="EndRental" method="post">
-            <input type="hidden" asp-for="@Model.Id" />
-            <button type="submit" class="btn btn-danger btn-block">End Rental</button>
-        </form>*@
-        
-        <form asp-action="EndRental" method="post" id="endRentalForm">
-            <input type="hidden" asp-for="@Model.Id" />
-            <button type="submit" class="btn btn-danger btn-block" id="endRentalButton">End Rental</button>
-        </form>
-
+        </div>
     </div>
 </div>
-
-
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial"/>
