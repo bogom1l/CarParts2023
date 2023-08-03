@@ -1,9 +1,8 @@
-﻿@model CarParts.Web.ViewModels.Part.DetailsPartViewModel
+﻿@model DetailsPartViewModel
 
 @{
     ViewBag.Title = "Part Details";
 }
-
 
 <div class="container my-custom-background-color">
     <hr/>
@@ -110,7 +109,6 @@
 </div>
 
 
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <partial name="CommonView"/>
@@ -128,5 +126,4 @@
             document.getElementById("lessDetailsBtn").style.display = "none";
         });
     </script>
-    
 }

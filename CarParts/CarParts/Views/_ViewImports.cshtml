@@ -1,3 +1,24 @@
-﻿@using CarParts
+﻿@using Microsoft.AspNetCore.Identity
+
+@using CarParts
 @using CarParts.Web.ViewModels
+@using CarParts.Web.ViewModels.Car
+@using CarParts.Web.ViewModels.Part
+@using CarParts.Web.ViewModels.Error
+@using CarParts.Web.ViewModels.Dealer
+@using CarParts.Web.ViewModels.Review
+
+@using CarParts.Data.Models
+@using CarParts.Web.Extensions
+@using CarParts.Services.Data.Interfaces
+
+@using static CarParts.Common.GlobalConstants.AdminUser
+@using static CarParts.Common.GlobalConstants.Part;
+@using static CarParts.Common.GlobalConstants.Car;
+
+@inject IUserService UserService
+@inject ICarService CarService
+@inject SignInManager<ApplicationUser> SignInManager
+
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

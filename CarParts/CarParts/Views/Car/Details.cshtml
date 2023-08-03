@@ -1,14 +1,9 @@
-﻿@using CarParts.Web.Extensions
-@using CarParts.Web.ViewModels.Review
-@using Microsoft.AspNetCore.Mvc.TagHelpers
-@using CarParts.Services.Data.Interfaces
-@model CarParts.Web.ViewModels.Car.DetailsCarViewModel
+﻿@model DetailsCarViewModel
 @{
     ViewBag.Title = "Car Details";
 }
 
 @inject IUserService UserService
-
 
 <div class="container my-custom-background-color">
     <hr/>
@@ -171,6 +166,7 @@
         }
     </p>
 </div>
+
 <div class="d-flex justify-content-center">
 
     @if (User.IsAdmin())
@@ -212,7 +208,6 @@
         </a>
     </p>
 </div>
-
 
 
 @section Scripts {

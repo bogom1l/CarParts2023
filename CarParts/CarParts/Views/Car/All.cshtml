@@ -1,16 +1,10 @@
-﻿@using CarParts.Services.Data.Interfaces
-@using CarParts.Web.Extensions
-@model ICollection<CarParts.Web.ViewModels.Car.CarViewModel>
-
+﻿@model ICollection<CarViewModel>
 
 @{
     ViewBag.Title = "All Cars";
 }
 
-
-@inject ICarService CarService
 @inject IUserService UserService
-
 
 <div class="container my-custom-background-color">
     <div class="row">
@@ -127,7 +121,6 @@
 
     </div>
 </div>
-
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial"/>

@@ -1,8 +1,5 @@
-﻿@using CarParts.Services.Data.Interfaces
-@using CarParts.Web.Extensions
-@using Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@inject IUserService UserService
 
-@inject IUserService UserService
 @{
     var userBalance = await UserService.GetUserBalanceById(User.GetId());
 }

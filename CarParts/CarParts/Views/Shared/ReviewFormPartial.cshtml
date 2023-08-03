@@ -1,5 +1,4 @@
-﻿@model CarParts.Web.ViewModels.Review.ReviewViewModel
-
+﻿@model ReviewViewModel
 
 <h2 class="text-center" style="color:rebeccapurple">Add a Review</h2>
 
@@ -17,7 +16,6 @@
         <input asp-for="@Model.Rating" type="number" class="form-control" aria-required="true" step="0.1" value="10"/>
         <span asp-validation-for="@Model.Rating" class="text-danger"></span>
     </div>
-
 
     <button type="submit" class="btn btn-primary">Submit Review</button>
 </form>

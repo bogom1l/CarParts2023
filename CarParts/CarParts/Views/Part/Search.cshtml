@@ -1,15 +1,10 @@
-﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
-@using CarParts.Services.Data.Interfaces
-@using CarParts.Web.Extensions
-@model ICollection<CarParts.Web.ViewModels.Part.PartViewModel>
-
+﻿@model ICollection<PartViewModel>
 
 @inject IUserService UserService
 
 @{
     ViewBag.Title = "Search Parts";
 }
-
 
 <section class="search-sec">
     <div class="container my-custom-background-color border border-info">
@@ -141,8 +136,6 @@
     </div>
 
 </section>
-
-
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
