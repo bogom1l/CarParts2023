@@ -75,10 +75,13 @@
 <div class="d-flex justify-content-center">
 
     <p>
-           
-        <a asp-controller="Part" asp-action="AddToFavoriteParts" asp-route-id="@Model.Id" class="btn btn-purple btn-lg fw-bold">
-            Add to favorite parts
-        </a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Part" asp-action="AddToFavoriteParts" asp-route-id="@Model.Id" class="btn btn-purple btn-lg fw-bold">
+                Add to favorite parts
+            </a>
+        }
+       
     </p>
     
 </div>

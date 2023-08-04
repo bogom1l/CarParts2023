@@ -9,13 +9,7 @@
     {
         protected string GetUserId()
         {
-            var id = string.Empty;
-
-            if (User != null)
-            {
-                id = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            }
-
+            var id = User.FindFirstValue(ClaimTypes.NameIdentifier);
             return id;
         }
     }

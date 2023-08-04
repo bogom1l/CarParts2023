@@ -181,23 +181,28 @@
 </div>
 
 <div class="d-flex justify-content-center">
-
-    <p>
-        <a asp-controller="Car" asp-action="Rent" asp-route-id="@Model.CarId" class="btn btn-orange btn-lg fw-bold">
-            Rent
-        </a>
-    </p>
+    
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>
+            <a asp-controller="Car" asp-action="Rent" asp-route-id="@Model.CarId" class="btn btn-orange btn-lg fw-bold">
+                Rent
+            </a>
+        </p>
+    }
 
 </div>
 
 <div class="d-flex justify-content-center">
-
-    <p>
-        <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@Model.CarId" class="btn btn-purple btn-lg fw-bold">
-            Add to favorite cars
-        </a>
-    </p>
     
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>
+            <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@Model.CarId" class="btn btn-purple btn-lg fw-bold">
+                Add to favorite cars
+            </a>
+        </p>
+    }
 </div>
 
 

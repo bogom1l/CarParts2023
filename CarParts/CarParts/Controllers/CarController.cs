@@ -1,6 +1,7 @@
 ﻿namespace CarParts.Web.Controllers
 {
     using Extensions;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Data.Interfaces;
     using ViewModels.Car;
@@ -21,6 +22,7 @@
             _userService = userService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> All()
         {
@@ -40,9 +42,15 @@
                 return RedirectToAction("BecomeDealer", "Dealer");
             }
 
-            var car = await _carService.GetAddCarViewModelAsync();
-
-            return View(car);
+            try
+            {
+                var car = await _carService.GetAddCarViewModelAsync();
+                return View(car);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpPost]
@@ -67,6 +75,7 @@
             return RedirectToAction("All");
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
@@ -174,6 +183,7 @@
             }
 
             var isCarInMyFavoriteCars = await _carService.IsCarMine(id, GetUserId());
+
             if (isCarInMyFavoriteCars && !User.IsAdmin())
             {
                 TempData["ErrorMessage"] = "You can't add a car in your favorite list if you are the owner of the car.";
@@ -212,6 +222,7 @@
             return RedirectToAction("All", "Car");
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Search(string searchTerm, string category,
             string priceSort, string transmissionName, string fuelName, int? fromYear,
@@ -220,7 +231,7 @@
             var cars = await _carService.SearchCarsAsync(searchTerm, category, priceSort,
                 transmissionName, fuelName, fromYear, toYear, fromHp, toHp, fromPrice, toPrice);
             /*
-            if i want to keep the search term in the search box:
+            if i want to keep the search params in the search boxes:
 
             ViewBag.SearchTerm = searchTerm;
             ViewBag.FromPrice = fromPrice;
@@ -431,6 +442,14 @@
 
             TempData["SuccessMessage"] = "Review has been successfully added.";
             return RedirectToAction("Details", "Car", new { id = reviewViewModel.CarId });
+        }
+
+        private IActionResult GeneralError()
+        {
+            TempData["ErrorMessage"] =
+                "Unexpected error occurred! Please try again later or contact administrator.";
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

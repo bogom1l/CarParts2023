@@ -20,50 +20,49 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 
-                @if (User.Identity!.IsAuthenticated)
-                {
+                @* at if(User.Identity!.IsAuthenticated) *@
 
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="@Url.Action("All", "Car")">
-                            All Cars
-                        </a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="@Url.Action("All", "Car")">
+                        All Cars
+                    </a>
+                </li>
 
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Cars
-                        </a>
-                        <ul class="dropdown-menu lightblue-color">
-                            <li><a class="dropdown-item" href="@Url.Action("Add", "Car")">Add a car</a></li>
-                            <li><a class="dropdown-item" href="@Url.Action("Search", "Car")">Search cars</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="@Url.Action("MyFavoriteCars", "Car")">My favorite cars</a></li>
-                            <li><a class="dropdown-item" href="@Url.Action("MyCars", "Car")">My added cars</a></li>
-                            <li><a class="dropdown-item" href="@Url.Action("MyRentedCars", "Car")">My rented cars</a></li>
-                        </ul>
-                    </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Cars
+                    </a>
+                    <ul class="dropdown-menu lightblue-color">
+                        <li><a class="dropdown-item" href="@Url.Action("Add", "Car")">Add a car</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("Search", "Car")">Search cars</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="@Url.Action("MyFavoriteCars", "Car")">My favorite cars</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("MyCars", "Car")">My added cars</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("MyRentedCars", "Car")">My rented cars</a></li>
+                    </ul>
+                </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="@Url.Action("All", "Part")">
-                            All Parts
-                        </a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="@Url.Action("All", "Part")">
+                        All Parts
+                    </a>
+                </li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Parts
-                        </a>
-                        <ul class="dropdown-menu lightblue-color">
-                            <li><a class="dropdown-item" href="@Url.Action("Add", "Part")">Add a part</a></li>
-                            <li><a class="dropdown-item" href="@Url.Action("Search", "Part")">Search part</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="@Url.Action("MyFavoriteParts", "Part")">My favorite parts</a></li>
-                            <li><a class="dropdown-item" href="@Url.Action("MyParts", "Part")">My added parts</a></li>
-                        </ul>
-                    </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Parts
+                    </a>
+                    <ul class="dropdown-menu lightblue-color">
+                        <li><a class="dropdown-item" href="@Url.Action("Add", "Part")">Add a part</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("Search", "Part")">Search part</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="@Url.Action("MyFavoriteParts", "Part")">My favorite parts</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("MyParts", "Part")">My added parts</a></li>
+                    </ul>
+                </li>
 
-                }
+                
                 
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="@Url.Action("Contacts", "Home")">

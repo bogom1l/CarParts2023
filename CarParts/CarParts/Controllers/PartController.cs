@@ -1,5 +1,6 @@
 ﻿namespace CarParts.Web.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Data.Interfaces;
     using ViewModels.Part;
@@ -13,6 +14,7 @@
             _partService = partService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> All()
         {
@@ -43,6 +45,7 @@
             return RedirectToAction("All", "Part");
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
@@ -180,6 +183,7 @@
             return RedirectToAction("All", "Part");
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Search(string searchTerm, string category, string priceSort,
             int? fromPrice, int? toPrice)

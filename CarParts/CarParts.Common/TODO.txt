@@ -1,13 +1,22 @@
 ﻿  
-   
-  ✔ front end . . .
-  ✔ full project review -> clean
+	✔ front end . . .
+	✔ full project review -> clean
+	
+	✔ [AllowAnonymous] All, Details, Search
+	  
+	- da oprawq toq rout sled login, da ne e /Identity/Car/ALl, a /Car/All
 
+	- User Dashboard: Create a personalized dashboard for users to view their profile, active rentals, rental history, and account settings.
 
+	- Car Comparison: Allow users to compare multiple cars side by side, helping them make informed decisions about their rental choice.
 
+	- improve search functionality (kato w mobie.bg/auto.bg/cars.bg/bestauto.bg)
 
+	- funkciq UpdateMyRentals, ako nqkoq kola EndRentalDate >= DateTime.Now - da q maxam ot spisaka
 
+	- change favorite cars/parts to : Wishlist
 
+	- add try catch in controllers
 
 ------------------
-00:01 - 04.08.2023
+12:00 - 05.08.2023

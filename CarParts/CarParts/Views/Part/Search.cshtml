@@ -104,10 +104,14 @@
                                 <a asp-controller="Part" asp-action="Details" asp-route-id="@part.Id" class="btn btn-info btn-block">
                                     View Details
                                 </a>
+                                
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <a asp-controller="Part" asp-action="AddToFavoriteParts" asp-route-id="@part.Id" class="btn btn-purple btn-block">
+                                        Add to favorite parts
+                                    </a>
+                                }
 
-                                <a asp-controller="Part" asp-action="AddToFavoriteParts" asp-route-id="@part.Id" class="btn btn-purple btn-block">
-                                    Add to favorite parts
-                                </a>
 
                                 @if (User.IsAdmin())
                                 {
