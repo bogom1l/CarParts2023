@@ -90,10 +90,29 @@
                 </div>
 
             </div>
+
+            
         }
+
+        <div class="text-center">
+           
+        </div>
 
     </div>
 </div>
+
+
+<div class="d-flex justify-content-center">
+    @if (User.Identity!.IsAuthenticated)
+    {
+        <p>
+            <a asp-controller="Car" asp-action="UpdateMyRentals" class="btn btn-dark btn-block">
+                Update Rentals
+            </a>
+        </p>
+    }
+</div>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial"/>

@@ -1,24 +1,20 @@
 ﻿  
 	✔ front end . . .
 	✔ full project review -> clean
-	
 	✔ [AllowAnonymous] All, Details, Search
-	  
 	✔ da oprawq toq rout sled login, da ne e /Identity/Car/ALl, a /Car/All :: FIXED = ", new { area = "" }"
-
 	✔ improve search functionality : buton koito iztriva viewbaga , viewbaga da sedi sled wseki search
+	✔ funkciq UpdateMyRentals, ako nqkoq kola EndRentalDate >= DateTime.Now - da q maxam ot spisaka
 
-	- Car Comparison: Allow users to compare multiple cars side by side, helping them make informed decisions about their rental choice.
+	- [easy] change favorite cars/parts to : Wishlist
 
-	- funkciq UpdateMyRentals, ako nqkoq kola EndRentalDate >= DateTime.Now - da q maxam ot spisaka
-
-	- change favorite cars/parts to : Wishlist
-
-	- [almost_done] User Dashboard: Create a personalized dashboard for users to view their profile, active rentals, and account settings.
+	- [easy][almost_done] User Dashboard: Create a personalized dashboard for users to view their profile, active rentals, and account settings.
 	  TODO: Validation for Balance 231123123123123
 
-	- add try catch in controllers
+	- [medium] Car Comparison: Allow users to compare multiple cars side by side, helping them make informed decisions about their rental choice.
+
+	- [medium] add try catch in controllers
 
 	
 ------------------
-13:00 - 05.08.2023
+15:20 - 05.08.2023

@@ -230,7 +230,7 @@
         {
             var cars = await _carService.SearchCarsAsync(searchTerm, category, priceSort,
                 transmissionName, fuelName, fromYear, toYear, fromHp, toHp, fromPrice, toPrice);
-            
+
             //if i want to keep the search params in the search boxes:
 
             ViewBag.SearchTerm = searchTerm;
@@ -240,14 +240,14 @@
             ViewBag.Fuel = fuelName;
 
             ViewBag.FromYear = fromYear;
-            ViewBag.ToYear = toYear;  
+            ViewBag.ToYear = toYear;
 
             ViewBag.FromHp = fromHp;
             ViewBag.ToHp = toHp;
 
             ViewBag.FromPrice = fromPrice;
             ViewBag.ToPrice = toPrice;
-            
+
             ViewBag.PriceSort = priceSort;
 
             return View(cars);
@@ -436,6 +436,22 @@
             return RedirectToAction("MyRentedCars", "Car");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> UpdateMyRentals()
+        {
+            var cars = await _carService.GetMyRentedCarsAsync(GetUserId());
+
+            foreach (var car in cars)
+            {
+                if (car.RentalEndDate < DateTime.Now)
+                {
+                    await _carService.EndCarRentalAsync(car.Id);
+                }
+            }
+
+            return RedirectToAction("MyRentedCars", "Car");
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddReview(ReviewViewModel reviewViewModel)
         {
@@ -452,6 +468,7 @@
             TempData["SuccessMessage"] = "Review has been successfully added.";
             return RedirectToAction("Details", "Car", new { id = reviewViewModel.CarId });
         }
+
 
         private IActionResult GeneralError()
         {
