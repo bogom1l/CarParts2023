@@ -10,46 +10,92 @@
 
     <div class="row">
         <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-
             <form asp-area="" asp-controller="Dashboard" asp-action="EditAccountSettings" method="post">
 
-                <div class="form-group">
-                    <label asp-for="@Model.Username">Username</label>
-                    <input asp-for="@Model.Username" class="form-control" readonly />
-                </div>
+                @if (User.IsAdmin())
+                {
+                    <div class="form-group">
+                        <label asp-for="@Model.Username">Username</label>
+                        <input asp-for="@Model.Username" class="form-control" readonly />
+                    </div>
 
-                <div class="form-group">
-                    <label asp-for="@Model.Email">Email</label>
-                    <input asp-for="@Model.Email" class="form-control" readonly/>
-                </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Email">Email</label>
+                        <input asp-for="@Model.Email" class="form-control" readonly />
+                    </div>
 
-                @*<div class="form-group">
-                    <label asp-for="@Model.PhoneNumber">Phone Number</label>
-                    <input asp-for="@Model.PhoneNumber" class="form-control"/>
-                </div>*@
+                    <div class="form-group">
+                        <label asp-for="@Model.PhoneNumber">Phone Number</label>
+                        <input asp-for="@Model.PhoneNumber" class="form-control" readonly />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
 
-                <div class="form-group">
-                    <label asp-for="@Model.FirstName">First Name</label>
-                    <input asp-for="@Model.FirstName" class="form-control"/>
-                </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.FirstName">First Name</label>
+                        <input asp-for="@Model.FirstName" class="form-control" readonly />
+                        <span asp-validation-for="FirstName" class="text-danger" ></span>
+                    </div>
 
-                <div class="form-group">
-                    <label asp-for="@Model.LastName">Last Name</label>
-                    <input asp-for="@Model.LastName" class="form-control"/>
-                </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.LastName">Last Name</label>
+                        <input asp-for="@Model.LastName" class="form-control" readonly />
+                        <span asp-validation-for="LastName" class="text-danger" ></span>
+                    </div>
 
-                <div class="mb-3">
-                    <label asp-for="@Model.Balance" class="form-label-add-edit">Balance</label>
-                    <input type="number" asp-for="@Model.Balance" class="form-control" aria-required="true"/>
-                    <span asp-validation-for="@Model.Balance" class="text-danger"></span>
-                </div>
+                    <div class="mb-3">
+                        <label asp-for="@Model.Balance" class="form-label-add-edit">Balance</label>
+                        <input type="number" asp-for="@Model.Balance" class="form-control" aria-required="true" id="balanceInput" />
+                        <span asp-validation-for="Balance" class="text-danger"></span>
+                    </div>
+ 
+                }
+                else
+                {
+                
+                
+                    <div class="form-group">
+                        <label asp-for="@Model.Username">Username</label>
+                        <input asp-for="@Model.Username" class="form-control" readonly/>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Email">Email</label>
+                        <input asp-for="@Model.Email" class="form-control" readonly/>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.PhoneNumber">Phone Number</label>
+                        <input asp-for="@Model.PhoneNumber" class="form-control"/>
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.FirstName">First Name</label>
+                        <input asp-for="@Model.FirstName" class="form-control"/>
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.LastName">Last Name</label>
+                        <input asp-for="@Model.LastName" class="form-control"/>
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                
+               
+                }
+            
 
                 <br/>
                 <div class="mb-3">
                     <input type="submit" value="Save Changes" class="btn btn-info w-100 fw-bold" />
                 </div>
             </form>
+
         </div>
     </div>
     <hr/>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -31,7 +31,7 @@
                     Email = u.Email, // SHOULD NOT BE ABLE TO CHANGE
                     FirstName = u.FirstName,
                     LastName = u.LastName,
-                    //PhoneNumber = u.PhoneNumber,
+                    PhoneNumber = u.PhoneNumber,
                     Balance = u.Balance
                 })
                 .FirstOrDefaultAsync();
@@ -60,8 +60,11 @@
                 // Update the user's account settings
                 currentUser.FirstName = editUserViewModel.FirstName;
                 currentUser.LastName = editUserViewModel.LastName;
-                //currentUser.PhoneNumber = editUserViewModel.PhoneNumber;
-                currentUser.Balance = editUserViewModel.Balance;
+                currentUser.PhoneNumber = editUserViewModel.PhoneNumber;
+                if (User.IsAdmin())
+                {
+                    currentUser.Balance = editUserViewModel.Balance;
+                }
 
                 var result = await _userManager.UpdateAsync(currentUser);
 
