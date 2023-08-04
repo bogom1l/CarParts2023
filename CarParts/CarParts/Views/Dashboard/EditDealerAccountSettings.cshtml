@@ -1,0 +1,69 @@
+﻿@model EditDealerViewModel
+@{
+    ViewBag.Title = "Edit Dealer Info";
+}
+
+<div class="container my-custom-background-color">
+    <hr />
+    <h2 class="text-center">@ViewBag.Title</h2>
+    <br />
+
+    <div class="row">
+        <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+            <form asp-area="" asp-controller="Dashboard" asp-action="EditDealerAccountSettings" method="post">
+
+                @if (User.IsAdmin())
+                {
+                    <div class="form-group">
+                        <label asp-for="@Model.Username">Username</label>
+                        <input asp-for="@Model.Username" class="form-control" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Email">Email</label>
+                        <input asp-for="@Model.Email" class="form-control" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Address">Address</label>
+                        <input asp-for="@Model.Address" class="form-control" readonly />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+                }
+                else
+                {
+                    <input type="hidden" asp-for="@Model.UserId" />
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Username">Username</label>
+                        <input asp-for="@Model.Username" class="form-control" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Email">Email</label>
+                        <input asp-for="@Model.Email" class="form-control" readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Address">Address</label>
+                        <input asp-for="@Model.Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+                }
+
+                <br />
+                <div class="mb-3">
+                    <input type="submit" value="Save Changes" class="btn btn-info w-100 fw-bold" />
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <hr />
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

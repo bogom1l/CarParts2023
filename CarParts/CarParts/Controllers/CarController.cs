@@ -321,7 +321,8 @@
             await _userService.RemoveMoney(GetUserId(), totalMoneyToRent);
 
             TempData["SuccessMessage"] =
-                $"You have successfully rented the car to date {rentCarViewModel.RentalEndDate!.Value.ToShortDateString()}.";
+                $"You have successfully rented the car to date {rentCarViewModel.RentalEndDate!.Value.ToShortDateString()}." +
+                $" You have been taxed {totalMoneyToRent} Euros.";
             return RedirectToAction("MyRentedCars", "Car");
         }
 

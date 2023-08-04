@@ -6,16 +6,13 @@
 	✔ improve search functionality : buton koito iztriva viewbaga , viewbaga da sedi sled wseki search
 	✔ funkciq UpdateMyRentals, ako nqkoq kola EndRentalDate >= DateTime.Now - da q maxam ot spisaka
 	✔ User Dashboard : Validation for Balance 12312321312213 + da limitiram samo za admini : problema beshe _ValidationScriptsPartial
-		
-	- [easy] da opraq butonite na admina, gore balance i Dashboard tam da sa pokazwat winagi i tn
-
-	- [easy] Dealer Dashboard kato User Dashboard, samo che s Address
-	   => promenqm Dealera da moje da go dostupwa samo, i go smenqm w Header-a v Nav bara ako e Dealer da go redirectwa kym dealerskiq dashboard
+	✔ Dealer Dashboard
 	
+
 	- [medium] Car Comparison: Allow users to compare multiple cars side by side, helping them make informed decisions about their rental choice.
 
 	- [medium] add try catch in controllers
 
 	
 ------------------
-16:00 - 04.08.2023
+22:30 - 04.08.2023

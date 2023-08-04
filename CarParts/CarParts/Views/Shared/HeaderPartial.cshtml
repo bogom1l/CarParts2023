@@ -1,7 +1,9 @@
 ﻿@inject IUserService UserService
+@inject IDealerService DealerService
 
 @{
     var userBalance = await UserService.GetUserBalanceById(User.GetId()!);
+    var dealerId = await DealerService.GetDealerIdByUserIdAsync(User.GetId());
 }
 
 <style>
@@ -110,7 +112,23 @@
                     </li>
                 }
 
-                @if (User.Identity.IsAuthenticated)
+                @if (User.IsAdmin())
+                {
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="Dashboard" asp-action="EditAccountSettings" asp-route-id="@User.GetId()" class="nav-link active" aria-current="page">
+                            <b>Dashboard</b>
+                        </a>
+                    </li>
+                }
+                else if (User.Identity.IsAuthenticated && await UserService.IsUserDealer(User.GetId()))
+                {
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="Dashboard" asp-action="EditDealerAccountSettings" asp-route-id="@dealerId" class="nav-link active" aria-current="page">
+                            <b>Dashboard</b>
+                        </a>
+                    </li>
+                }
+                else if (User.Identity.IsAuthenticated && !await UserService.IsUserDealer(User.GetId()))
                 {
                     <li class="nav-item">
                         <a asp-area="" asp-controller="Dashboard" asp-action="EditAccountSettings" asp-route-id="@User.GetId()" class="nav-link active" aria-current="page">

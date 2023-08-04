@@ -6,23 +6,34 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+    using Services.Data.Interfaces;
+    using ViewModels.Dealer;
     using ViewModels.User;
 
     public class DashboardController : BaseController
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly IDealerService _dealerService;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public DashboardController(UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext)
+        public DashboardController(UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext,
+            IDealerService dealerService)
         {
             _userManager = userManager;
             _dbContext = dbContext;
+            _dealerService = dealerService;
         }
 
 
         [HttpGet]
         public async Task<IActionResult> EditAccountSettings(string id)
         {
+            if (GetUserId() != id)
+            {
+                TempData["ErrorMessage"] = "User can only edit his personal account.";
+                return RedirectToAction("Index", "Home");
+            }
+
             var editUserViewModel = await _dbContext.Users
                 .Where(u => u.Id == id)
                 .Select(u => new EditUserViewModel
@@ -82,6 +93,60 @@
             }
 
             return View(editUserViewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditDealerAccountSettings(int id)
+        {
+            var dealer = await _dbContext.Dealers
+                .Where(d => d.Id == id)
+                .Select(d => new EditDealerViewModel
+                {
+                    Username = d.User.UserName,
+                    Email = d.User.Email,
+                    Address = d.Address,
+                    UserId = GetUserId()
+                })
+                .FirstOrDefaultAsync();
+
+            if (dealer == null)
+            {
+                TempData["ErrorMessage"] = "Dealer with provided id does not exist!";
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (GetUserId() != dealer.UserId)
+            {
+                TempData["ErrorMessage"] = "Dealer can only edit his personal account.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(dealer);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditDealerAccountSettings(EditDealerViewModel editDealerViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(editDealerViewModel);
+            }
+
+            var dealer = await _dbContext.Dealers
+                .FirstOrDefaultAsync(d => d.UserId == editDealerViewModel.UserId);
+
+            if (dealer != null)
+            {
+                dealer.Address = editDealerViewModel.Address;
+
+                await _dbContext.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Dealer's account settings were updated successfully!";
+                return RedirectToAction("Index", "Home");
+            }
+
+            TempData["ErrorMessage"] = "Some error has occurred. Please try again.";
+            return View(editDealerViewModel);
         }
     }
 }
