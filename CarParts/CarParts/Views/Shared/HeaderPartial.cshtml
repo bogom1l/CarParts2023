@@ -101,13 +101,21 @@
                             Balance: @userBalance eur
                         </a>
                     </li>
-
                 }
                 else if (User.Identity.IsAuthenticated && User.IsAdmin())
                 {
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="@Url.Action("Index", "Home", new { area = "Admin" })">
                             <b>ADMIN AREA</b>
+                        </a>
+                    </li>
+                }
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="Dashboard" asp-action="EditAccountSettings" asp-route-id="@User.GetId()" class="nav-link active" aria-current="page">
+                            <b>Dashboard</b>
                         </a>
                     </li>
                 }

@@ -62,6 +62,7 @@ namespace CarParts.Web
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
+                //TODO?: app.SeedAdmin();
             }
             else
             {

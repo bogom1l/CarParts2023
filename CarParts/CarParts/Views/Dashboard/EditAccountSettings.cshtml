@@ -1,0 +1,55 @@
+﻿@model CarParts.Web.ViewModels.User.EditUserViewModel
+@{
+    ViewBag.Title = "Edit User Info";
+}
+
+<div class="container my-custom-background-color">
+    <hr/>
+    <h2 class="text-center">@ViewBag.Title</h2>
+    <br/>
+
+    <div class="row">
+        <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+
+            <form asp-area="" asp-controller="Dashboard" asp-action="EditAccountSettings" method="post">
+
+                <div class="form-group">
+                    <label asp-for="@Model.Username">Username</label>
+                    <input asp-for="@Model.Username" class="form-control" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="@Model.Email">Email</label>
+                    <input asp-for="@Model.Email" class="form-control" readonly/>
+                </div>
+
+                @*<div class="form-group">
+                    <label asp-for="@Model.PhoneNumber">Phone Number</label>
+                    <input asp-for="@Model.PhoneNumber" class="form-control"/>
+                </div>*@
+
+                <div class="form-group">
+                    <label asp-for="@Model.FirstName">First Name</label>
+                    <input asp-for="@Model.FirstName" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="@Model.LastName">Last Name</label>
+                    <input asp-for="@Model.LastName" class="form-control"/>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="@Model.Balance" class="form-label-add-edit">Balance</label>
+                    <input type="number" asp-for="@Model.Balance" class="form-control" aria-required="true" max="1_000_000" />
+                    <span asp-validation-for="@Model.Balance" class="text-danger"></span>
+                </div>
+
+                <br/>
+                <div class="mb-3">
+                    <input type="submit" value="Save Changes" class="btn btn-info w-100 fw-bold" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr/>
+</div>

@@ -6,7 +6,8 @@
 	  
 	- da oprawq toq rout sled login, da ne e /Identity/Car/ALl, a /Car/All
 
-	- User Dashboard: Create a personalized dashboard for users to view their profile, active rentals, rental history, and account settings.
+	-[almost_done] User Dashboard: Create a personalized dashboard for users to view their profile, active rentals, and account settings.
+	  TODO: Validation for Balance 231123123123123
 
 	- Car Comparison: Allow users to compare multiple cars side by side, helping them make informed decisions about their rental choice.
 
@@ -18,5 +19,6 @@
 
 	- add try catch in controllers
 
+	
 ------------------
-12:00 - 05.08.2023
+13:00 - 05.08.2023
