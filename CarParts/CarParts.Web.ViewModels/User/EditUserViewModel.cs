@@ -14,7 +14,7 @@
 
         //public string PhoneNumber { get; set; } = null!;
 
-        
+        //TODO:
         [Required]
         [Range(BalanceMinValue,
             1_000_000,

@@ -4,18 +4,18 @@
 	
 	✔ [AllowAnonymous] All, Details, Search
 	  
-	- da oprawq toq rout sled login, da ne e /Identity/Car/ALl, a /Car/All
+	✔ da oprawq toq rout sled login, da ne e /Identity/Car/ALl, a /Car/All :: FIXED = ", new { area = "" }"
 
-	-[almost_done] User Dashboard: Create a personalized dashboard for users to view their profile, active rentals, and account settings.
-	  TODO: Validation for Balance 231123123123123
+	✔ improve search functionality : buton koito iztriva viewbaga , viewbaga da sedi sled wseki search
 
 	- Car Comparison: Allow users to compare multiple cars side by side, helping them make informed decisions about their rental choice.
-
-	- improve search functionality (kato w mobie.bg/auto.bg/cars.bg/bestauto.bg)
 
 	- funkciq UpdateMyRentals, ako nqkoq kola EndRentalDate >= DateTime.Now - da q maxam ot spisaka
 
 	- change favorite cars/parts to : Wishlist
+
+	- [almost_done] User Dashboard: Create a personalized dashboard for users to view their profile, active rentals, and account settings.
+	  TODO: Validation for Balance 231123123123123
 
 	- add try catch in controllers
 

@@ -1,7 +1,5 @@
 ﻿namespace CarParts.Web.Controllers
 {
-    using CarParts.Web.ViewModels.Car;
-    using CarParts.Web.ViewModels.Part;
     using Data;
     using Data.Models;
     using Extensions;
@@ -9,12 +7,11 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using ViewModels.User;
-    using static CarParts.Common.GlobalConstants;
 
     public class DashboardController : BaseController
     {
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _dbContext;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public DashboardController(UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext)
         {
@@ -31,13 +28,13 @@
                 .Select(u => new EditUserViewModel
                 {
                     Username = u.UserName, //SHOULD NOT BE ABLE TO CHANGE
-                    Email = u.Email,// SHOULD NOT BE ABLE TO CHANGE
+                    Email = u.Email, // SHOULD NOT BE ABLE TO CHANGE
                     FirstName = u.FirstName,
                     LastName = u.LastName,
                     //PhoneNumber = u.PhoneNumber,
                     Balance = u.Balance
                 })
-            .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync();
 
             if (editUserViewModel == null)
             {
@@ -83,7 +80,5 @@
 
             return View(editUserViewModel);
         }
-
-
     }
 }

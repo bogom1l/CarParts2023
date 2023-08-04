@@ -230,16 +230,25 @@
         {
             var cars = await _carService.SearchCarsAsync(searchTerm, category, priceSort,
                 transmissionName, fuelName, fromYear, toYear, fromHp, toHp, fromPrice, toPrice);
-            /*
-            if i want to keep the search params in the search boxes:
+            
+            //if i want to keep the search params in the search boxes:
 
             ViewBag.SearchTerm = searchTerm;
-            ViewBag.FromPrice = fromPrice;
-            ViewBag.ToPrice = toPrice;
+
+            ViewBag.Category = category;
+            ViewBag.Transmission = transmissionName;
+            ViewBag.Fuel = fuelName;
+
+            ViewBag.FromYear = fromYear;
+            ViewBag.ToYear = toYear;  
+
             ViewBag.FromHp = fromHp;
             ViewBag.ToHp = toHp;
-            ViewBag.FromYear = fromYear;
-            ViewBag.ToYear = toYear;  */
+
+            ViewBag.FromPrice = fromPrice;
+            ViewBag.ToPrice = toPrice;
+            
+            ViewBag.PriceSort = priceSort;
 
             return View(cars);
         }

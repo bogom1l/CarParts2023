@@ -21,7 +21,7 @@
                     </td>
                     <td>
                         <label class="fw-bold">Category</label>
-                        <select class="form-control search-slt" name="category">
+                        <select class="form-control search-slt" name="category"> 
                             <option value="">All Categories</option>
                             <option value="Sedan">Sedan</option>
                             <option value="Coupe">Coupe</option>
@@ -42,8 +42,7 @@
                             <option value="Manual">Manual</option>
                         </select>
                     </td>
-                </tr>
-                <tr>
+                    
                     <td>
                         <label class="fw-bold">Fuel type</label>
                         <select class="form-control search-slt" name="fuelName">
@@ -54,6 +53,10 @@
                             <option value="Hybrid">Hybrid</option>
                         </select>
                     </td>
+
+                </tr>
+                <tr>
+                    
                     <td>
                         <label class="fw-bold">From year</label>
                         <input type="number" class="form-control search-slt" name="fromYear" value="@ViewBag.FromYear"
@@ -69,13 +72,15 @@
                         <input type="number" class="form-control search-slt" name="fromHp" value="@ViewBag.FromHp"
                                placeholder="From Horsepower">
                     </td>
-                </tr>
-                <tr>
+                    
                     <td>
                         <label class="fw-bold">To horsepower</label>
                         <input type="number" class="form-control search-slt" name="toHp" value="@ViewBag.ToHp"
                                placeholder="To Horsepower">
                     </td>
+                </tr>
+                <tr>
+                   
                     <td>
                         <label class="fw-bold">From price</label>
                         <input type="number" class="form-control search-slt" name="fromPrice" value="@ViewBag.FromPrice"
@@ -97,7 +102,9 @@
                 <tr>
                     <td colspan="4" class="text-center">
                         <button type="submit" class="btn btn-primary">Search</button>
+                        <button type="submit" class="btn btn-danger" id="resetButton">Reset</button>
                     </td>
+
                 </tr>
             </table>
         </form>
@@ -203,6 +210,85 @@
 
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-    <partial name="CommonView" />
+    <partial name="_ValidationScriptsPartial"/>
+    <partial name="CommonView"/>
+
+
+    <script>
+        //Save results from last search
+       
+        var selectedFuel = '@ViewBag.Fuel';
+        var selectedTransmission = '@ViewBag.Transmission';
+        var selectedCategory = '@ViewBag.Category';
+        var selectedPriceSort = '@ViewBag.PriceSort';
+
+        var dropdownFuel = document.getElementsByName('fuelName')[0];
+        var dropdownTransmission = document.getElementsByName('transmissionName')[0];
+        var dropdownCategory = document.getElementsByName('category')[0];
+        var dropdownPriceSort = document.getElementsByName('priceSort')[0];
+
+        for (var i = 0; i < dropdownFuel.options.length; i++) {
+            if (dropdownFuel.options[i].value === selectedFuel) {
+                dropdownFuel.options[i].selected = true;
+                break;
+            }
+        }
+
+
+        for (var i = 0; i < dropdownTransmission.options.length; i++) {
+            if (dropdownTransmission.options[i].value === selectedTransmission) {
+                dropdownTransmission.options[i].selected = true;
+                break;
+            }
+        }
+
+        for (var i = 0; i < dropdownCategory.options.length; i++) {
+            if (dropdownCategory.options[i].value === selectedCategory) {
+                dropdownCategory.options[i].selected = true;
+                break;
+            }
+        }
+
+        for (var i = 0; i < dropdownPriceSort.options.length; i++) {
+            if (dropdownPriceSort.options[i].value === selectedPriceSort) {
+                dropdownPriceSort.options[i].selected = true;
+                break;
+            }
+        }
+
+
+    // Function to reset the dropdown selected options
+    function resetDropdown(dropdown) {
+        for (var i = 0; i < dropdown.options.length; i++) {
+            dropdown.options[i].selected = false;
+        }
+    }
+
+    // Function to reset all form fields
+    function resetFormFields() {
+
+        // Reset the dropdown selected options
+        resetDropdown(dropdownFuel);
+        resetDropdown(dropdownTransmission);
+        resetDropdown(dropdownCategory);
+        resetDropdown(dropdownPriceSort);
+
+        // Reset the text input values
+        document.getElementsByName("searchTerm")[0].value = "";
+        document.getElementsByName("fromYear")[0].value = "";
+        document.getElementsByName("toYear")[0].value = "";
+        document.getElementsByName("fromHp")[0].value = "";
+        document.getElementsByName("toHp")[0].value = "";
+        document.getElementsByName("fromPrice")[0].value = "";
+        document.getElementsByName("toPrice")[0].value = "";
+
+        // Submit the form to trigger the server-side reset
+        document.querySelector("form").submit();
+    }
+
+    // Event handler for the Reset button
+    document.getElementById("resetButton").addEventListener("click", resetFormFields);
+
+</script>
+
 }
