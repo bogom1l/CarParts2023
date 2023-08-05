@@ -18,7 +18,7 @@
 
         public Task EditCarAsync(int carId, EditCarViewModel car);
 
-        public Task DeleteCarAsync(int carId); //, string userId (used to be)
+        public Task DeleteCarAsync(int carId);
 
         public Task<Car?> GetCarByIdAsync(int carId);
 
@@ -26,21 +26,23 @@
 
         public Task<ICollection<CarViewModel>> GetMyFavoriteCarsAsync(string userId);
 
-        public Task<bool> IsCarMine(int carId, string userId);
+        public Task<bool> IsUserOwnerOfCarByIdAsync(int carId, string userId); //TODO: add async
 
-        public Task<bool> AddCarToMyFavoriteCarsAsync(int carId, string userId);
+        public Task<bool> IsCarInMyFavoritesAsync(int carId, string userId);
 
-        public Task<bool> RemoveCarFromMyFavoriteCarsAsync(int carId, string userId);
+        public Task AddCarToMyFavoriteCarsAsync(int carId, string userId);
+
+        public Task RemoveCarFromMyFavoriteCarsAsync(int carId, string userId);
 
         public Task<ICollection<CarViewModel>> SearchCarsAsync(string searchTerm, string category,
             string priceSort, string transmissionName, string fuelName, int? fromYear,
-            int? toYear, int? fromHp, int? toHp, int? fromPrice, int? toPrice);
+            int? toYear, int? fromHp, int? toHp, int? fromPrice, int? toPrice, bool isRented);
 
         public Task<bool> ExistsByIdAsync(int carId);
 
         public Task<bool> IsRentedAsync(int carId);
 
-        public Task<bool> IsRentedByMeAsync(int carId, string userId);
+        public Task<bool> IsRentedByUserIdAsync(int carId, string userId);
 
         public Task RentCarAsync(RentCarViewModel rentCarViewModel, string userId);
 
@@ -54,13 +56,13 @@
 
         public bool IsRentalPeriodValid(RentCarViewModel rentCarViewModel);
 
-        public Task<double> TotalMoneyToRentAsync(RentCarViewModel rentCarViewModel);
+        public double TotalMoneyToRentAsync(RentCarViewModel rentCarViewModel);
 
-        public Task<double> TotalMoneyToExtendRentAsync(RentCarViewModel rentCarViewModel, DateTime endDate);
+        public double TotalMoneyToExtendRentAsync(RentCarViewModel rentCarViewModel, DateTime endDate);
 
-        public Task<double> TotalMoneyToReturnForEndingRental(int carId);
+        public Task<double> TotalMoneyToReturnForEndingRentalAsync(int carId);
 
-        public Task AddReview(ReviewViewModel reviewViewModel, string userId);
-        public Task<bool> HasUserAlreadyReviewedThisCar(int carId, string userId);
+        public Task AddReviewAsync(ReviewViewModel reviewViewModel, string userId);
+        public Task<bool> HasUserAlreadyReviewedThisCarAsync(int carId, string userId);
     }
 }

@@ -47,7 +47,10 @@
                         <input type="number" asp-for="@Model.Balance" class="form-control" aria-required="true" id="balanceInput" />
                         <span asp-validation-for="Balance" class="text-danger"></span>
                     </div>
- 
+
+                    <a asp-area="" asp-controller="Dashboard" asp-action="DeleteAllReviewsForUser" class="btn btn-warning btn-block delete-myreviews">
+                        Delete all my reviews
+                    </a>
                 }
                 else
                 {
@@ -80,8 +83,10 @@
                         <input asp-for="@Model.LastName" class="form-control"/>
                         <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
-                
-               
+
+                    <a asp-area="" asp-controller="Dashboard" asp-action="DeleteAllReviewsForUser" class="btn btn-warning btn-block delete-myreviews">
+                        Delete all my reviews
+                    </a>
                 }
             
 
@@ -96,6 +101,8 @@
     <hr/>
 </div>
 
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <partial name="CommonView" />
 }

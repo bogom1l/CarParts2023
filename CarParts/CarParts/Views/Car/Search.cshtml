@@ -98,6 +98,10 @@
                             <option value="desc">Price: High to Low</option>
                         </select>
                     </td>
+                    <td style="margin-left: 5%">
+                        <input type="checkbox" class="form-check-input search-slt" name="isRented" value="@ViewBag.IsRented">
+                        <label class="fw-bold">Is Rented</label>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="4" class="text-center">
@@ -156,6 +160,9 @@
                                     <span class="fw-bold">Price:</span> @car.Price (EUR)
                                 </p>
 
+                                <p class="card-text">
+                                    <span class="fw-bold">Renter:</span> @car.RenterEmail 
+                                </p>
                             </div>
 
                             <div class="card-footer">
@@ -185,7 +192,7 @@
                                         Rent
                                     </a>
                                 }
-                                else if (!await UserService.IsUserDealer(User.GetId()!))
+                                else if (!await UserService.IsUserDealerAsync(User.GetId()!))
                                 {
                                     @if (User.Identity!.IsAuthenticated)
                                     {

@@ -69,25 +69,41 @@
                 return RedirectToAction("BecomeDealer", "Dealer");
             }
 
-            await _carService.AddCarAsync(car, dealerId);
+            try
+            {
+                await _carService.AddCarAsync(car, dealerId);
 
-            TempData["SuccessMessage"] = "Car has been successfully added.";
-            return RedirectToAction("All");
+                TempData["SuccessMessage"] = "Car has been successfully added.";
+                return RedirectToAction("All");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            var detailsCarViewModel = await _carService.GetDetailsCarViewModelAsync(id);
+            var carExists = await _carService.ExistsByIdAsync(id);
 
-            if (detailsCarViewModel == null)
+            if (!carExists)
             {
                 TempData["ErrorMessage"] = "Car with provided id does not exist! Please try again.";
                 return RedirectToAction("All", "Car");
             }
 
-            return View(detailsCarViewModel);
+            try
+            {
+                var detailsCarViewModel = await _carService.GetDetailsCarViewModelAsync(id);
+
+                return View(detailsCarViewModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpGet]
@@ -107,15 +123,16 @@
                 return RedirectToAction("All", "Car");
             }
 
-            var editCarViewModel = await _carService.GetEditCarViewModelAsync(id);
-
-            if (editCarViewModel == null)
+            try
             {
-                TempData["ErrorMessage"] = "Car with provided id does not exist! Please try again.";
-                return RedirectToAction("All", "Car");
-            }
+                var editCarViewModel = await _carService.GetEditCarViewModelAsync(id);
 
-            return View(editCarViewModel);
+                return View(editCarViewModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpPost]
@@ -126,10 +143,17 @@
                 return View(car);
             }
 
-            await _carService.EditCarAsync(id, car);
+            try
+            {
+                await _carService.EditCarAsync(id, car);
 
-            TempData["SuccessMessage"] = "Car has been successfully edited.";
-            return RedirectToAction("All", "Car");
+                TempData["SuccessMessage"] = "Car has been successfully edited.";
+                return RedirectToAction("All", "Car");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpGet]
@@ -149,26 +173,47 @@
                 return RedirectToAction("All", "Car");
             }
 
-            await _carService.DeleteCarAsync(id);
+            try
+            {
+                await _carService.DeleteCarAsync(id);
 
-            TempData["SuccessMessage"] = "Car has been successfully deleted!";
-            return RedirectToAction("All", "Car");
+                TempData["SuccessMessage"] = "Car has been successfully deleted!";
+                return RedirectToAction("All", "Car");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> MyCars()
         {
-            var cars = await _carService.GetMyCarsAsync(GetUserId());
+            try
+            {
+                var cars = await _carService.GetMyCarsAsync(GetUserId());
 
-            return View(cars);
+                return View(cars);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> MyFavoriteCars()
         {
-            var cars = await _carService.GetMyFavoriteCarsAsync(GetUserId());
+            try
+            {
+                var cars = await _carService.GetMyFavoriteCarsAsync(GetUserId());
 
-            return View(cars);
+                return View(cars);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpGet]
@@ -182,22 +227,33 @@
                 return RedirectToAction("All", "Car");
             }
 
-            var isCarInMyFavoriteCars = await _carService.IsCarMine(id, GetUserId());
+            var isCarMine = await _carService.IsUserOwnerOfCarByIdAsync(id, GetUserId());
 
-            if (isCarInMyFavoriteCars && !User.IsAdmin())
+            if (isCarMine && !User.IsAdmin())
             {
                 TempData["ErrorMessage"] = "You can't add a car in your favorite list if you are the owner of the car.";
                 return RedirectToAction("All", "Car");
             }
 
-            if (!await _carService.AddCarToMyFavoriteCarsAsync(id, GetUserId()))
+            var isCarInMyFavorites = await _carService.IsCarInMyFavoritesAsync(id, GetUserId());
+
+            if (isCarInMyFavorites)
             {
                 TempData["ErrorMessage"] = "The car is already in your favorite cars.";
                 return RedirectToAction("MyFavoriteCars", "Car");
             }
 
-            TempData["SuccessMessage"] = "Car has been successfully added to favorite cars!";
-            return RedirectToAction("MyFavoriteCars", "Car");
+            try
+            {
+                await _carService.AddCarToMyFavoriteCarsAsync(id, GetUserId());
+
+                TempData["SuccessMessage"] = "Car has been successfully added to favorite cars!";
+                return RedirectToAction("MyFavoriteCars", "Car");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpGet]
@@ -211,28 +267,38 @@
                 return RedirectToAction("MyFavoriteCars", "Car");
             }
 
-            if (!await _carService.RemoveCarFromMyFavoriteCarsAsync(id, GetUserId()))
+            var isCarInMyFavorites = await _carService.IsCarInMyFavoritesAsync(id, GetUserId());
+
+            if (!isCarInMyFavorites)
             {
                 TempData["ErrorMessage"] =
                     "Car with provided id does not exist in your favorite list! Please try again.";
                 return RedirectToAction("MyFavoriteCars", "Car");
             }
 
-            TempData["SuccessMessage"] = "Car successfully removed from favorite cars.";
-            return RedirectToAction("All", "Car");
+            try
+            {
+                await _carService.RemoveCarFromMyFavoriteCarsAsync(id, GetUserId());
+
+                TempData["SuccessMessage"] = "Car successfully removed from favorite cars.";
+                return RedirectToAction("All", "Car");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Search(string searchTerm, string category,
             string priceSort, string transmissionName, string fuelName, int? fromYear,
-            int? toYear, int? fromHp, int? toHp, int? fromPrice, int? toPrice)
+            int? toYear, int? fromHp, int? toHp, int? fromPrice, int? toPrice, bool isRented)
         {
             var cars = await _carService.SearchCarsAsync(searchTerm, category, priceSort,
-                transmissionName, fuelName, fromYear, toYear, fromHp, toHp, fromPrice, toPrice);
+                transmissionName, fuelName, fromYear, toYear, fromHp, toHp, fromPrice, toPrice, isRented);
 
-            //if i want to keep the search params in the search boxes:
-
+            // to keep the search params in the search boxes:
             ViewBag.SearchTerm = searchTerm;
 
             ViewBag.Category = category;
@@ -249,6 +315,8 @@
             ViewBag.ToPrice = toPrice;
 
             ViewBag.PriceSort = priceSort;
+
+            ViewBag.IsRented = isRented;
 
             return View(cars);
         }
@@ -272,7 +340,7 @@
                 return RedirectToAction("Index", "Home");
             }
 
-            var isRentedByMe = await _carService.IsRentedByMeAsync(id, GetUserId());
+            var isRentedByMe = await _carService.IsRentedByUserIdAsync(id, GetUserId());
 
             if (isRentedByMe)
             {
@@ -288,15 +356,16 @@
                 return RedirectToAction("All", "Car");
             }
 
-            var rentCarViewModel = await _carService.GetRentCarViewModelAsync(id);
-
-            if (rentCarViewModel == null)
+            try
             {
-                TempData["ErrorMessage"] = "Car with provided id does not exist! Please try again.";
-                return RedirectToAction("All", "Car");
-            }
+                var rentCarViewModel = await _carService.GetRentCarViewModelAsync(id);
 
-            return View(rentCarViewModel);
+                return View(rentCarViewModel);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpPost]
@@ -308,8 +377,8 @@
                 return View(rentCarViewModel);
             }
 
-            var userBalance = await _userService.GetUserBalanceById(GetUserId());
-            var totalMoneyToRent = await _carService.TotalMoneyToRentAsync(rentCarViewModel);
+            var userBalance = await _userService.GetUserBalanceByIdAsync(GetUserId());
+            var totalMoneyToRent = _carService.TotalMoneyToRentAsync(rentCarViewModel);
 
             if (totalMoneyToRent > userBalance)
             {
@@ -317,13 +386,20 @@
                 return RedirectToAction("All", "Car");
             }
 
-            await _carService.RentCarAsync(rentCarViewModel, GetUserId());
-            await _userService.RemoveMoney(GetUserId(), totalMoneyToRent);
+            try
+            {
+                await _carService.RentCarAsync(rentCarViewModel, GetUserId());
+                await _userService.RemoveMoneyAsync(GetUserId(), totalMoneyToRent);
 
-            TempData["SuccessMessage"] =
-                $"You have successfully rented the car to date {rentCarViewModel.RentalEndDate!.Value.ToShortDateString()}." +
-                $" You have been taxed {totalMoneyToRent} Euros.";
-            return RedirectToAction("MyRentedCars", "Car");
+                TempData["SuccessMessage"] =
+                    $"You have successfully rented the car to date {rentCarViewModel.RentalEndDate!.Value.ToShortDateString()}." +
+                    $" You have been taxed {totalMoneyToRent} Euros.";
+                return RedirectToAction("MyRentedCars", "Car");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpGet]
@@ -361,17 +437,18 @@
                 return RedirectToAction("Index", "Home");
             }
 
-            var rentCarViewModel = await _carService.GetRentCarViewModelAsync(id);
-
-            if (rentCarViewModel == null)
+            try
             {
-                TempData["ErrorMessage"] = "Car with provided id does not exist! Please try again.";
-                return RedirectToAction("All", "Car");
+                var rentCarViewModel = await _carService.GetRentCarViewModelAsync(id);
+
+                _curentEndDate = (DateTime)rentCarViewModel!.RentalEndDate!;
+
+                return View(rentCarViewModel);
             }
-
-            _curentEndDate = (DateTime)rentCarViewModel.RentalEndDate!;
-
-            return View(rentCarViewModel);
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpPost]
@@ -387,13 +464,12 @@
 
             if (!_carService.IsRentalPeriodValid(rentCarViewModel))
             {
-                TempData["ErrorMessage"] = "Please check and alter your rental period.";
+                TempData["ErrorMessage"] = "Your rental period was invalid! Please try again with correct data.";
                 return View(rentCarViewModel);
             }
 
-            var userBalance = await _userService.GetUserBalanceById(GetUserId());
-            var totalMoneyToRentMore =
-                await _carService.TotalMoneyToExtendRentAsync(rentCarViewModel, _curentEndDate);
+            var userBalance = await _userService.GetUserBalanceByIdAsync(GetUserId());
+            var totalMoneyToRentMore = _carService.TotalMoneyToExtendRentAsync(rentCarViewModel, _curentEndDate);
 
             if (totalMoneyToRentMore > userBalance)
             {
@@ -401,73 +477,102 @@
                 return RedirectToAction("MyRentedCars", "Car");
             }
 
-            await _carService.UpdateCarRentalAsync(rentCarViewModel);
-            await _userService.RemoveMoney(GetUserId(), totalMoneyToRentMore);
-
-            if (totalMoneyToRentMore > 0)
+            try
             {
-                TempData["SuccessMessage"] =
-                    $"You have successfully changed the car rental for the price of {totalMoneyToRentMore} euros. " +
-                    $"Your new rental end date is {rentCarViewModel.RentalEndDate!.Value.ToShortDateString()}.";
-            }
-            else
-            {
-                TempData["SuccessMessage"] =
-                    $"You have successfully changed the car rental. " +
-                    $"You received back: {-totalMoneyToRentMore} euros! " +
-                    $"Your new rental end date is {rentCarViewModel.RentalEndDate!.Value.ToShortDateString()}.";
-            }
+                await _carService.UpdateCarRentalAsync(rentCarViewModel);
+                await _userService.RemoveMoneyAsync(GetUserId(), totalMoneyToRentMore);
 
-            return RedirectToAction("MyRentedCars", "Car");
+                if (totalMoneyToRentMore > 0)
+                {
+                    TempData["SuccessMessage"] =
+                        $"You have successfully changed the car rental. You have been charged {totalMoneyToRentMore} euros for the rental, including taxes. " +
+                        $"Your new rental end date is {rentCarViewModel.RentalEndDate!.Value.ToShortDateString()}.";
+                }
+                else
+                {
+                    TempData["SuccessMessage"] =
+                        $"You have successfully changed the car rental. " +
+                        $"You received back: {-totalMoneyToRentMore} euros! " +
+                        $"Your new rental end date is {rentCarViewModel.RentalEndDate!.Value.ToShortDateString()}.";
+                }
+
+                return RedirectToAction("MyRentedCars", "Car");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
-        [HttpPost]
+        //[HttpPost]
+        [HttpGet]
         public async Task<IActionResult> EndRental(int id)
         {
-            //return user the money that he spent for the rental
-            var moneyToReturn = await _carService.TotalMoneyToReturnForEndingRental(id);
-            await _userService.AddCustomAmountMoney(GetUserId(), moneyToReturn);
+            try
+            {
+                //return user the money that he spent for the rental
+                var moneyToReturn = await _carService.TotalMoneyToReturnForEndingRentalAsync(id);
+                await _userService.AddCustomAmountMoneyAsync(GetUserId(), moneyToReturn);
 
-            await _carService.EndCarRentalAsync(id);
-            await _userService.RemoveMoney(GetUserId(), TaxPriceForCancelingRental);
+                await _carService.EndCarRentalAsync(id);
+                await _userService.RemoveMoneyAsync(GetUserId(), TaxPriceForCancelingRental);
 
-            TempData["SuccessMessage"] = "You have successfully ended the car rental! " +
-                                         $"You received back {moneyToReturn} euros " +
-                                         $"and you have been taxed {TaxPriceForCancelingRental} euros.";
-            return RedirectToAction("MyRentedCars", "Car");
+                TempData["SuccessMessage"] = "You have successfully ended the car rental! " +
+                                             $"You received back {moneyToReturn} euros " +
+                                             $"and you have been taxed {TaxPriceForCancelingRental} euros.";
+                return RedirectToAction("MyRentedCars", "Car");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> UpdateMyRentals()
         {
-            var cars = await _carService.GetMyRentedCarsAsync(GetUserId());
-
-            foreach (var car in cars)
+            try
             {
-                if (car.RentalEndDate < DateTime.Now)
-                {
-                    await _carService.EndCarRentalAsync(car.Id);
-                }
-            }
+                var cars = await _carService.GetMyRentedCarsAsync(GetUserId());
 
-            return RedirectToAction("MyRentedCars", "Car");
+                foreach (var car in cars)
+                {
+                    if (car.RentalEndDate < DateTime.Now)
+                    {
+                        await _carService.EndCarRentalAsync(car.Id);
+                    }
+                }
+
+                return RedirectToAction("MyRentedCars", "Car");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> AddReview(ReviewViewModel reviewViewModel)
         {
             var hasUserAlreadyReviewedThisCar =
-                await _carService.HasUserAlreadyReviewedThisCar(reviewViewModel.CarId, GetUserId());
+                await _carService.HasUserAlreadyReviewedThisCarAsync(reviewViewModel.CarId, GetUserId());
             if (hasUserAlreadyReviewedThisCar)
             {
                 TempData["ErrorMessage"] = "Sending more than one review per car is not allowed.";
                 return RedirectToAction("Details", "Car", new { id = reviewViewModel.CarId });
             }
 
-            await _carService.AddReview(reviewViewModel, GetUserId());
+            try
+            {
+                await _carService.AddReviewAsync(reviewViewModel, GetUserId());
 
-            TempData["SuccessMessage"] = "Review has been successfully added.";
-            return RedirectToAction("Details", "Car", new { id = reviewViewModel.CarId });
+                TempData["SuccessMessage"] = "Review has been successfully added.";
+                return RedirectToAction("Details", "Car", new { id = reviewViewModel.CarId });
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
 

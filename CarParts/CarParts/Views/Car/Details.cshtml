@@ -127,7 +127,7 @@
 
         <div class="col-sm-5 offset-xl-1 col-xl-6 mt-xxl-5 mx-auto">
 
-            @if ((User.Identity!.IsAuthenticated && !await UserService.IsUserDealer(User.GetId()!)) || User.IsAdmin())
+            @if ((User.Identity!.IsAuthenticated && !await UserService.IsUserDealerAsync(User.GetId()!)) || User.IsAdmin())
             {
                 <div class="card my-custom-background-color-v2">
                     <div class="card-body">

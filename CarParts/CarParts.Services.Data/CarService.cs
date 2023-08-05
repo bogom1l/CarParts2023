@@ -9,6 +9,12 @@
     using Web.ViewModels.Dealer;
     using Web.ViewModels.Review;
     using static Common.GlobalConstants.Car;
+    using Car = CarParts.Data.Models.Car;
+    using Review = CarParts.Data.Models.Review;
+    /*
+    using Car = CarParts.Data.Models.Car;
+    using Review = CarParts.Data.Models.Review;
+     */
 
     public class CarService : ICarService
     {
@@ -263,11 +269,11 @@
 
         public async Task<Car?> GetCarByIdAsync(int carId)
         {
-            var carData = await _dbContext.Cars
+            var car = await _dbContext.Cars
                 .Include(c => c.Dealer)
                 .FirstOrDefaultAsync(c => c.CarId == carId);
 
-            return carData;
+            return car;
         }
 
         public async Task<ICollection<CarViewModel>> GetMyCarsAsync(string userId)
@@ -328,24 +334,22 @@
                 }).ToListAsync();
         }
 
-        public async Task<bool> IsCarMine(int carId, string userId)
+        public async Task<bool> IsCarInMyFavoritesAsync(int carId, string userId)
+        {
+            return await _dbContext
+                .UsersFavoriteCars
+                .AnyAsync(ufc => ufc.CarId == carId && ufc.UserId == userId);
+        }
+
+        public async Task<bool> IsUserOwnerOfCarByIdAsync(int carId, string userId)
         {
             return await _dbContext
                 .Cars
                 .AnyAsync(c => c.CarId == carId && c.Dealer.UserId == userId);
         }
 
-        public async Task<bool> AddCarToMyFavoriteCarsAsync(int carId, string userId)
+        public async Task AddCarToMyFavoriteCarsAsync(int carId, string userId)
         {
-            var isCarAlreadyInMyFavoriteCars = await _dbContext
-                .UsersFavoriteCars
-                .AnyAsync(ufc => ufc.CarId == carId && ufc.UserId == userId);
-
-            if (isCarAlreadyInMyFavoriteCars)
-            {
-                return false;
-            }
-
             var userFavoriteCar = new UserFavoriteCar
             {
                 CarId = carId,
@@ -354,30 +358,21 @@
 
             await _dbContext.UsersFavoriteCars.AddAsync(userFavoriteCar);
             await _dbContext.SaveChangesAsync();
-
-            return true;
         }
 
-        public async Task<bool> RemoveCarFromMyFavoriteCarsAsync(int carId, string userId)
+        public async Task RemoveCarFromMyFavoriteCarsAsync(int carId, string userId)
         {
             var car = await _dbContext
                 .UsersFavoriteCars
                 .FirstOrDefaultAsync(ufc => ufc.CarId == carId && ufc.UserId == userId);
 
-            if (car == null)
-            {
-                return false;
-            }
-
             _dbContext.UsersFavoriteCars.Remove(car);
             await _dbContext.SaveChangesAsync();
-
-            return true;
         }
 
         public async Task<ICollection<CarViewModel>> SearchCarsAsync(string searchTerm, string category,
             string priceSort, string transmissionName, string fuelName, int? fromYear,
-            int? toYear, int? fromHp, int? toHp, int? fromPrice, int? toPrice)
+            int? toYear, int? fromHp, int? toHp, int? fromPrice, int? toPrice, bool isRented)
         {
             var carsQuery = _dbContext.Cars.AsQueryable();
 
@@ -452,6 +447,11 @@
                 carsQuery = carsQuery.OrderByDescending(c => c.Price);
             }
 
+            if (isRented)
+            {
+                carsQuery = carsQuery.Where(c => !string.IsNullOrEmpty(c.RenterId));
+            }
+
             var cars = await carsQuery
                 .Select(c => new CarViewModel
                 {
@@ -473,7 +473,8 @@
                     Torque = c.Torque,
                     FuelConsumption = c.FuelConsumption,
                     Owner = c.Dealer.User.FirstName,
-                    ImageUrl = c.ImageUrl
+                    ImageUrl = c.ImageUrl,
+                    RenterEmail = c.Renter.Email
                 })
                 .ToListAsync();
 
@@ -496,7 +497,7 @@
             return !string.IsNullOrEmpty(car.RenterId);
         }
 
-        public async Task<bool> IsRentedByMeAsync(int carId, string userId)
+        public async Task<bool> IsRentedByUserIdAsync(int carId, string userId)
         {
             var car = await _dbContext
                 .Cars
@@ -567,10 +568,8 @@
             return cars;
         }
 
-        public async Task<double> TotalMoneyToRentAsync(RentCarViewModel rentCarViewModel)
+        public double TotalMoneyToRentAsync(RentCarViewModel rentCarViewModel)
         {
-            var car = await _dbContext.Cars.FirstAsync(c => c.CarId == rentCarViewModel.Id);
-
             var days = ((DateTime)rentCarViewModel!.RentalEndDate! - (DateTime)rentCarViewModel!.RentalStartDate!).Days;
 
             var totalPrice = days * rentCarViewModel.RentPrice;
@@ -578,10 +577,8 @@
             return totalPrice;
         }
 
-        public async Task<double> TotalMoneyToExtendRentAsync(RentCarViewModel rentCarViewModel, DateTime pastEndDate)
+        public double TotalMoneyToExtendRentAsync(RentCarViewModel rentCarViewModel, DateTime pastEndDate)
         {
-            var car = await _dbContext.Cars.FirstAsync(c => c.CarId == rentCarViewModel.Id);
-
             var days = ((DateTime)rentCarViewModel!.RentalEndDate! - pastEndDate).Days;
 
             var totalPrice = days * rentCarViewModel.RentPrice;
@@ -619,7 +616,7 @@
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<double> TotalMoneyToReturnForEndingRental(int carId)
+        public async Task<double> TotalMoneyToReturnForEndingRentalAsync(int carId)
         {
             var car = await _dbContext.Cars.FirstAsync(c => c.CarId == carId);
 
@@ -636,7 +633,7 @@
         }
 
 
-        public async Task AddReview(ReviewViewModel reviewViewModel, string userId)
+        public async Task AddReviewAsync(ReviewViewModel reviewViewModel, string userId)
         {
             var review = new Review
             {
@@ -651,7 +648,7 @@
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<bool> HasUserAlreadyReviewedThisCar(int carId, string userId)
+        public async Task<bool> HasUserAlreadyReviewedThisCarAsync(int carId, string userId)
         {
             return await _dbContext.Reviews.AnyAsync(r => r.CarId == carId && r.UserId == userId);
         }

@@ -13,15 +13,15 @@
     public class DashboardController : BaseController
     {
         private readonly ApplicationDbContext _dbContext;
-        private readonly IDealerService _dealerService;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IUserService _userService;
 
         public DashboardController(UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext,
-            IDealerService dealerService)
+            IUserService userService)
         {
             _userManager = userManager;
             _dbContext = dbContext;
-            _dealerService = dealerService;
+            _userService = userService;
         }
 
 
@@ -30,7 +30,7 @@
         {
             if (GetUserId() != id)
             {
-                TempData["ErrorMessage"] = "User can only edit his personal account.";
+                TempData["ErrorMessage"] = "User can only edit your personal account.";
                 return RedirectToAction("Index", "Home");
             }
 
@@ -147,6 +147,38 @@
 
             TempData["ErrorMessage"] = "Some error has occurred. Please try again.";
             return View(editDealerViewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteAllReviewsForUser()
+        {
+            try
+            {
+                var reviewsCount = await _userService.GetMyReviewsCountAsync(GetUserId());
+
+                if (reviewsCount == 0)
+                {
+                    TempData["ErrorMessage"] = "You have not made any reviews!";
+                    return RedirectToAction("EditAccountSettings", "Dashboard", new { area = "", id = GetUserId() });
+                }
+
+                await _userService.DeleteAllReviewsForUserByIdAsync(GetUserId());
+
+                TempData["SuccessMessage"] = $"All {reviewsCount} of your reviews were deleted successfully!";
+                return RedirectToAction("EditAccountSettings", "Dashboard", new { area = "", id = GetUserId() });
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        private IActionResult GeneralError()
+        {
+            TempData["ErrorMessage"] =
+                "Unexpected error occurred! Please try again later or contact administrator.";
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

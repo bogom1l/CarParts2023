@@ -25,9 +25,9 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            @if (await UserService.GetUserFullNameById(User.GetId()!) is var fullName)
+            @if (await UserService.GetUserFullNameByIdAsync(User.GetId()!) is var fullName)
             {
-                @if (await UserService.IsUserDealer(User.GetId()!) && !User.IsInRole(AdminRoleName))
+                @if (await UserService.IsUserDealerAsync(User.GetId()!) && !User.IsInRole(AdminRoleName))
                 {
                     <div class="d-inline p-4 text-bg-primary"><b>[Dealer] @fullName</b></div>
                 }
@@ -43,7 +43,7 @@
             else
             {
                
-                @if (await UserService.IsUserDealer(User.GetId()) && !User.IsInRole(AdminRoleName))
+                @if (await UserService.IsUserDealerAsync(User.GetId()) && !User.IsInRole(AdminRoleName))
                 {
                     <a class="nav-link text-dark"><b>[Dealer]</b> @User.Identity!.Name</a>
                 }

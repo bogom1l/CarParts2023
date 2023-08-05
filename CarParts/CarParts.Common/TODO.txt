@@ -7,12 +7,16 @@
 	✔ funkciq UpdateMyRentals, ako nqkoq kola EndRentalDate >= DateTime.Now - da q maxam ot spisaka
 	✔ User Dashboard : Validation for Balance 12312321312213 + da limitiram samo za admini : problema beshe _ValidationScriptsPartial
 	✔ Dealer Dashboard
-	
 
-	- [medium] Car Comparison: Allow users to compare multiple cars side by side, helping them make informed decisions about their rental choice.
+	✔ add try catch in Car, Part, Dashboard, User controller
+	✔ da izchistq nenujnite metodi v Car, Part service
 
-	- [medium] add try catch in controllers
+	✔ na EndRental butona da dobavq "Are you sure?"
 
-	
+	✔ butonche "Remove all my reviews" v User Dashboarda
+
+	-> v search da dobavq da se tursim po IsRented (chechbox)
+
+
 ------------------
-22:30 - 04.08.2023
+11:15 - 05.08.2023

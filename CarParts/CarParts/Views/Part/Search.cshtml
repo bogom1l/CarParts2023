@@ -123,7 +123,7 @@
                                         Delete
                                     </a>
                                 }
-                                else if (!await UserService.IsUserDealer(User.GetId()!))
+                                else if (!await UserService.IsUserDealerAsync(User.GetId()!))
                                 {
                                     @*TODO SELL BUTTON*@
                                 }

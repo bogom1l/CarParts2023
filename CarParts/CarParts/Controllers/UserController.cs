@@ -15,28 +15,56 @@
         [HttpGet]
         public async Task<IActionResult> AddMoney()
         {
-            await _userService.AddMoney(GetUserId());
+            try
+            {
+                await _userService.AddMoneyAsync(GetUserId());
 
-            TempData["SuccessMessage"] = "You added 100 euro to your balance!";
-            return RedirectToAction("Index", "Home");
+                TempData["SuccessMessage"] = "You added 100 euro to your balance!";
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> ResetMoney()
         {
-            await _userService.ResetMoney(GetUserId());
+            try
+            {
+                await _userService.ResetMoneyAsync(GetUserId());
 
-            return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> AddCustomAmountMoney(double amount)
         {
-            await _userService.AddCustomAmountMoney(GetUserId(), amount);
+            try
+            {
+                await _userService.AddCustomAmountMoneyAsync(GetUserId(), amount);
 
-            TempData["SuccessMessage"] = $"You added {amount} euro to your balance!";
-            return RedirectToAction("Index", "Home");
+                TempData["SuccessMessage"] = $"You added {amount} euro to your balance!";
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
+        private IActionResult GeneralError()
+        {
+            TempData["ErrorMessage"] =
+                "Unexpected error occurred! Please try again later or contact administrator.";
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

@@ -4,26 +4,28 @@
 
     public interface IUserService
     {
-       public Task<double> GetUserBalanceById(string userId);
+       public Task<double> GetUserBalanceByIdAsync(string userId);
 
-       public Task AddMoney(string userId);
+       public Task AddMoneyAsync(string userId);
 
-       public Task RemoveMoney(string userId, double moneyToRemove);
+       public Task RemoveMoneyAsync(string userId, double moneyToRemove);
 
-       public Task ResetMoney(string userId);
+       public Task ResetMoneyAsync(string userId);
 
-       public Task AddCustomAmountMoney(string userId, double amount);
+       public Task AddCustomAmountMoneyAsync(string userId, double amount);
 
-       public Task<string> GetUserFullNameById(string userId);
+       public Task<string> GetUserFullNameByIdAsync(string userId);
 
        public Task<ICollection<UserViewModel>> GetAllUsersAsync();
 
-       public Task<bool> IsUserDealerOfCar(string userId, int carId);
+       public Task<bool> IsUserDealerAsync(string userId);
 
-       public Task<bool> IsUserDealer(string userId);
+       public Task DeleteAllReviewsForCarAsync(int id);
 
-       public Task DeleteAllReviewsForCar(int id);
+       public Task DeleteAllReviewsAsync();
 
-       public Task DeleteAllReviews();
+       public Task DeleteAllReviewsForUserByIdAsync(string userId);
+
+       public Task<int> GetMyReviewsCountAsync(string userId);
     }
 }

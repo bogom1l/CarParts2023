@@ -2,8 +2,8 @@
 
 @{
     string id = this.User.GetId();
-    double balance = await UserService.GetUserBalanceById(id);
-    var userBalance = await UserService.GetUserBalanceById(User.GetId());
+    double balance = await UserService.GetUserBalanceByIdAsync(id);
+    var userBalance = await UserService.GetUserBalanceByIdAsync(User.GetId());
 }
 
 <style>

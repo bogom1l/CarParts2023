@@ -25,9 +25,10 @@
 
         public Task<ICollection<PartViewModel>> GetMyFavoritePartsAsync(string userId);
 
-        public Task<bool> AddPartToMyFavoritePartsAsync(int partId, string userId);
+        public Task<bool> IsPartInMyFavoritesAsync(int partId, string userId);
+        public Task AddPartToMyFavoritePartsAsync(int partId, string userId);
 
-        public Task<bool> RemovePartFromMyFavoritePartsAsync(int partId, string userId);
+        public Task RemovePartFromMyFavoritePartsAsync(int partId, string userId);
 
         public Task<ICollection<PartViewModel>> SearchPartsAsync(string searchTerm, string category,
             string priceSort, int? fromPrice, int? toPrice);

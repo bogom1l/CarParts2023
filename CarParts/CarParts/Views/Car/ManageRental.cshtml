@@ -69,14 +69,19 @@
                         </div>
                 
                     </div>
+                    
                 </div>
             </form>
 
             <div class="d-flex justify-content-end">
-                <form asp-action="EndRental" method="post" id="endRentalForm">
-                    <input type="hidden" asp-for="@Model.Id" />
-                    <button type="submit" class="btn btn-danger btn-lg fw-bold" id="endRentalButton">End Rental</button>
+
+                <form asp-action="EndRental" method="get" id="endRentalForm">
+                    <input type="hidden" asp-for="@Model.Id"/>
+                    <a href="#" class="btn btn-danger btn-lg fw-bold end-rental" data-id="@Model.Id">
+                        End Rental
+                    </a>
                 </form>
+
             </div>
 
         </div>

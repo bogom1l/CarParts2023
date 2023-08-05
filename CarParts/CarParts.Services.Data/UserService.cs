@@ -15,7 +15,7 @@
         }
 
 
-        public async Task<double> GetUserBalanceById(string userId)
+        public async Task<double> GetUserBalanceByIdAsync(string userId)
         {
             var user = await _dbContext
                 .Users
@@ -29,7 +29,7 @@
             return user.Balance;
         }
 
-        public async Task AddMoney(string userId) //adds 100 euro
+        public async Task AddMoneyAsync(string userId) //adds 100 euro
         {
             var user = await _dbContext
                 .Users
@@ -45,7 +45,7 @@
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task AddCustomAmountMoney(string userId, double amount)
+        public async Task AddCustomAmountMoneyAsync(string userId, double amount)
         {
             var user = await _dbContext
                 .Users
@@ -62,7 +62,7 @@
         }
 
 
-        public async Task RemoveMoney(string userId, double moneyToRemove)
+        public async Task RemoveMoneyAsync(string userId, double moneyToRemove)
         {
             var user = await _dbContext
                 .Users
@@ -78,7 +78,7 @@
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task ResetMoney(string userId)
+        public async Task ResetMoneyAsync(string userId)
         {
             var user = await _dbContext
                 .Users
@@ -94,7 +94,7 @@
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<string> GetUserFullNameById(string userId)
+        public async Task<string> GetUserFullNameByIdAsync(string userId)
         {
             var user = await _dbContext.Users.FindAsync(userId);
 
@@ -140,23 +140,15 @@
             return allUsers;
         }
 
-        public async Task<bool> IsUserDealerOfCar(string userId, int carId)
-        {
-            var dealer = await _dbContext
-                .Dealers
-                .FirstOrDefaultAsync(d => d.UserId == userId);
 
-            return await _dbContext.Cars.AnyAsync(c => c.CarId == carId && c.DealerId == dealer!.Id);
-        }
-
-        public async Task<bool> IsUserDealer(string userId)
+        public async Task<bool> IsUserDealerAsync(string userId)
         {
             return await _dbContext
                 .Dealers
                 .AnyAsync(d => d.UserId == userId);
         }
 
-        public async Task DeleteAllReviewsForCar(int id)
+        public async Task DeleteAllReviewsForCarAsync(int id)
         {
             var reviews = await _dbContext
                 .Reviews
@@ -167,12 +159,33 @@
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAllReviews()
+        public async Task DeleteAllReviewsAsync()
         {
             var reviews = await _dbContext.Reviews.ToListAsync();
 
             _dbContext.Reviews.RemoveRange(reviews);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteAllReviewsForUserByIdAsync(string userId)
+        {
+            var reviews = await _dbContext
+                .Reviews
+                .Where(r => r.UserId == userId)
+                .ToListAsync();
+
+            _dbContext.Reviews.RemoveRange(reviews);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<int> GetMyReviewsCountAsync(string userId)
+        {
+            var reviews = await _dbContext
+                .Reviews
+                .Where(r => r.UserId == userId)
+                .ToListAsync();
+
+            return reviews.Count;
         }
     }
 }

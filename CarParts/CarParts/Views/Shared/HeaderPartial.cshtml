@@ -2,7 +2,7 @@
 @inject IDealerService DealerService
 
 @{
-    var userBalance = await UserService.GetUserBalanceById(User.GetId()!);
+    var userBalance = await UserService.GetUserBalanceByIdAsync(User.GetId()!);
     var dealerId = await DealerService.GetDealerIdByUserIdAsync(User.GetId());
 }
 
@@ -77,7 +77,7 @@
 
             <ul class="navbar-nav align-self-end">
 
-                @if (User.Identity.IsAuthenticated && (!await UserService.IsUserDealer(User.GetId()!)))
+                @if (User.Identity.IsAuthenticated && (!await UserService.IsUserDealerAsync(User.GetId()!)))
                 {
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="@Url.Action("BecomeDealer", "Dealer")">
@@ -120,7 +120,7 @@
                         </a>
                     </li>
                 }
-                else if (User.Identity.IsAuthenticated && await UserService.IsUserDealer(User.GetId()))
+                else if (User.Identity.IsAuthenticated && await UserService.IsUserDealerAsync(User.GetId()))
                 {
                     <li class="nav-item">
                         <a asp-area="" asp-controller="Dashboard" asp-action="EditDealerAccountSettings" asp-route-id="@dealerId" class="nav-link active" aria-current="page">
@@ -128,7 +128,7 @@
                         </a>
                     </li>
                 }
-                else if (User.Identity.IsAuthenticated && !await UserService.IsUserDealer(User.GetId()))
+                else if (User.Identity.IsAuthenticated && !await UserService.IsUserDealerAsync(User.GetId()))
                 {
                     <li class="nav-item">
                         <a asp-area="" asp-controller="Dashboard" asp-action="EditAccountSettings" asp-route-id="@User.GetId()" class="nav-link active" aria-current="page">

@@ -173,17 +173,15 @@
                 }).ToListAsync();
         }
 
-        public async Task<bool> AddPartToMyFavoritePartsAsync(int partId, string userId)
+        public async Task<bool> IsPartInMyFavoritesAsync(int partId, string userId)
         {
-            var isPartAlreadyInMyFavoriteParts = await _dbContext
+            return await _dbContext
                 .UsersFavoriteParts
-                .AnyAsync(ufp => ufp.PartId == partId && ufp.UserId == userId);
+                .AnyAsync(ufc => ufc.PartId == partId && ufc.UserId == userId);
+        }
 
-            if (isPartAlreadyInMyFavoriteParts)
-            {
-                return false;
-            }
-
+        public async Task AddPartToMyFavoritePartsAsync(int partId, string userId)
+        {
             var userFavoritePart = new UserFavoritePart
             {
                 PartId = partId,
@@ -192,25 +190,16 @@
 
             await _dbContext.UsersFavoriteParts.AddAsync(userFavoritePart);
             await _dbContext.SaveChangesAsync();
-
-            return true;
         }
 
-        public async Task<bool> RemovePartFromMyFavoritePartsAsync(int partId, string userId)
+        public async Task RemovePartFromMyFavoritePartsAsync(int partId, string userId)
         {
             var part = await _dbContext
                 .UsersFavoriteParts
                 .FirstOrDefaultAsync(ufp => ufp.PartId == partId && ufp.UserId == userId);
 
-            if (part == null)
-            {
-                return false;
-            }
-
-            _dbContext.UsersFavoriteParts.Remove(part);
+            _dbContext.UsersFavoriteParts.Remove(part!);
             await _dbContext.SaveChangesAsync();
-
-            return true;
         }
 
         public async Task<ICollection<PartViewModel>> SearchPartsAsync(string searchTerm,

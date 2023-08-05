@@ -26,9 +26,16 @@
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            var part = await _partService.GetAddPartViewModelAsync();
+            try
+            {
+                var part = await _partService.GetAddPartViewModelAsync();
 
-            return View(part);
+                return View(part);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpPost]
@@ -39,10 +46,18 @@
                 return View(addPartViewModel);
             }
 
-            await _partService.AddPartAsync(addPartViewModel, GetUserId());
 
-            TempData["SuccessMessage"] = "Part successfully added!";
-            return RedirectToAction("All", "Part");
+            try
+            {
+                await _partService.AddPartAsync(addPartViewModel, GetUserId());
+
+                TempData["SuccessMessage"] = "Part successfully added!";
+                return RedirectToAction("All", "Part");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [AllowAnonymous]
@@ -53,7 +68,7 @@
 
             if (detailsPartViewModel == null)
             {
-                RedirectToPage("All", "Part");
+                return RedirectToAction("All", "Part");
             }
 
             return View(detailsPartViewModel);
@@ -76,15 +91,16 @@
                 return RedirectToAction("All", "Part");
             }
 
-            var editPartViewModel = await _partService.GetEditPartViewModelAsync(id);
 
-            if (editPartViewModel == null)
+            try
             {
-                TempData["ErrorMessage"] = "Part with provided id does not exist! Please try again.";
-                RedirectToPage("All", "Part");
+                var editPartViewModel = await _partService.GetEditPartViewModelAsync(id);
+                return View(editPartViewModel);
             }
-
-            return View(editPartViewModel);
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpPost]
@@ -95,10 +111,17 @@
                 return View(part);
             }
 
-            await _partService.EditPartAsync(id, part);
+            try
+            {
+                await _partService.EditPartAsync(id, part);
 
-            TempData["SuccessMessage"] = "Part successfully edited!";
-            return RedirectToAction("All");
+                TempData["SuccessMessage"] = "Part successfully edited!";
+                return RedirectToAction("All");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpGet]
@@ -118,26 +141,47 @@
                 return RedirectToAction("All", "Part");
             }
 
-            await _partService.DeletePartAsync(id, GetUserId());
+            try
+            {
+                await _partService.DeletePartAsync(id, GetUserId());
 
-            TempData["SuccessMessage"] = "Part successfully deleted!";
-            return RedirectToAction("All", "Part");
+                TempData["SuccessMessage"] = "Part successfully deleted!";
+                return RedirectToAction("All", "Part");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> MyParts()
         {
-            var parts = await _partService.GetMyPartsAsync(GetUserId());
+            try
+            {
+                var parts = await _partService.GetMyPartsAsync(GetUserId());
 
-            return View(parts);
+                return View(parts);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> MyFavoriteParts()
         {
-            var parts = await _partService.GetMyFavoritePartsAsync(GetUserId());
+            try
+            {
+                var parts = await _partService.GetMyFavoritePartsAsync(GetUserId());
 
-            return View(parts);
+                return View(parts);
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpGet]
@@ -151,14 +195,24 @@
                 return RedirectToAction("All", "Part");
             }
 
-            if (!await _partService.AddPartToMyFavoritePartsAsync(id, GetUserId()))
+            var isPartInMyFavorites = await _partService.IsPartInMyFavoritesAsync(id, GetUserId());
+
+            if (isPartInMyFavorites)
             {
                 TempData["ErrorMessage"] = "The part is already in your favorite parts.";
                 return RedirectToAction("All", "Part");
             }
 
-            TempData["SuccessMessage"] = "Part has been successfully added to favorite parts!";
-            return RedirectToAction("MyFavoriteParts", "Part");
+            try
+            {
+                await _partService.AddPartToMyFavoritePartsAsync(id, GetUserId());
+                TempData["SuccessMessage"] = "Part has been successfully added to favorite parts!";
+                return RedirectToAction("MyFavoriteParts", "Part");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpGet]
@@ -172,15 +226,25 @@
                 return RedirectToAction("MyFavoriteParts", "Part");
             }
 
-            if (!await _partService.RemovePartFromMyFavoritePartsAsync(id, GetUserId()))
+            var isPartInMyFavorites = await _partService.IsPartInMyFavoritesAsync(id, GetUserId());
+
+            if (!isPartInMyFavorites)
             {
                 TempData["ErrorMessage"] =
                     "Part with provided id does not exist in your favorite list! Please try again.";
                 return RedirectToAction("MyFavoriteParts", "Part");
             }
 
-            TempData["SuccessMessage"] = "Part has been successfully removed from favorite parts!";
-            return RedirectToAction("All", "Part");
+            try
+            {
+                await _partService.RemovePartFromMyFavoritePartsAsync(id, GetUserId());
+                TempData["SuccessMessage"] = "Part has been successfully removed from favorite parts!";
+                return RedirectToAction("All", "Part");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [AllowAnonymous]
@@ -191,6 +255,14 @@
             var parts = await _partService.SearchPartsAsync(searchTerm, category, priceSort, fromPrice, toPrice);
 
             return View(parts);
+        }
+
+        private IActionResult GeneralError()
+        {
+            TempData["ErrorMessage"] =
+                "Unexpected error occurred! Please try again later or contact administrator.";
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

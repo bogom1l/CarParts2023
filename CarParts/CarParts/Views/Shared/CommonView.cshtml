@@ -92,3 +92,50 @@
 </script>
 
                 
+                
+@*END RENTAL Car BUTTON*@
+<script>
+        // Handle the click event for the delete button
+        $('.end-rental').on('click', function (e) {
+            e.preventDefault();
+            const carId = $(this).data('id');
+
+            // Show SweetAlert confirmation dialog
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You are about to end your rental.',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, end it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `/Car/EndRental/${carId}`;
+                }
+            });
+        });
+</script>
+
+
+@*DELETE MY REVIEWS Car BUTTON*@
+<script>
+    // Handle the click event for the delete button
+    $('.delete-myreviews').on('click', function (e) {
+        e.preventDefault();
+
+        // Show SweetAlert confirmation dialog
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You are about to delete all your reviews.',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete them!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = `/Dashboard/DeleteAllReviewsForUser`;
+            }
+        });
+    });
+</script>
+
