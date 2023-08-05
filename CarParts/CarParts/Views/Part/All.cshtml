@@ -72,9 +72,35 @@
                                     Add to favorite parts
                                 </a>
                             }
-                           
-                        
-                            @if (User.Identity!.Name == part.Owner || User.IsAdmin())
+
+
+                            @if (User.IsAdmin())
+                            {
+                                <a asp-controller="Part" asp-action="Edit" asp-route-id="@part.Id" class="btn btn-warning btn-block">
+                                    Edit
+                                </a>
+
+                                <a href="#" class="btn btn-danger btn-block delete-part" data-id="@part.Id">
+                                    Delete
+                                </a>
+
+                                <a asp-controller="Part" asp-action="Purchase" asp-route-id="@part.Id" class="btn btn-lightgreen btn-block">
+                                    Purchase
+                                </a>
+
+                                <p>
+                                    <i>PurchaserEmail</i>:
+                                    @if (part.PurchaserEmail == null)
+                                    {
+                                        <span class="fw-bold">No purchaser</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-bold">@part.PurchaserEmail</span>
+                                    }
+                                </p>
+                            }
+                            else if (User.Identity!.Name == part.Owner)
                             {
                                 <a asp-controller="Part" asp-action="Edit" asp-route-id="@part.Id" class="btn btn-warning btn-block">
                                     Edit
@@ -84,6 +110,15 @@
                                     Delete
                                 </a>
                             }
+                            else if (!await UserService.IsUserDealerAsync(User.GetId()!) && User.Identity.IsAuthenticated)
+                            {
+                                <a asp-controller="Part" asp-action="Purchase" asp-route-id="@part.Id" class="btn btn-lightgreen btn-block">
+                                    Purchase
+                                </a>
+                            }
+
+                            
+
                         </div>
 
                     </span>

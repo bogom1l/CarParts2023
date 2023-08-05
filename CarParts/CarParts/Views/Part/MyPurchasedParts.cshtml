@@ -1,0 +1,79 @@
+﻿@model ICollection<PurchasePartViewModel>
+
+@{
+    ViewBag.Title = "My Purchased Parts";
+}
+
+<div class="container my-custom-background-color">
+    <div class="row">
+
+        <p><h2 class="text-center">@ViewBag.Title</h2></p>
+
+        @if (!Model.Any())
+        {
+            <h2 class="text-center">You don't have any purchased parts at the moment.</h2>
+            <div class="d-flex justify-content-center">
+                <p>
+                    <a asp-controller="Part" asp-action="All" class="btn btn-success btn-lg fw-bold" style="width:350px">
+                        Back to the catalogue
+                    </a>
+                </p>
+            </div>
+
+        }
+
+        @foreach (var part in Model)
+        {
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="card">
+
+                    <img class="card-img-top img-fluid img-thumbnail my-custom-car-image-props" src="@part.ImageUrl" alt="Part Image">
+
+                    <div class="card-body">
+
+                        <h4 class="card-title text-center">@part.Name </h4>
+
+
+                        <p class="card-text">
+                            <span class="fw-bold">Price:</span> @part.Price (EUR)
+                        </p>
+
+
+                        @if (User.IsAdmin())
+                        {
+                            <p class="card-text">
+                                <span class="fw-bold">Purchaser Name:</span> @part.PurchaserName
+                            </p>
+
+                            <p class="card-text">
+                                <span class="fw-bold">Car Id:</span> @part.PartId
+                            </p>
+                        }
+
+                    </div>
+
+                    <div class="card-footer">
+                        <a asp-controller="Part" asp-action="Details" asp-route-id="@part.PartId" class="btn btn-success btn-block">
+                            Details
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        }
+
+        <div class="text-center">
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <partial name="CommonView" />
+}

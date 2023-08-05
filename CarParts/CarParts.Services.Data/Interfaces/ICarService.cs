@@ -26,7 +26,7 @@
 
         public Task<ICollection<CarViewModel>> GetMyFavoriteCarsAsync(string userId);
 
-        public Task<bool> IsUserOwnerOfCarByIdAsync(int carId, string userId); //TODO: add async
+        public Task<bool> IsUserOwnerOfCarByIdAsync(int carId, string userId);
 
         public Task<bool> IsCarInMyFavoritesAsync(int carId, string userId);
 

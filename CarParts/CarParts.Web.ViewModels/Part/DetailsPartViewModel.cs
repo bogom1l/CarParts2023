@@ -1,5 +1,7 @@
 ﻿namespace CarParts.Web.ViewModels.Part
 {
+    using Dealer;
+
     public class DetailsPartViewModel
     {
         public int Id { get; set; }
@@ -15,5 +17,9 @@
         public string ImageUrl { get; set; } = null!;
 
         public string Owner { get; set; } = null!;
+
+        public string PurchaserEmail { get; set; } = null!;
+
+        public DetailsDealerViewModel DetailsDealerViewModel { get; set; } = null!;
     }
 }

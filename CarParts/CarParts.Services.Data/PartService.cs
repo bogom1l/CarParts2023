@@ -4,6 +4,7 @@
     using CarParts.Data.Models;
     using Interfaces;
     using Microsoft.EntityFrameworkCore;
+    using Web.ViewModels.Dealer;
     using Web.ViewModels.Part;
     using Web.ViewModels.Part.PartProperties;
 
@@ -25,8 +26,9 @@
                 Description = p.Description,
                 Price = p.Price,
                 CategoryName = p.Category.Name,
-                Owner = p.Owner.Email,
-                ImageUrl = p.ImageUrl
+                ImageUrl = p.ImageUrl,
+                Owner = p.Dealer.User.Email,
+                PurchaserEmail = p.Purchaser.Email ?? null
             }).ToListAsync();
         }
 
@@ -46,7 +48,7 @@
             };
         }
 
-        public async Task AddPartAsync(AddPartViewModel addPartViewModel, string userId)
+        public async Task AddPartAsync(AddPartViewModel addPartViewModel, int dealerId)
         {
             var part = new Part
             {
@@ -54,8 +56,9 @@
                 Description = addPartViewModel.Description,
                 Price = addPartViewModel.Price,
                 CategoryId = addPartViewModel.CategoryId,
-                OwnerId = userId,
-                ImageUrl = addPartViewModel.ImageUrl
+                ImageUrl = addPartViewModel.ImageUrl,
+                DealerId = dealerId,
+                PurchaserId = null
             };
 
             await _dbContext.Parts.AddAsync(part);
@@ -74,7 +77,14 @@
                     Price = p.Price,
                     Category = p.Category.Name,
                     ImageUrl = p.ImageUrl,
-                    Owner = p.Owner.Email
+                    Owner = p.Dealer.User.Email,
+                    PurchaserEmail = p.Purchaser.Email ?? null,
+                    DetailsDealerViewModel = new DetailsDealerViewModel
+                    {
+                        FullName = p.Dealer.User.FirstName + " " + p.Dealer.User.LastName,
+                        Address = p.Dealer.Address,
+                        Email = p.Dealer.User.Email
+                    }
                 })
                 .FirstOrDefaultAsync();
         }
@@ -82,6 +92,7 @@
         public async Task<Part?> GetPartByIdAsync(int partId)
         {
             return await _dbContext.Parts
+                .Include(p => p.Dealer)
                 .FirstOrDefaultAsync(p => p.PartId == partId);
         }
 
@@ -126,11 +137,11 @@
             }
         }
 
-        public async Task DeletePartAsync(int partId, string userId)
+        public async Task DeletePartAsync(int partId)
         {
             var partToDelete = await _dbContext
                 .Parts
-                .FirstOrDefaultAsync(p => p.PartId == partId && p.OwnerId == userId);
+                .FirstOrDefaultAsync(p => p.PartId == partId);
 
             if (partToDelete != null)
             {
@@ -139,11 +150,25 @@
             }
         }
 
+        public async Task<bool> ExistsByIdAsync(int partId)
+        {
+            return await _dbContext
+                .Parts
+                .AnyAsync(p => p.PartId == partId);
+        }
+
+        public async Task<bool> IsUserOwnerOfPartByIdAsync(int partId, string userId)
+        {
+            return await _dbContext
+                .Parts
+                .AnyAsync(p => p.PartId == partId && p.Dealer.UserId == userId);
+        }
+
         public async Task<ICollection<PartViewModel>> GetMyPartsAsync(string userId)
         {
             return await _dbContext
                 .Parts
-                .Where(p => p.OwnerId == userId)
+                .Where(p => p.PurchaserId == userId)
                 .Select(p => new PartViewModel
                 {
                     Id = p.PartId,
@@ -151,7 +176,7 @@
                     Description = p.Description,
                     Price = p.Price,
                     CategoryName = p.Category.Name,
-                    Owner = p.Owner.Email,
+                    Owner = p.Dealer.User.Email,
                     ImageUrl = p.ImageUrl
                 }).ToListAsync();
         }
@@ -168,7 +193,7 @@
                     Description = p.Description,
                     Price = p.Price,
                     CategoryName = p.Category.Name,
-                    Owner = p.Owner.Email,
+                    Owner = p.Dealer.User.Email,
                     ImageUrl = p.ImageUrl
                 }).ToListAsync();
         }
@@ -251,8 +276,70 @@
                     Description = p.Description,
                     Price = p.Price,
                     CategoryName = p.Category.Name,
-                    Owner = p.Owner.Email,
+                    Owner = p.Dealer.User.Email,
                     ImageUrl = p.ImageUrl
+                }).ToListAsync();
+
+            return parts;
+        }
+
+        public async Task<bool> IsPurchasedAsync(int partId)
+        {
+            var car = await _dbContext
+                .Parts
+                .FirstAsync(p => p.PartId == partId);
+
+            return !string.IsNullOrEmpty(car.PurchaserId);
+        }
+
+        public async Task<bool> IsAlreadyPurchasedByUserIdAsync(int partId, string userId)
+        {
+            var part = await _dbContext.Parts
+                .FirstAsync(p => p.PartId == partId);
+
+            return part.PurchaserId == userId;
+        }
+
+        public async Task PurchasePartAsync(PurchasePartViewModel purchasePartViewModel, string userId)
+        {
+            var part = await _dbContext
+                .Parts
+                .FirstAsync(p => p.PartId == purchasePartViewModel.PartId);
+
+            part.PurchaserId = userId;
+
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<PurchasePartViewModel?> GetPurchasePartViewModelAsync(int partId)
+        {
+            var purchasePartViewModel = await _dbContext.Parts
+                .Where(p => p.PartId == partId)
+                .Select(p => new PurchasePartViewModel
+                {
+                    PartId = p.PartId,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Price = p.Price,
+                    ImageUrl = p.ImageUrl,
+                    PurchaserName = p.Purchaser.FirstName + " " + p.Purchaser.LastName
+                }).FirstOrDefaultAsync();
+
+            return purchasePartViewModel;
+        }
+
+        public async Task<ICollection<PurchasePartViewModel>> GetMyPurchasedPartsAsync(string userId)
+        {
+            var parts = await _dbContext.Parts
+                .Where(p => p.PurchaserId == userId && p.PurchaserId != null) //TODO: nujna prowerka?
+                .Select(p => new PurchasePartViewModel
+                {
+                    PartId = p.PartId,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Price = p.Price,
+                    ImageUrl = p.ImageUrl,
+                    PurchaserName = p.Purchaser.FirstName + " " + p.Purchaser.LastName
                 }).ToListAsync();
 
             return parts;

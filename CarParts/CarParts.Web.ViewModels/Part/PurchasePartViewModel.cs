@@ -1,21 +1,17 @@
 ﻿namespace CarParts.Web.ViewModels.Part
 {
-    public class PartViewModel
+    public class PurchasePartViewModel
     {
-        public int Id { get; set; }
+        public int PartId { get; set; }
 
         public string Name { get; set; } = null!;
-
+      
         public string Description { get; set; } = null!;
 
         public double Price { get; set; }
 
-        public string CategoryName { get; set; } = null!;
-
-        public string Owner { get; set; } = null!;
-
         public string ImageUrl { get; set; } = null!;
 
-        public string PurchaserEmail { get; set; } = null!;
+        public string? PurchaserName { get; set; }
     }
 }
