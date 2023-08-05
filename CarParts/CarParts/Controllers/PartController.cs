@@ -1,10 +1,12 @@
 ﻿namespace CarParts.Web.Controllers
 {
+    using CarParts.Services.Data;
     using Extensions;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Services.Data.Interfaces;
     using ViewModels.Part;
+    using static Common.GlobalConstants.Part;
 
     public class PartController : BaseController
     {
@@ -393,6 +395,28 @@
             return View(parts);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Refund(int id)
+        {
+            try
+            {
+                //returning the user the money that he spent for the purchase
+                var moneyToReturn = await _partService.TotalMoneyToReturnForRefundAsync(id);
+                await _userService.AddCustomAmountMoneyAsync(GetUserId(), moneyToReturn);
+
+                await _partService.RefundPartAsync(id);
+                await _userService.RemoveMoneyAsync(GetUserId(), TaxPriceForRefundingPart);
+
+                TempData["SuccessMessage"] = "You have successfully refunded the part! " +
+                                             $"You received back {moneyToReturn} euros " +
+                                             $"and you have been taxed {TaxPriceForRefundingPart} euros.";
+                return RedirectToAction("MyPurchasedParts", "Part");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
 
         private IActionResult GeneralError()
         {

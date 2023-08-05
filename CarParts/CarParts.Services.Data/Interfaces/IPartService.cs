@@ -46,5 +46,9 @@
         public Task<PurchasePartViewModel?> GetPurchasePartViewModelAsync(int partId);
 
         public Task<ICollection<PurchasePartViewModel>> GetMyPurchasedPartsAsync(string userId);
+
+        public Task<double> TotalMoneyToReturnForRefundAsync(int partId);
+
+        public Task RefundPartAsync(int partId);
     }
 }

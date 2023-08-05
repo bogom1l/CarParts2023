@@ -72,6 +72,8 @@
 
             public const int PartCategoryNameMinLength = 1;
             public const int PartCategoryNameMaxLength = 50;
+
+            public const double TaxPriceForRefundingPart = 5;
         }
 
         public static class User

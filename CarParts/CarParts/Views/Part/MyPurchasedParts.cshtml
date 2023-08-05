@@ -56,13 +56,25 @@
                         <a asp-controller="Part" asp-action="Details" asp-route-id="@part.PartId" class="btn btn-success btn-block">
                             Details
                         </a>
+                        <div class="d-flex justify-content-end">
+
+                            <form asp-action="Refund" method="get" id="endRentalForm">
+                                <input type="hidden" asp-for="@part.PartId"/>
+                                <a href="#" class="btn btn-danger btn-lg fw-bold refund-part" data-id="@part.PartId">
+                                    Refund
+                                </a>
+                            </form>
+
+                        </div>
 
                     </div>
+                    
+
 
                 </div>
 
             </div>
-
+                
 
         }
 

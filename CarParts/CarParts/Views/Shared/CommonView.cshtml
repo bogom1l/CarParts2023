@@ -139,3 +139,27 @@
     });
 </script>
 
+
+
+@*REFUND Part BUTTON*@
+<script>
+    // Handle the click event for the delete button
+    $('.refund-part').on('click', function (e) {
+        e.preventDefault();
+        const partId = $(this).data('id');
+
+        // Show SweetAlert confirmation dialog
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You are about to refund your purchase.',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, refund it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = `/Part/Refund/${partId}`;
+            }
+        });
+    });
+</script>

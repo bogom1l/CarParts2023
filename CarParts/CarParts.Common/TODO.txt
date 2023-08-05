@@ -12,20 +12,19 @@
 	✔ da izchistq nenujnite metodi v Car, Part service
 
 	✔ na EndRental butona da dobavq "Are you sure?"
-
 	✔ butonche "Remove all my reviews" v User Dashboarda
-
 	✔ v search da dobavq da se tursim po IsRented (chechbox)
 
 	✔ Dealer-a da moje da addwa Parts, a Usera da moje da gi kupuva
+    ✔ v detailite na chastite da ima info za Dealera, kakto pri kolite
+    ✔ da moje da vurne chast-a usera i da si poluchi obratno parite -> "Are you sure?"
+    -> parts search functionality checkbox isAvailable
 
-    -> v detailite na chastite da ima info za Dealera, kakto pri kolite
-
-    -  da moje da vurne chast-a usera i da si poluchi obratno parite (-||- EndRental)
+	clean up what ive done -> git push
 
 
 	(30min) Geolocation of every dealer (ednakwa shte e,za , ama da go dobawq prosto za front-enda :D)
 
 
 ------------------
-15:30 - 05.08.2023
+17:00 - 05.08.2023

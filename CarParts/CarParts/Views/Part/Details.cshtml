@@ -36,31 +36,30 @@
                     <button id="lessDetailsBtn" class="btn btn-info" style="display: none;">Show less details</button>
                 </div>
             </div>
-        
+            
 
-            @* TODO:
             <div class="card">
-            <div class="card-body">
-                <h4 class="card-title" style="color:darkred;">Dealer Info:</h4>
+                 <div class="card-body">
+                     <h4 class="card-title" style="color:darkred;">Dealer Info:</h4>
                     
-                <p class="mb-2"><span class="fw-bold" style="color:darkred;">Full Name: </span>
-                    <span style="font-family: Lucida Handwriting, Cursive;">
-                        @Model.DetailsSellerViewModel.FullName
-                    </span>
-                </p>
-                <p class="mb-2"><span class="fw-bold" style="color:darkred;">Email: </span>
-                    <span style="font-family: Lucida Handwriting, Cursive;">
-                            @Model.DetailsSellerViewModel.Email
-                    </span>
-                </p>
-                <p class="mb-2"><span class="fw-bold" style="color:darkred;">Address: </span>
-                    <span style="font-family: Lucida Handwriting, Cursive;">
-                            @Model.DetailsSellerViewModel.Address
-                    </span>
-                </p>
+                     <p class="mb-2"><span class="fw-bold" style="color:darkred;">Full Name: </span>
+                         <span style="font-family: Lucida Handwriting, Cursive;">
+                             @Model.DetailsDealerViewModel.FullName
+                         </span>
+                     </p>
+                     <p class="mb-2"><span class="fw-bold" style="color:darkred;">Email: </span>
+                         <span style="font-family: Lucida Handwriting, Cursive;">
+                             @Model.DetailsDealerViewModel.Email
+                         </span>
+                     </p>
+                     <p class="mb-2"><span class="fw-bold" style="color:darkred;">Address: </span>
+                         <span style="font-family: Lucida Handwriting, Cursive;">
+                             @Model.DetailsDealerViewModel.Address
+                         </span>
+                     </p>
 
-            </div>
-        </div>*@
+                 </div>
+             </div>
         
             <br />
             <br />
@@ -71,6 +70,18 @@
 
 <br/>
     
+<div class="d-flex justify-content-center">
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>
+            <a asp-controller="Part" asp-action="Purchase" asp-route-id="@Model.Id" class="btn btn-orange btn-lg fw-bold">
+                Purchase
+            </a>
+        </p>
+    }
+
+</div>
 
 <div class="d-flex justify-content-center">
 
@@ -89,7 +100,7 @@
 <div class="d-flex justify-content-center">
 
     <p>
-        @if (User.Identity!.Name == Model.Owner)
+        @if (User.Identity.Name == @Model.Owner || User.IsAdmin())
         {
             <a asp-controller="Part" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-lg fw-bold">
                 Edit

@@ -168,7 +168,7 @@
         {
             return await _dbContext
                 .Parts
-                .Where(p => p.PurchaserId == userId)
+                .Where(p => p.Dealer.UserId == userId)
                 .Select(p => new PartViewModel
                 {
                     Id = p.PartId,
@@ -343,6 +343,24 @@
                 }).ToListAsync();
 
             return parts;
+        }
+
+        public async Task<double> TotalMoneyToReturnForRefundAsync(int partId)
+        {
+            var part = await _dbContext.Parts
+                .FirstAsync(p => p.PartId == partId);
+
+            return part.Price;
+        }
+
+        public async Task RefundPartAsync(int partId)
+        {
+            var part = await _dbContext.Parts
+                .FirstAsync(p => p.PartId == partId);
+
+            part.PurchaserId = null;
+
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
