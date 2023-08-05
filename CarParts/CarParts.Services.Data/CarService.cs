@@ -9,8 +9,7 @@
     using Web.ViewModels.Dealer;
     using Web.ViewModels.Review;
     using static Common.GlobalConstants.Car;
-    using Car = CarParts.Data.Models.Car;
-    using Review = CarParts.Data.Models.Review;
+
     /*
     using Car = CarParts.Data.Models.Car;
     using Review = CarParts.Data.Models.Review;

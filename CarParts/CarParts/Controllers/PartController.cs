@@ -1,6 +1,5 @@
 ﻿namespace CarParts.Web.Controllers
 {
-    using CarParts.Services.Data;
     using Extensions;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -293,13 +292,14 @@
         public async Task<IActionResult> Search(string nameOrDesc, string category, string priceSort,
             int? fromPrice, int? toPrice, bool showOnlyAvailable)
         {
-            var parts = await _partService.SearchPartsAsync(nameOrDesc, category, priceSort, fromPrice, toPrice, showOnlyAvailable);
+            var parts = await _partService.SearchPartsAsync(nameOrDesc, category, priceSort, fromPrice, toPrice,
+                showOnlyAvailable);
 
             // to keep the search params in the search boxes:
             ViewBag.NameOrDesc = nameOrDesc;
 
             ViewBag.Category = category;
-           
+
             ViewBag.FromPrice = fromPrice;
             ViewBag.ToPrice = toPrice;
 
