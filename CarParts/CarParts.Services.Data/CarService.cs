@@ -372,7 +372,7 @@
 
         public async Task<ICollection<CarViewModel>> SearchCarsAsync(string searchTerm, string category,
             string priceSort, string transmissionName, string fuelName, int? fromYear,
-            int? toYear, int? fromHp, int? toHp, int? fromPrice, int? toPrice, bool isRented)
+            int? toYear, int? fromHp, int? toHp, int? fromPrice, int? toPrice, bool showOnlyNonRented)
         {
             var carsQuery = _dbContext.Cars.AsQueryable();
 
@@ -447,9 +447,9 @@
                 carsQuery = carsQuery.OrderByDescending(c => c.Price);
             }
 
-            if (isRented)
+            if (showOnlyNonRented)
             {
-                carsQuery = carsQuery.Where(c => !string.IsNullOrEmpty(c.RenterId));
+                carsQuery = carsQuery.Where(c => string.IsNullOrEmpty(c.RenterId));
             }
 
             var cars = await carsQuery

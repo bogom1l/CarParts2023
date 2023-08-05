@@ -98,10 +98,13 @@
                             <option value="desc">Price: High to Low</option>
                         </select>
                     </td>
-                    <td style="margin-left: 5%">
-                        <input type="checkbox" class="form-check-input search-slt" name="isRented" value="@ViewBag.IsRented">
-                        <label class="fw-bold">Is Rented</label>
+                    <td>
+                        <div class="form-check" style="margin-top:17%">
+                            <input class="form-check-input" type="checkbox" name="showOnlyNonRented" value="true" @if (ViewBag.ShowOnlyNonRented == true) { <text>checked</text> }>
+                            <label class="form-check-label">Show only non-rented cars</label>
+                        </div>
                     </td>
+
                 </tr>
                 <tr>
                     <td colspan="4" class="text-center">
@@ -159,10 +162,12 @@
                                 <p class="card-text">
                                     <span class="fw-bold">Price:</span> @car.Price (EUR)
                                 </p>
-
+                                
+                                @*TODO: remove this for users*@
                                 <p class="card-text">
                                     <span class="fw-bold">Renter:</span> @car.RenterEmail 
                                 </p>
+
                             </div>
 
                             <div class="card-footer">
@@ -271,6 +276,13 @@
         }
     }
 
+
+   // Function to reset the checkbox
+        function resetCheckbox(checkbox) {
+            checkbox.checked = false;
+        }
+
+
     // Function to reset all form fields
     function resetFormFields() {
 
@@ -289,6 +301,11 @@
         document.getElementsByName("fromPrice")[0].value = "";
         document.getElementsByName("toPrice")[0].value = "";
 
+        // Reset the checkbox
+        var showOnlyNonRentedCheckbox = document.getElementsByName("showOnlyNonRented")[0];
+        resetCheckbox(showOnlyNonRentedCheckbox);
+
+
         // Submit the form to trigger the server-side reset
         document.querySelector("form").submit();
     }
@@ -297,5 +314,7 @@
     document.getElementById("resetButton").addEventListener("click", resetFormFields);
 
 </script>
+
+
 
 }

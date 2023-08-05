@@ -15,8 +15,10 @@
 
 	✔ butonche "Remove all my reviews" v User Dashboarda
 
-	-> v search da dobavq da se tursim po IsRented (chechbox)
+	✔ v search da dobavq da se tursim po IsRented (chechbox)
+
+	txt
 
 
 ------------------
-11:15 - 05.08.2023
+12:15 - 05.08.2023

@@ -293,10 +293,10 @@
         [HttpGet]
         public async Task<IActionResult> Search(string searchTerm, string category,
             string priceSort, string transmissionName, string fuelName, int? fromYear,
-            int? toYear, int? fromHp, int? toHp, int? fromPrice, int? toPrice, bool isRented)
+            int? toYear, int? fromHp, int? toHp, int? fromPrice, int? toPrice, bool showOnlyNonRented)
         {
             var cars = await _carService.SearchCarsAsync(searchTerm, category, priceSort,
-                transmissionName, fuelName, fromYear, toYear, fromHp, toHp, fromPrice, toPrice, isRented);
+                transmissionName, fuelName, fromYear, toYear, fromHp, toHp, fromPrice, toPrice, showOnlyNonRented);
 
             // to keep the search params in the search boxes:
             ViewBag.SearchTerm = searchTerm;
@@ -316,7 +316,7 @@
 
             ViewBag.PriceSort = priceSort;
 
-            ViewBag.IsRented = isRented;
+            ViewBag.ShowOnlyNonRented = showOnlyNonRented;
 
             return View(cars);
         }

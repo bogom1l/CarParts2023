@@ -36,7 +36,7 @@
 
         public Task<ICollection<CarViewModel>> SearchCarsAsync(string searchTerm, string category,
             string priceSort, string transmissionName, string fuelName, int? fromYear,
-            int? toYear, int? fromHp, int? toHp, int? fromPrice, int? toPrice, bool isRented);
+            int? toYear, int? fromHp, int? toHp, int? fromPrice, int? toPrice, bool showOnlyNonRented);
 
         public Task<bool> ExistsByIdAsync(int carId);
 
