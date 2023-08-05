@@ -21,7 +21,12 @@
     ✔ parts search functionality checkbox isAvailable
 	✔ Geolocation of Main Office Location
 
+	- Car Comparison (in Table)
+	  * https://www.emag.bg/compare/D67Y4LMBM,D97R8RMBM/
 
+	- da prerazpredelq hubavo koi metodi, v koi service-i, v koi controleri, che s usera malko e kasha
+
+	- txt
 
 ------------------
 18:30 - 05.08.2023
