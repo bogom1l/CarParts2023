@@ -23,6 +23,10 @@
 
 	- Car Comparison (in Table)
 	  * https://www.emag.bg/compare/D67Y4LMBM,D97R8RMBM/
+	  ApplicationUser ima 1 List<Car> CarsToCompare
+	  na vseki CarDetails da ima butonche "Add to Compare"
+	  da ima stranica Car/CompareCars
+	  i vutre ima list i ako sa poveche ot 2 koli, se vizualizirat w tablica
 
 	- da prerazpredelq hubavo koi metodi, v koi service-i, v koi controleri, che s usera malko e kasha
 
