@@ -1,26 +1,5 @@
-﻿  
-	✔ front end . . .
-	✔ full project review -> clean
-	✔ [AllowAnonymous] All, Details, Search
-	✔ da oprawq toq rout sled login, da ne e /Identity/Car/ALl, a /Car/All :: FIXED = ", new { area = "" }"
-	✔ improve search functionality : buton koito iztriva viewbaga , viewbaga da sedi sled wseki search
-	✔ funkciq UpdateMyRentals, ako nqkoq kola EndRentalDate >= DateTime.Now - da q maxam ot spisaka
-	✔ User Dashboard : Validation for Balance 12312321312213 + da limitiram samo za admini : problema beshe _ValidationScriptsPartial
-	✔ Dealer Dashboard
-
-	✔ add try catch in Car, Part, Dashboard, User controller
-	✔ da izchistq nenujnite metodi v Car, Part service
-
-	✔ na EndRental butona da dobavq "Are you sure?"
-	✔ butonche "Remove all my reviews" v User Dashboarda
-	✔ v search da dobavq da se tursim po IsRented (chechbox)
-
-	✔ Dealer-a da moje da addwa Parts, a Usera da moje da gi kupuva
-    ✔ v detailite na chastite da ima info za Dealera, kakto pri kolite
-    ✔ da moje da vurne chast-a usera i da si poluchi obratno parite -> "Are you sure?"
-    ✔ parts search functionality checkbox isAvailable
-	✔ Geolocation of Main Office Location
-
+﻿  ✔️
+	
 	- Car Comparison (in Table)
 	  * https://www.emag.bg/compare/D67Y4LMBM,D97R8RMBM/
 	  ApplicationUser ima 1 List<Car> CarsToCompare
@@ -33,4 +12,4 @@
 	- txt
 
 ------------------
-18:30 - 05.08.2023
+00:30 - 06.08.2023
