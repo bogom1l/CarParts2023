@@ -18,7 +18,7 @@
 	✔ Dealer-a da moje da addwa Parts, a Usera da moje da gi kupuva
     ✔ v detailite na chastite da ima info za Dealera, kakto pri kolite
     ✔ da moje da vurne chast-a usera i da si poluchi obratno parite -> "Are you sure?"
-    -> parts search functionality checkbox isAvailable
+    ✔ parts search functionality checkbox isAvailable
 
 	clean up what ive done -> git push
 

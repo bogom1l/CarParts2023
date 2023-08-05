@@ -35,7 +35,7 @@
         public Task RemovePartFromMyFavoritePartsAsync(int partId, string userId);
 
         public Task<ICollection<PartViewModel>> SearchPartsAsync(string searchTerm, string category,
-            string priceSort, int? fromPrice, int? toPrice);
+            string priceSort, int? fromPrice, int? toPrice, bool showOnlyAvailable);
 
         public Task<bool> IsPurchasedAsync(int partId);
 

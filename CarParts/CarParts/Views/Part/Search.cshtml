@@ -15,8 +15,8 @@
 
                     <td>
                         <label class="fw-bold">Name/description</label>
-                        <input type="text" class="form-control search-slt" name="searchTerm"
-                               value="@ViewBag.SearchTerm" placeholder="Search by part model or description">
+                        <input type="text" class="form-control search-slt" name="nameOrDesc"
+                               value="@ViewBag.NameOrDesc" placeholder="Name or description">
                     </td>
                     <td>
                         <label class="fw-bold">Category</label>
@@ -50,10 +50,20 @@
                             <option value="desc">Price: High to Low</option>
                         </select>
                     </td>
+                     <td>
+                        <div class="form-check" style="margin-top:17%">
+                            <input class="form-check-input" type="checkbox" name="showOnlyAvailable" value="true" @if (ViewBag.ShowOnlyAvailable == true)
+                            {
+                                <text>checked</text>
+                            }>
+                            <label class="form-check-label">Show only available parts</label>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="text-center">
+                    <td colspan="6" class="text-center">
                         <button type="submit" class="btn btn-primary">Search</button>
+                        <button type="submit" class="btn btn-danger" id="resetButton">Reset</button>
                     </td>
                 </tr>
             </table>
@@ -125,7 +135,9 @@
                                 }
                                 else if (!await UserService.IsUserDealerAsync(User.GetId()!))
                                 {
-                                    @*TODO SELL BUTTON*@
+                                    <a asp-controller="Part" asp-action="Purchase" asp-route-id="@part.Id" class="btn btn-lightgreen btn-block">
+                                        Purchase
+                                    </a>
                                 }
                             </div>
 
@@ -142,6 +154,74 @@
 </section>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-    <partial name="CommonView" />
+    <partial name="_ValidationScriptsPartial"/>
+    <partial name="CommonView"/>
+
+
+    <script>
+        //Save results from last search
+
+        var selectedCategory = '@ViewBag.Category';
+        var selectedPriceSort = '@ViewBag.PriceSort';
+
+        var dropdownCategory = document.getElementsByName('category')[0];
+        var dropdownPriceSort = document.getElementsByName('priceSort')[0];
+
+
+        for (var i = 0; i < dropdownCategory.options.length; i++) {
+            if (dropdownCategory.options[i].value === selectedCategory) {
+                dropdownCategory.options[i].selected = true;
+                break;
+            }
+        }
+
+        for (var i = 0; i < dropdownPriceSort.options.length; i++) {
+            if (dropdownPriceSort.options[i].value === selectedPriceSort) {
+                dropdownPriceSort.options[i].selected = true;
+                break;
+            }
+        }
+
+
+        // Function to reset the dropdown selected options
+        function resetDropdown(dropdown) {
+            for (var i = 0; i < dropdown.options.length; i++) {
+                dropdown.options[i].selected = false;
+            }
+        }
+
+
+        // Function to reset the checkbox
+        function resetCheckbox(checkbox) {
+            checkbox.checked = false;
+        }
+
+
+        // Function to reset all form fields
+        function resetFormFields() {
+
+            // Reset the dropdown selected options
+            resetDropdown(dropdownCategory);
+            resetDropdown(dropdownPriceSort);
+
+            // Reset the text input values
+            document.getElementsByName("nameOrDesc")[0].value = "";
+            document.getElementsByName("fromPrice")[0].value = "";
+            document.getElementsByName("toPrice")[0].value = "";
+
+            // Reset the checkbox
+            var showOnlyAvailableCheckbox = document.getElementsByName("showOnlyAvailable")[0];
+            resetCheckbox(showOnlyAvailableCheckbox);
+
+
+            // Submit the form to trigger the server-side reset
+            document.querySelector("form").submit();
+        }
+
+        // Event handler for the Reset button
+        document.getElementById("resetButton").addEventListener("click", resetFormFields);
+
+    </script>
+
+
 }

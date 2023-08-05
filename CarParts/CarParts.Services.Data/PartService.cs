@@ -228,7 +228,7 @@
         }
 
         public async Task<ICollection<PartViewModel>> SearchPartsAsync(string searchTerm,
-            string category, string priceSort, int? fromPrice, int? toPrice)
+            string category, string priceSort, int? fromPrice, int? toPrice, bool showOnlyAvailable)
         {
             var partsQuery = _dbContext.Parts.AsQueryable();
 
@@ -266,6 +266,11 @@
             else if (priceSort == "desc")
             {
                 partsQuery = partsQuery.OrderByDescending(c => c.Price);
+            }
+
+            if (showOnlyAvailable)
+            {
+                partsQuery = partsQuery.Where(p => string.IsNullOrEmpty(p.PurchaserId));
             }
 
             var parts = await partsQuery
