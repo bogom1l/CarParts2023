@@ -51,6 +51,8 @@ namespace CarParts.Web
 
             builder.Services.RegisterServiceReflection(typeof(ICarService)); //reflection for services
 
+            builder.Services.AddMemoryCache();
+
 
             var app = builder.Build();
 

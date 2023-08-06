@@ -6,21 +6,26 @@
 namespace CarParts.Web.Areas.Identity.Pages.Account
 {
     using System.ComponentModel.DataAnnotations;
+    using Common;
     using Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.Extensions.Caching.Memory;
+    using static Common.GlobalConstants.AdminUser;
 
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IMemoryCache _memoryCache;
 
         public RegisterModel(UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager, IMemoryCache memoryCache)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _memoryCache = memoryCache;
         }
 
         [BindProperty] public InputModel Input { get; set; }
@@ -56,6 +61,7 @@ namespace CarParts.Web.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, false);
+                    _memoryCache.Remove(UsersCacheKey); // Clear cache after successful registration
                     return LocalRedirect(returnUrl);
                 }
 

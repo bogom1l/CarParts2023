@@ -109,6 +109,9 @@
             public const string AdminLastName = "ADMINISTRATOR";
             public const string AdminAddress = "ADMIN_ADDRESS";
             public const string AdminAreaName = "Admin";
+
+            public const string UsersCacheKey = "UsersCacheKey";
+            public const int UsersCacheExpirationTimeInMinutes = 5;
         }
 
         public static class Review

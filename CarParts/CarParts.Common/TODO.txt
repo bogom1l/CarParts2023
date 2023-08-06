@@ -7,10 +7,7 @@
 
 	✔️ da premestq "Add 100 euro" buttona w user dashboarda, i da redirectwa pak tam
 
-
-	- add recaptcha ot workshopa na kris 
-
-	- add cache ot workshopa na kris (i ot laba)
+	✔️ add cache ot workshopa na kris (i ot laba)
 
 	- custom error page => Workshop: Services and Error Pages , (return this.NotFound())
 
@@ -22,4 +19,4 @@
 	  * !ModelState.IsValid
 
 ------------------
-16:00 - 06.08.2023
+17:00 - 06.08.2023
