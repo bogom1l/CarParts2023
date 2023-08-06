@@ -57,6 +57,9 @@
 
             public const double TaxPriceForCancelingRental = 20;
             public const double TaxPriceForAdjustingRental = 10;
+
+            public const int ComparisonListMinCount = 2;
+            public const int ComparisonListMaxCount = 5;
         }
 
         public static class Part

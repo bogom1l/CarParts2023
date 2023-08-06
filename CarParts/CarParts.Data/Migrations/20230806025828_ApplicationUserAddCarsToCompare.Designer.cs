@@ -4,6 +4,7 @@ using CarParts.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarParts.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230806025828_ApplicationUserAddCarsToCompare")]
+    partial class ApplicationUserAddCarsToCompare
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,7 +107,7 @@ namespace CarParts.Data.Migrations
                             Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
                             AccessFailedCount = 0,
                             Balance = 9999999.0,
-                            ConcurrencyStamp = "85bbc2b4-99b5-4b7e-9fcf-f140c2b65a35",
+                            ConcurrencyStamp = "fc176bfc-af43-43a5-969a-6a6154a3c059",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "ADMINISTRATOR",
@@ -113,9 +115,9 @@ namespace CarParts.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPOhBqsZQvYYXlbi8k58DwLPyEd3hC1QbWgo7VznBEqfl0QYFFmJ/Ud0dgk9etYspA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFgm4obzMK9PYhqgOUOvgwGN36EYhq46CZjzRMNOYdRMdNA9gEQ2NQDhlUSH33f7ww==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0fac83a1-cece-462f-8aea-85eba87a9670",
+                            SecurityStamp = "92268e46-9397-47bc-9246-2ec32fd9c334",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
@@ -216,7 +218,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("TransmissionId");
 
-                    b.ToTable("Cars", (string)null);
+                    b.ToTable("Cars");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.CarCategory", b =>
@@ -234,7 +236,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -299,7 +301,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FuelTypes", (string)null);
+                    b.ToTable("FuelTypes");
 
                     b.HasData(
                         new
@@ -339,7 +341,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Transmissions", (string)null);
+                    b.ToTable("Transmissions");
 
                     b.HasData(
                         new
@@ -375,7 +377,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Dealers", (string)null);
+                    b.ToTable("Dealers");
 
                     b.HasData(
                         new
@@ -428,7 +430,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("PurchaserId");
 
-                    b.ToTable("Parts", (string)null);
+                    b.ToTable("Parts");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.PartCategory", b =>
@@ -446,7 +448,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("PartCategories", (string)null);
+                    b.ToTable("PartCategories");
 
                     b.HasData(
                         new
@@ -509,22 +511,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("Reviews", (string)null);
-                });
-
-            modelBuilder.Entity("CarParts.Data.Models.UserComparisonCar", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "CarId");
-
-                    b.HasIndex("CarId");
-
-                    b.ToTable("UsersComparisonCars", (string)null);
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.UserFavoriteCar", b =>
@@ -539,7 +526,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("UsersFavoriteCars", (string)null);
+                    b.ToTable("UsersFavoriteCars");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.UserFavoritePart", b =>
@@ -554,7 +541,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("PartId");
 
-                    b.ToTable("UsersFavoriteParts", (string)null);
+                    b.ToTable("UsersFavoriteParts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -715,7 +702,7 @@ namespace CarParts.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("CarParts.Data.Models.ApplicationUser", "Renter")
-                        .WithMany()
+                        .WithMany("CarsToCompare")
                         .HasForeignKey("RenterId");
 
                     b.HasOne("CarParts.Data.Models.CarTransmission", "Transmission")
@@ -775,25 +762,6 @@ namespace CarParts.Data.Migrations
                 {
                     b.HasOne("CarParts.Data.Models.Car", "Car")
                         .WithMany("Reviews")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CarParts.Data.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Car");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CarParts.Data.Models.UserComparisonCar", b =>
-                {
-                    b.HasOne("CarParts.Data.Models.Car", "Car")
-                        .WithMany("UserComparisonCars")
                         .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -898,11 +866,14 @@ namespace CarParts.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("CarParts.Data.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("CarsToCompare");
+                });
+
             modelBuilder.Entity("CarParts.Data.Models.Car", b =>
                 {
                     b.Navigation("Reviews");
-
-                    b.Navigation("UserComparisonCars");
 
                     b.Navigation("UserFavoriteCars");
                 });

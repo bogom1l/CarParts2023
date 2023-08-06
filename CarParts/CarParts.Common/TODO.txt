@@ -1,15 +1,18 @@
-﻿  ✔️
+﻿
 	
-	- Car Comparison (in Table)
-	  * https://www.emag.bg/compare/D67Y4LMBM,D97R8RMBM/
-	  ApplicationUser ima 1 List<Car> CarsToCompare
-	  na vseki CarDetails da ima butonche "Add to Compare"
-	  da ima stranica Car/CompareCars
-	  i vutre ima list i ako sa poveche ot 2 koli, se vizualizirat w tablica
+	✔️ Car Comparison (in Table)
+	✔️  * vseki User/Dealer/Admin moje da si dobavq kolite v tablicata
+	✔️  * add property in Car: IsFreeForCompare
+	✔️  * button clear my comparison list
+
+
+
+	- da premestq "Add 100 euro" buttona w user dashboarda, i da redirectwa pak tam
+	  * i da dobavq "Add 1000 euro", "Add 10 000 euro"
 
 	- da prerazpredelq hubavo koi metodi, v koi service-i, v koi controleri, che s usera malko e kasha
 
 	- txt
 
 ------------------
-00:30 - 06.08.2023
+14:00 - 06.08.2023

@@ -576,6 +576,109 @@
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> Compare()
+        {
+            var cars = await _carService.GetAllCarCompareViewModelsAsync(GetUserId());
+
+            switch (cars.Count)
+            {
+                case 0:
+                    TempData["ErrorMessage"] = $"Your comparison list is empty. Please add at least {ComparisonListMinCount} cars to compare.";
+                    return RedirectToAction("All", "Car");
+                case 1:
+                    TempData["ErrorMessage"] = "Please add at least 1 more car to compare.";
+                    return RedirectToAction("All", "Car");
+                case > 5:
+                    TempData["ErrorMessage"] =
+                        $"You can compare up to maximum {ComparisonListMaxCount} cars! Please remove at least one.";
+                    return RedirectToAction("All", "Car");
+                default:
+                    return View(cars);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddCarForCompare(int id)
+        {
+            var car = await _carService.GetCarByIdAsync(id);
+
+            if (car == null)
+            {
+                TempData["ErrorMessage"] = "Car with provided id does not exist! Please try again.";
+                return RedirectToAction("All", "Car");
+            }
+
+            var isCarInMyComparisonListAsync = await _carService.IsCarInMyComparisonListAsync(id, GetUserId());
+
+            if (isCarInMyComparisonListAsync)
+            {
+                TempData["ErrorMessage"] = "You have already added this car for comparison!";
+                return RedirectToAction("All", "Car");
+            }
+
+            var isComparisonListFull = await _carService.IsComparisonListFullAsync(GetUserId());
+
+            if (isComparisonListFull)
+            {
+                TempData["ErrorMessage"] =
+                    $"You can compare up to maximum {ComparisonListMaxCount} cars! Please remove at least one.";
+                return RedirectToAction("Compare", "Car");
+            }
+
+            try
+            {
+                await _carService.AddCarForComparisonAsync(id, GetUserId());
+
+                TempData["SuccessMessage"] = "Car has been successfully added for comparison.";
+                return RedirectToAction("Details", "Car", new { id });
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RemoveCarFromCompare(int id)
+        {
+            var car = await _carService.GetCarByIdAsync(id);
+
+            if (car == null)
+            {
+                TempData["ErrorMessage"] = "Car with provided id does not exist! Please try again.";
+                return RedirectToAction("All", "Car");
+            }
+
+            try
+            {
+                await _carService.RemoveCarFromComparisonAsync(id, GetUserId());
+
+                TempData["SuccessMessage"] = "Car has been successfully removed for comparison.";
+                return RedirectToAction("All", "Car");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ClearMyComparisonList()
+        {
+            try
+            {
+                await _carService.ClearMyComparisonList(GetUserId());
+
+                TempData["SuccessMessage"] = "Comparison list has been successfully cleared.";
+                return RedirectToAction("All", "Car");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
         private IActionResult GeneralError()
         {
             TempData["ErrorMessage"] =

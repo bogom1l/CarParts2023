@@ -8,12 +8,15 @@
     using Web.ViewModels.Car.CarProperties;
     using Web.ViewModels.Dealer;
     using Web.ViewModels.Review;
+    using static CarParts.Common.GlobalConstants;
     using static Common.GlobalConstants.Car;
-
-    /*
     using Car = CarParts.Data.Models.Car;
     using Review = CarParts.Data.Models.Review;
-     */
+
+    /*
+using Car = CarParts.Data.Models.Car;
+using Review = CarParts.Data.Models.Review;
+*/
 
     public class CarService : ICarService
     {
@@ -650,6 +653,90 @@
         public async Task<bool> HasUserAlreadyReviewedThisCarAsync(int carId, string userId)
         {
             return await _dbContext.Reviews.AnyAsync(r => r.CarId == carId && r.UserId == userId);
+        }
+
+
+
+        public async Task<ICollection<CompareCarViewModel>> GetAllCarCompareViewModelsAsync(string userId)
+        {
+            return await _dbContext
+                .Cars
+                .Where(c => c.UserComparisonCars.Any(ucc => ucc.UserId == userId))
+                .Select(c => new CompareCarViewModel
+                {
+                    CarId = c.CarId,
+                    Make = c.Make,
+                    Model = c.Model,
+                    Year = c.Year,
+                    Description = c.Description,
+                    Price = c.Price,
+                    Color = c.Color,
+                    EngineSize = c.EngineSize,
+                    FuelTypeName = c.FuelType.Name,
+                    TransmissionName = c.Transmission.Name,
+                    CategoryName = c.Category.Name,
+                    Weight = c.Weight,
+                    TopSpeed = c.TopSpeed,
+                    Acceleration = c.Acceleration,
+                    Horsepower = c.Horsepower,
+                    Torque = c.Torque,
+                    FuelConsumption = c.FuelConsumption,
+                    Owner = c.Dealer.User.Email,
+                    ImageUrl = c.ImageUrl,
+                    RentPrice = c.RentPrice
+                }).ToListAsync();
+        }
+
+        public async Task AddCarForComparisonAsync(int carId, string userId)
+        {
+            var userComparisonCar = new UserComparisonCar()
+            {
+                CarId = carId,
+                UserId = userId
+            };
+
+            await _dbContext.UsersComparisonCars.AddAsync(userComparisonCar);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task RemoveCarFromComparisonAsync(int carId, string userId)
+        {
+            var userComparisonCar = await _dbContext
+                .UsersComparisonCars
+                .FirstOrDefaultAsync(ufc => ufc.CarId == carId && ufc.UserId == userId);
+
+            if (userComparisonCar != null)
+            {
+                _dbContext.UsersComparisonCars.Remove(userComparisonCar);
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+
+        public async Task<bool> IsCarInMyComparisonListAsync(int carId, string userId)
+        {
+            return await _dbContext
+                .UsersComparisonCars
+                .AnyAsync(ucc => ucc.CarId == carId && ucc.UserId == userId);
+        }
+
+        public async Task<bool> IsComparisonListFullAsync(string userId)
+        {
+            var comparisonListCount = await _dbContext
+                .UsersComparisonCars
+                .CountAsync(ucc => ucc.UserId == userId);
+
+            return comparisonListCount >= ComparisonListMaxCount;
+        }
+
+        public async Task ClearMyComparisonList(string userId)
+        {
+            var userComparisonCars = await _dbContext
+                .UsersComparisonCars
+                .Where(ucc => ucc.UserId == userId)
+                .ToListAsync();
+
+            _dbContext.UsersComparisonCars.RemoveRange(userComparisonCars);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

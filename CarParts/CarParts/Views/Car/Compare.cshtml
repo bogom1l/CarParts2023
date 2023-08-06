@@ -1,0 +1,136 @@
+﻿@model ICollection<CompareCarViewModel>
+
+@{
+    ViewBag.Title = "Compare Cars";
+}
+
+<p><h2 class="text-center">@ViewBag.Title</h2></p>
+
+
+<div class="row">
+    <div class="col-md-1">
+    </div>
+    @foreach (var car in Model)
+    {
+        <div class="col-md-2">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <td colspan="2" class="text-center"><img src="@car.ImageUrl" alt="Car Image" style="max-width: 400px; max-height: 150px;"/></td>
+                </tr>
+                <tr>
+                    <th colspan="2" class="text-center">@car.Make - @car.Model (@car.Year)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><strong>Price:</strong></td>
+                    <td>@car.Price EUR</td>
+                </tr>
+                <tr>
+                    <td><strong>Color:</strong></td>
+                    <td>@car.Color</td>
+                </tr>
+                <tr>
+                    <td><strong>Engine Size:</strong></td>
+                    <td>@car.EngineSize cc</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Fuel Type:</strong></td>
+                    <td>@car.FuelTypeName</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Transmission:</strong></td>
+                    <td>@car.TransmissionName</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Category:</strong></td>
+                    <td>@car.CategoryName</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Weight:</strong></td>
+                    <td>@car.Weight kg</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Top Speed:</strong></td>
+                    <td>@car.TopSpeed km/h</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Acceleration:</strong></td>
+                    <td>@car.Acceleration sec (0-100km/h)</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Horsepower:</strong></td>
+                    <td>@car.Horsepower</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Torque:</strong></td>
+                    <td>@car.Torque Nm</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Consumption:</strong></td>
+                    <td>@car.FuelConsumption (L/100km)</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Owner:</strong></td>
+                    <td>@car.Owner</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Rent Price:</strong></td>
+                    <td>@car.RentPrice EUR</td>
+
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="text-center">
+                                
+                            <a asp-controller="Car" asp-action="Details" asp-route-id="@car.CarId" class="btn btn-info btn-lg fw-bold">
+                                Details
+                            </a>
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="text-center">
+
+                            <a asp-controller="Car" asp-action="RemoveCarFromCompare" asp-route-id="@car.CarId" class="btn btn-danger btn-lg fw-bold">
+                                Remove
+                            </a>
+
+                        </div>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    }
+
+    <div class="col-md-1">
+    </div>
+
+</div>
+
+<div class="text-center">
+    <a asp-controller="Car" asp-action="ClearMyComparisonList" class="btn btn-warning btn-lg fw-bold">
+        Clear comparison list
+    </a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <partial name="CommonView" />
+}

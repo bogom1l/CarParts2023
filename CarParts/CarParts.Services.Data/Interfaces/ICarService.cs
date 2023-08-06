@@ -64,5 +64,18 @@
 
         public Task AddReviewAsync(ReviewViewModel reviewViewModel, string userId);
         public Task<bool> HasUserAlreadyReviewedThisCarAsync(int carId, string userId);
+
+
+        public Task<ICollection<CompareCarViewModel>> GetAllCarCompareViewModelsAsync(string userId);
+
+        public Task AddCarForComparisonAsync(int carId, string userId);
+
+        public Task RemoveCarFromComparisonAsync(int carId, string userId);
+
+        public Task<bool> IsCarInMyComparisonListAsync(int carId, string userId);
+
+        public Task<bool> IsComparisonListFullAsync(string userId);
+
+        public Task ClearMyComparisonList(string userId);
     }
 }

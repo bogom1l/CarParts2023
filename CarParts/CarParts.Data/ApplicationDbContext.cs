@@ -26,6 +26,8 @@
 
         public DbSet<Review> Reviews { get; set; } = null!;
 
+        public DbSet<UserComparisonCar> UsersComparisonCars { get; set; } = null!;
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             DataSeeder.Seed(builder);
@@ -38,6 +40,9 @@
 
             builder.Entity<Review>()
                 .HasKey(r => new { r.UserId, r.CarId });
+
+            builder.Entity<UserComparisonCar>()
+                .HasKey(ucc => new { ucc.UserId, ucc.CarId });
 
             base.OnModelCreating(builder);
         }
