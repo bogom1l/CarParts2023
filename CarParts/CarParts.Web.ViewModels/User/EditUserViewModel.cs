@@ -9,11 +9,17 @@
 
         public string Email { get; set; } = null!;
 
+        [StringLength(FirstNameMaxLength,
+            MinimumLength = FirstNameMinLength)]
         public string FirstName { get; set; } = null!;
 
+        [StringLength(LastNameMaxLength,
+            MinimumLength = LastNameMinLength)]
         public string LastName { get; set; } = null!;
 
         [Phone]
+        [StringLength(PhoneNumberMaxLength,
+            MinimumLength = PhoneNumberMinLength)]
         public string PhoneNumber { get; set; } = null!;
 
         [Required]

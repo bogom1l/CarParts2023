@@ -360,11 +360,6 @@
         [HttpPost]
         public async Task<IActionResult> Purchase(PurchasePartViewModel purchasePartViewModel)
         {
-            //if (!ModelState.IsValid) TODO: twa raboti li prawilno ?
-            //{
-            //    return View(purchasePartViewModel);
-            //}
-
             var userBalance = await _userService.GetUserBalanceByIdAsync(GetUserId());
             var totalMoneyToPurchase = purchasePartViewModel.Price;
 

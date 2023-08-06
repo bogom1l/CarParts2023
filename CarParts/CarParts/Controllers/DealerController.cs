@@ -60,9 +60,24 @@
                 return RedirectToAction("MyRentedCars", "Car");
             }
 
-            await _dealerService.BecomeDealerAsync(dealer, GetUserId());
+            try
+            {
+                await _dealerService.BecomeDealerAsync(dealer, GetUserId());
 
-            TempData["SuccessMessage"] = "You are now a dealer.";
+                TempData["SuccessMessage"] = "You are now a dealer.";
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        private IActionResult GeneralError()
+        {
+            TempData["ErrorMessage"] =
+                "Unexpected error occurred! Please try again later or contact administrator.";
+
             return RedirectToAction("Index", "Home");
         }
     }

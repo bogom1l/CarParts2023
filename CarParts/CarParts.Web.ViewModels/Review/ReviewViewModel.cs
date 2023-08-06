@@ -1,9 +1,12 @@
 ﻿namespace CarParts.Web.ViewModels.Review
 {
     using System.ComponentModel.DataAnnotations;
+    using static Common.GlobalConstants.Review;
 
     public class ReviewViewModel
     {
+        [StringLength(ReviewContentMaxLength, 
+            MinimumLength = ReviewContentMinLength)]
         public string Content { get; set; } = null!;
 
         [Range(0.0, 10.0, ErrorMessage = "Please enter a rating between 0 and 10.")]

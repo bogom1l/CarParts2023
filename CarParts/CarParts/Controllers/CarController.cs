@@ -3,6 +3,8 @@
     using Extensions;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
+    using Microsoft.EntityFrameworkCore;
     using Services.Data.Interfaces;
     using ViewModels.Car;
     using ViewModels.Review;
@@ -374,7 +376,7 @@
             if (!_carService.IsRentalPeriodValid(rentCarViewModel))
             {
                 TempData["ErrorMessage"] = "Your rental period was invalid! Please try again with correct data.";
-                return View(rentCarViewModel);
+                return RedirectToAction("Details", "Car", new { id = rentCarViewModel.Id });
             }
 
             var userBalance = await _userService.GetUserBalanceByIdAsync(GetUserId());
@@ -504,7 +506,6 @@
             }
         }
 
-        //[HttpPost]
         [HttpGet]
         public async Task<IActionResult> EndRental(int id)
         {
@@ -554,6 +555,20 @@
         [HttpPost]
         public async Task<IActionResult> AddReview(ReviewViewModel reviewViewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                var error = ModelState.Values.SelectMany(v => v.Errors).ToList()
+                    .FirstOrDefault(e => e.ErrorMessage.ToLower().Contains("content")).ErrorMessage.ToString();
+
+                if (string.IsNullOrEmpty(error))
+                {
+                    return GeneralError();
+                }
+
+                TempData["ErrorMessage"] = error;
+                return RedirectToAction("Details", "Car", new { id = reviewViewModel.CarId });
+            }
+
             var hasUserAlreadyReviewedThisCar =
                 await _carService.HasUserAlreadyReviewedThisCarAsync(reviewViewModel.CarId, GetUserId());
             if (hasUserAlreadyReviewedThisCar)

@@ -7,9 +7,7 @@
     public class Review
     {
         [Required]
-        [StringLength(ReviewContentMaxLength,
-            MinimumLength = ReviewContentMinLength,
-            ErrorMessage = "The comment can be between 1 and 3000 characters.")]
+        [MaxLength(ReviewContentMaxLength)]
         public string Content { get; set; } = null!;
         
         public double Rating { get; set; }
