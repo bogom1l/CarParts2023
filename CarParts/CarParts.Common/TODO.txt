@@ -7,9 +7,10 @@
 
 	✔️ da premestq "Add 100 euro" buttona w user dashboarda, i da redirectwa pak tam
 
-	- da prerazpredelq hubavo koi metodi, v koi service-i, v koi controleri, che s usera malko e kasha
 
 	- txt
 
+
+
 ------------------
-15:00 - 06.08.2023
+15:01 - 06.08.2023

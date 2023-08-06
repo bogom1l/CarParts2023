@@ -12,7 +12,6 @@
             _userService = userService;
         }
 
-        //[Route("User/All")]
         public async Task<IActionResult> All()
         {
             var users = await _userService.GetAllUsersAsync();
@@ -22,19 +21,41 @@
         [HttpGet]
         public async Task<IActionResult> DeleteAllReviews()
         {
-            await _userService.DeleteAllReviewsAsync();
+            try
+            {
+                await _userService.DeleteAllReviewsAsync();
 
-            TempData["SuccessMessage"] = "You have successfully deleted all reviews!";
-            return RedirectToAction("Index", "Home");
+                TempData["SuccessMessage"] = "You have successfully deleted all reviews!";
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> DeleteAllReviewsForCar(int id)
         {
-            await _userService.DeleteAllReviewsForCarAsync(id);
+            try
+            {
+                await _userService.DeleteAllReviewsForCarAsync(id);
 
-            TempData["SuccessMessage"] = $"You have successfully deleted all reviews for car with id: {id}!";
-            return RedirectToAction("All", "Car", new { area = "" });
+                TempData["SuccessMessage"] = $"You have successfully deleted all reviews for car with id: {id}!";
+                return RedirectToAction("All", "Car", new { area = "" });
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
+        }
+
+        private IActionResult GeneralError()
+        {
+            TempData["ErrorMessage"] =
+                "Unexpected error occurred! Please try again later or contact administrator.";
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
