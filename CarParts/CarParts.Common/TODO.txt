@@ -8,9 +8,18 @@
 	✔️ da premestq "Add 100 euro" buttona w user dashboarda, i da redirectwa pak tam
 
 
-	- txt
+	- add recaptcha ot workshopa na kris 
 
+	- add cache ot workshopa na kris (i ot laba)
 
+	- custom error page => Workshop: Services and Error Pages , (return this.NotFound())
+
+	- error handling EVERYWHERE (try-catch, to not be able to throw any exceptions)
+
+	- data validation EVERYWHERE :
+	  * https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-7.0
+	  * data, viewmodels - [required], [max/minlength], [address], [phone], ...
+	  * !ModelState.IsValid
 
 ------------------
-15:01 - 06.08.2023
+16:00 - 06.08.2023
