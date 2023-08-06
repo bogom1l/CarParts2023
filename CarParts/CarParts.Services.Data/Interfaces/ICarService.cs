@@ -76,6 +76,6 @@
 
         public Task<bool> IsComparisonListFullAsync(string userId);
 
-        public Task ClearMyComparisonList(string userId);
+        public Task ClearMyComparisonListAsync(string userId);
     }
 }

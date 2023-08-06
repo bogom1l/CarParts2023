@@ -8,15 +8,13 @@
     using Web.ViewModels.Car.CarProperties;
     using Web.ViewModels.Dealer;
     using Web.ViewModels.Review;
-    using static CarParts.Common.GlobalConstants;
     using static Common.GlobalConstants.Car;
     using Car = CarParts.Data.Models.Car;
     using Review = CarParts.Data.Models.Review;
-
     /*
-using Car = CarParts.Data.Models.Car;
-using Review = CarParts.Data.Models.Review;
-*/
+    using Car = CarParts.Data.Models.Car;
+    using Review = CarParts.Data.Models.Review;
+    */
 
     public class CarService : ICarService
     {
@@ -656,7 +654,6 @@ using Review = CarParts.Data.Models.Review;
         }
 
 
-
         public async Task<ICollection<CompareCarViewModel>> GetAllCarCompareViewModelsAsync(string userId)
         {
             return await _dbContext
@@ -689,7 +686,7 @@ using Review = CarParts.Data.Models.Review;
 
         public async Task AddCarForComparisonAsync(int carId, string userId)
         {
-            var userComparisonCar = new UserComparisonCar()
+            var userComparisonCar = new UserComparisonCar
             {
                 CarId = carId,
                 UserId = userId
@@ -728,7 +725,7 @@ using Review = CarParts.Data.Models.Review;
             return comparisonListCount >= ComparisonListMaxCount;
         }
 
-        public async Task ClearMyComparisonList(string userId)
+        public async Task ClearMyComparisonListAsync(string userId)
         {
             var userComparisonCars = await _dbContext
                 .UsersComparisonCars

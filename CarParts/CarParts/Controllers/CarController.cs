@@ -668,7 +668,7 @@
         {
             try
             {
-                await _carService.ClearMyComparisonList(GetUserId());
+                await _carService.ClearMyComparisonListAsync(GetUserId());
 
                 TempData["SuccessMessage"] = "Comparison list has been successfully cleared.";
                 return RedirectToAction("All", "Car");

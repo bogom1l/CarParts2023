@@ -16,37 +16,65 @@
                 {
                     <div class="form-group">
                         <label asp-for="@Model.Username">Username</label>
-                        <input asp-for="@Model.Username" class="form-control" readonly />
+                        <input asp-for="@Model.Username" class="form-control" readonly/>
                     </div>
 
                     <div class="form-group">
                         <label asp-for="@Model.Email">Email</label>
-                        <input asp-for="@Model.Email" class="form-control" readonly />
+                        <input asp-for="@Model.Email" class="form-control" readonly/>
                     </div>
 
                     <div class="form-group">
                         <label asp-for="@Model.PhoneNumber">Phone Number</label>
-                        <input asp-for="@Model.PhoneNumber" class="form-control" readonly />
+                        <input asp-for="@Model.PhoneNumber" class="form-control" readonly/>
                         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <label asp-for="@Model.FirstName">First Name</label>
-                        <input asp-for="@Model.FirstName" class="form-control" readonly />
-                        <span asp-validation-for="FirstName" class="text-danger" ></span>
+                        <input asp-for="@Model.FirstName" class="form-control" readonly/>
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <label asp-for="@Model.LastName">Last Name</label>
-                        <input asp-for="@Model.LastName" class="form-control" readonly />
-                        <span asp-validation-for="LastName" class="text-danger" ></span>
+                        <input asp-for="@Model.LastName" class="form-control" readonly/>
+                        <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">
                         <label asp-for="@Model.Balance" class="form-label-add-edit">Balance</label>
-                        <input type="number" asp-for="@Model.Balance" class="form-control" aria-required="true" id="balanceInput" />
+                        <input type="number" asp-for="@Model.Balance" class="form-control" aria-required="true" id="balanceInput"/>
                         <span asp-validation-for="Balance" class="text-danger"></span>
                     </div>
+
+                    <div class="row text-center">
+                        <div class="col-md-3">
+                            <a class="btn btn-primary" aria-current="page" href="@Url.Action("AddMoney", "User")">
+                                Add 100 euro
+                            </a>
+                        </div>
+
+                        <div class="col-md-3">
+                            <a class="btn btn-primary" href="@Url.Action("AddCustomAmountMoney", "User", new { area = "", amount = 1000 })">
+                                Add 1000 euro
+                            </a>
+                        </div>
+
+                        <div class="col-md-3">
+                            <a class="btn btn-primary" href="@Url.Action("AddCustomAmountMoney", "User", new { area = "", amount = 10_000 })">
+                                Add 10 000 euro
+                            </a>
+                        </div>
+
+                        <div class="col-md-3">
+                            <a class="btn btn-primary" aria-current="page" href="@Url.Action("ResetMoney", "User")">
+                                Reset money
+                            </a>
+                        </div>
+                    </div>
+
+                    <br/>
 
                     <a asp-area="" asp-controller="Dashboard" asp-action="DeleteAllReviewsForUser" class="btn btn-warning btn-block delete-myreviews">
                         Delete all my reviews
@@ -83,6 +111,30 @@
                         <input asp-for="@Model.LastName" class="form-control"/>
                         <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
+
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <a class="btn btn-primary" aria-current="page" href="@Url.Action("AddMoney", "User")">
+                                Add 100 euro
+                            </a>
+                        </div>
+
+                        <div class="col-md-4">
+                            <a class="btn btn-primary" href="@Url.Action("AddCustomAmountMoney", "User", new { area = "", amount = 1000 })">
+                                Add 1000 euro
+                            </a>
+                        </div>
+
+                        <div class="col-md-4">
+                            <a class="btn btn-primary" aria-current="page" href="@Url.Action("ResetMoney", "User")">
+                                Reset money
+                            </a>
+                        </div>
+                    </div>
+
+                    <br/>
+                 
+               
 
                     <a asp-area="" asp-controller="Dashboard" asp-action="DeleteAllReviewsForUser" class="btn btn-warning btn-block delete-myreviews">
                         Delete all my reviews

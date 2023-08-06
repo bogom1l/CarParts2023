@@ -20,7 +20,7 @@
                 await _userService.AddMoneyAsync(GetUserId());
 
                 TempData["SuccessMessage"] = "You added 100 euro to your balance!";
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("EditAccountSettings", "Dashboard", new {id = GetUserId()});
             }
             catch (Exception)
             {
@@ -35,7 +35,8 @@
             {
                 await _userService.ResetMoneyAsync(GetUserId());
 
-                return RedirectToAction("Index", "Home");
+                TempData["SuccessMessage"] = "You have successfully reset your balance!";
+                return RedirectToAction("EditAccountSettings", "Dashboard", new {id = GetUserId()});
             }
             catch (Exception)
             {
@@ -51,7 +52,7 @@
                 await _userService.AddCustomAmountMoneyAsync(GetUserId(), amount);
 
                 TempData["SuccessMessage"] = $"You added {amount} euro to your balance!";
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("EditAccountSettings", "Dashboard", new {id = GetUserId()});
             }
             catch (Exception)
             {

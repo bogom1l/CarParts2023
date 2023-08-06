@@ -30,7 +30,7 @@
         {
             if (GetUserId() != id)
             {
-                TempData["ErrorMessage"] = "User can only edit your personal account.";
+                TempData["ErrorMessage"] = "User can only edit his own personal account.";
                 return RedirectToAction("Index", "Home");
             }
 
