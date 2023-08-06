@@ -9,14 +9,14 @@
 
 	✔️ add cache ot workshopa na kris (i ot laba)
 
-	- custom error page => Workshop: Services and Error Pages , (return this.NotFound())
+	✔️ custom error page => Workshop: Services and Error Pages , (return this.NotFound())
 
-	- error handling EVERYWHERE (try-catch, to not be able to throw any exceptions)
+	- [10min]error handling EVERYWHERE (try-catch, to not be able to throw any exceptions)
 
-	- data validation EVERYWHERE :
+	- [30min]data validation EVERYWHERE :
 	  * https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-7.0
 	  * data, viewmodels - [required], [max/minlength], [address], [phone], ...
 	  * !ModelState.IsValid
 
 ------------------
-17:00 - 06.08.2023
+22:00 - 06.08.2023
