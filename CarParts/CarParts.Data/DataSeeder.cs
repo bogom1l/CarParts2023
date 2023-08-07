@@ -12,11 +12,13 @@
             SeedCarFuelTypes(modelBuilder);
             SeedCarTransmissions(modelBuilder);
             SeedCarCategories(modelBuilder);
+
             SeedPartCategories(modelBuilder);
+
             SeedAdministrator(modelBuilder);
 
             SeedCars(modelBuilder);
-            //TODO: parts
+            SeedParts(modelBuilder);
         }
 
         private static void SeedCarFuelTypes(ModelBuilder modelBuilder)
@@ -109,7 +111,8 @@
 
             var cars = new List<Car>();
             Car car;
-            var currentCarId = 178; //_seedHelper.GetLastCarId() + 1;  // [!] 
+            var currentCarId =
+                178; //TODO: Change this to the last CarId in the database <=> _seedHelper.GetLastCarId() + 1;
 
             car = new Car
             {
@@ -656,7 +659,7 @@
             //---------------------------------------------------------------------------------------------------------
 
             //------------------------------------\\
-            cars.ForEach(c => c.DealerId = 14);
+            cars.ForEach(c => c.DealerId = 14); //Usually the ADMIN for simplicity
             cars.ForEach(c => c.Dealer = null);
             cars.ForEach(c => c.FuelType = null);
             cars.ForEach(c => c.Transmission = null);
@@ -671,11 +674,303 @@
             //------------------------------------\\
             modelBuilder.Entity<Car>().HasData(cars);
         }
+
+        private static void SeedParts(ModelBuilder modelBuilder)
+        {
+            // To be careful with PartId, and DealerId !!!
+            // Copy the first added part here and use it for template when adding new parts
+
+            var parts = new List<Part>();
+            Part part;
+            var currentPartId = 73; //TODO: Change this to the last PartId in the database
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "BMW M52",
+                Description = "ToAddPartDescription",
+                Price = 15000,
+                ImageUrl = "https://www.bimmerarchive.org/images/5177-114-bmw-m52@2x.jpg",
+                CategoryId = 1
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "BMW M54",
+                Description = "ToAddPartDescription",
+                Price = 13000,
+                ImageUrl = "https://i.ytimg.com/vi/4yw4_1bI63I/maxresdefault.jpg",
+                CategoryId = 1
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "BMW N54",
+                Description = "ToAddPartDescription",
+                Price = 17000,
+                ImageUrl = "https://images-stag.jazelc.com/uploads/theautopian-m2en/335i-engine-bay.jpg",
+                CategoryId = 1
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "S tronic (DSG) Audi",
+                Description = "ToAddPartDescription",
+                Price = 19000,
+                ImageUrl =
+                    "https://static.wixstatic.com/media/c3e527_eeac5846b92f4c5a839e8f5b8a02021b~mv2.png/v1/fill/w_640,h_400,al_c,q_85,usm_4.00_1.00_0.00,enc_auto/c3e527_eeac5846b92f4c5a839e8f5b8a02021b~mv2.png",
+                CategoryId = 2
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "Tiptronic Audi",
+                Description = "ToAddPartDescription",
+                Price = 21000,
+                ImageUrl = "https://www.audi-technology-portal.de/en/download?file=813",
+                CategoryId = 2
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "DSG (Direct Shift Gearbox) VW",
+                Description = "ToAddPartDescription",
+                Price = 9000,
+                ImageUrl =
+                    "https://b1936034.smushcdn.com/1936034/wp-content/uploads/2020/01/DL382.png?lossy=1&strip=1&webp=1",
+                CategoryId = 2
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "6-speed Manual VW",
+                Description = "ToAddPartDescription",
+                Price = 7500,
+                ImageUrl = "https://images.hgmsites.net/hug/volkswagen_100708189_h.jpg",
+                CategoryId = 2
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "Mercedes-Benz AMG Ceramic Composite Brakes (CCB)",
+                Description = "ToAddPartDescription",
+                Price = 4500,
+                ImageUrl = "https://tro-nik.com/wp-content/uploads/2021/07/Mercedes-Benz-W167-brakes.-pic.-1.jpg",
+                CategoryId = 3
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "Mercedes-Benz AMG Performance Brakes",
+                Description = "ToAddPartDescription",
+                Price = 8700,
+                ImageUrl =
+                    "https://www.kunzmann.de/image/replacement-and-wearparts-brake-equipment-brake-di-29847-xl.jpg",
+                CategoryId = 3
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "Adaptive M Suspension",
+                Description = "ToAddPartDescription",
+                Price = 16000,
+                ImageUrl =
+                    "https://www.bmw.ie/en/shop/ls/images/connected-drive/xl/VDC_Offer/images/Adaptives_M_Fahrwerk_902x508.jpg",
+                CategoryId = 4
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "Audi Dynamic Ride Control (DRC)",
+                Description = "ToAddPartDescription",
+                Price = 9500,
+                ImageUrl =
+                    "https://audimediacenter-a.akamaihd.net/system/production/media/84119/images/7e6b0f01721320da20eade10395735ebf282c6a1/A1912000_x500.jpg?1582560882",
+                CategoryId = 4
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "M Sport Seats",
+                Description = "BMW E46 Cab M Sport Dakota Coral Red Leather",
+                Price = 123456789,
+                ImageUrl =
+                    "https://trimtechnik.net/assets/images/content/129/bmw_e46_cab_m_sport_coral_red_leather_003__1000.jpg",
+                CategoryId = 5
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "Audi RS4 B7 Recaro Seats",
+                Description = "ToAddPartDescription",
+                Price = 1150,
+                ImageUrl =
+                    "https://bringatrailer.com/wp-content/uploads/2019/01/1547765401b064a6f7f52ae3fPhoto-Jan-10-6-09-19-PM.jpg",
+                CategoryId = 5
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "Carbon rear wing / rear spoiler",
+                Description = "ToAddPartDescription",
+                Price = 600,
+                ImageUrl =
+                    "https://luethen-motorsport.com/media/image/9f/42/ed/mercedes-c63-amg-coupe-c205-carbon-heckflugel-heckspoiler-ac2051200_600x600.jpg",
+                CategoryId = 6
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "LED Angel Eyes (white)",
+                Description = "ToAddPartDescription",
+                Price = 2200,
+                ImageUrl = "https://nastarta-shop.com/wp-content/uploads/2022/02/led_halo.jpg",
+                CategoryId = 6
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "LCI LED Headlights - BMW F10 M5 & 5 Series",
+                Description = "ToAddPartDescription",
+                Price = 800,
+                ImageUrl =
+                    "https://bimmerplug.com/cdn/shop/products/LCI-LED-Headlights-BMW-F10-M5-5-Series-2_800x.jpg?v=1655094531",
+                CategoryId = 6
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "Soundstage + Subwoofer System for BMW 3-Series",
+                Description = "ToAddPartDescription",
+                Price = 2599,
+                ImageUrl =
+                    "https://integralaudio.com/media/catalog/product/cache/429f869d5d4fbd3e94a8a75b24ebea81/f/3/f30.soundstage.complete_2_1.jpg",
+                CategoryId = 7
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "Performance chip Audi A3 1.9 TDI 110hp",
+                Description = "ToAddPartDescription",
+                Price = 300,
+                ImageUrl = "https://www.ptronic.com/files/images/boitiers/12/1.jpg",
+                CategoryId = 7
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "First aid kit",
+                Description = "ToAddPartDescription",
+                Price = 60,
+                ImageUrl = "https://cdn.autodoc.de/thumb?id=17857567&m=1&n=0&lng=bg&ccf=94077841",
+                CategoryId = 7
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "BBS CC-R Rims",
+                Description = "ToAddPartDescription",
+                Price = 2400,
+                ImageUrl = "https://www.felgenoutlet.at/felgenbilder/10985_5/seo/bbs_cc-r_schwarz_matt.jpg?1589867390",
+                CategoryId = 6
+            };
+            parts.Add(part);
+            currentPartId += 1;
+            //--------------------------------------
+
+
+            //---------------------------------------------------------------------------------------------------------
+            //---------------------------------------------------------------------------------------------------------
+
+            //------------------------------------\\
+            parts.ForEach(c => c.DealerId = 14); //Usually the ADMIN for simplicity
+            parts.ForEach(c => c.Dealer = null);
+            parts.ForEach(c => c.Category = null);
+            parts.ForEach(c => c.PurchaserId = null);
+            parts.ForEach(c => c.Purchaser = null);
+            parts.ForEach(c => c.UserFavoriteParts = new List<UserFavoritePart>());
+            //------------------------------------\\
+            modelBuilder.Entity<Part>().HasData(parts);
+        }
     }
 }
 
 /*
-
 //public int GetLastCarId() 
 //{
 //    var lastCar = _dbContext
@@ -690,12 +985,11 @@
 
 //    return lastCar.CarId;
 //}
-
  */
 
 
 /*
- TEMPLATE CAR
+TEMPLATE Car
  
 car = new Car
 {
@@ -722,5 +1016,24 @@ car = new Car
 cars.Add(car);
 currentCarId += 1;
 //--------------------------------------
+
+*/
+
+/*
+TEMPLATE Part
+
+part = new Part
+{
+    PartId = currentPartId,
+    Name = "NAMENAMENAMENAME",
+    Description = "ToAddPartDescription",
+    Price = 123456789,
+    ImageUrl = "IMAGEIMAGEIMAGE",
+    CategoryId = 1
+};
+parts.Add(part);
+currentPartId += 1;
+//--------------------------------------
+
 
 */

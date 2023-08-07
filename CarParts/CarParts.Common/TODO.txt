@@ -7,7 +7,7 @@
 
    ✔️ iztriwam wsi4ki danni ot bazata danni (bez admina)
    ✔️ seed cars
-   -> seed parts
+   ✔️ seed parts
 
 
 ------------------
