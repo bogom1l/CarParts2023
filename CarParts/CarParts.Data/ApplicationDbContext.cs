@@ -28,6 +28,7 @@
 
         public DbSet<UserComparisonCar> UsersComparisonCars { get; set; } = null!;
 
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             DataSeeder.Seed(builder);

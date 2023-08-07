@@ -1,4 +1,6 @@
-﻿<style>
+﻿@model StatisticsViewModel
+
+<style>
     .my-custom-background-color {
         background-color: #e6f9ff;
     }
@@ -18,6 +20,73 @@
             <a href="@Url.Action("All", "Car")" class="btn btn-primary my-2">Explore all cars in our site</a>
             <a href="@Url.Action("All", "Part")" class="btn btn-secondary my-2">Explore all parts in our site</a>
         </p>
+        
+        <p>
+            
+            <p class="d-inline-flex gap-1">
+                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Show statistics
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample">
+                <div class="row">
+                    
+                    <div class="col-md-4">
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="row">
+
+                            <div class="col-md-2">
+
+                            </div>
+
+                            <div class="col-md-8">
+
+                                <h2>Statistics</h2>
+                                <table class="table">
+                                    <tr>
+                                        <th>Total Cars:</th>
+                                        <td>@Model.TotalCars</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total Parts:</th>
+                                        <td>@Model.TotalParts</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total Users:</th>
+                                        <td>@Model.TotalUsers</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total Dealers:</th>
+                                        <td>@Model.TotalDealers</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total Rentals:</th>
+                                        <td>@Model.TotalRents</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="col-md-2">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                    </div>
+
+                </div>
+            </div>
+
+        </p>
+     
     </div>
 </section>
 
@@ -131,9 +200,9 @@
                 </div>
             </div>
 
-            
-            
 
         </div>
+
+
     </div>
 </div>

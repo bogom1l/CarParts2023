@@ -2,13 +2,32 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Services.Data.Interfaces;
+    using ViewModels.Statistics;
 
     public class HomeController : BaseController
     {
-        [AllowAnonymous]
-        public IActionResult Index()
+        private readonly IStatisticsService _statisticsService;
+
+        public HomeController(IStatisticsService statisticsService)
         {
-            return View();
+            _statisticsService = statisticsService;
+        }
+
+
+        [AllowAnonymous]
+        public async Task<IActionResult> Index()
+        {
+            var statistics = new StatisticsViewModel
+            {
+                TotalCars = await _statisticsService.GetTotalCars(),
+                TotalParts = await _statisticsService.GetTotalParts(),
+                TotalUsers = await _statisticsService.GetTotalUsers(),
+                TotalDealers = await _statisticsService.GetTotalDealers(),
+                TotalRents = await _statisticsService.GetTotalRents()
+            };
+
+            return View(statistics);
         }
 
         [AllowAnonymous]

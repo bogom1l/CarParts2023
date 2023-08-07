@@ -1,5 +1,4 @@
 ﻿
-	
 	✔️ Car Comparison (in Table)
 	✔️  * vseki User/Dealer/Admin moje da si dobavq kolite v tablicata
 	✔️  * add property in Car: IsFreeForCompare
@@ -13,7 +12,15 @@
 
 	✔️ data validation : !ModelState.IsValid
 
-	
+
+	✔️ statistics on the front page  
+
+	- (2h) automapper implement
+
+	- (2h) seedwam danni (s kod, za da sedqt winagi tam)
+	  *predi twa iztriwam wsi4ki danni koito sym wywel za testwane do sega
+	  *validaciq za PhoneNumber (kakto na kris ot workshopa)
+
 
 ------------------
-10:00 - 07.08.2023
+12:00 - 07.08.2023
