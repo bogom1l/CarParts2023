@@ -59,6 +59,8 @@
                 .To<CarViewModel>()
                 .ToListAsync();
 
+            int a = 5;
+
             return cars;
         }
 
@@ -619,6 +621,16 @@
                 _dbContext.UsersComparisonCars.Remove(userComparisonCar);
                 await _dbContext.SaveChangesAsync();
             }
+        }
+
+        public async Task RemoveCarFromComparisonForAllUsersAsync(int carId)
+        {
+            var cars = await _dbContext
+                .UsersComparisonCars
+                .Where(ufc => ufc.CarId == carId).ToListAsync();
+
+            _dbContext.UsersComparisonCars.RemoveRange(cars);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<bool> IsCarInMyComparisonListAsync(int carId, string userId)

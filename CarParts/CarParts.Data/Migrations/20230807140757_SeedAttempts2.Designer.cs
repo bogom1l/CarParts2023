@@ -4,6 +4,7 @@ using CarParts.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarParts.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230807140757_SeedAttempts2")]
+    partial class SeedAttempts2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,7 +107,7 @@ namespace CarParts.Data.Migrations
                             Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
                             AccessFailedCount = 0,
                             Balance = 9999999.0,
-                            ConcurrencyStamp = "e4f635ee-e790-49f0-9309-97c845231aa0",
+                            ConcurrencyStamp = "df571915-1637-4588-82e2-12da7e22f453",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "ADMINISTRATOR",
@@ -113,9 +115,9 @@ namespace CarParts.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJ7zGMVr4Al85UyD+vVF4yuOqRUDT3h1/Oyy2AnvsqRVgfD39Vcl0RLg+XhTI2YT0g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAi1nGlIcLCN5T18v+uNwfzfdmi+WYNcEBPlbxi1k7cm3hWfve0NlqocmTYH8HvXsg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "65e814d6-25e9-4af8-bd37-8b99c79cda4f",
+                            SecurityStamp = "63684d46-8935-40e6-96c7-c5546453a6b8",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
@@ -216,7 +218,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("TransmissionId");
 
-                    b.ToTable("Cars", (string)null);
+                    b.ToTable("Cars");
 
                     b.HasData(
                         new
@@ -264,420 +266,6 @@ namespace CarParts.Data.Migrations
                             TransmissionId = 1,
                             Weight = 1285.0,
                             Year = 2004
-                        },
-                        new
-                        {
-                            CarId = 180,
-                            Acceleration = 10.1,
-                            CategoryId = 3,
-                            Color = "Red",
-                            DealerId = 14,
-                            Description = "ToAddDescription",
-                            EngineSize = 2993.0,
-                            FuelConsumption = 5.5999999999999996,
-                            FuelTypeId = 2,
-                            Horsepower = 110.0,
-                            ImageUrl = "https://www.auto-data.net/images/f76/Skoda-Fabia-III-facelift-2018.jpg",
-                            Make = "Skoda",
-                            Model = "Fabia III",
-                            Price = 24000.0,
-                            RentPrice = 130.0,
-                            TopSpeed = 195.0,
-                            Torque = 200.0,
-                            TransmissionId = 2,
-                            Weight = 1957.0,
-                            Year = 2018
-                        },
-                        new
-                        {
-                            CarId = 181,
-                            Acceleration = 6.7999999999999998,
-                            CategoryId = 4,
-                            Color = "Dark blue",
-                            DealerId = 14,
-                            Description = "ToAddDescription",
-                            EngineSize = 3456.0,
-                            FuelConsumption = 11.699999999999999,
-                            FuelTypeId = 2,
-                            Horsepower = 290.0,
-                            ImageUrl = "https://www.auto-data.net/images/f28/file9510003.jpg",
-                            Make = "Lexus",
-                            Model = "RX IV",
-                            Price = 85000.0,
-                            RentPrice = 220.0,
-                            TopSpeed = 200.0,
-                            Torque = 363.0,
-                            TransmissionId = 1,
-                            Weight = 2025.0,
-                            Year = 2016
-                        },
-                        new
-                        {
-                            CarId = 182,
-                            Acceleration = 9.5,
-                            CategoryId = 1,
-                            Color = "White",
-                            DealerId = 14,
-                            Description = "ToAddDescription",
-                            EngineSize = 1999.0,
-                            FuelConsumption = 10.800000000000001,
-                            FuelTypeId = 2,
-                            Horsepower = 145.0,
-                            ImageUrl = "https://www.auto-data.net/images/f88/Volvo-S40-II-facelift-2007.jpg",
-                            Make = "Volvo",
-                            Model = "S40 II",
-                            Price = 4800.0,
-                            RentPrice = 75.0,
-                            TopSpeed = 200.0,
-                            Torque = 185.0,
-                            TransmissionId = 2,
-                            Weight = 1370.0,
-                            Year = 2011
-                        },
-                        new
-                        {
-                            CarId = 183,
-                            Acceleration = 10.699999999999999,
-                            CategoryId = 5,
-                            Color = "Red",
-                            DealerId = 14,
-                            Description = "ToAddDescription",
-                            EngineSize = 2993.0,
-                            FuelConsumption = 10.1,
-                            FuelTypeId = 2,
-                            Horsepower = 163.0,
-                            ImageUrl = "https://www.auto-data.net/images/f56/Kia-Optima-IV-Sportswagon-facelift-2018.jpg",
-                            Make = "Kia",
-                            Model = "Optima IV",
-                            Price = 3900.0,
-                            RentPrice = 360.0,
-                            TopSpeed = 205.0,
-                            Torque = 196.0,
-                            TransmissionId = 1,
-                            Weight = 1625.0,
-                            Year = 2018
-                        },
-                        new
-                        {
-                            CarId = 184,
-                            Acceleration = 6.4000000000000004,
-                            CategoryId = 1,
-                            Color = "Black",
-                            DealerId = 14,
-                            Description = "ToAddDescription",
-                            EngineSize = 2993.0,
-                            FuelConsumption = 9.0,
-                            FuelTypeId = 1,
-                            Horsepower = 286.0,
-                            ImageUrl = "https://i.pinimg.com/originals/51/62/d5/5162d58a4f273c8ce26544da15659b5d.jpg",
-                            Make = "BMW",
-                            Model = "E60",
-                            Price = 18500.0,
-                            RentPrice = 190.0,
-                            TopSpeed = 250.0,
-                            Torque = 580.0,
-                            TransmissionId = 1,
-                            Weight = 1660.0,
-                            Year = 2010
-                        },
-                        new
-                        {
-                            CarId = 185,
-                            Acceleration = 5.0999999999999996,
-                            CategoryId = 2,
-                            Color = "White",
-                            DealerId = 14,
-                            Description = "ToAddDescription",
-                            EngineSize = 2997.0,
-                            FuelConsumption = 14.6,
-                            FuelTypeId = 2,
-                            Horsepower = 330.0,
-                            ImageUrl = "https://media.suara.com/pictures/653x366/2019/05/23/91189-toyota-supra-mk4.jpg",
-                            Make = "Toyota",
-                            Model = "Supra",
-                            Price = 60000.0,
-                            RentPrice = 300.0,
-                            TopSpeed = 250.0,
-                            Torque = 440.0,
-                            TransmissionId = 2,
-                            Weight = 1570.0,
-                            Year = 1993
-                        },
-                        new
-                        {
-                            CarId = 186,
-                            Acceleration = 5.7000000000000002,
-                            CategoryId = 3,
-                            Color = "Black",
-                            DealerId = 14,
-                            Description = "ToAddDescription",
-                            EngineSize = 1984.0,
-                            FuelConsumption = 12.4,
-                            FuelTypeId = 2,
-                            Horsepower = 265.0,
-                            ImageUrl = "https://www.ilr-carbon.com/1603-large_default/audi-a3-s3-8p-3-dr-rear-spoiler-rs3-style.jpg",
-                            Make = "Audi",
-                            Model = "S3 8P",
-                            Price = 15400.0,
-                            RentPrice = 210.0,
-                            TopSpeed = 250.0,
-                            Torque = 350.0,
-                            TransmissionId = 2,
-                            Weight = 1455.0,
-                            Year = 2006
-                        },
-                        new
-                        {
-                            CarId = 187,
-                            Acceleration = 6.9000000000000004,
-                            CategoryId = 6,
-                            Color = "Black",
-                            DealerId = 14,
-                            Description = "ToAddDescription",
-                            EngineSize = 2996.0,
-                            FuelConsumption = 11.800000000000001,
-                            FuelTypeId = 2,
-                            Horsepower = 272.0,
-                            ImageUrl = "https://www.auto-data.net/images/f37/BMW-6-Series-Convertible-E64-facelift-2007.jpg",
-                            Make = "BMW",
-                            Model = "E64",
-                            Price = 24000.0,
-                            RentPrice = 260.0,
-                            TopSpeed = 250.0,
-                            Torque = 320.0,
-                            TransmissionId = 2,
-                            Weight = 1740.0,
-                            Year = 2007
-                        },
-                        new
-                        {
-                            CarId = 188,
-                            Acceleration = 7.2000000000000002,
-                            CategoryId = 2,
-                            Color = "Black",
-                            DealerId = 14,
-                            Description = "ToAddDescription 330cd",
-                            EngineSize = 2993.0,
-                            FuelConsumption = 9.0999999999999996,
-                            FuelTypeId = 1,
-                            Horsepower = 204.0,
-                            ImageUrl = "https://cloud.leparking.fr/2021/09/07/00/14/bmw-serie-3-coupe-bmw-e46-330cd-coupe-manual-rare-colour-xenons-satnav-heated-seats-bleu_8263957425.jpg",
-                            Make = "BMW",
-                            Model = "E46",
-                            Price = 8100.0,
-                            RentPrice = 150.0,
-                            TopSpeed = 250.0,
-                            Torque = 410.0,
-                            TransmissionId = 2,
-                            Weight = 1540.0,
-                            Year = 2003
-                        },
-                        new
-                        {
-                            CarId = 189,
-                            Acceleration = 10.199999999999999,
-                            CategoryId = 8,
-                            Color = "White",
-                            DealerId = 14,
-                            Description = "ToAddDescription",
-                            EngineSize = 2231.0,
-                            FuelConsumption = 8.3000000000000007,
-                            FuelTypeId = 1,
-                            Horsepower = 136.0,
-                            ImageUrl = "https://d1gymyavdvyjgt.cloudfront.net/drive/images/made/drive/images/remote/https_ssl.caranddriving.com/f2/images/used/big/toycorollaverso%202006_750_500_70.jpg",
-                            Make = "Toyota",
-                            Model = "Corolla Verso II",
-                            Price = 6800.0,
-                            RentPrice = 70.0,
-                            TopSpeed = 250.0,
-                            Torque = 310.0,
-                            TransmissionId = 2,
-                            Weight = 1575.0,
-                            Year = 2004
-                        },
-                        new
-                        {
-                            CarId = 190,
-                            Acceleration = 6.0,
-                            CategoryId = 2,
-                            Color = "Grey",
-                            DealerId = 14,
-                            Description = "ToAddDescription C300",
-                            EngineSize = 1991.0,
-                            FuelConsumption = 8.3000000000000007,
-                            FuelTypeId = 2,
-                            Horsepower = 245.0,
-                            ImageUrl = "https://www.auto-data.net/images/f22/file8603854.jpg",
-                            Make = "Mercedes-Benz",
-                            Model = "C-Class",
-                            Price = 5200.0,
-                            RentPrice = 135.0,
-                            TopSpeed = 250.0,
-                            Torque = 370.0,
-                            TransmissionId = 1,
-                            Weight = 1490.0,
-                            Year = 2016
-                        },
-                        new
-                        {
-                            CarId = 191,
-                            Acceleration = 6.7999999999999998,
-                            CategoryId = 4,
-                            Color = "White",
-                            DealerId = 14,
-                            Description = "ToAddDescription",
-                            EngineSize = 3444.0,
-                            FuelConsumption = 18.5,
-                            FuelTypeId = 2,
-                            Horsepower = 415.0,
-                            ImageUrl = "https://www.auto-data.net/images/f109/Toyota-Land-Cruiser-J300.jpg",
-                            Make = "Toyota",
-                            Model = "Land Cruiser",
-                            Price = 85000.0,
-                            RentPrice = 190.0,
-                            TopSpeed = 250.0,
-                            Torque = 650.0,
-                            TransmissionId = 1,
-                            Weight = 2520.0,
-                            Year = 2003
-                        },
-                        new
-                        {
-                            CarId = 192,
-                            Acceleration = 8.5999999999999996,
-                            CategoryId = 5,
-                            Color = "Blue",
-                            DealerId = 14,
-                            Description = "ToAddDescription",
-                            EngineSize = 1995.0,
-                            FuelConsumption = 8.0999999999999996,
-                            FuelTypeId = 1,
-                            Horsepower = 163.0,
-                            ImageUrl = "https://www.auto-data.net/images/f41/BMW-3-Series-Touring-E91.jpg",
-                            Make = "BMW",
-                            Model = "E91",
-                            Price = 8200.0,
-                            RentPrice = 140.0,
-                            TopSpeed = 223.0,
-                            Torque = 340.0,
-                            TransmissionId = 2,
-                            Weight = 1510.0,
-                            Year = 2005
-                        },
-                        new
-                        {
-                            CarId = 193,
-                            Acceleration = 6.7999999999999998,
-                            CategoryId = 7,
-                            Color = "Yellow",
-                            DealerId = 14,
-                            Description = "ToAddDescription",
-                            EngineSize = 5657.0,
-                            FuelConsumption = 18.100000000000001,
-                            FuelTypeId = 2,
-                            Horsepower = 345.0,
-                            ImageUrl = "https://www.auto-data.net/images/f46/Dodge-Ram-1500-III-DR-DH.jpg",
-                            Make = "Dodge",
-                            Model = "Ram",
-                            Price = 3700.0,
-                            RentPrice = 330.0,
-                            TopSpeed = 250.0,
-                            Torque = 529.0,
-                            TransmissionId = 1,
-                            Weight = 1880.0,
-                            Year = 2005
-                        },
-                        new
-                        {
-                            CarId = 194,
-                            Acceleration = 11.1,
-                            CategoryId = 4,
-                            Color = "Red",
-                            DealerId = 14,
-                            Description = "ToAddDescription",
-                            EngineSize = 2999.0,
-                            FuelConsumption = 6.7000000000000002,
-                            FuelTypeId = 2,
-                            Horsepower = 90.0,
-                            ImageUrl = "https://cdn3.focus.bg/autodata/i/dacia/sandero/sandero-ii-stepway/large/675829b961ab0a61241270896e202b87.jpg",
-                            Make = "Dacia",
-                            Model = "Sandero II Stepway",
-                            Price = 9999.0,
-                            RentPrice = 199.0,
-                            TopSpeed = 170.0,
-                            Torque = 135.0,
-                            TransmissionId = 2,
-                            Weight = 1023.0,
-                            Year = 2013
-                        },
-                        new
-                        {
-                            CarId = 195,
-                            Acceleration = 10.800000000000001,
-                            CategoryId = 3,
-                            Color = "Black",
-                            DealerId = 14,
-                            Description = "ToAddDescription",
-                            EngineSize = 1598.0,
-                            FuelConsumption = 10.199999999999999,
-                            FuelTypeId = 2,
-                            Horsepower = 102.0,
-                            ImageUrl = "https://static-eu.cargurus.com/images/forsale/2023/05/16/15/02/2003_mercedes-benz_a-class-pic-3974413017599453644-1024x768.jpeg",
-                            Make = "Mercedes-Benz",
-                            Model = "A-Class (W168)",
-                            Price = 4400.0,
-                            RentPrice = 110.0,
-                            TopSpeed = 180.0,
-                            Torque = 150.0,
-                            TransmissionId = 2,
-                            Weight = 1135.0,
-                            Year = 1999
-                        },
-                        new
-                        {
-                            CarId = 196,
-                            Acceleration = 8.0999999999999996,
-                            CategoryId = 1,
-                            Color = "Grey",
-                            DealerId = 14,
-                            Description = "ToAddDescription",
-                            EngineSize = 1798.0,
-                            FuelConsumption = 7.4000000000000004,
-                            FuelTypeId = 2,
-                            Horsepower = 170.0,
-                            ImageUrl = "https://www.auto-data.net/images/f93/Audi-A4-B8-8K-facelift-2011.jpg",
-                            Make = "Audi",
-                            Model = "A4",
-                            Price = 12400.0,
-                            RentPrice = 180.0,
-                            TopSpeed = 230.0,
-                            Torque = 320.0,
-                            TransmissionId = 2,
-                            Weight = 1430.0,
-                            Year = 2011
-                        },
-                        new
-                        {
-                            CarId = 197,
-                            Acceleration = 3.6000000000000001,
-                            CategoryId = 1,
-                            Color = "Black",
-                            DealerId = 14,
-                            Description = "ToAddDescription",
-                            EngineSize = 3996.0,
-                            FuelConsumption = 14.4,
-                            FuelTypeId = 2,
-                            Horsepower = 550.0,
-                            ImageUrl = "https://www.auto-data.net/images/f15/file8561600.jpg",
-                            Make = "Porsche",
-                            Model = "Panamera G2",
-                            Price = 175000.0,
-                            RentPrice = 100.0,
-                            TopSpeed = 306.0,
-                            Torque = 770.0,
-                            TransmissionId = 1,
-                            Weight = 1995.0,
-                            Year = 2019
                         });
                 });
 
@@ -696,7 +284,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -761,7 +349,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FuelTypes", (string)null);
+                    b.ToTable("FuelTypes");
 
                     b.HasData(
                         new
@@ -801,7 +389,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Transmissions", (string)null);
+                    b.ToTable("Transmissions");
 
                     b.HasData(
                         new
@@ -837,7 +425,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Dealers", (string)null);
+                    b.ToTable("Dealers");
 
                     b.HasData(
                         new
@@ -890,7 +478,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("PurchaserId");
 
-                    b.ToTable("Parts", (string)null);
+                    b.ToTable("Parts");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.PartCategory", b =>
@@ -908,7 +496,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("PartCategories", (string)null);
+                    b.ToTable("PartCategories");
 
                     b.HasData(
                         new
@@ -971,7 +559,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("Reviews", (string)null);
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.UserComparisonCar", b =>
@@ -986,7 +574,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("UsersComparisonCars", (string)null);
+                    b.ToTable("UsersComparisonCars");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.UserFavoriteCar", b =>
@@ -1001,7 +589,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("UsersFavoriteCars", (string)null);
+                    b.ToTable("UsersFavoriteCars");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.UserFavoritePart", b =>
@@ -1016,7 +604,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("PartId");
 
-                    b.ToTable("UsersFavoriteParts", (string)null);
+                    b.ToTable("UsersFavoriteParts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -177,6 +177,7 @@
 
             try
             {
+                await _carService.RemoveCarFromComparisonForAllUsersAsync(id);
                 await _carService.DeleteCarAsync(id);
 
                 TempData["SuccessMessage"] = "Car has been successfully deleted!";
@@ -554,19 +555,7 @@
         [HttpPost]
         public async Task<IActionResult> AddReview(ReviewViewModel reviewViewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                var error = ModelState.Values.SelectMany(v => v.Errors).ToList()
-                    .FirstOrDefault(e => e.ErrorMessage.ToLower().Contains("content")).ErrorMessage.ToString();
-
-                if (string.IsNullOrEmpty(error))
-                {
-                    return GeneralError();
-                }
-
-                TempData["ErrorMessage"] = error;
-                return RedirectToAction("Details", "Car", new { id = reviewViewModel.CarId });
-            }
+            //triq toq komentar, ama tuka nqma da slagam model is valid shot se chupi zverski za det e forma v stranica ili nz
 
             var hasUserAlreadyReviewedThisCar =
                 await _carService.HasUserAlreadyReviewedThisCarAsync(reviewViewModel.CarId, GetUserId());

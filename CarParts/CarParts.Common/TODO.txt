@@ -5,10 +5,10 @@
 	✔️ automapper implement
 
 
-   -> iztriwam wsi4ki danni ot bazata danni (ADMINA ????)  => nai-dobre prosto manually prez saita s butonchetata da gi iztriq? :D
-      seedwam danni (s kod, za da sedqt winagi tam)
-	   *validaciq za PhoneNumber (kakto na kris ot workshopa)
+   ✔️ iztriwam wsi4ki danni ot bazata danni (bez admina)
+   ✔️ seed cars
+   -> seed parts
 
 
 ------------------
-14:00 - 07.08.2023
+18:00 - 07.08.2023

@@ -72,6 +72,8 @@
 
         public Task RemoveCarFromComparisonAsync(int carId, string userId);
 
+        public Task RemoveCarFromComparisonForAllUsersAsync(int carId);
+
         public Task<bool> IsCarInMyComparisonListAsync(int carId, string userId);
 
         public Task<bool> IsComparisonListFullAsync(string userId);
