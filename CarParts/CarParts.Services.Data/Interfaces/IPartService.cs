@@ -50,5 +50,7 @@
         public Task<double> TotalMoneyToReturnForRefundAsync(int partId);
 
         public Task RefundPartAsync(int partId);
+
+        public Task<ICollection<PartViewModel>> GetHomePagePartsAsync();
     }
 }

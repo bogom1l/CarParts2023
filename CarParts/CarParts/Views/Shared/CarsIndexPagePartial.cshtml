@@ -1,0 +1,66 @@
+﻿@inject ICarService CarService
+@{
+    ICollection<CarViewModel> cars = await CarService.GetHomePageCarsAsync();
+
+    CarViewModel? BMW_E92_M3 = cars.FirstOrDefault(x => x.Make.Contains("BMW"));
+    CarViewModel? MERC_CLS = cars.FirstOrDefault(x => x.Make.Contains("Mercedes-Benz"));
+    CarViewModel? AUDI_S5 = cars.FirstOrDefault(x => x.Make.Contains("Audi"));
+}
+
+<div class="col-md-4">
+    <div class="card mb-4 box-shadow">
+        <span class="border">
+            <img class="card-img-top img-fluid" src="@BMW_E92_M3.ImageUrl" alt="Card image cap">
+        </span>
+        <div class="card-body">
+            <p class="card-text">
+                @BMW_E92_M3.Description
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a href="@Url.Action("Details", "Car", new{id = BMW_E92_M3.CarId})" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                    <a href="@Url.Action("Rent", "Car", new{id = BMW_E92_M3.CarId})" type="button" class="btn btn-sm btn-outline-secondary">Rent</a>
+                </div>
+                <small class="text-muted">Coupe</small>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="card mb-4 box-shadow">
+        <span class="border">
+            <img class="card-img-top img-fluid" src="@MERC_CLS.ImageUrl" alt="Card image cap">
+        </span>
+        <div class="card-body">
+            <p class="card-text">
+                @MERC_CLS.Description
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a href="@Url.Action("Details", "Car", new{id = MERC_CLS.CarId})" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                    <a href="@Url.Action("Rent", "Car", new{id = MERC_CLS.CarId})" type="button" class="btn btn-sm btn-outline-secondary">Rent</a>
+                </div>
+                <small class="text-muted">Coupe</small>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="card mb-4 box-shadow">
+        <span class="border">
+            <img class="card-img-top img-fluid" src="@AUDI_S5.ImageUrl" alt="Card image cap">
+        </span>
+        <div class="card-body">
+            <p class="card-text">
+                @AUDI_S5.Description
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a href="@Url.Action("Details", "Car", new{id = AUDI_S5.CarId})" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                    <a href="@Url.Action("Rent", "Car", new{id = AUDI_S5.CarId})" type="button" class="btn btn-sm btn-outline-secondary">Rent</a>
+                </div>
+                <small class="text-muted">Coupe</small>
+            </div>
+        </div>
+    </div>
+</div>

@@ -654,6 +654,116 @@
             currentCarId += 1;
             //--------------------------------------
 
+            car = new Car
+            {
+                CarId = currentCarId,
+                Make = "BMW",
+                Model = "E92 M3",
+                Year = 2010,
+                Description =
+                    "The BMW E92 M3 is a high-performance sports coupe known for its powerful V8 engine, precise handling, and iconic design. With a perfect blend of luxury and exhilaration, it remains a favorite among car enthusiasts seeking a thrilling driving experience.",
+                Price = 66500,
+                Color = "Black",
+                EngineSize = 4361,
+                FuelTypeId = 2,
+                TransmissionId = 1,
+                CategoryId = 2,
+                Weight = 1530,
+                TopSpeed = 250,
+                Acceleration = 4.4,
+                Horsepower = 450,
+                Torque = 440,
+                FuelConsumption = 18.5,
+                ImageUrl =
+                    "https://collectingcars.imgix.net/007137/19-ww-8.jpg?w=1263&fit=fillmax&crop=edges&auto=format,compress&cs=srgb&q=85",
+                RentPrice = 600
+            };
+            cars.Add(car);
+            currentCarId += 1;
+//--------------------------------------
+
+            car = new Car
+            {
+                CarId = currentCarId,
+                Make = "Mercedes-Benz",
+                Model = "CLS 63 AMG",
+                Year = 2014,
+                Description =
+                    "The Mercedes CLS 63 AMG is a luxury four-door coupe that combines elegance with blistering performance. Powered by a potent V8 engine, it offers a comfortable yet exhilarating driving experience, setting new standards for high-end performance cars.",
+                Price = 67500,
+                Color = "Black",
+                EngineSize = 5461,
+                FuelTypeId = 2,
+                TransmissionId = 1,
+                CategoryId = 2,
+                Weight = 1945,
+                TopSpeed = 250,
+                Acceleration = 3.6,
+                Horsepower = 585,
+                Torque = 800,
+                FuelConsumption = 14.4,
+                ImageUrl = "https://citycarrentals.ca/wp-content/uploads/2018/02/mercedes-benz-cls-63-amg-black-3.jpg",
+                RentPrice = 680
+            };
+            cars.Add(car);
+            currentCarId += 1;
+//--------------------------------------
+
+            car = new Car
+            {
+                CarId = currentCarId,
+                Make = "Audi",
+                Model = "S5",
+                Year = 2012,
+                Description =
+                    "The Audi S5 is a dynamic and sleek sports coupe, featuring a turbocharged V6 engine and Quattro all-wheel drive. Its blend of performance, comfort, and cutting-edge technology make it a compelling choice for driving enthusiasts with a taste for luxury.",
+                Price = 64000,
+                Color = "Black",
+                EngineSize = 2999,
+                FuelTypeId = 2,
+                TransmissionId = 1,
+                CategoryId = 2,
+                Weight = 1745,
+                TopSpeed = 250,
+                Acceleration = 5.1,
+                Horsepower = 333,
+                Torque = 440,
+                FuelConsumption = 10.7,
+                ImageUrl = "https://i.pinimg.com/originals/4f/23/28/4f2328613a9577fef6f77eee198e5f65.jpg",
+                RentPrice = 510
+            };
+            cars.Add(car);
+            currentCarId += 1;
+//--------------------------------------
+
+//--------------------------------------
+
+            car = new Car
+            {
+                CarId = currentCarId,
+                Make = "Test1",
+                Model = "Test1",
+                Year = 2012,
+                Description = "Test1",
+                Price = 1234,
+                Color = "Black",
+                EngineSize = 444,
+                FuelTypeId = 1,
+                TransmissionId = 1,
+                CategoryId = 1,
+                Weight = 1234,
+                TopSpeed = 123,
+                Acceleration = 1.1,
+                Horsepower = 333,
+                Torque = 333,
+                FuelConsumption = 11,
+                ImageUrl =
+                    "https://images.drive.com.au/driveau/image/upload/t_wp-default/v1/cms/uploads/jjslyagf8e3gcny2doyy",
+                RentPrice = 111
+            };
+            cars.Add(car);
+            currentCarId += 1;
+//--------------------------------------
 
             //---------------------------------------------------------------------------------------------------------
             //---------------------------------------------------------------------------------------------------------
@@ -952,6 +1062,50 @@
             parts.Add(part);
             currentPartId += 1;
             //--------------------------------------
+
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "BMW S85",
+                Description =
+                    "The BMW S85 is a high-revving 5.0-liter V10 engine, primarily known for powering the iconic E60 M5 and E63 M6 models. With its distinctive exhaust note and impressive performance, the S85 remains a celebrated powerplant among automotive enthusiasts.",
+                Price = 2400,
+                ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/f/f0/BMW_S85B50_Engine.JPG",
+                CategoryId = 1
+            };
+            parts.Add(part);
+            currentPartId += 1;
+//--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "Audi S-line Brakes",
+                Description =
+                    "Audi S-line brakes offer enhanced stopping power and performance, designed to complement high-performance S-line models. With improved brake pads, calipers, and rotors, they provide precise control and confidence, making them ideal for spirited driving experiences.",
+                Price = 1700,
+                ImageUrl = "https://i.ebayimg.com/images/g/vHMAAOSwc6deV7Zx/s-l1600.jpg",
+                CategoryId = 3
+            };
+            parts.Add(part);
+            currentPartId += 1;
+//--------------------------------------
+
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "Side Mirror C-Class",
+                Description =
+                    "The Mercedes-Benz C-Class side mirror features a sleek design with integrated turn signals and auto-dimming capabilities. Its power-adjustable function and heating element provide added convenience and safety, enhancing the driving experience.",
+                Price = 390,
+                ImageUrl =
+                    "https://www.mercedes-benz.com.cy/passengercars/mercedes-benz-cars/models/c-class/coupe-c205/safety/safety-packages/mirror-package/_jcr_content/par/productinfotextimage/media2/slides/videoimageslide_3f5b/image.MQ6.12.20210515155216.jpeg",
+                CategoryId = 6
+            };
+            parts.Add(part);
+            currentPartId += 1;
+//--------------------------------------
 
 
             //---------------------------------------------------------------------------------------------------------

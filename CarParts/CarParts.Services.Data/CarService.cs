@@ -10,8 +10,6 @@
     using Web.ViewModels.Dealer;
     using Web.ViewModels.Review;
     using static Common.GlobalConstants.Car;
-    using Car = CarParts.Data.Models.Car;
-    using Review = CarParts.Data.Models.Review;
 
     /*
     using Car = CarParts.Data.Models.Car;
@@ -55,11 +53,11 @@
             // })
 
 
-            var cars = await _dbContext.Cars 
+            var cars = await _dbContext.Cars
                 .To<CarViewModel>()
                 .ToListAsync();
 
-            int a = 5;
+            var a = 5;
 
             return cars;
         }
@@ -495,7 +493,10 @@
                     Color = c.Color,
                     ImageUrl = c.ImageUrl,
                     RentPrice = c.RentPrice,
-                    RentalStartDate = c.RentalStartDate ?? DateTime.Now.AddDays(1), //c.RentalStartDate.HasValue ? c.RentalStartDate.Value : DateTime.Now.AddDays(1),
+                    RentalStartDate =
+                        c.RentalStartDate ??
+                        DateTime.Now
+                            .AddDays(1), //c.RentalStartDate.HasValue ? c.RentalStartDate.Value : DateTime.Now.AddDays(1),
                     RentalEndDate = c.RentalEndDate ?? DateTime.Now.AddDays(1),
                     RenterName = c.Renter.FirstName + " " + c.Renter.LastName,
                     Id = c.CarId
@@ -658,6 +659,24 @@
 
             _dbContext.UsersComparisonCars.RemoveRange(userComparisonCars);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<ICollection<CarViewModel>> GetHomePageCarsAsync()
+        {
+            var cars = new List<CarViewModel>();
+
+            var BMW_E92_M3 = await _dbContext.Cars.To<CarViewModel>()
+                .FirstOrDefaultAsync(x => x.Make.Contains("BMW") && x.Model.Contains("E92 M3"));
+            var MERC_CLS = await _dbContext.Cars.To<CarViewModel>()
+                .FirstOrDefaultAsync(x => x.Make.Contains("Mercedes-Benz") && x.Model.Contains("CLS 63 AMG"));
+            var AUDI_S5 = await _dbContext.Cars.To<CarViewModel>()
+                .FirstOrDefaultAsync(x => x.Make.Contains("Audi") && x.Model.Contains("S5"));
+
+            cars.Add(BMW_E92_M3);
+            cars.Add(MERC_CLS);
+            cars.Add(AUDI_S5);
+
+            return cars;
         }
     }
 }

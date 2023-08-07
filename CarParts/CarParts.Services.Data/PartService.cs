@@ -2,6 +2,7 @@
 {
     using CarParts.Data;
     using CarParts.Data.Models;
+    using CarParts.Web.ViewModels.Car;
     using Interfaces;
     using Mapping;
     using Microsoft.EntityFrameworkCore;
@@ -315,5 +316,24 @@
 
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<ICollection<PartViewModel>> GetHomePagePartsAsync()
+        {
+            var parts = new List<PartViewModel>();
+
+            var BMW_S85 = await _dbContext.Parts.To<PartViewModel>()
+                .FirstOrDefaultAsync(x => x.Name.Contains("BMW S85"));
+            var Audi_S_Line_Brakes = await _dbContext.Parts.To<PartViewModel>()
+                .FirstOrDefaultAsync(x => x.Name.Contains("Audi S-line Brakes"));
+            var Side_Mirror_C_Class = await _dbContext.Parts.To<PartViewModel>()
+                .FirstOrDefaultAsync(x => x.Name.Contains("Side Mirror C-Class"));
+
+            parts.Add(BMW_S85);
+            parts.Add(Audi_S_Line_Brakes);
+            parts.Add(Side_Mirror_C_Class);
+
+            return parts;
+        }
+
     }
 }

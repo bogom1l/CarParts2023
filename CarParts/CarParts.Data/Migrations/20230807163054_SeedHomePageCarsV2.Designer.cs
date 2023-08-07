@@ -4,6 +4,7 @@ using CarParts.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarParts.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230807163054_SeedHomePageCarsV2")]
+    partial class SeedHomePageCarsV2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,7 +107,7 @@ namespace CarParts.Data.Migrations
                             Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
                             AccessFailedCount = 0,
                             Balance = 9999999.0,
-                            ConcurrencyStamp = "53573b79-4d23-4a28-95eb-baf4709858c7",
+                            ConcurrencyStamp = "3dbbfa7a-8f6a-4423-b357-6bfbfa8355ca",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "ADMINISTRATOR",
@@ -113,9 +115,9 @@ namespace CarParts.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENCsaka8+kflLO1xlH6hwspN6O43TCC1+UaLHlMdR0aI/e4e4xKIkRc/T2Q8Ugmmqg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBl2VC8g5KuK1LpoLLn1wuZh1jDmuubUZ0f8tTuaI2rP7IxotxIvOQExQefmH184+Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8fe152fe-02fa-4932-953e-eeb47aa6f58d",
+                            SecurityStamp = "858d86d5-775b-4afc-bc4a-806896e7b8e7",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
@@ -1184,36 +1186,6 @@ namespace CarParts.Data.Migrations
                             ImageUrl = "https://www.felgenoutlet.at/felgenbilder/10985_5/seo/bbs_cc-r_schwarz_matt.jpg?1589867390",
                             Name = "BBS CC-R Rims",
                             Price = 2400.0
-                        },
-                        new
-                        {
-                            PartId = 93,
-                            CategoryId = 1,
-                            DealerId = 14,
-                            Description = "The BMW S85 is a high-revving 5.0-liter V10 engine, primarily known for powering the iconic E60 M5 and E63 M6 models. With its distinctive exhaust note and impressive performance, the S85 remains a celebrated powerplant among automotive enthusiasts.",
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/f/f0/BMW_S85B50_Engine.JPG",
-                            Name = "BMW S85",
-                            Price = 2400.0
-                        },
-                        new
-                        {
-                            PartId = 94,
-                            CategoryId = 3,
-                            DealerId = 14,
-                            Description = "Audi S-line brakes offer enhanced stopping power and performance, designed to complement high-performance S-line models. With improved brake pads, calipers, and rotors, they provide precise control and confidence, making them ideal for spirited driving experiences.",
-                            ImageUrl = "https://i.ebayimg.com/images/g/vHMAAOSwc6deV7Zx/s-l1600.jpg",
-                            Name = "Audi S-line Brakes",
-                            Price = 1700.0
-                        },
-                        new
-                        {
-                            PartId = 95,
-                            CategoryId = 6,
-                            DealerId = 14,
-                            Description = "The Mercedes-Benz C-Class side mirror features a sleek design with integrated turn signals and auto-dimming capabilities. Its power-adjustable function and heating element provide added convenience and safety, enhancing the driving experience.",
-                            ImageUrl = "https://www.mercedes-benz.com.cy/passengercars/mercedes-benz-cars/models/c-class/coupe-c205/safety/safety-packages/mirror-package/_jcr_content/par/productinfotextimage/media2/slides/videoimageslide_3f5b/image.MQ6.12.20210515155216.jpeg",
-                            Name = "Side Mirror C-Class",
-                            Price = 390.0
                         });
                 });
 

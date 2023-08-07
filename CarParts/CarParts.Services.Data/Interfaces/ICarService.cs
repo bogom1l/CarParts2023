@@ -79,5 +79,7 @@
         public Task<bool> IsComparisonListFullAsync(string userId);
 
         public Task ClearMyComparisonListAsync(string userId);
+
+        public Task<ICollection<CarViewModel>> GetHomePageCarsAsync();
     }
 }

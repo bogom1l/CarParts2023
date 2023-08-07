@@ -1,0 +1,66 @@
+﻿@inject IPartService PartService
+@{
+    ICollection<PartViewModel> parts = await PartService.GetHomePagePartsAsync();
+
+    PartViewModel? BMW_S85 = parts.FirstOrDefault(x => x.Name.Contains("BMW S85"));
+    PartViewModel? Audi_S_Line_Brakes = parts.FirstOrDefault(x => x.Name.Contains("Audi S-line Brakes"));
+    PartViewModel? Side_Mirror_C_Class = parts.FirstOrDefault(x => x.Name.Contains("Side Mirror C-Class"));
+}
+
+<div class="col-md-4">
+    <div class="card mb-4 box-shadow">
+        <span class="border">
+            <img class="card-img-top img-fluid" src="@BMW_S85.ImageUrl" alt="Card image cap">
+        </span>
+        <div class="card-body">
+            <p class="card-text">
+                @BMW_S85.Description
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a href="@Url.Action("Details", "Part", new{id = BMW_S85.Id})" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                    <a href="@Url.Action("Purchase", "Part", new{id = BMW_S85.Id})" type="button" class="btn btn-sm btn-outline-secondary">Buy</a>
+                </div>
+                <small class="text-muted">Engine</small>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="card mb-4 box-shadow">
+        <span class="border">
+            <img class="card-img-top img-fluid" src="@Audi_S_Line_Brakes.ImageUrl" alt="Card image cap">
+        </span>
+        <div class="card-body">
+            <p class="card-text">
+                @Audi_S_Line_Brakes.Description
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a href="@Url.Action("Details", "Part", new{id = Audi_S_Line_Brakes.Id})" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                    <a href="@Url.Action("Purchase", "Part", new{id = Audi_S_Line_Brakes.Id})" type="button" class="btn btn-sm btn-outline-secondary">Buy</a>
+                </div>
+                <small class="text-muted">Brakes</small>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="card mb-4 box-shadow">
+        <span class="border">
+            <img class="card-img-top img-fluid" src="@Side_Mirror_C_Class.ImageUrl" alt="Card image cap">
+        </span>
+        <div class="card-body">
+            <p class="card-text">
+                @Side_Mirror_C_Class.Description
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a href="@Url.Action("Details", "Part", new{id = Side_Mirror_C_Class.Id})" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                    <a href="@Url.Action("Purchase", "Part", new{id = Side_Mirror_C_Class.Id})" type="button" class="btn btn-sm btn-outline-secondary">Buy</a>
+                </div>
+                <small class="text-muted">Side mirror</small>
+            </div>
+        </div>
+    </div>
+</div>

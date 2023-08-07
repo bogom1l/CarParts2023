@@ -9,6 +9,7 @@
    ✔️ seed cars
    ✔️ seed parts
 
+   -> da align-na na Home/Index kartichkite (kakto Car/All)
 
 ------------------
-18:00 - 07.08.2023
+20:30 - 07.08.2023
