@@ -2,6 +2,7 @@
 {
     using CarParts.Data;
     using Interfaces;
+    using Mapping;
     using Microsoft.EntityFrameworkCore;
     using Web.ViewModels.Rent;
 
@@ -21,16 +22,8 @@
                 .Include(c => c.Dealer.User)
                 .Include(c => c.Renter)
                 .Where(c => c.RenterId != null)
-                .Select(c => new RentInfoViewModel
-                {
-                    CarMake = c.Make,
-                    CarModel = c.Model,
-                    CarImageUrl = c.ImageUrl,
-                    DealerFullName = c.Dealer.User.FirstName + " " + c.Dealer.User.LastName,
-                    DealerEmail = c.Dealer.User.Email,
-                    RenterFullName = c.Renter!.FirstName + " " + c.Renter.LastName,
-                    RenterEmail = c.Renter.Email
-                }).ToListAsync();
+                .To<RentInfoViewModel>()
+                .ToListAsync();
 
             return allRents;
         }
