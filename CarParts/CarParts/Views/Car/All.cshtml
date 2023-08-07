@@ -95,7 +95,7 @@
                                     }
                                 </p>
                             }
-                            else if (User.Identity!.Name == car.Owner)
+                            else if (User.Identity!.Name == car.OwnerEmail)
                             {
                                 <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.CarId" class="btn btn-warning btn-block">
                                     Edit

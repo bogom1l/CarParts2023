@@ -65,7 +65,7 @@ namespace CarParts.Web
             {
                 app.UseMigrationsEndPoint();
                 app.UseDeveloperExceptionPage();
-                //TODO?: app.SeedAdmin();
+                //TODO?: app.SeedAdmin(); (i have it already declared above in this file)
             }
             else
             {

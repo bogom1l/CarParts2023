@@ -3,6 +3,7 @@
     using CarParts.Data;
     using CarParts.Data.Models;
     using Interfaces;
+    using Mapping;
     using Microsoft.EntityFrameworkCore;
     using Web.ViewModels.Dealer;
     using Web.ViewModels.Part;
@@ -19,28 +20,26 @@
 
         public async Task<ICollection<PartViewModel>> GetAllPartsAsync()
         {
-            return await _dbContext.Parts.Select(p => new PartViewModel
-            {
-                Id = p.PartId,
-                Name = p.Name,
-                Description = p.Description,
-                Price = p.Price,
-                CategoryName = p.Category.Name,
-                ImageUrl = p.ImageUrl,
-                Owner = p.Dealer.User.Email,
-                PurchaserEmail = p.Purchaser.Email ?? null
-            }).ToListAsync();
+            //Select(p => new PartViewModel
+            //{
+            //    Id = p.PartId,
+            //    Name = p.Name,
+            //    Description = p.Description,
+            //    Price = p.Price,
+            //    CategoryName = p.Category.Name,
+            //    ImageUrl = p.ImageUrl,
+            //    OwnerEmail = p.Dealer.User.Email,
+            //    PurchaserEmail = p.Purchaser.Email ?? null
+            //})
+
+            var parts = await _dbContext.Parts.To<PartViewModel>().ToListAsync();
+            return parts;
         }
 
         public async Task<AddPartViewModel> GetAddPartViewModelAsync()
         {
-            var categories = await _dbContext
-                .PartCategories
-                .Select(c => new PartCategoryViewModel
-                {
-                    Id = c.CategoryId,
-                    Name = c.Name
-                }).ToListAsync();
+            var categories = await _dbContext.PartCategories
+                .To<PartCategoryViewModel>().ToListAsync();
 
             return new AddPartViewModel
             {
@@ -99,11 +98,7 @@
         public async Task<EditPartViewModel?> GetEditPartViewModelAsync(int partId)
         {
             var categories = await _dbContext.PartCategories
-                .Select(c => new PartCategoryViewModel
-                {
-                    Id = c.CategoryId,
-                    Name = c.Name
-                }).ToListAsync();
+                .To<PartCategoryViewModel>().ToListAsync();
 
             var editCarViewModel = await _dbContext.Parts
                 .Where(p => p.PartId == partId)
@@ -169,16 +164,7 @@
             return await _dbContext
                 .Parts
                 .Where(p => p.Dealer.UserId == userId)
-                .Select(p => new PartViewModel
-                {
-                    Id = p.PartId,
-                    Name = p.Name,
-                    Description = p.Description,
-                    Price = p.Price,
-                    CategoryName = p.Category.Name,
-                    Owner = p.Dealer.User.Email,
-                    ImageUrl = p.ImageUrl
-                }).ToListAsync();
+                .To<PartViewModel>().ToListAsync();
         }
 
         public async Task<ICollection<PartViewModel>> GetMyFavoritePartsAsync(string userId)
@@ -186,16 +172,7 @@
             return await _dbContext
                 .Parts
                 .Where(p => p.UserFavoriteParts.Any(ufp => ufp.UserId == userId))
-                .Select(p => new PartViewModel
-                {
-                    Id = p.PartId,
-                    Name = p.Name,
-                    Description = p.Description,
-                    Price = p.Price,
-                    CategoryName = p.Category.Name,
-                    Owner = p.Dealer.User.Email,
-                    ImageUrl = p.ImageUrl
-                }).ToListAsync();
+                .To<PartViewModel>().ToListAsync();
         }
 
         public async Task<bool> IsPartInMyFavoritesAsync(int partId, string userId)
@@ -270,16 +247,7 @@
             }
 
             var parts = await partsQuery
-                .Select(p => new PartViewModel
-                {
-                    Id = p.PartId,
-                    Name = p.Name,
-                    Description = p.Description,
-                    Price = p.Price,
-                    CategoryName = p.Category.Name,
-                    Owner = p.Dealer.User.Email,
-                    ImageUrl = p.ImageUrl
-                }).ToListAsync();
+                .To<PartViewModel>().ToListAsync();
 
             return parts;
         }
@@ -316,15 +284,7 @@
         {
             var purchasePartViewModel = await _dbContext.Parts
                 .Where(p => p.PartId == partId)
-                .Select(p => new PurchasePartViewModel
-                {
-                    PartId = p.PartId,
-                    Name = p.Name,
-                    Description = p.Description,
-                    Price = p.Price,
-                    ImageUrl = p.ImageUrl,
-                    PurchaserName = p.Purchaser.FirstName + " " + p.Purchaser.LastName
-                }).FirstOrDefaultAsync();
+                .To<PurchasePartViewModel>().FirstOrDefaultAsync();
 
             return purchasePartViewModel;
         }
@@ -333,15 +293,7 @@
         {
             var parts = await _dbContext.Parts
                 .Where(p => p.PurchaserId == userId && p.PurchaserId != null)
-                .Select(p => new PurchasePartViewModel
-                {
-                    PartId = p.PartId,
-                    Name = p.Name,
-                    Description = p.Description,
-                    Price = p.Price,
-                    ImageUrl = p.ImageUrl,
-                    PurchaserName = p.Purchaser.FirstName + " " + p.Purchaser.LastName
-                }).ToListAsync();
+                .To<PurchasePartViewModel>().ToListAsync();
 
             return parts;
         }

@@ -45,7 +45,7 @@
 
         public string RenterEmail { get; set; } = null!;
 
-        public string Owner { get; set; } = null!;
+        public string OwnerEmail { get; set; } = null!;
 
         public DetailsDealerViewModel DetailsDealerViewModel { get; set; } = null!;
 

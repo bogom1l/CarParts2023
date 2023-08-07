@@ -1,6 +1,10 @@
 ﻿namespace CarParts.Web.ViewModels.Car
 {
-    public class CompareCarViewModel
+    using AutoMapper;
+    using Data.Models;
+    using Services.Mapping;
+
+    public class CompareCarViewModel : IMapFrom<Car>, IHaveCustomMappings
     {
         public int CarId { get; set; }
 
@@ -36,10 +40,19 @@
 
         public double FuelConsumption { get; set; }
 
-        public string Owner { get; set; } = null!;
+        public string OwnerEmail { get; set; } = null!;
 
         public string ImageUrl { get; set; } = null!;
 
         public double RentPrice { get; set; }
+
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration
+                .CreateMap<Car, CompareCarViewModel>()
+                .ForMember(d => d.OwnerEmail,
+                    opt => opt.MapFrom(s => s.Dealer.User.Email));
+        }
     }
 }

@@ -154,7 +154,7 @@
 <div class="d-flex justify-content-center">
 
     <p>
-        @if (User.Identity.Name == @Model.Owner || User.IsAdmin())
+        @if (User.Identity.Name == @Model.OwnerEmail || User.IsAdmin())
         {
             <a asp-controller="Car" asp-action="Edit" asp-route-id="@Model.CarId" class="btn btn-warning btn-lg fw-bold">
                 Edit

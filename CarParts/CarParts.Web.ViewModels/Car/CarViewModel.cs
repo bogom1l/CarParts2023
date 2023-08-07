@@ -1,6 +1,10 @@
 ﻿namespace CarParts.Web.ViewModels.Car
 {
-    public class CarViewModel //: IMapFrom<Car>
+    using AutoMapper;
+    using Data.Models;
+    using Services.Mapping;
+
+    public class CarViewModel : IMapFrom<Car>, IHaveCustomMappings
     {
         public int CarId { get; set; }
 
@@ -36,12 +40,32 @@
 
         public double FuelConsumption { get; set; }
 
-        public string Owner { get; set; } = null!;
+        public string OwnerEmail { get; set; } = null!;
 
         public string ImageUrl { get; set; } = null!;
 
         public string RenterEmail { get; set; } = null!;
 
         public double RentPrice { get; set; }
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration
+                .CreateMap<Car, CarViewModel>()
+                .ForMember(d => d.OwnerEmail,
+                    opt => opt.MapFrom(s => s.Dealer.User.Email));
+
+            //.ForMember(d => d.AgentEmail,
+            //    opt => opt.MapFrom(s => s.Agent.User.Email))
+
+            //.ForMember(d => d.AgentFullName, opt => 
+            //    opt.MapFrom(s => s.Agent.User.FirstName + " " + s.Agent.User.LastName))
+
+            //.ForMember(d => d.RenterFullName, opt =>
+            //    opt.MapFrom(s => s.Renter!.FirstName + " " + s.Renter!.LastName))
+
+            //.ForMember(d => d.RenterEmail, opt =>
+            //    opt.MapFrom(s => s.Renter!.Email));
+        }
     }
 }

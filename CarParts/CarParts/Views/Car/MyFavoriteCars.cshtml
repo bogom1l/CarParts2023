@@ -45,15 +45,6 @@
 
                     <div class="card-footer">
 
-                        @if (User.Identity!.Name == car.Owner)
-                        {
-                            <p>
-                                <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.CarId" class="btn btn-warning fw-bold">
-                                    Edit
-                                </a>
-                            </p>
-                        }
-
                         <a asp-controller="Car" asp-action="Details" asp-route-id="@car.CarId" class="btn btn-success fw-bold">
                             View Details
                         </a>

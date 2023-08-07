@@ -46,7 +46,7 @@
             
                     <div class="card-footer">
 
-                        @if (User.Identity!.Name == part.Owner)
+                        @if (User.Identity!.Name == part.OwnerEmail)
                         {
                             <p>
                                 <a asp-controller="Part" asp-action="Edit" asp-route-id="@part.Id" class="btn btn-warning fw-bold">

@@ -3,6 +3,7 @@
     using CarParts.Data;
     using CarParts.Data.Models;
     using Interfaces;
+    using Mapping;
     using Microsoft.EntityFrameworkCore;
     using Web.ViewModels.Car;
     using Web.ViewModels.Car.CarProperties;
@@ -28,31 +29,34 @@
 
         public async Task<ICollection<CarViewModel>> GetAllCarsAsync()
         {
-            var cars = await _dbContext.Cars //.To<CarViewModel>()
-                .Select(c => new CarViewModel
-                {
-                    CarId = c.CarId,
-                    Make = c.Make,
-                    Model = c.Model,
-                    Year = c.Year,
-                    Description = c.Description,
-                    Price = c.Price,
-                    Color = c.Color,
-                    EngineSize = c.EngineSize,
-                    FuelTypeName = c.FuelType.Name,
-                    TransmissionName = c.Transmission.Name,
-                    CategoryName = c.Category.Name,
-                    Weight = c.Weight,
-                    TopSpeed = c.TopSpeed,
-                    Acceleration = c.Acceleration,
-                    Horsepower = c.Horsepower,
-                    Torque = c.Torque,
-                    FuelConsumption = c.FuelConsumption,
-                    Owner = c.Dealer.User.Email,
-                    ImageUrl = c.ImageUrl,
-                    RentPrice = c.RentPrice,
-                    RenterEmail = c.Renter.Email ?? null
-                })
+            //.Select(c => new CarViewModel
+            // {
+            //     CarId = c.CarId,
+            //     Make = c.Make,
+            //     Model = c.Model,
+            //     Year = c.Year,
+            //     Description = c.Description,
+            //     Price = c.Price,
+            //     Color = c.Color,
+            //     EngineSize = c.EngineSize,
+            //     FuelTypeName = c.FuelType.Name,
+            //     TransmissionName = c.Transmission.Name,
+            //     CategoryName = c.Category.Name,
+            //     Weight = c.Weight,
+            //     TopSpeed = c.TopSpeed,
+            //     Acceleration = c.Acceleration,
+            //     Horsepower = c.Horsepower,
+            //     Torque = c.Torque,
+            //     FuelConsumption = c.FuelConsumption,
+            //     OwnerEmail = c.Dealer.User.Email,
+            //     ImageUrl = c.ImageUrl,
+            //     RentPrice = c.RentPrice,
+            //     RenterEmail = c.Renter.Email ?? null
+            // })
+
+
+            var cars = await _dbContext.Cars 
+                .To<CarViewModel>()
                 .ToListAsync();
 
             return cars;
@@ -61,25 +65,13 @@
         public async Task<AddCarViewModel> GetAddCarViewModelAsync()
         {
             var fuelTypes = await _dbContext.FuelTypes
-                .Select(f => new CarFuelTypeViewModel
-                {
-                    Id = f.Id,
-                    Name = f.Name
-                }).ToListAsync();
+                .To<CarFuelTypeViewModel>().ToListAsync();
 
             var transmissions = await _dbContext.Transmissions
-                .Select(t => new CarTransmissionViewModel
-                {
-                    Id = t.Id,
-                    Name = t.Name
-                }).ToListAsync();
+                .To<CarTransmissionViewModel>().ToListAsync();
 
             var categories = await _dbContext.Categories
-                .Select(c => new CarCategoryViewModel
-                {
-                    Id = c.Id,
-                    Name = c.Name
-                }).ToListAsync();
+                .To<CarCategoryViewModel>().ToListAsync();
 
             var addCarViewModel = new AddCarViewModel
             {
@@ -150,7 +142,7 @@
                     ImageUrl = c.ImageUrl,
                     RentPrice = c.RentPrice,
                     RenterEmail = c.Renter.Email ?? null,
-                    Owner = c.Dealer.User.Email,
+                    OwnerEmail = c.Dealer.User.Email,
                     DetailsDealerViewModel = new DetailsDealerViewModel
                     {
                         FullName = c.Dealer.User.FirstName + " " + c.Dealer.User.LastName,
@@ -174,25 +166,13 @@
         public async Task<EditCarViewModel?> GetEditCarViewModelAsync(int carId)
         {
             var fuelTypes = await _dbContext.FuelTypes
-                .Select(f => new CarFuelTypeViewModel
-                {
-                    Id = f.Id,
-                    Name = f.Name
-                }).ToListAsync();
+                .To<CarFuelTypeViewModel>().ToListAsync();
 
             var transmissions = await _dbContext.Transmissions
-                .Select(t => new CarTransmissionViewModel
-                {
-                    Id = t.Id,
-                    Name = t.Name
-                }).ToListAsync();
+                .To<CarTransmissionViewModel>().ToListAsync();
 
             var categories = await _dbContext.Categories
-                .Select(c => new CarCategoryViewModel
-                {
-                    Id = c.Id,
-                    Name = c.Name
-                }).ToListAsync();
+                .To<CarCategoryViewModel>().ToListAsync();
 
             var editCarViewModel = await _dbContext.Cars
                 .Where(c => c.CarId == carId)
@@ -279,31 +259,34 @@
 
         public async Task<ICollection<CarViewModel>> GetMyCarsAsync(string userId)
         {
+            //.Select(c => new CarViewModel
+            //{
+            //    CarId = c.CarId,
+            //    Make = c.Make,
+            //    Model = c.Model,
+            //    Year = c.Year,
+            //    Description = c.Description,
+            //    Price = c.Price,
+            //    Color = c.Color,
+            //    EngineSize = c.EngineSize,
+            //    FuelTypeName = c.FuelType.Name,
+            //    TransmissionName = c.Transmission.Name,
+            //    CategoryName = c.Category.Name,
+            //    Weight = c.Weight,
+            //    TopSpeed = c.TopSpeed,
+            //    Acceleration = c.Acceleration,
+            //    Horsepower = c.Horsepower,
+            //    Torque = c.Torque,
+            //    FuelConsumption = c.FuelConsumption,
+            //    OwnerEmail = c.Dealer.User.Email,
+            //    ImageUrl = c.ImageUrl
+            //})
+
             return await _dbContext
                 .Cars
                 .Where(c => c.Dealer.UserId == userId)
-                .Select(c => new CarViewModel
-                {
-                    CarId = c.CarId,
-                    Make = c.Make,
-                    Model = c.Model,
-                    Year = c.Year,
-                    Description = c.Description,
-                    Price = c.Price,
-                    Color = c.Color,
-                    EngineSize = c.EngineSize,
-                    FuelTypeName = c.FuelType.Name,
-                    TransmissionName = c.Transmission.Name,
-                    CategoryName = c.Category.Name,
-                    Weight = c.Weight,
-                    TopSpeed = c.TopSpeed,
-                    Acceleration = c.Acceleration,
-                    Horsepower = c.Horsepower,
-                    Torque = c.Torque,
-                    FuelConsumption = c.FuelConsumption,
-                    Owner = c.Dealer.User.Email,
-                    ImageUrl = c.ImageUrl
-                }).ToListAsync();
+                .To<CarViewModel>()
+                .ToListAsync();
         }
 
         public async Task<ICollection<CarViewModel>> GetMyFavoriteCarsAsync(string userId)
@@ -311,28 +294,8 @@
             return await _dbContext
                 .Cars
                 .Where(c => c.UserFavoriteCars.Any(ufc => ufc.UserId == userId))
-                .Select(c => new CarViewModel
-                {
-                    CarId = c.CarId,
-                    Make = c.Make,
-                    Model = c.Model,
-                    Year = c.Year,
-                    Description = c.Description,
-                    Price = c.Price,
-                    Color = c.Color,
-                    EngineSize = c.EngineSize,
-                    FuelTypeName = c.FuelType.Name,
-                    TransmissionName = c.Transmission.Name,
-                    CategoryName = c.Category.Name,
-                    Weight = c.Weight,
-                    TopSpeed = c.TopSpeed,
-                    Acceleration = c.Acceleration,
-                    Horsepower = c.Horsepower,
-                    Torque = c.Torque,
-                    FuelConsumption = c.FuelConsumption,
-                    Owner = c.Dealer.User.FirstName,
-                    ImageUrl = c.ImageUrl
-                }).ToListAsync();
+                .To<CarViewModel>()
+                .ToListAsync();
         }
 
         public async Task<bool> IsCarInMyFavoritesAsync(int carId, string userId)
@@ -446,29 +409,7 @@
             }
 
             var cars = await carsQuery
-                .Select(c => new CarViewModel
-                {
-                    CarId = c.CarId,
-                    Make = c.Make,
-                    Model = c.Model,
-                    Year = c.Year,
-                    Description = c.Description,
-                    Price = c.Price,
-                    Color = c.Color,
-                    EngineSize = c.EngineSize,
-                    FuelTypeName = c.FuelType.Name,
-                    TransmissionName = c.Transmission.Name,
-                    CategoryName = c.Category.Name,
-                    Weight = c.Weight,
-                    TopSpeed = c.TopSpeed,
-                    Acceleration = c.Acceleration,
-                    Horsepower = c.Horsepower,
-                    Torque = c.Torque,
-                    FuelConsumption = c.FuelConsumption,
-                    Owner = c.Dealer.User.FirstName,
-                    ImageUrl = c.ImageUrl,
-                    RenterEmail = c.Renter.Email
-                })
+                .To<CarViewModel>()
                 .ToListAsync();
 
             return cars;
@@ -526,7 +467,7 @@
                     Price = c.Price,
                     Color = c.Color,
                     ImageUrl = c.ImageUrl,
-                    RentalStartDate = c.RentalStartDate != null ? c.RentalStartDate.Value : DateTime.Now,
+                    RentalStartDate = c.RentalStartDate ?? DateTime.Now, // != null ? c.RentalStartDate : DateTime.Now,
                     RentalEndDate = c.RentalEndDate ?? DateTime.Now.AddDays(1),
                     RenterName = c.Renter.FirstName + " " + c.Renter.LastName,
                     RentPrice = c.RentPrice,
@@ -552,7 +493,7 @@
                     Color = c.Color,
                     ImageUrl = c.ImageUrl,
                     RentPrice = c.RentPrice,
-                    RentalStartDate = c.RentalStartDate.HasValue ? c.RentalStartDate.Value : DateTime.Now.AddDays(1),
+                    RentalStartDate = c.RentalStartDate ?? DateTime.Now.AddDays(1), //c.RentalStartDate.HasValue ? c.RentalStartDate.Value : DateTime.Now.AddDays(1),
                     RentalEndDate = c.RentalEndDate ?? DateTime.Now.AddDays(1),
                     RenterName = c.Renter.FirstName + " " + c.Renter.LastName,
                     Id = c.CarId
@@ -651,29 +592,8 @@
             return await _dbContext
                 .Cars
                 .Where(c => c.UserComparisonCars.Any(ucc => ucc.UserId == userId))
-                .Select(c => new CompareCarViewModel
-                {
-                    CarId = c.CarId,
-                    Make = c.Make,
-                    Model = c.Model,
-                    Year = c.Year,
-                    Description = c.Description,
-                    Price = c.Price,
-                    Color = c.Color,
-                    EngineSize = c.EngineSize,
-                    FuelTypeName = c.FuelType.Name,
-                    TransmissionName = c.Transmission.Name,
-                    CategoryName = c.Category.Name,
-                    Weight = c.Weight,
-                    TopSpeed = c.TopSpeed,
-                    Acceleration = c.Acceleration,
-                    Horsepower = c.Horsepower,
-                    Torque = c.Torque,
-                    FuelConsumption = c.FuelConsumption,
-                    Owner = c.Dealer.User.Email,
-                    ImageUrl = c.ImageUrl,
-                    RentPrice = c.RentPrice
-                }).ToListAsync();
+                .To<CompareCarViewModel>()
+                .ToListAsync();
         }
 
         public async Task AddCarForComparisonAsync(int carId, string userId)

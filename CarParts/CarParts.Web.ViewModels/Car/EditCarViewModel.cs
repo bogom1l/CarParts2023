@@ -52,19 +52,16 @@
 
         [Required(ErrorMessage = "Please select a fuel type.")]
         public int FuelTypeId { get; set; }
-
         public ICollection<CarFuelTypeViewModel> FuelTypes { get; set; } = new List<CarFuelTypeViewModel>();
 
 
         [Required(ErrorMessage = "Please select a transmission type.")]
         public int TransmissionId { get; set; }
-
         public ICollection<CarTransmissionViewModel> Transmissions { get; set; } = new List<CarTransmissionViewModel>();
 
 
         [Required(ErrorMessage = "Please select a category type.")]
         public int CategoryId { get; set; }
-
         public ICollection<CarCategoryViewModel> Categories { get; set; } = new List<CarCategoryViewModel>();
 
         [Required]

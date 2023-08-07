@@ -58,7 +58,7 @@
                         </a>
 
 
-                        @if (User.Identity!.Name == part.Owner)
+                        @if (User.Identity!.Name == part.OwnerEmail)
                         {
                             <a asp-controller="Part" asp-action="Edit" asp-route-id="@part.Id" class="btn btn-warning btn-block">
                                 Edit
