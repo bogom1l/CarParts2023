@@ -55,6 +55,20 @@
                             <p class="card-text">
                                 <span class="fw-bold">Rent price / day:</span> @car.RentPrice (EUR)
                             </p>
+                            
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="btn-group btn-group-sm">
+                                    <a asp-controller="Car" asp-action="Details" asp-route-id="@car.CarId" type="button" class="btn btn-primary">
+                                        View more details
+                                    </a>
+                                    <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@car.CarId" type="button" class="btn btn-purple">
+                                        Add to favorites
+                                    </a>
+                                  
+                                  
+                                </div>
+
+                            </div>
 
                         </div>
 

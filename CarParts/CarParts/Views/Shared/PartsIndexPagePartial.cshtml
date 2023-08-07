@@ -5,16 +5,20 @@
     PartViewModel? BMW_S85 = parts.FirstOrDefault(x => x.Name.Contains("BMW S85"));
     PartViewModel? Audi_S_Line_Brakes = parts.FirstOrDefault(x => x.Name.Contains("Audi S-line Brakes"));
     PartViewModel? Side_Mirror_C_Class = parts.FirstOrDefault(x => x.Name.Contains("Side Mirror C-Class"));
+
+    string? BMW_S85_ShortDescription = BMW_S85.Description.Substring(0, 225).TrimEnd() + "...";
+    string? Audi_S_Line_Brakes_ShortDescription = Audi_S_Line_Brakes.Description.Substring(0, 225).TrimEnd() + "...";
+    string? Side_Mirror_C_Class_ShortDescription = Side_Mirror_C_Class.Description.Substring(0, 225).TrimEnd() + "...";
 }
 
 <div class="col-md-4">
     <div class="card mb-4 box-shadow">
         <span class="border">
-            <img class="card-img-top img-fluid" src="@BMW_S85.ImageUrl" alt="Card image cap">
+            <img class="card-img-top img-fluid img-thumbnail my-home-car-image-props" src="@BMW_S85.ImageUrl" alt="Part Image">
         </span>
         <div class="card-body">
             <p class="card-text">
-                @BMW_S85.Description
+                @BMW_S85_ShortDescription
             </p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -29,11 +33,11 @@
 <div class="col-md-4">
     <div class="card mb-4 box-shadow">
         <span class="border">
-            <img class="card-img-top img-fluid" src="@Audi_S_Line_Brakes.ImageUrl" alt="Card image cap">
+            <img class="card-img-top img-fluid img-thumbnail my-home-car-image-props" src="@Audi_S_Line_Brakes.ImageUrl" alt="Part Image">
         </span>
         <div class="card-body">
             <p class="card-text">
-                @Audi_S_Line_Brakes.Description
+                @Audi_S_Line_Brakes_ShortDescription
             </p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -48,11 +52,11 @@
 <div class="col-md-4">
     <div class="card mb-4 box-shadow">
         <span class="border">
-            <img class="card-img-top img-fluid" src="@Side_Mirror_C_Class.ImageUrl" alt="Card image cap">
+            <img class="card-img-top img-fluid img-thumbnail my-home-car-image-props" src="@Side_Mirror_C_Class.ImageUrl" alt="Part Image">
         </span>
         <div class="card-body">
             <p class="card-text">
-                @Side_Mirror_C_Class.Description
+                @Side_Mirror_C_Class_ShortDescription
             </p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -64,3 +68,9 @@
         </div>
     </div>
 </div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <partial name="CommonView" />
+}

@@ -5,16 +5,21 @@
     CarViewModel? BMW_E92_M3 = cars.FirstOrDefault(x => x.Make.Contains("BMW"));
     CarViewModel? MERC_CLS = cars.FirstOrDefault(x => x.Make.Contains("Mercedes-Benz"));
     CarViewModel? AUDI_S5 = cars.FirstOrDefault(x => x.Make.Contains("Audi"));
+
+    string? BMW_E92_M3_ShortDescription = BMW_E92_M3.Description.Substring(0, 225).TrimEnd() + "...";
+    string? MERC_CLS_ShortDescription = MERC_CLS.Description.Substring(0, 225).TrimEnd() + "...";
+    string? AUDI_S5_ShortDescription = AUDI_S5.Description.Substring(0, 225).TrimEnd() + "...";
 }
 
 <div class="col-md-4">
     <div class="card mb-4 box-shadow">
         <span class="border">
-            <img class="card-img-top img-fluid" src="@BMW_E92_M3.ImageUrl" alt="Card image cap">
+            <img class="card-img-top img-fluid img-thumbnail my-home-car-image-props" src="@BMW_E92_M3.ImageUrl" alt="Car Image">
+           @* <img class="card-img-top img-fluid" src="@BMW_E92_M3.ImageUrl" alt="Card image cap">*@
         </span>
         <div class="card-body">
             <p class="card-text">
-                @BMW_E92_M3.Description
+                @BMW_E92_M3_ShortDescription
             </p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -29,11 +34,12 @@
 <div class="col-md-4">
     <div class="card mb-4 box-shadow">
         <span class="border">
-            <img class="card-img-top img-fluid" src="@MERC_CLS.ImageUrl" alt="Card image cap">
+            <img class="card-img-top img-fluid img-thumbnail my-home-car-image-props" src="@MERC_CLS.ImageUrl" alt="Car Image">
+            @*  <img class="card-img-top img-fluid" src="@MERC_CLS.ImageUrl" alt="Card image cap">*@
         </span>
         <div class="card-body">
             <p class="card-text">
-                @MERC_CLS.Description
+                @MERC_CLS_ShortDescription
             </p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -48,11 +54,12 @@
 <div class="col-md-4">
     <div class="card mb-4 box-shadow">
         <span class="border">
-            <img class="card-img-top img-fluid" src="@AUDI_S5.ImageUrl" alt="Card image cap">
+            <img class="card-img-top img-fluid img-thumbnail my-home-car-image-props" src="@AUDI_S5.ImageUrl" alt="Car Image">
+            @* <img class="card-img-top img-fluid" src="@AUDI_S5.ImageUrl" alt="Card image cap">*@
         </span>
         <div class="card-body">
             <p class="card-text">
-                @AUDI_S5.Description
+                @AUDI_S5_ShortDescription
             </p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -64,3 +71,8 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+    <partial name="CommonView"/>
+}

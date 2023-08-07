@@ -2,51 +2,65 @@
     ViewData["Title"] = "Contacts";
 }
 
-<div class="container my-custom-background-color">
+<div class="container">
     <div class="container">
         <div class="row">
 
             <div class="col-md-9">
                 <h1 class="text-center">@ViewData["Title"]</h1>
                 <h4 class="text-center fw-light">
-                    CarParts Website - The unique place to buy car parts online in Bulgaria.
+                    CarParts Website - Your local place for car guys.
                 </h4>
                 <br/>
                 @await Html.PartialAsync("FAQPartial")
             </div>
-
+            
             
             <div class="col-md-3">
-                <!-- Map -->
-                <h4>Main Office Location</h4>
+                
+                <div class="row">
+                    <div class="col-md-2">
+                       
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h3 style="margin-left: 50%">&nbsp;</h3>
 
-                <div id="map" style="height:430px; width:430px;"></div>
-                <script type="text/javascript">
+                        <!-- Map -->
 
-                let map;
+                        <div id="map" style="height:430px; width:430px;"></div>
+                        <script type="text/javascript">
 
-                function initMap() {
-                    map = new google.maps.Map(document.getElementById("map"), {
-                          center: { lat: 43.214649269728916, lng: 27.91792350129014 }, zoom: 12, });
+                        let map;
 
-                // Add a marker for the specified coordinates.
-                const markerCoordinates = { lat: 43.214649269728916, lng: 27.91792350129014 };
-                userMarker = new google.maps.Marker({
-                    position: markerCoordinates,
-                    map: map,
-                    title: "Marker Location", // Set your desired title for the marker
-                });
-            }
+                        function initMap() {
+                            map = new google.maps.Map(document.getElementById("map"), {
+                                  center: { lat: 43.214649269728916, lng: 27.91792350129014 }, zoom: 12, });
 
-            </script>
-                <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5iPOeXN1nNaCDQ_poRNw1Pj5SaroOPMc&callback=initMap">
-            </script>
+                        // Add a marker for the specified coordinates.
+                        const markerCoordinates = { lat: 43.214649269728916, lng: 27.91792350129014 };
+                        userMarker = new google.maps.Marker({
+                            position: markerCoordinates,
+                            map: map,
+                            title: "Marker Location", // Set your desired title for the marker
+                        });
+                        }
 
+                        </script>
+                        <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5iPOeXN1nNaCDQ_poRNw1Pj5SaroOPMc&callback=initMap">
+                        </script>
+
+                    </div>
+                    
+                    <div class="col-md-3">
+                    </div>
+                </div>
             </div>
 
         </div>
     </div>
 </div>
+
 
 @section Scripts {
     <partial name="CommonView" />
