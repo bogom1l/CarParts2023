@@ -93,7 +93,7 @@
                 .HasData(
                     new Dealer
                     {
-                        Id = 14, //careful, what is my last (TODO)
+                        Id = 14, //TODO: careful, what is my last 
                         Address = AdminAddress,
                         UserId = adminUser.Id
                     });

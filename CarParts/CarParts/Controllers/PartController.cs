@@ -407,7 +407,6 @@
         {
             try
             {
-                //returning the user the money that he spent for the purchase
                 var moneyToReturn = await _partService.TotalMoneyToReturnForRefundAsync(id);
                 await _userService.AddCustomAmountMoneyAsync(GetUserId(), moneyToReturn);
 

@@ -13,10 +13,7 @@
 
 	✔️ data validation : !ModelState.IsValid
 
-	- clear TODO's in entire project
-	- clear all comments in entire project
-
-	- add todos from txt
+	
 
 ------------------
-22:00 - 06.08.2023
+10:00 - 07.08.2023

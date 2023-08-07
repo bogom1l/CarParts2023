@@ -232,13 +232,11 @@
         {
             var partsQuery = _dbContext.Parts.AsQueryable();
 
-            // Filter by category
             if (!string.IsNullOrEmpty(category))
             {
                 partsQuery = partsQuery.Where(c => c.Category.Name == category);
             }
 
-            // Search by custom text in part's name/description
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 partsQuery = partsQuery.Where(c =>
@@ -247,7 +245,6 @@
                 );
             }
 
-            // Filter by price range
             if (fromPrice != null)
             {
                 partsQuery = partsQuery.Where(c => c.Price >= fromPrice);
@@ -258,7 +255,6 @@
                 partsQuery = partsQuery.Where(c => c.Price <= toPrice);
             }
 
-            // Sort by price ascending/descending
             if (priceSort == "asc")
             {
                 partsQuery = partsQuery.OrderBy(c => c.Price);
@@ -336,7 +332,7 @@
         public async Task<ICollection<PurchasePartViewModel>> GetMyPurchasedPartsAsync(string userId)
         {
             var parts = await _dbContext.Parts
-                .Where(p => p.PurchaserId == userId && p.PurchaserId != null) //TODO: nujna prowerka?
+                .Where(p => p.PurchaserId == userId && p.PurchaserId != null)
                 .Select(p => new PurchasePartViewModel
                 {
                     PartId = p.PartId,

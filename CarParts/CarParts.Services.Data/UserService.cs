@@ -29,7 +29,7 @@
             return user.Balance;
         }
 
-        public async Task AddMoneyAsync(string userId) //adds 100 euro
+        public async Task AddMoneyAsync(string userId)
         {
             var user = await _dbContext
                 .Users

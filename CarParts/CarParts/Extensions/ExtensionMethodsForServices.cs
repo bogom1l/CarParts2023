@@ -9,7 +9,7 @@
         {
             var assembly = Assembly.GetAssembly(serviceType);
 
-            var types = assembly!.GetTypes() // assembly!
+            var types = assembly.GetTypes()
                 .Where(t => !t.IsInterface && !t.IsAbstract)
                 .Where(t => t.Name.ToLower().EndsWith("service"))
                 .ToList();

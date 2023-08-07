@@ -511,7 +511,6 @@
         {
             try
             {
-                //return user the money that he spent for the rental
                 var moneyToReturn = await _carService.TotalMoneyToReturnForEndingRentalAsync(id);
                 await _userService.AddCustomAmountMoneyAsync(GetUserId(), moneyToReturn);
 

@@ -36,13 +36,11 @@
 
         public CarFuelType FuelType { get; set; } = null!;
 
-
         [Required]
         [ForeignKey(nameof(Transmission))]
         public int TransmissionId { get; set; }
 
         public CarTransmission Transmission { get; set; } = null!;
-
 
         [Required]
         [ForeignKey(nameof(Category))]
@@ -64,8 +62,6 @@
 
         [Required] public string ImageUrl { get; set; } = null!;
 
-        public ICollection<UserFavoriteCar> UserFavoriteCars { get; set; } = new List<UserFavoriteCar>();
-
         public double RentPrice { get; set; }
 
         public DateTime? RentalStartDate { get; set; }
@@ -81,9 +77,9 @@
 
         [Required] public Dealer Dealer { get; set; } = null!;
 
+        public ICollection<UserFavoriteCar> UserFavoriteCars { get; set; } = new List<UserFavoriteCar>();
 
         public ICollection<Review> Reviews { get; set; } = new List<Review>();
-
 
         public ICollection<UserComparisonCar> UserComparisonCars { get; set; } = new List<UserComparisonCar>();
     }

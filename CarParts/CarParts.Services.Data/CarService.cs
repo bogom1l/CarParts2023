@@ -11,6 +11,7 @@
     using static Common.GlobalConstants.Car;
     using Car = CarParts.Data.Models.Car;
     using Review = CarParts.Data.Models.Review;
+
     /*
     using Car = CarParts.Data.Models.Car;
     using Review = CarParts.Data.Models.Review;
@@ -376,25 +377,21 @@
         {
             var carsQuery = _dbContext.Cars.AsQueryable();
 
-            // Filter by category
             if (!string.IsNullOrEmpty(category))
             {
                 carsQuery = carsQuery.Where(c => c.Category.Name == category);
             }
 
-            // Filter by transmission
             if (!string.IsNullOrEmpty(transmissionName))
             {
                 carsQuery = carsQuery.Where(c => c.Transmission.Name == transmissionName);
             }
 
-            // Filter by fuel
             if (!string.IsNullOrEmpty(fuelName))
             {
                 carsQuery = carsQuery.Where(c => c.FuelType.Name == fuelName);
             }
 
-            // Search by custom text in car's make/model/description
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 carsQuery = carsQuery.Where(c =>
@@ -404,7 +401,6 @@
                 );
             }
 
-            // Filter by price range
             if (fromPrice != null)
             {
                 carsQuery = carsQuery.Where(c => c.Price >= fromPrice);
@@ -415,7 +411,6 @@
                 carsQuery = carsQuery.Where(c => c.Price <= toPrice);
             }
 
-            // Filter by year range
             if (fromYear != null)
             {
                 carsQuery = carsQuery.Where(c => c.Year >= fromYear);
@@ -426,7 +421,6 @@
                 carsQuery = carsQuery.Where(c => c.Year <= toYear);
             }
 
-            // Filter by horsepower range
             if (fromHp != null)
             {
                 carsQuery = carsQuery.Where(c => c.Horsepower >= fromHp);
@@ -437,7 +431,6 @@
                 carsQuery = carsQuery.Where(c => c.Horsepower <= toHp);
             }
 
-            // Sort by price ascending/descending
             if (priceSort == "asc")
             {
                 carsQuery = carsQuery.OrderBy(c => c.Price);
@@ -622,7 +615,6 @@
 
             if (car.RentalEndDate.HasValue && car.RentalStartDate.HasValue)
             {
-                //var days = ((DateTime)car!.RentalEndDate!.Value - (DateTime)car!.RentalStartDate!.Value).Days;
                 var days = (car!.RentalEndDate!.Value - car!.RentalStartDate!.Value).Days;
                 var totalPrice = days * car.RentPrice;
 

@@ -18,22 +18,13 @@
 
         [Required] public double Price { get; set; }
 
+        public string ImageUrl { get; set; } = null!;
+
         [Required]
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
 
         public PartCategory Category { get; set; } = null!;
-
-        public string ImageUrl { get; set; } = null!;
-
-        public ICollection<UserFavoritePart> UserFavoriteParts { get; set; } = new List<UserFavoritePart>();
-
-        
-        //[Required]
-        //[ForeignKey(nameof(Owner))] 
-        //public string OwnerId { get; set; } = null!;
-        //[Required] public ApplicationUser Owner { get; set; } = null!;
-
 
         public string? PurchaserId { get; set; }
         public ApplicationUser? Purchaser { get; set; } = null!;
@@ -41,6 +32,9 @@
         [Required]
         [ForeignKey(nameof(Dealer))]
         public int DealerId { get; set; }
+
         [Required] public Dealer Dealer { get; set; } = null!;
+
+        public ICollection<UserFavoritePart> UserFavoriteParts { get; set; } = new List<UserFavoritePart>();
     }
 }

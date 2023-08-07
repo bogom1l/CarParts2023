@@ -38,8 +38,8 @@
                 .Where(u => u.Id == id)
                 .Select(u => new EditUserViewModel
                 {
-                    Username = u.UserName, //SHOULD NOT BE ABLE TO CHANGE
-                    Email = u.Email, // SHOULD NOT BE ABLE TO CHANGE
+                    Username = u.UserName,
+                    Email = u.Email,
                     FirstName = u.FirstName,
                     LastName = u.LastName,
                     PhoneNumber = u.PhoneNumber,
@@ -68,7 +68,6 @@
 
             if (currentUser != null)
             {
-                // Update the user's account settings
                 currentUser.FirstName = editUserViewModel.FirstName;
                 currentUser.LastName = editUserViewModel.LastName;
                 currentUser.PhoneNumber = editUserViewModel.PhoneNumber;
@@ -85,7 +84,6 @@
                     return RedirectToAction("Index", "Home");
                 }
 
-                // Handle errors if the update failed
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
