@@ -321,16 +321,16 @@
         {
             var parts = new List<PartViewModel>();
 
-            var BMW_S85 = await _dbContext.Parts.To<PartViewModel>()
+            var firstPart = await _dbContext.Parts.To<PartViewModel>()
                 .FirstOrDefaultAsync(x => x.Name.Contains("BMW S85"));
-            var Audi_S_Line_Brakes = await _dbContext.Parts.To<PartViewModel>()
+            var secondPart = await _dbContext.Parts.To<PartViewModel>()
                 .FirstOrDefaultAsync(x => x.Name.Contains("Audi S-line Brakes"));
-            var Side_Mirror_C_Class = await _dbContext.Parts.To<PartViewModel>()
+            var thirdPart = await _dbContext.Parts.To<PartViewModel>()
                 .FirstOrDefaultAsync(x => x.Name.Contains("Side Mirror C-Class"));
 
-            parts.Add(BMW_S85);
-            parts.Add(Audi_S_Line_Brakes);
-            parts.Add(Side_Mirror_C_Class);
+            parts.Add(firstPart);
+            parts.Add(secondPart);
+            parts.Add(thirdPart);
 
             return parts;
         }

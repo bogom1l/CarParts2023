@@ -2,28 +2,28 @@
 @{
     ICollection<PartViewModel> parts = await PartService.GetHomePagePartsAsync();
 
-    PartViewModel? BMW_S85 = parts.FirstOrDefault(x => x.Name.Contains("BMW S85"));
-    PartViewModel? Audi_S_Line_Brakes = parts.FirstOrDefault(x => x.Name.Contains("Audi S-line Brakes"));
-    PartViewModel? Side_Mirror_C_Class = parts.FirstOrDefault(x => x.Name.Contains("Side Mirror C-Class"));
+    PartViewModel? firstPart = parts.FirstOrDefault(x => x.Name.Contains("BMW S85"));
+    PartViewModel? secondPart = parts.FirstOrDefault(x => x.Name.Contains("Audi S-line Brakes"));
+    PartViewModel? thirdPart = parts.FirstOrDefault(x => x.Name.Contains("Side Mirror C-Class"));
 
-    string? BMW_S85_ShortDescription = BMW_S85.Description.Substring(0, 225).TrimEnd() + "...";
-    string? Audi_S_Line_Brakes_ShortDescription = Audi_S_Line_Brakes.Description.Substring(0, 225).TrimEnd() + "...";
-    string? Side_Mirror_C_Class_ShortDescription = Side_Mirror_C_Class.Description.Substring(0, 225).TrimEnd() + "...";
+    string? firstPart_ShortDescription = firstPart.Description.Substring(0, 225).TrimEnd() + "...";
+    string? secondPart_ShortDescription = secondPart.Description.Substring(0, 225).TrimEnd() + "...";
+    string? thirdPart_ShortDescription = thirdPart.Description.Substring(0, 225).TrimEnd() + "...";
 }
 
 <div class="col-md-4">
     <div class="card mb-4 box-shadow">
         <span class="border">
-            <img class="card-img-top img-fluid img-thumbnail my-home-car-image-props" src="@BMW_S85.ImageUrl" alt="Part Image">
+            <img class="card-img-top img-fluid img-thumbnail my-home-car-image-props" src="@firstPart.ImageUrl" alt="Part Image">
         </span>
         <div class="card-body">
             <p class="card-text">
-                @BMW_S85_ShortDescription
+                @firstPart_ShortDescription
             </p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                    <a href="@Url.Action("Details", "Part", new{id = BMW_S85.Id})" type="button" class="btn btn-sm btn-outline-secondary">View</a>
-                    <a href="@Url.Action("Purchase", "Part", new{id = BMW_S85.Id})" type="button" class="btn btn-sm btn-outline-secondary">Buy</a>
+                    <a href="@Url.Action("Details", "Part", new{id = firstPart.Id})" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                    <a href="@Url.Action("Purchase", "Part", new{id = firstPart.Id})" type="button" class="btn btn-sm btn-outline-secondary">Buy</a>
                 </div>
                 <small class="text-muted">Engine</small>
             </div>
@@ -33,16 +33,16 @@
 <div class="col-md-4">
     <div class="card mb-4 box-shadow">
         <span class="border">
-            <img class="card-img-top img-fluid img-thumbnail my-home-car-image-props" src="@Audi_S_Line_Brakes.ImageUrl" alt="Part Image">
+            <img class="card-img-top img-fluid img-thumbnail my-home-car-image-props" src="@secondPart.ImageUrl" alt="Part Image">
         </span>
         <div class="card-body">
             <p class="card-text">
-                @Audi_S_Line_Brakes_ShortDescription
+                @secondPart_ShortDescription
             </p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                    <a href="@Url.Action("Details", "Part", new{id = Audi_S_Line_Brakes.Id})" type="button" class="btn btn-sm btn-outline-secondary">View</a>
-                    <a href="@Url.Action("Purchase", "Part", new{id = Audi_S_Line_Brakes.Id})" type="button" class="btn btn-sm btn-outline-secondary">Buy</a>
+                    <a href="@Url.Action("Details", "Part", new{id = secondPart.Id})" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                    <a href="@Url.Action("Purchase", "Part", new{id = secondPart.Id})" type="button" class="btn btn-sm btn-outline-secondary">Buy</a>
                 </div>
                 <small class="text-muted">Brakes</small>
             </div>
@@ -52,16 +52,16 @@
 <div class="col-md-4">
     <div class="card mb-4 box-shadow">
         <span class="border">
-            <img class="card-img-top img-fluid img-thumbnail my-home-car-image-props" src="@Side_Mirror_C_Class.ImageUrl" alt="Part Image">
+            <img class="card-img-top img-fluid img-thumbnail my-home-car-image-props" src="@thirdPart.ImageUrl" alt="Part Image">
         </span>
         <div class="card-body">
             <p class="card-text">
-                @Side_Mirror_C_Class_ShortDescription
+                @thirdPart_ShortDescription
             </p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                    <a href="@Url.Action("Details", "Part", new{id = Side_Mirror_C_Class.Id})" type="button" class="btn btn-sm btn-outline-secondary">View</a>
-                    <a href="@Url.Action("Purchase", "Part", new{id = Side_Mirror_C_Class.Id})" type="button" class="btn btn-sm btn-outline-secondary">Buy</a>
+                    <a href="@Url.Action("Details", "Part", new{id = thirdPart.Id})" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                    <a href="@Url.Action("Purchase", "Part", new{id = thirdPart.Id})" type="button" class="btn btn-sm btn-outline-secondary">Buy</a>
                 </div>
                 <small class="text-muted">Side mirror</small>
             </div>

@@ -2,29 +2,29 @@
 @{
     ICollection<CarViewModel> cars = await CarService.GetHomePageCarsAsync();
 
-    CarViewModel? BMW_E92_M3 = cars.FirstOrDefault(x => x.Make.Contains("BMW"));
-    CarViewModel? MERC_CLS = cars.FirstOrDefault(x => x.Make.Contains("Mercedes-Benz"));
-    CarViewModel? AUDI_S5 = cars.FirstOrDefault(x => x.Make.Contains("Audi"));
+    CarViewModel? firstCar = cars.FirstOrDefault(x => x.Make.Contains("BMW"));
+    CarViewModel? secondCar = cars.FirstOrDefault(x => x.Make.Contains("Mercedes-Benz"));
+    CarViewModel? thirdCar = cars.FirstOrDefault(x => x.Make.Contains("Audi"));
 
-    string? BMW_E92_M3_ShortDescription = BMW_E92_M3.Description.Substring(0, 225).TrimEnd() + "...";
-    string? MERC_CLS_ShortDescription = MERC_CLS.Description.Substring(0, 225).TrimEnd() + "...";
-    string? AUDI_S5_ShortDescription = AUDI_S5.Description.Substring(0, 225).TrimEnd() + "...";
+    string? firstCar_ShortDescription = firstCar.Description.Substring(0, 225).TrimEnd() + "...";
+    string? secondCar_ShortDescription = secondCar.Description.Substring(0, 225).TrimEnd() + "...";
+    string? thirdCar_ShortDescription = thirdCar.Description.Substring(0, 225).TrimEnd() + "...";
 }
 
 <div class="col-md-4">
     <div class="card mb-4 box-shadow">
         <span class="border">
-            <img class="card-img-top img-fluid img-thumbnail my-home-car-image-props" src="@BMW_E92_M3.ImageUrl" alt="Car Image">
-           @* <img class="card-img-top img-fluid" src="@BMW_E92_M3.ImageUrl" alt="Card image cap">*@
+            <img class="card-img-top img-fluid img-thumbnail my-home-car-image-props" src="@firstCar.ImageUrl" alt="Car Image">
+           @* <img class="card-img-top img-fluid" src="@firstCar.ImageUrl" alt="Card image cap">*@
         </span>
         <div class="card-body">
             <p class="card-text">
-                @BMW_E92_M3_ShortDescription
+                @firstCar_ShortDescription
             </p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                    <a href="@Url.Action("Details", "Car", new{id = BMW_E92_M3.CarId})" type="button" class="btn btn-sm btn-outline-secondary">View</a>
-                    <a href="@Url.Action("Rent", "Car", new{id = BMW_E92_M3.CarId})" type="button" class="btn btn-sm btn-outline-secondary">Rent</a>
+                    <a href="@Url.Action("Details", "Car", new{id = firstCar.CarId})" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                    <a href="@Url.Action("Rent", "Car", new{id = firstCar.CarId})" type="button" class="btn btn-sm btn-outline-secondary">Rent</a>
                 </div>
                 <small class="text-muted">Coupe</small>
             </div>
@@ -34,17 +34,17 @@
 <div class="col-md-4">
     <div class="card mb-4 box-shadow">
         <span class="border">
-            <img class="card-img-top img-fluid img-thumbnail my-home-car-image-props" src="@MERC_CLS.ImageUrl" alt="Car Image">
-            @*  <img class="card-img-top img-fluid" src="@MERC_CLS.ImageUrl" alt="Card image cap">*@
+            <img class="card-img-top img-fluid img-thumbnail my-home-car-image-props" src="@secondCar.ImageUrl" alt="Car Image">
+            @*  <img class="card-img-top img-fluid" src="@secondCar.ImageUrl" alt="Card image cap">*@
         </span>
         <div class="card-body">
             <p class="card-text">
-                @MERC_CLS_ShortDescription
+                @secondCar_ShortDescription
             </p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                    <a href="@Url.Action("Details", "Car", new{id = MERC_CLS.CarId})" type="button" class="btn btn-sm btn-outline-secondary">View</a>
-                    <a href="@Url.Action("Rent", "Car", new{id = MERC_CLS.CarId})" type="button" class="btn btn-sm btn-outline-secondary">Rent</a>
+                    <a href="@Url.Action("Details", "Car", new{id = secondCar.CarId})" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                    <a href="@Url.Action("Rent", "Car", new{id = secondCar.CarId})" type="button" class="btn btn-sm btn-outline-secondary">Rent</a>
                 </div>
                 <small class="text-muted">Coupe</small>
             </div>
@@ -54,17 +54,17 @@
 <div class="col-md-4">
     <div class="card mb-4 box-shadow">
         <span class="border">
-            <img class="card-img-top img-fluid img-thumbnail my-home-car-image-props" src="@AUDI_S5.ImageUrl" alt="Car Image">
-            @* <img class="card-img-top img-fluid" src="@AUDI_S5.ImageUrl" alt="Card image cap">*@
+            <img class="card-img-top img-fluid img-thumbnail my-home-car-image-props" src="@thirdCar.ImageUrl" alt="Car Image">
+            @* <img class="card-img-top img-fluid" src="@thirdCar.ImageUrl" alt="Card image cap">*@
         </span>
         <div class="card-body">
             <p class="card-text">
-                @AUDI_S5_ShortDescription
+                @thirdCar_ShortDescription
             </p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                    <a href="@Url.Action("Details", "Car", new{id = AUDI_S5.CarId})" type="button" class="btn btn-sm btn-outline-secondary">View</a>
-                    <a href="@Url.Action("Rent", "Car", new{id = AUDI_S5.CarId})" type="button" class="btn btn-sm btn-outline-secondary">Rent</a>
+                    <a href="@Url.Action("Details", "Car", new{id = thirdCar.CarId})" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                    <a href="@Url.Action("Rent", "Car", new{id = thirdCar.CarId})" type="button" class="btn btn-sm btn-outline-secondary">Rent</a>
                 </div>
                 <small class="text-muted">Coupe</small>
             </div>

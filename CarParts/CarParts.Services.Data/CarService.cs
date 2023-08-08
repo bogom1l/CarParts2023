@@ -665,16 +665,16 @@
         {
             var cars = new List<CarViewModel>();
 
-            var BMW_E92_M3 = await _dbContext.Cars.To<CarViewModel>()
+            var firstCar = await _dbContext.Cars.To<CarViewModel>()
                 .FirstOrDefaultAsync(x => x.Make.Contains("BMW") && x.Model.Contains("E92 M3"));
-            var MERC_CLS = await _dbContext.Cars.To<CarViewModel>()
+            var secondCar = await _dbContext.Cars.To<CarViewModel>()
                 .FirstOrDefaultAsync(x => x.Make.Contains("Mercedes-Benz") && x.Model.Contains("CLS 63 AMG"));
-            var AUDI_S5 = await _dbContext.Cars.To<CarViewModel>()
+            var thirdCar = await _dbContext.Cars.To<CarViewModel>()
                 .FirstOrDefaultAsync(x => x.Make.Contains("Audi") && x.Model.Contains("S5"));
 
-            cars.Add(BMW_E92_M3);
-            cars.Add(MERC_CLS);
-            cars.Add(AUDI_S5);
+            cars.Add(firstCar);
+            cars.Add(secondCar);
+            cars.Add(thirdCar);
 
             return cars;
         }

@@ -1,18 +1,18 @@
 ﻿
-	
 	✔️ statistics on the front page  
 
 	✔️ automapper implement
 
+	✔️ iztriwam wsi4ki danni ot bazata danni (bez admina)
+	✔️ seed cars
+	✔️ seed parts
 
-   ✔️ iztriwam wsi4ki danni ot bazata danni (bez admina)
-   ✔️ seed cars
-   ✔️ seed parts
 
-   ✔️ front end
-
-   add cars' descriptions everywhere
-   add parts' descriptions everywhere
+	✔️ front end
+   
+	   seeding: add cars' descriptions
+	   seeding: add parts' descriptions
+	   seeding: add 2 different users that added cars/parts
 
 ------------------
-10:00 - 08.08.2023
+10:30 - 08.08.2023
