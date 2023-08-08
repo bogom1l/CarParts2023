@@ -20,8 +20,8 @@
 	✔️ seed 1 user
 	✔️ seed 1 dealer, set some parts and cars to him
 
-	-> unit testingz
+	-> unit testingzz
 	   
 
 ------------------
-18:15 - 08.08.2023
+18:30 - 08.08.2023

@@ -4,6 +4,7 @@ Used AutoMapper from NikolayIT's ASP.NET-Core-Template
 
 ``````````````````````````````````````````
 ``````````````````````````````````````````
+
 Login with:
 
 
@@ -19,3 +20,4 @@ pass: asdasd
 email: admin@mail.com
 pass: admin123
 
+- - - - - - - - - - - - - - - - - - - 
