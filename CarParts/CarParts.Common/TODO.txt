@@ -9,10 +9,16 @@
 
 
 	✔️ front end
-   
-	   seeding: add cars' descriptions
-	   seeding: add parts' descriptions
-	   seeding: add 2 different users that added cars/parts
+
+	✔️  register manually 2 different users that their id's will be set for 3 cars and 3 parts (home page ones)
+	✔️  seeding: add cars' descriptions
+	✔️  da oprawq id-to na poslednite 3 kolite, taka che sobstvenicite im da sa tiq manually registered users
+
+	✔️  seeding: add parts' descriptions
+	✔️  fix last 3 parts id's, taka che sobstvenicite im da sa tiq manually registered users
+
+	add todos
+	   
 
 ------------------
-10:30 - 08.08.2023
+11:30 - 08.08.2023

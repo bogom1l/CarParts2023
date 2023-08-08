@@ -4,6 +4,7 @@ using CarParts.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarParts.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230808080158_BetterSeedCarParts")]
+    partial class BetterSeedCarParts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,7 +107,7 @@ namespace CarParts.Data.Migrations
                             Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
                             AccessFailedCount = 0,
                             Balance = 9999999.0,
-                            ConcurrencyStamp = "6f30ef96-7aae-4114-8316-7cc3d00fcd17",
+                            ConcurrencyStamp = "813e37c3-7a4d-4672-9a86-a94cc10489f1",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "ADMINISTRATOR",
@@ -113,9 +115,9 @@ namespace CarParts.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKSpPwljxUJ4nRiI8LuSbwc4EbT8z8xCRDRriTq4vTNjhAN7Q4T2IgS8uSOyOPWZ/Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPSp7OWRpF1gbI9jfMl/v7FiKDEUdu4aIBrTnVnnxdaXBFc/vmgI8O0dhMraW/fLyw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c9fdb94a-f782-4e76-85b7-8fbfd0d445e4",
+                            SecurityStamp = "419676d4-bb39-4385-80c1-fd0593a685df",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
@@ -216,7 +218,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("TransmissionId");
 
-                    b.ToTable("Cars", (string)null);
+                    b.ToTable("Cars");
 
                     b.HasData(
                         new
@@ -708,7 +710,7 @@ namespace CarParts.Data.Migrations
                             Acceleration = 3.6000000000000001,
                             CategoryId = 2,
                             Color = "Black",
-                            DealerId = 20,
+                            DealerId = 18,
                             Description = "The Mercedes CLS 63 AMG is a luxury four-door coupe that combines elegance with blistering performance. Powered by a potent V8 engine, it offers a comfortable yet exhilarating driving experience, setting new standards for high-end performance cars.",
                             EngineSize = 5461.0,
                             FuelConsumption = 14.4,
@@ -788,7 +790,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -853,7 +855,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FuelTypes", (string)null);
+                    b.ToTable("FuelTypes");
 
                     b.HasData(
                         new
@@ -893,7 +895,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Transmissions", (string)null);
+                    b.ToTable("Transmissions");
 
                     b.HasData(
                         new
@@ -929,7 +931,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Dealers", (string)null);
+                    b.ToTable("Dealers");
 
                     b.HasData(
                         new
@@ -982,7 +984,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("PurchaserId");
 
-                    b.ToTable("Parts", (string)null);
+                    b.ToTable("Parts");
 
                     b.HasData(
                         new
@@ -1199,7 +1201,7 @@ namespace CarParts.Data.Migrations
                         {
                             PartId = 119,
                             CategoryId = 3,
-                            DealerId = 20,
+                            DealerId = 18,
                             Description = "Audi S-line brakes offer enhanced stopping power and performance, designed to complement high-performance S-line models. With improved brake pads, calipers, and rotors, they provide precise control and confidence, making them ideal for spirited driving experiences.",
                             ImageUrl = "https://i.ebayimg.com/images/g/vHMAAOSwc6deV7Zx/s-l1600.jpg",
                             Name = "Audi S-line Brakes",
@@ -1209,7 +1211,7 @@ namespace CarParts.Data.Migrations
                         {
                             PartId = 120,
                             CategoryId = 6,
-                            DealerId = 20,
+                            DealerId = 18,
                             Description = "The Mercedes-Benz C-Class side mirror features a sleek design with integrated turn signals and auto-dimming capabilities. Its power-adjustable function and heating element provide added convenience and safety, enhancing the driving experience.",
                             ImageUrl = "https://www.mercedes-benz.com.cy/passengercars/mercedes-benz-cars/models/c-class/coupe-c205/safety/safety-packages/mirror-package/_jcr_content/par/productinfotextimage/media2/slides/videoimageslide_3f5b/image.MQ6.12.20210515155216.jpeg",
                             Name = "Side Mirror C-Class",
@@ -1232,7 +1234,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("PartCategories", (string)null);
+                    b.ToTable("PartCategories");
 
                     b.HasData(
                         new
@@ -1295,7 +1297,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("Reviews", (string)null);
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.UserComparisonCar", b =>
@@ -1310,7 +1312,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("UsersComparisonCars", (string)null);
+                    b.ToTable("UsersComparisonCars");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.UserFavoriteCar", b =>
@@ -1325,7 +1327,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("UsersFavoriteCars", (string)null);
+                    b.ToTable("UsersFavoriteCars");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.UserFavoritePart", b =>
@@ -1340,7 +1342,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("PartId");
 
-                    b.ToTable("UsersFavoriteParts", (string)null);
+                    b.ToTable("UsersFavoriteParts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
