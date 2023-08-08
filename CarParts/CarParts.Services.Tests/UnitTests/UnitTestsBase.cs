@@ -12,7 +12,7 @@
         public ApplicationUser RenterUser { get; private set; }
         public Dealer Dealer { get; private set; }
         public Car Car { get; private set; }
-        public Part Part { get; }
+        public Part Part { get; private set; }
 
         [OneTimeSetUp]
         public void SetUpBase()
@@ -37,7 +37,9 @@
                 SecurityStamp = "ca32c787-626e-4234-a4e4-8c94d85a2b1c",
                 TwoFactorEnabled = false,
                 FirstName = "Pesho",
-                LastName = "Petrov"
+                LastName = "Petrov",
+                Id = "DealerUserId",
+                Balance = 123
             };
             _data.Users.Add(DealerUser);
 
@@ -53,7 +55,9 @@
                 SecurityStamp = "f6af46f5-74ba-43dc-927b-ad83497d0387",
                 TwoFactorEnabled = false,
                 FirstName = "Gosho",
-                LastName = "Goshov"
+                LastName = "Goshov",
+                Id = "RenterUserId",
+                Balance = 123
             };
             _data.Users.Add(RenterUser);
 
@@ -99,6 +103,58 @@
                 UserComparisonCars = null
             };
             _data.Cars.Add(Car);
+
+            
+            RenterUser = new ApplicationUser
+            {
+                UserName = "Gosho",
+                NormalizedUserName = "GOSHO",
+                Email = "gosho@renters.com",
+                NormalizedEmail = "GOSHO@RENTERS.COM",
+                EmailConfirmed = true,
+                PasswordHash = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+                ConcurrencyStamp = "8b51706e-f6e8-4dae-b240-54f856fb3004",
+                SecurityStamp = "f6af46f5-74ba-43dc-927b-ad83497d0387",
+                TwoFactorEnabled = false,
+                FirstName = "Renter2",
+                LastName = "Renterov2",
+                Id = "RenterId2",
+                Balance = 123
+            };
+            _data.Users.Add(RenterUser);
+
+
+            Part = new Part
+            {
+                PartId = 1,
+                Name = "a",
+                Description = "b",
+                Price = 123,
+                ImageUrl = "image",
+                CategoryId = 1,
+                PurchaserId = "PurchaserId",
+                DealerId = 1,
+                UserFavoriteParts = new List<UserFavoritePart>(),
+            };
+
+            _data.Parts.Add(Part);
+
+            Part = new Part
+            {
+                PartId = 2,
+                Name = "aa",
+                Description = "bb",
+                Price = 123,
+                ImageUrl = "image",
+                CategoryId = 1,
+                PurchaserId = "Purchaser2Id",
+                DealerId = 1,
+                UserFavoriteParts = new List<UserFavoritePart>(),
+            };
+
+            _data.Parts.Add(Part);
+
+
 
             _data.SaveChanges();
         }

@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarParts.Services.Mapping",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{391EFE6D-0A14-41C8-9C3D-D38F4C310FBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarParts.Services.Tests", "CarParts.Services.Tests\CarParts.Services.Tests.csproj", "{61DA3B50-CF56-48BC-9AE2-9EEED9D08384}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarParts.Services.Tests", "CarParts.Services.Tests\CarParts.Services.Tests.csproj", "{61DA3B50-CF56-48BC-9AE2-9EEED9D08384}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

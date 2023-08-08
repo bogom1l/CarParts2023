@@ -84,7 +84,7 @@
         public async Task GetTotalCars_ReturnsNotCorrectCount()
         {
             // Arrange
-            var incorrectCount = 999; // Set an incorrect count
+            var incorrectCount = 999;
 
             // Act
             var result = await _statisticsService.GetTotalCars();
@@ -97,7 +97,7 @@
         public async Task GetTotalParts_ReturnsNotCorrectCount()
         {
             // Arrange
-            var incorrectCount = 888; // Set an incorrect count
+            var incorrectCount = 888;
 
             // Act
             var result = await _statisticsService.GetTotalParts();
