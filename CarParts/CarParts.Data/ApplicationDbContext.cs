@@ -9,6 +9,12 @@
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+
+            //if (!Database.IsRelational())
+            //{
+            //    Database.EnsureCreated();
+            //}
+
         }
 
         public DbSet<Car> Cars { get; set; } = null!;

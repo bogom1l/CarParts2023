@@ -4,6 +4,7 @@ using CarParts.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarParts.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230808104733_SeedUsersAndDealers")]
+    partial class SeedUsersAndDealers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,7 +107,7 @@ namespace CarParts.Data.Migrations
                             Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
                             AccessFailedCount = 0,
                             Balance = 9999999.0,
-                            ConcurrencyStamp = "b1b85c76-3b33-4c3f-bd75-9f2d10671f07",
+                            ConcurrencyStamp = "7985cb2e-4eb1-4b16-9c83-f75d0edca9c7",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "ADMINISTRATOR",
@@ -113,9 +115,9 @@ namespace CarParts.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAWqWNjBbMeFQeDf+gMv2Dboi1Qa+gxmvfuWQCLhCaSvaf5OFsO3MfwXj5ZOCyC+cA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM32Jd9IyNpj/jKj8DVnwaUjEk3k9Ve/nniEtiv3xeU/FNLS3RXU6t8aVPOGWicKkA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a3120f3a-32c5-4a24-82cb-9fd4177122f0",
+                            SecurityStamp = "68250df7-4a0b-4286-9add-22e1e0593bf2",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         },
@@ -124,7 +126,7 @@ namespace CarParts.Data.Migrations
                             Id = "asd4f072-ecca-43c9-ab26-c060c6f364e4",
                             AccessFailedCount = 0,
                             Balance = 0.0,
-                            ConcurrencyStamp = "65663d8a-4f12-4885-a085-f584d7caaeb2",
+                            ConcurrencyStamp = "1083c1c4-395e-4dd5-ab4d-bd1119e502c1",
                             Email = "johnwick@abv.bg",
                             EmailConfirmed = false,
                             FirstName = "John",
@@ -132,9 +134,9 @@ namespace CarParts.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JOHNWICK@ABV.BG",
                             NormalizedUserName = "JOHNWICK@ABV.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJZ1piaLVOcROEbWWKH3jauLfCvMpynF9c/r2tf/DEZ6vK6QLectj9uqvz52WhGBAg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGtovon5AI5yX42fTl/YXZSoPQdw7mwrdP8Bk20HQiauKMQpimCIEJfEytevCLlYZQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "383c5dc4-36cf-47db-935c-4473165b31c5",
+                            SecurityStamp = "1522a40b-631b-412b-be79-8eda546beaba",
                             TwoFactorEnabled = false,
                             UserName = "johnwick@abv.bg"
                         },
@@ -143,7 +145,7 @@ namespace CarParts.Data.Migrations
                             Id = "qwe4f072-ecca-43c9-ab26-c060c6f364e4",
                             AccessFailedCount = 0,
                             Balance = 0.0,
-                            ConcurrencyStamp = "41354710-12a8-45ff-9a06-762264147a8a",
+                            ConcurrencyStamp = "86cd8cf6-55fe-4b0c-9413-062cb601c50c",
                             Email = "bogi@mail.bg",
                             EmailConfirmed = false,
                             FirstName = "Bogi",
@@ -151,9 +153,9 @@ namespace CarParts.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "BOGI@MAIL.BG",
                             NormalizedUserName = "BOGI@MAIL.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEKF3RyEDx1yg37gMFtiOnb82qqbcYIbSgBksyWd/1/etypATKHHfddvKQVLBgpWAg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAqeNY/lgmYxcv/T4YETivmHAI3oZdrWhW7DqiMikrMWV4sNR5oonfpHG+mUZCTRTQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "13310e84-5655-40a1-8cbb-cc726245c45d",
+                            SecurityStamp = "60c0c660-1ec5-42d3-bde1-e9a7e47de164",
                             TwoFactorEnabled = false,
                             UserName = "bogi@mail.bg"
                         });
@@ -254,7 +256,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("TransmissionId");
 
-                    b.ToTable("Cars", (string)null);
+                    b.ToTable("Cars");
 
                     b.HasData(
                         new
@@ -723,7 +725,7 @@ namespace CarParts.Data.Migrations
                             Acceleration = 4.4000000000000004,
                             CategoryId = 2,
                             Color = "Black",
-                            DealerId = 21,
+                            DealerId = 19,
                             Description = "The BMW E92 M3 is a high-performance sports coupe known for its powerful V8 engine, precise handling, and iconic design. With a perfect blend of luxury and exhilaration, it remains a favorite among car enthusiasts seeking a thrilling driving experience.",
                             EngineSize = 4361.0,
                             FuelConsumption = 18.5,
@@ -746,7 +748,7 @@ namespace CarParts.Data.Migrations
                             Acceleration = 3.6000000000000001,
                             CategoryId = 2,
                             Color = "Black",
-                            DealerId = 21,
+                            DealerId = 20,
                             Description = "The Mercedes CLS 63 AMG is a luxury four-door coupe that combines elegance with blistering performance. Powered by a potent V8 engine, it offers a comfortable yet exhilarating driving experience, setting new standards for high-end performance cars.",
                             EngineSize = 5461.0,
                             FuelConsumption = 14.4,
@@ -769,7 +771,7 @@ namespace CarParts.Data.Migrations
                             Acceleration = 5.0999999999999996,
                             CategoryId = 2,
                             Color = "Black",
-                            DealerId = 21,
+                            DealerId = 19,
                             Description = "The Audi S5 is a dynamic and sleek sports coupe, featuring a turbocharged V6 engine and Quattro all-wheel drive. Its blend of performance, comfort, and cutting-edge technology make it a compelling choice for driving enthusiasts with a taste for luxury.",
                             EngineSize = 2999.0,
                             FuelConsumption = 10.699999999999999,
@@ -826,7 +828,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -891,7 +893,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FuelTypes", (string)null);
+                    b.ToTable("FuelTypes");
 
                     b.HasData(
                         new
@@ -931,7 +933,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Transmissions", (string)null);
+                    b.ToTable("Transmissions");
 
                     b.HasData(
                         new
@@ -967,7 +969,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Dealers", (string)null);
+                    b.ToTable("Dealers");
 
                     b.HasData(
                         new
@@ -1026,7 +1028,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("PurchaserId");
 
-                    b.ToTable("Parts", (string)null);
+                    b.ToTable("Parts");
 
                     b.HasData(
                         new
@@ -1233,7 +1235,7 @@ namespace CarParts.Data.Migrations
                         {
                             PartId = 118,
                             CategoryId = 1,
-                            DealerId = 21,
+                            DealerId = 19,
                             Description = "The BMW S85 is a high-revving 5.0-liter V10 engine, primarily known for powering the iconic E60 M5 and E63 M6 models. With its distinctive exhaust note and impressive performance, the S85 remains a celebrated powerplant among automotive enthusiasts.",
                             ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/f/f0/BMW_S85B50_Engine.JPG",
                             Name = "BMW S85",
@@ -1243,7 +1245,7 @@ namespace CarParts.Data.Migrations
                         {
                             PartId = 119,
                             CategoryId = 3,
-                            DealerId = 21,
+                            DealerId = 20,
                             Description = "Audi S-line brakes offer enhanced stopping power and performance, designed to complement high-performance S-line models. With improved brake pads, calipers, and rotors, they provide precise control and confidence, making them ideal for spirited driving experiences.",
                             ImageUrl = "https://i.ebayimg.com/images/g/vHMAAOSwc6deV7Zx/s-l1600.jpg",
                             Name = "Audi S-line Brakes",
@@ -1253,7 +1255,7 @@ namespace CarParts.Data.Migrations
                         {
                             PartId = 120,
                             CategoryId = 6,
-                            DealerId = 21,
+                            DealerId = 20,
                             Description = "The Mercedes-Benz C-Class side mirror features a sleek design with integrated turn signals and auto-dimming capabilities. Its power-adjustable function and heating element provide added convenience and safety, enhancing the driving experience.",
                             ImageUrl = "https://www.mercedes-benz.com.cy/passengercars/mercedes-benz-cars/models/c-class/coupe-c205/safety/safety-packages/mirror-package/_jcr_content/par/productinfotextimage/media2/slides/videoimageslide_3f5b/image.MQ6.12.20210515155216.jpeg",
                             Name = "Side Mirror C-Class",
@@ -1276,7 +1278,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("PartCategories", (string)null);
+                    b.ToTable("PartCategories");
 
                     b.HasData(
                         new
@@ -1339,7 +1341,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("Reviews", (string)null);
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.UserComparisonCar", b =>
@@ -1354,7 +1356,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("UsersComparisonCars", (string)null);
+                    b.ToTable("UsersComparisonCars");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.UserFavoriteCar", b =>
@@ -1369,7 +1371,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("UsersFavoriteCars", (string)null);
+                    b.ToTable("UsersFavoriteCars");
                 });
 
             modelBuilder.Entity("CarParts.Data.Models.UserFavoritePart", b =>
@@ -1384,7 +1386,7 @@ namespace CarParts.Data.Migrations
 
                     b.HasIndex("PartId");
 
-                    b.ToTable("UsersFavoriteParts", (string)null);
+                    b.ToTable("UsersFavoriteParts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

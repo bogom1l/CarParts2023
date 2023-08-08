@@ -19,6 +19,9 @@
 
             SeedCars(modelBuilder);
             SeedParts(modelBuilder);
+
+            SeedUsers(modelBuilder);
+            SeedDealers(modelBuilder);
         }
 
         private static void SeedCarFuelTypes(ModelBuilder modelBuilder)
@@ -802,20 +805,34 @@
             cars.ForEach(c => c.Reviews = new List<Review>());
             cars.ForEach(c => c.UserComparisonCars = new List<UserComparisonCar>());
 
+
+            foreach (var customCar in cars)
+            {
+                if (customCar.Make.Contains("a"))
+                {
+                    customCar.DealerId = 21;
+                }
+                else
+                {
+                    customCar.DealerId = 14;
+                }
+            }
+
+
             // Custom set for example data when seeding
             // WARNING: DealerIds SHOULD BE VALID
             cars.First(
                     c => c.ImageUrl == "https://i.pinimg.com/originals/4f/23/28/4f2328613a9577fef6f77eee198e5f65.jpg")
-                .DealerId = 19;
+                .DealerId = 21;
             cars.First(c =>
-                    c.ImageUrl ==
-                    "https://citycarrentals.ca/wp-content/uploads/2018/02/mercedes-benz-cls-63-amg-black-3.jpg")
-                .DealerId =
-                20;
+                        c.ImageUrl ==
+                        "https://citycarrentals.ca/wp-content/uploads/2018/02/mercedes-benz-cls-63-amg-black-3.jpg")
+                    .DealerId =
+                21;
             cars.First(c =>
                     c.ImageUrl ==
                     "https://collectingcars.imgix.net/007137/19-ww-8.jpg?w=1263&fit=fillmax&crop=edges&auto=format,compress&cs=srgb&q=85")
-                .DealerId = 19;
+                .DealerId = 21;
             //------------------------------------\\
             modelBuilder.Entity<Car>().HasData(cars);
         }
@@ -1174,17 +1191,76 @@
             parts.ForEach(c => c.Purchaser = null);
             parts.ForEach(c => c.UserFavoriteParts = new List<UserFavoritePart>());
 
+            foreach (var customPart in parts)
+            {
+                if (customPart.Name.Contains("a"))
+                {
+                    customPart.DealerId = 21;
+                }
+                else
+                {
+                    customPart.DealerId = 14;
+                }
+            }
+
             // Custom set for example data when seeding
             // WARNING: DealerIds SHOULD BE VALID
             parts.First(c => c.ImageUrl == "https://upload.wikimedia.org/wikipedia/commons/f/f0/BMW_S85B50_Engine.JPG")
-                .DealerId = 19;
-            parts.First(c => c.ImageUrl == "https://i.ebayimg.com/images/g/vHMAAOSwc6deV7Zx/s-l1600.jpg").DealerId = 20;
+                .DealerId = 21;
+            parts.First(c => c.ImageUrl == "https://i.ebayimg.com/images/g/vHMAAOSwc6deV7Zx/s-l1600.jpg").DealerId = 21;
             parts.First(c =>
                     c.ImageUrl ==
                     "https://www.mercedes-benz.com.cy/passengercars/mercedes-benz-cars/models/c-class/coupe-c205/safety/safety-packages/mirror-package/_jcr_content/par/productinfotextimage/media2/slides/videoimageslide_3f5b/image.MQ6.12.20210515155216.jpeg")
-                .DealerId = 20;
+                .DealerId = 21;
             //------------------------------------\\
             modelBuilder.Entity<Part>().HasData(parts);
+        }
+
+        private static void SeedUsers(ModelBuilder modelBuilder)
+        {
+            var hasher = new PasswordHasher<ApplicationUser>();
+
+            var user1 = new ApplicationUser
+            {
+                Id = "asd4f072-ecca-43c9-ab26-c060c6f364e4", //Guid.NewGuid().ToString(), //maybe set this to custom one?
+                UserName = "johnwick@abv.bg",
+                NormalizedUserName = "johnwick@abv.bg".ToUpper(),
+                Email = "johnwick@abv.bg",
+                NormalizedEmail = "johnwick@abv.bg".ToUpper(),
+                FirstName = "John",
+                LastName = "Wick",
+                Balance = 0
+            };
+            user1.PasswordHash = hasher.HashPassword(user1, "asdasd");
+
+            var user2 = new ApplicationUser
+            {
+                Id = "qwe4f072-ecca-43c9-ab26-c060c6f364e4", //Guid.NewGuid().ToString(), //maybe set this to custom one?
+                UserName = "bogi@mail.bg",
+                NormalizedUserName = "bogi@mail.bg".ToUpper(),
+                Email = "bogi@mail.bg",
+                NormalizedEmail = "bogi@mail.bg".ToUpper(),
+                FirstName = "Bogi",
+                LastName = "Shefa",
+                Balance = 0
+            };
+            user2.PasswordHash = hasher.HashPassword(user2, "asdasd");
+
+
+            modelBuilder.Entity<ApplicationUser>().HasData(user1);
+            modelBuilder.Entity<ApplicationUser>().HasData(user2);
+        }
+
+        private static void SeedDealers(ModelBuilder modelBuilder)
+        {
+            var dealer = new Dealer
+            {
+                Id = 21, // [!]
+                Address = "St. St. Constantine and Elena",
+                UserId = "qwe4f072-ecca-43c9-ab26-c060c6f364e4"
+            };
+
+            modelBuilder.Entity<Dealer>().HasData(dealer);
         }
     }
 }
