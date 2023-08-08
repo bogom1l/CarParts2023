@@ -188,6 +188,12 @@
         [HttpGet]
         public async Task<IActionResult> MyParts()
         {
+            if (!await _userService.IsUserDealerAsync(GetUserId()))
+            {
+                TempData["ErrorMessage"] = "You must become a dealer in order to see your added parts!";
+                return RedirectToAction("BecomeDealer", "Dealer");
+            }
+
             try
             {
                 var parts = await _partService.GetMyPartsAsync(GetUserId());

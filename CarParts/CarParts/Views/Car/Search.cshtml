@@ -163,10 +163,12 @@
                                     <span class="fw-bold">Price:</span> @car.Price (EUR)
                                 </p>
                                 
-                                @*TODO: remove this for users*@
-                                <p class="card-text">
-                                    <span class="fw-bold">Renter:</span> @car.RenterEmail 
-                                </p>
+                                @if (User.IsAdmin())
+                                {
+                                    <p class="card-text">
+                                        <span class="fw-bold">Renter:</span> @car.RenterEmail 
+                                    </p>
+                                }
 
                             </div>
 
@@ -181,6 +183,9 @@
                                 {
                                     <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@car.CarId" class="btn btn-purple btn-block">
                                         Add to favorite cars
+                                    </a>
+                                    <a asp-controller="Car" asp-action="AddCarForCompare" asp-route-id="@car.CarId" class="btn btn-success btn-block">
+                                        Compare
                                     </a>
                                 }
 

@@ -24,7 +24,7 @@
 <ul class="navbar-nav align-self-end ">
     @if (SignInManager.IsSignedIn(User))
     {
-        <li class="nav-item">
+        <li class="nav-item" style="margin-top:3%">
             @if (await UserService.GetUserFullNameByIdAsync(User.GetId()!) is var fullName)
             {
                 @if (await UserService.IsUserDealerAsync(User.GetId()!) && !User.IsInRole(AdminRoleName))

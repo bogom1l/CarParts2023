@@ -55,32 +55,24 @@
                             <p class="card-text">
                                 <span class="fw-bold">Rent price / day:</span> @car.RentPrice (EUR)
                             </p>
-                            
-                            <div class="d-flex justify-content-center align-items-center">
-                                <div class="btn-group btn-group-sm">
-                                    <a asp-controller="Car" asp-action="Details" asp-route-id="@car.CarId" type="button" class="btn btn-primary">
-                                        View more details
-                                    </a>
-                                    <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@car.CarId" type="button" class="btn btn-purple">
-                                        Add to favorites
-                                    </a>
-                                  
-                                  
-                                </div>
 
-                            </div>
 
                         </div>
 
                         <div class="card-footer">
+                            
                             <a asp-controller="Car" asp-action="Details" asp-route-id="@car.CarId" class="btn btn-info btn-block">
                                 View Details
                             </a>
-                            
+
                             @if (User.Identity!.IsAuthenticated)
                             {
                                 <a asp-controller="Car" asp-action="AddToFavoriteCars" asp-route-id="@car.CarId" class="btn btn-purple btn-block">
-                                    Add to favorite cars
+                                    Add to favorites
+                                </a>
+
+                                <a asp-controller="Car" asp-action="AddCarForCompare" asp-route-id="@car.CarId" class="btn btn-success btn-block">
+                                    Compare
                                 </a>
                             }
 
@@ -119,13 +111,6 @@
                                     Delete
                                 </a>
                             }
-                            else if (!await UserService.IsUserDealerAsync(User.GetId()!) && User.Identity.IsAuthenticated)
-                            {
-                                <a asp-controller="Car" asp-action="Rent" asp-route-id="@car.CarId" class="btn btn-lightgreen btn-block">
-                                    Rent
-                                </a>
-                            }
-
 
 
                         </div>

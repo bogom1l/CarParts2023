@@ -112,7 +112,7 @@
                             }
                             else if (!await UserService.IsUserDealerAsync(User.GetId()!) && User.Identity.IsAuthenticated)
                             {
-                                <a asp-controller="Part" asp-action="Purchase" asp-route-id="@part.Id" class="btn btn-lightgreen btn-block">
+                                <a asp-controller="Part" asp-action="Purchase" asp-route-id="@part.Id" class="btn btn-orange btn-block">
                                     Purchase
                                 </a>
                             }

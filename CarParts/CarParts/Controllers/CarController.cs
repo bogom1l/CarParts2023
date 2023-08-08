@@ -192,6 +192,12 @@
         [HttpGet]
         public async Task<IActionResult> MyCars()
         {
+            if (!await _userService.IsUserDealerAsync(GetUserId()))
+            {
+                TempData["ErrorMessage"] = "You must become a dealer in order to see your added cars!";
+                return RedirectToAction("BecomeDealer", "Dealer");
+            }
+
             try
             {
                 var cars = await _carService.GetMyCarsAsync(GetUserId());
@@ -658,7 +664,7 @@
                 await _carService.RemoveCarFromComparisonAsync(id, GetUserId());
 
                 TempData["SuccessMessage"] = "Car has been successfully removed for comparison.";
-                return RedirectToAction("All", "Car");
+                return RedirectToAction("Compare", "Car");
             }
             catch (Exception)
             {

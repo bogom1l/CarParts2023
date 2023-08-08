@@ -9,9 +9,10 @@
    ✔️ seed cars
    ✔️ seed parts
 
-   da obmislq kakwi butoncheta trqbwa da se wijdat na pryw pogled, i ostanalite weche v Details Page-a
-   do dobawq butonche za Compare v vsqka kartichka na kolite w Car/All 
-   -> da gi naprawq po-malki butonchetata (kakto w Home/Index?)
+   ✔️ front end
+
+   add cars' descriptions everywhere
+   add parts' descriptions everywhere
 
 ------------------
-00:30 - 08.08.2023
+10:00 - 08.08.2023
