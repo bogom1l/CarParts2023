@@ -17,11 +17,11 @@
 	✔️  seeding: add parts' descriptions
 	✔️  fix last 3 parts id's, taka che sobstvenicite im da sa tiq manually registered users
 
-	seed 1 user
-	seed 1 dealer, set some parts and cars to him
+	✔️ seed 1 user
+	✔️ seed 1 dealer, set some parts and cars to him
 
-	unit testing
+	-> unit testing
 	   
 
 ------------------
-12:45 - 08.08.2023
+15:45 - 08.08.2023

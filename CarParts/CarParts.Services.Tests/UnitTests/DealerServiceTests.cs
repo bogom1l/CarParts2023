@@ -1,40 +1,27 @@
-namespace CarParts.Services.Tests
+namespace CarParts.Services.Tests.UnitTests
 {
-    using CarParts.Data;
-    using CarParts.Web.ViewModels.Dealer;
     using Data;
     using Data.Interfaces;
     using Microsoft.EntityFrameworkCore;
-    using static DatabaseSeeder;
+    using Web.ViewModels.Dealer;
 
-    public class DealerServiceTests
+    public class DealerServiceTests : UnitTestsBase
     {
-        private DbContextOptions<ApplicationDbContext> dbOptions;
-        private ApplicationDbContext dbContext;
-
-        private IDealerService dealerService;
+        private IDealerService _dealerService;
 
         [OneTimeSetUp]
-        public void OneTimeSetUp()
+        public void SetUp()
         {
-            this.dbOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase("CarPartsInMemory" + Guid.NewGuid().ToString())
-                .Options;
-            this.dbContext = new ApplicationDbContext(this.dbOptions, false);
-
-            this.dbContext.Database.EnsureCreated();
-            SeedDatabase(this.dbContext);
-
-            this.dealerService = new DealerService(this.dbContext);
+            _dealerService = new DealerService(_data);
         }
 
 
         [Test]
         public async Task DealerExistsByUserIdAsync_ShouldReturnTrueWhenExists()
         {
-            string existingDealerUserId = DealerUser.Id.ToString();
+            var existingDealerUserId = DealerUser.Id;
 
-            bool result = await this.dealerService.DealerExistsByUserIdAsync(existingDealerUserId);
+            var result = await _dealerService.DealerExistsByUserIdAsync(existingDealerUserId);
 
             Assert.IsTrue(result);
         }
@@ -42,9 +29,9 @@ namespace CarParts.Services.Tests
         [Test]
         public async Task DealerExistsByUserIdAsync_ShouldReturnFalseWhenNotExists()
         {
-            string existingDealerUserId = RenterUser.Id.ToString();
+            var existingDealerUserId = RenterUser.Id;
 
-            bool result = await this.dealerService.DealerExistsByUserIdAsync(existingDealerUserId);
+            var result = await _dealerService.DealerExistsByUserIdAsync(existingDealerUserId);
 
             Assert.IsFalse(result);
         }
@@ -53,10 +40,10 @@ namespace CarParts.Services.Tests
         public async Task GetDealerIdByUserIdAsync_ReturnsCorrectId()
         {
             // Arrange
-            var userId = DealerUser.Id.ToString();
+            var userId = DealerUser.Id;
 
             // Act
-            var result = await this.dealerService.GetDealerIdByUserIdAsync(userId);
+            var result = await _dealerService.GetDealerIdByUserIdAsync(userId);
 
             // Assert
             Assert.AreEqual(Dealer.Id, result);
@@ -69,7 +56,7 @@ namespace CarParts.Services.Tests
             var userId = "NonExistentUserId";
 
             // Act
-            var result = await this.dealerService.GetDealerIdByUserIdAsync(userId);
+            var result = await _dealerService.GetDealerIdByUserIdAsync(userId);
 
             // Assert
             Assert.AreEqual(0, result);
@@ -82,7 +69,7 @@ namespace CarParts.Services.Tests
             var address = Dealer.Address;
 
             // Act
-            var result = await this.dealerService.DealerExistsByAddressAsync(address);
+            var result = await _dealerService.DealerExistsByAddressAsync(address);
 
             // Assert
             Assert.IsTrue(result);
@@ -95,7 +82,7 @@ namespace CarParts.Services.Tests
             var address = "NonExistentAddress";
 
             // Act
-            var result = await this.dealerService.DealerExistsByAddressAsync(address);
+            var result = await _dealerService.DealerExistsByAddressAsync(address);
 
             // Assert
             Assert.IsFalse(result);
@@ -109,7 +96,7 @@ namespace CarParts.Services.Tests
             var userId = "NonExistentUserId";
 
             // Act
-            var result = await this.dealerService.HasRentsByUserIdAsync(userId);
+            var result = await _dealerService.HasRentsByUserIdAsync(userId);
 
             // Assert
             Assert.IsFalse(result);
@@ -124,15 +111,17 @@ namespace CarParts.Services.Tests
                 Address = "NewAddress"
             };
             var userId = "NewUserId";
+            var dealersBefore = await _data.Dealers.CountAsync();
 
             // Act
-            await this.dealerService.BecomeDealerAsync(dealerFormModel, userId);
+            await _dealerService.BecomeDealerAsync(dealerFormModel, userId);
 
             // Assert
-            var addedDealer = await dbContext.Dealers.FirstOrDefaultAsync(x => x.UserId == userId);
+            var addedDealer = await _data.Dealers.FirstOrDefaultAsync(x => x.UserId == userId);
             Assert.NotNull(addedDealer);
             Assert.AreEqual(dealerFormModel.Address, addedDealer.Address);
             Assert.AreEqual(userId, addedDealer.UserId);
+            Assert.AreEqual(dealersBefore + 1, await _data.Dealers.CountAsync());
         }
     }
 }
