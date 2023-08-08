@@ -19,7 +19,7 @@
 <body>
 
 <header>
-    @await Html.PartialAsync("HeaderPartial");
+    @await Html.PartialAsync("HeaderPartial")
 </header>
 
 
@@ -42,9 +42,9 @@
     @RenderBody();
 </main>
 
-<footer class="border-top footer text-muted">
-    @await Html.PartialAsync("FooterPartial")
-</footer>
+
+@await Html.PartialAsync("CustomFooterPartial")
+
 
 
 <!-- Bootstrap core JavaScript -->

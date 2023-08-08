@@ -52,5 +52,12 @@
         {
             return View();
         }
+
+        [AllowAnonymous]
+        public IActionResult UsefulTips()
+        {
+            return View();
+        }
+
     }
 }

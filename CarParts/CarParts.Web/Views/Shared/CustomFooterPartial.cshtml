@@ -1,0 +1,43 @@
+﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<body class="d-flex flex-column min-vh-100">
+
+<footer class="text-center text-lg-start mt-auto" style="background-color: steelblue;">
+    <div class="container d-flex justify-content-center py-3">
+        
+        <a type="button" class="btn btn-primary btn-lg btn-floating mx-2" href="/Home/UsefulTips" style="background-color: #54456b;">
+            Useful Tips
+        </a>
+
+        <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #54456b;">
+            <i class="fab fa-facebook-f"></i>
+        </button>
+        <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #54456b;">
+            <i class="fab fa-youtube"></i>
+        </button>
+        <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #54456b;">
+            <i class="fab fa-instagram"></i>
+        </button>
+        <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #54456b;">
+            <i class="fab fa-twitter"></i>
+        </button>
+
+
+        <a class="btn btn-primary btn-lg btn-floating mx-2" 
+           href="@Url.Action("Contacts", "Home", new { area = "" })" style="background-color: #54456b;">
+            Contacts
+        </a>
+
+    </div>
+
+    <!-- Copyright -->
+    <div class="text-center text-white p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        &copy; Copyright: CarParts 2023 - <a asp-area="" asp-controller="Home" asp-action="Privacy" style="color: navajowhite" class="fw-bold">Privacy</a> - All Rights Reserved.
+        <a href="#" style="padding-left: 550px; color: antiquewhite">Jump back to the top</a>
+    </div>
+   
+
+
+</footer>
+
+</body>

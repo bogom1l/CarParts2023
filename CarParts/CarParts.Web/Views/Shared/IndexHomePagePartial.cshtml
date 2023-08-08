@@ -95,7 +95,7 @@
 
         <div class="row">
            
-            @if (Model.TotalCars >= 3 && Model.TotalParts >= 3) //Should be always, because i have the cars seeded
+            @if (Model.TotalCars >= 3 && Model.TotalParts >= 3) //Should be always true, because i have the cars seeded
             {
                 @await Html.PartialAsync("CarsIndexPagePartial")
                 @await Html.PartialAsync("PartsIndexPagePartial")
