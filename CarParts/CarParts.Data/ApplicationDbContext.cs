@@ -6,15 +6,16 @@
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        private readonly bool seedDb;
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, bool seedDb = true)
             : base(options)
         {
+            this.seedDb = seedDb;
 
             //if (!Database.IsRelational())
             //{
             //    Database.EnsureCreated();
             //}
-
         }
 
         public DbSet<Car> Cars { get; set; } = null!;
