@@ -30,7 +30,7 @@
                 CategoryId = 1,
                 Categories = new List<PartCategoryViewModel>()
             };
-            var dealerId = 1; 
+            var dealerId = 1;
 
             // Act
             await _partService.AddPartAsync(addPartViewModel, dealerId);
@@ -46,7 +46,7 @@
         public async Task GetPartByIdAsync_ReturnsPart()
         {
             // Arrange
-            var partId = 1; 
+            var partId = 20;
 
             // Act
             var result = await _partService.GetPartByIdAsync(partId);
@@ -61,7 +61,7 @@
         public async Task EditPartAsync_EditsPart()
         {
             // Arrange
-            var partId = 1; 
+            var partId = 22;
             var editPartViewModel = new EditPartViewModel
             {
                 Name = "aa",
@@ -78,20 +78,21 @@
 
             // Assert
             Assert.NotNull(editedPart);
+            Assert.AreEqual(editPartViewModel.Name, editedPart.Name);
         }
 
         [Test]
         public async Task IsUserOwnerOfPartByIdAsync_ReturnsTrueWhenUserIsOwner()
         {
             // Arrange
-            var partId = 2; 
-            var userId = "PurchaserId"; 
+            var partId = 22;
+            var userId = "DealerUserId";
 
             // Act
             var result = await _partService.IsUserOwnerOfPartByIdAsync(partId, userId);
 
             // Assert
-            Assert.IsFalse(result);
+            Assert.IsTrue(result);
         }
 
 
@@ -99,8 +100,9 @@
         public async Task AddPartToMyFavoritePartsAsync_AddsPartToMyFavoriteParts()
         {
             // Arrange
-            var partId = 2; 
-            var userId = "Purchaser2Id"; 
+            var partId = 2;
+            var userId = "Purchaser2Id";
+            var partsCountBefore = await _data.UsersFavoriteParts.CountAsync();
 
             // Act
             await _partService.AddPartToMyFavoritePartsAsync(partId, userId);
@@ -109,7 +111,52 @@
 
             // Assert
             Assert.NotNull(addedPart);
-
+            Assert.AreEqual(partsCountBefore + 1, await _data.UsersFavoriteParts.CountAsync());
         }
+
+
+        [Test]
+        public async Task DeletePartAsync_DeletesPart()
+        {
+            // Arrange
+            var partId = 21;
+            var partsCountBefore = await _data.Parts.CountAsync();
+
+            // Act
+            await _partService.DeletePartAsync(partId);
+
+            // Assert
+            Assert.AreEqual(partsCountBefore - 1, await _data.Parts.CountAsync());
+        }
+
+        [Test]
+        public async Task ExistsByIdAsync_ReturnsTrue()
+        {
+            // Arrange
+            var partId = 22;
+
+            // Act
+            var result = await _partService.ExistsByIdAsync(partId);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public async Task IsUserOwnerOfPartByIdAsync_ReturnTrue()
+        {
+            // Arrange
+            var partId = 22;
+            var userId = "DealerUserId";
+
+            // Act
+            var result = await _partService.IsUserOwnerOfPartByIdAsync(partId, userId);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+
+
     }
 }

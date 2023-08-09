@@ -85,7 +85,7 @@
             var newBalance = await _userService.GetUserBalanceByIdAsync(userId);
 
             // Assert
-            Assert.AreEqual(initialBalance - amountToRemove, newBalance);
+            Assert.That(newBalance, Is.EqualTo(initialBalance - amountToRemove));
         }
 
         [Test]
@@ -99,7 +99,7 @@
             var newBalance = await _userService.GetUserBalanceByIdAsync(userId);
 
             // Assert
-            Assert.AreEqual(0, newBalance);
+            Assert.That(newBalance, Is.EqualTo(0));
         }
 
         [Test]

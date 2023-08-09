@@ -20,10 +20,14 @@
 	✔️ seed 1 user
 	✔️ seed 1 dealer, set some parts and cars to him
 
-	-> unit testingzz for CarService, PartService
+	✔️ some unit tests
 	   
-    - SignalR
-    - Host
+	- Use SignalR communication somewhere in your application [easy? workshop presentation & lab]
+
+	- (2h)code cleanup && error list sinite syveti da gi izchistq kydeto moga
+
+	- Host the application in a cloud environment Azure [workshop]
+
 
 ------------------
-09:00 - 08.08.2023
+12:00 - 08.08.2023

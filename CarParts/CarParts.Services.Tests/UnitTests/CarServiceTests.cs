@@ -16,7 +16,7 @@
         }
 
         [Test]
-        public async Task AddPartAsync_AddsNewPart()
+        public async Task AddCarAsync_AddsNewCar()
         {
             // Arrange
             var addCarViewModel = new AddCarViewModel
@@ -75,7 +75,7 @@
         public async Task GetCarByIdAsync_ReturnsCar()
         {
             // Arrange
-            var carId = 1;
+            var carId = 22;
 
             // Act
             var result = await _carService.GetCarByIdAsync(carId);
