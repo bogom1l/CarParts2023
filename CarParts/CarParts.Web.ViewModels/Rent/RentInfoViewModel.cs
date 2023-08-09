@@ -1,13 +1,13 @@
 ﻿namespace CarParts.Web.ViewModels.Rent
 {
     using AutoMapper;
-    using Common;
     using Data.Models;
     using Services.Mapping;
 
     public class RentInfoViewModel : IMapFrom<Car>, IHaveCustomMappings
     {
         public string CarMake { get; set; } = null!;
+
         public string CarModel { get; set; } = null!;
 
         public string CarImageUrl { get; set; } = null!;
@@ -19,6 +19,7 @@
         public string RenterFullName { get; set; } = null!;
 
         public string RenterEmail { get; set; } = null!;
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration
@@ -29,7 +30,7 @@
                     opt.MapFrom(s => s.Model))
                 .ForMember(d => d.CarImageUrl, opt =>
                     opt.MapFrom(s => s.ImageUrl))
-                .ForMember(d => d.DealerFullName, opt => 
+                .ForMember(d => d.DealerFullName, opt =>
                     opt.MapFrom(s => s.Dealer.User.FirstName + " " + s.Dealer.User.LastName))
                 .ForMember(d => d.DealerEmail,
                     opt => opt.MapFrom(s => s.Dealer.User.Email))

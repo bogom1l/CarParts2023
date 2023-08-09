@@ -8,7 +8,7 @@
         public string Username { get; set; } = null!;
 
         public string Email { get; set; } = null!;
-        
+
         [StringLength(DealerAddressMaxLength,
             MinimumLength = DealerAddressMinLength,
             ErrorMessage = "Please enter a valid address.")]

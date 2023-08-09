@@ -10,7 +10,7 @@
     {
         [Required] public int Id { get; set; }
 
-        [Required] 
+        [Required]
         [StringLength(PartNameMaxLength,
             MinimumLength = PartNameMinLength)]
         public string Name { get; set; } = null!;

@@ -3,8 +3,6 @@
     using Extensions;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.ModelBinding;
-    using Microsoft.EntityFrameworkCore;
     using Services.Data.Interfaces;
     using ViewModels.Car;
     using ViewModels.Review;
@@ -307,24 +305,17 @@
             var cars = await _carService.SearchCarsAsync(searchTerm, category, priceSort,
                 transmissionName, fuelName, fromYear, toYear, fromHp, toHp, fromPrice, toPrice, showOnlyNonRented);
 
-            // to keep the search params in the search boxes:
             ViewBag.SearchTerm = searchTerm;
-
             ViewBag.Category = category;
             ViewBag.Transmission = transmissionName;
             ViewBag.Fuel = fuelName;
-
             ViewBag.FromYear = fromYear;
             ViewBag.ToYear = toYear;
-
             ViewBag.FromHp = fromHp;
             ViewBag.ToHp = toHp;
-
             ViewBag.FromPrice = fromPrice;
             ViewBag.ToPrice = toPrice;
-
             ViewBag.PriceSort = priceSort;
-
             ViewBag.ShowOnlyNonRented = showOnlyNonRented;
 
             return View(cars);
@@ -561,8 +552,6 @@
         [HttpPost]
         public async Task<IActionResult> AddReview(ReviewViewModel reviewViewModel)
         {
-            //triq toq komentar, ama tuka nqma da slagam model is valid shot se chupi zverski za det e forma v stranica ili nz
-
             var hasUserAlreadyReviewedThisCar =
                 await _carService.HasUserAlreadyReviewedThisCarAsync(reviewViewModel.CarId, GetUserId());
             if (hasUserAlreadyReviewedThisCar)
@@ -593,7 +582,8 @@
             switch (cars.Count)
             {
                 case 0:
-                    TempData["ErrorMessage"] = $"Your comparison list is empty. Please add at least {ComparisonListMinCount} cars to compare.";
+                    TempData["ErrorMessage"] =
+                        $"Your comparison list is empty. Please add at least {ComparisonListMinCount} cars to compare.";
                     return RedirectToAction("All", "Car");
                 case 1:
                     TempData["ErrorMessage"] = "Please add at least 1 more car to compare.";

@@ -536,7 +536,6 @@
             return await _dbContext.Reviews.AnyAsync(r => r.CarId == carId && r.UserId == userId);
         }
 
-
         public async Task<ICollection<CompareCarViewModel>> GetAllCarCompareViewModelsAsync(string userId)
         {
             return await _dbContext

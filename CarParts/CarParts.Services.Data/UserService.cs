@@ -14,7 +14,6 @@
             _dbContext = dbContext;
         }
 
-
         public async Task<double> GetUserBalanceByIdAsync(string userId)
         {
             var user = await _dbContext
@@ -35,14 +34,16 @@
                 .Users
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
-            if (user == null)
+            if (user != null)
+            {
+                user.Balance += 100;
+
+                await _dbContext.SaveChangesAsync();
+            }
+            else
             {
                 throw new ArgumentException("User with this id does not exist!");
             }
-
-            user.Balance += 100;
-
-            await _dbContext.SaveChangesAsync();
         }
 
         public async Task AddCustomAmountMoneyAsync(string userId, double amount)
@@ -51,14 +52,16 @@
                 .Users
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
-            if (user == null)
+            if (user != null)
+            {
+                user.Balance += amount;
+
+                await _dbContext.SaveChangesAsync();
+            }
+            else
             {
                 throw new ArgumentException("User with this id does not exist!");
             }
-
-            user.Balance += amount;
-
-            await _dbContext.SaveChangesAsync();
         }
 
 
@@ -68,14 +71,16 @@
                 .Users
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
-            if (user == null)
+            if (user != null)
+            {
+                user.Balance -= moneyToRemove;
+
+                await _dbContext.SaveChangesAsync();
+            }
+            else
             {
                 throw new ArgumentException("User with this id does not exist!");
             }
-
-            user.Balance -= moneyToRemove;
-
-            await _dbContext.SaveChangesAsync();
         }
 
         public async Task ResetMoneyAsync(string userId)
@@ -84,24 +89,26 @@
                 .Users
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
-            if (user == null)
+            if (user != null)
+            {
+                user.Balance = 0;
+
+                await _dbContext.SaveChangesAsync();
+            }
+            else
             {
                 throw new ArgumentException("User with this id does not exist!");
             }
-
-            user.Balance = 0;
-
-            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<string> GetUserFullNameByIdAsync(string userId)
         {
-            var user = await _dbContext.Users.FindAsync(userId);
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
-            if (string.IsNullOrEmpty(user.FirstName)
+            if (string.IsNullOrEmpty(user!.FirstName)
                 || string.IsNullOrEmpty(user.LastName))
             {
-                return null;
+                return "No FullName Available";
             }
 
             return user.FirstName + " " + user.LastName;

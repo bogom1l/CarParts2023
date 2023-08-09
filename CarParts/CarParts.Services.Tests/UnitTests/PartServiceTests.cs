@@ -6,7 +6,7 @@
     using Web.ViewModels.Part;
     using Web.ViewModels.Part.PartProperties;
 
-    public class _partServiceTests : UnitTestsBase
+    public class PartServiceTests : UnitTestsBase
     {
         private IPartService _partService;
 
@@ -155,8 +155,5 @@
             // Assert
             Assert.IsTrue(result);
         }
-
-
-
     }
 }

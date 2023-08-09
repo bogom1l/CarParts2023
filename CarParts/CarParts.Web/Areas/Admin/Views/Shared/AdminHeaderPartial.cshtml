@@ -3,7 +3,6 @@
 @{
     string id = this.User.GetId();
     double balance = await UserService.GetUserBalanceByIdAsync(id);
-    var userBalance = await UserService.GetUserBalanceByIdAsync(User.GetId());
 }
 
 <style>

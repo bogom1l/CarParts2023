@@ -4,13 +4,12 @@
     using Microsoft.Extensions.Caching.Memory;
     using Services.Data.Interfaces;
     using ViewModels.User;
-
     using static Common.GlobalConstants.AdminUser;
 
     public class UserController : AdminController
     {
-        private readonly IUserService _userService;
         private readonly IMemoryCache _memoryCache;
+        private readonly IUserService _userService;
 
         public UserController(IUserService userService, IMemoryCache memoryCache)
         {
@@ -20,8 +19,6 @@
 
         public async Task<IActionResult> All()
         {
-            //var users = await _userService.GetAllUsersAsync();
-
             var users = _memoryCache.Get<ICollection<UserViewModel>>(UsersCacheKey);
 
             if (users == null)
@@ -29,8 +26,7 @@
                 users = await _userService.GetAllUsersAsync();
 
                 var cacheOptions = new MemoryCacheEntryOptions()
-                    .SetAbsoluteExpiration(TimeSpan.
-                        FromMinutes(UsersCacheExpirationTimeInMinutes));
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(UsersCacheExpirationTimeInMinutes));
 
                 _memoryCache.Set(UsersCacheKey, users, cacheOptions);
             }

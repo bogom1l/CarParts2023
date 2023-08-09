@@ -50,8 +50,6 @@
                 .Where(c => c.RenterId == userId)
                 .ToListAsync();
 
-            var a = 2;
-
             return cars.Any();
         }
 

@@ -122,7 +122,6 @@
                 return RedirectToAction("All", "Part");
             }
 
-
             try
             {
                 var editPartViewModel = await _partService.GetEditPartViewModelAsync(id);
@@ -301,16 +300,11 @@
             var parts = await _partService.SearchPartsAsync(nameOrDesc, category, priceSort, fromPrice, toPrice,
                 showOnlyAvailable);
 
-            // to keep the search params in the search boxes:
             ViewBag.NameOrDesc = nameOrDesc;
-
             ViewBag.Category = category;
-
             ViewBag.FromPrice = fromPrice;
             ViewBag.ToPrice = toPrice;
-
             ViewBag.PriceSort = priceSort;
-
             ViewBag.ShowOnlyAvailable = showOnlyAvailable;
 
             return View(parts);

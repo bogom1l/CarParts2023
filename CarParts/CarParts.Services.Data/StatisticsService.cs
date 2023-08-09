@@ -13,7 +13,6 @@
             _dbContext = dbContext;
         }
 
-
         public async Task<int> GetTotalCars()
         {
             return await _dbContext.Cars.CountAsync();

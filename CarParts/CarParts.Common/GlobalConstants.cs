@@ -1,4 +1,6 @@
-﻿namespace CarParts.Common
+﻿// ReSharper disable All
+
+namespace CarParts.Common
 {
     public static class GlobalConstants
     {

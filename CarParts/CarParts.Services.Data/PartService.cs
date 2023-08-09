@@ -2,7 +2,6 @@
 {
     using CarParts.Data;
     using CarParts.Data.Models;
-    using CarParts.Web.ViewModels.Car;
     using Interfaces;
     using Mapping;
     using Microsoft.EntityFrameworkCore;
@@ -21,20 +20,7 @@
 
         public async Task<ICollection<PartViewModel>> GetAllPartsAsync()
         {
-            //Select(p => new PartViewModel
-            //{
-            //    Id = p.PartId,
-            //    Name = p.Name,
-            //    Description = p.Description,
-            //    Price = p.Price,
-            //    CategoryName = p.Category.Name,
-            //    ImageUrl = p.ImageUrl,
-            //    OwnerEmail = p.Dealer.User.Email,
-            //    PurchaserEmail = p.Purchaser.Email ?? null
-            //})
-
-            var parts = await _dbContext.Parts.To<PartViewModel>().ToListAsync();
-            return parts;
+            return await _dbContext.Parts.To<PartViewModel>().ToListAsync();
         }
 
         public async Task<AddPartViewModel> GetAddPartViewModelAsync()
@@ -334,6 +320,5 @@
 
             return parts;
         }
-
     }
 }

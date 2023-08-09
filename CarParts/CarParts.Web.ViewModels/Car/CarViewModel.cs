@@ -54,18 +54,6 @@
                 .CreateMap<Car, CarViewModel>()
                 .ForMember(d => d.OwnerEmail,
                     opt => opt.MapFrom(s => s.Dealer.User.Email));
-
-            //.ForMember(d => d.AgentEmail,
-            //    opt => opt.MapFrom(s => s.Agent.User.Email))
-
-            //.ForMember(d => d.AgentFullName, opt => 
-            //    opt.MapFrom(s => s.Agent.User.FirstName + " " + s.Agent.User.LastName))
-
-            //.ForMember(d => d.RenterFullName, opt =>
-            //    opt.MapFrom(s => s.Renter!.FirstName + " " + s.Renter!.LastName))
-
-            //.ForMember(d => d.RenterEmail, opt =>
-            //    opt.MapFrom(s => s.Renter!.Email));
         }
     }
 }

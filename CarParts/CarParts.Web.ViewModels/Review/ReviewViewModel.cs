@@ -5,7 +5,7 @@
 
     public class ReviewViewModel
     {
-        [StringLength(ReviewContentMaxLength, 
+        [StringLength(ReviewContentMaxLength,
             MinimumLength = ReviewContentMinLength)]
         public string Content { get; set; } = null!;
 
@@ -15,6 +15,7 @@
         public DateTime DatePosted { get; set; }
 
         public string UserId { get; set; } = null!;
+
         public string Username { get; set; } = null!;
 
         public int CarId { get; set; }

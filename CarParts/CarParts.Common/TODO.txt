@@ -1,33 +1,13 @@
 ﻿
-	✔️ statistics on the front page  
-
-	✔️ automapper implement
-
-	✔️ iztriwam wsi4ki danni ot bazata danni (bez admina)
-	✔️ seed cars
-	✔️ seed parts
-
-
-	✔️ front end
-
-	✔️  register manually 2 different users that their id's will be set for 3 cars and 3 parts (home page ones)
-	✔️  seeding: add cars' descriptions
-	✔️  da oprawq id-to na poslednite 3 kolite, taka che sobstvenicite im da sa tiq manually registered users
-
-	✔️  seeding: add parts' descriptions
-	✔️  fix last 3 parts id's, taka che sobstvenicite im da sa tiq manually registered users
-
-	✔️ seed 1 user
-	✔️ seed 1 dealer, set some parts and cars to him
-
 	✔️ some unit tests
 	   
-	- Use SignalR communication somewhere in your application [easy? workshop presentation & lab]
+	✔️ code cleanup 
 
-	- (2h)code cleanup && error list sinite syveti da gi izchistq kydeto moga
 
-	- Host the application in a cloud environment Azure [workshop]
+	-  Host the application in a cloud environment Azure [workshop]
+
+
 
 
 ------------------
-12:00 - 08.08.2023
+15:00 - 08.08.2023

@@ -50,12 +50,13 @@
                             <option value="desc">Price: High to Low</option>
                         </select>
                     </td>
-                     <td>
+                    <td>
                         <div class="form-check" style="margin-top:17%">
-                            <input class="form-check-input" type="checkbox" name="showOnlyAvailable" value="true" @if (ViewBag.ShowOnlyAvailable == true)
-                            {
-                                <text>checked</text>
-                            }>
+                            <input class="form-check-input" type="checkbox" name="showOnlyAvailable" value="true"
+                                   @if (ViewBag.ShowOnlyAvailable == true)
+                                   {
+                                       <text>checked</text>
+                                   }>
                             <label class="form-check-label">Show only available parts</label>
                         </div>
                     </td>
@@ -152,6 +153,7 @@
     </div>
 
 </section>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial"/>

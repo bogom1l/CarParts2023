@@ -3,10 +3,6 @@
     using CarParts.Data;
     using CarParts.Data.Models;
     using Mocks;
-    using static CarParts.Common.GlobalConstants;
-    using Car = CarParts.Data.Models.Car;
-    using Dealer = CarParts.Data.Models.Dealer;
-    using Part = CarParts.Data.Models.Part;
 
     public class UnitTestsBase
     {
@@ -90,7 +86,7 @@
             };
             _data.Users.Add(RenterUser);
 
-             Car = new Car
+            Car = new Car
             {
                 CarId = 20,
                 Make = "Kia",
@@ -111,9 +107,9 @@
                 Torque = 196,
                 FuelConsumption = 10.1,
                 ImageUrl = "https://www.auto-data.net/images/f56/Kia-Optima-IV-Sportswagon-facelift-2018.jpg",
-                 RentPrice = 360
+                RentPrice = 360
             };
-             _data.Cars.Add(Car);
+            _data.Cars.Add(Car);
 
             Car = new Car
             {
@@ -166,8 +162,6 @@
             };
             _data.Cars.Add(Car);
 
-           
-
 
             Part = new Part
             {
@@ -183,7 +177,7 @@
 
             _data.Parts.Add(Part);
 
-            Part = new Part()
+            Part = new Part
             {
                 PartId = 21,
                 Name = "S tronic (DSG) Audi",
@@ -197,7 +191,7 @@
 
             _data.Parts.Add(Part);
 
-            Part = new Part()
+            Part = new Part
             {
                 PartId = 2,
                 Name = "aa",

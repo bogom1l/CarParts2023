@@ -84,10 +84,5 @@
             Assert.NotNull(result);
             Assert.AreEqual(carId, result.CarId);
         }
-        
-
-
-
-
     }
 }
