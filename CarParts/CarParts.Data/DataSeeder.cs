@@ -17,11 +17,11 @@
 
             SeedAdministrator(modelBuilder);
 
-            SeedCars(modelBuilder);
-            SeedParts(modelBuilder);
-
             SeedUsers(modelBuilder);
             SeedDealers(modelBuilder);
+
+            SeedCars(modelBuilder);
+            SeedParts(modelBuilder);
         }
 
         private static void SeedCarFuelTypes(ModelBuilder modelBuilder)
@@ -110,7 +110,6 @@
         private static void SeedCars(ModelBuilder modelBuilder)
         {
             // To be careful with CarId, and DealerId !!!
-            // Copy the first added car here and use it for template when adding new cars
 
             var cars = new List<Car>();
             Car car;
@@ -759,8 +758,6 @@
             currentCarId += 1;
 //--------------------------------------
 
-//--------------------------------------
-
             car = new Car
             {
                 CarId = currentCarId,
@@ -791,6 +788,8 @@
             //---------------------------------------------------------------------------------------------------------
             //---------------------------------------------------------------------------------------------------------
 
+            // WARNING: DealerIds SHOULD BE VALID
+
             //------------------------------------\\
             cars.ForEach(c => c.DealerId = 14); //Usually the ADMIN for simplicity
             cars.ForEach(c => c.Dealer = null);
@@ -805,7 +804,7 @@
             cars.ForEach(c => c.Reviews = new List<Review>());
             cars.ForEach(c => c.UserComparisonCars = new List<UserComparisonCar>());
 
-
+            //Set some of the cars to be owned by an ordinary dealer
             foreach (var customCar in cars)
             {
                 if (customCar.Make.Contains("a"))
@@ -818,9 +817,7 @@
                 }
             }
 
-
             // Custom set for example data when seeding
-            // WARNING: DealerIds SHOULD BE VALID
             cars.First(
                     c => c.ImageUrl == "https://i.pinimg.com/originals/4f/23/28/4f2328613a9577fef6f77eee198e5f65.jpg")
                 .DealerId = 21;
@@ -840,7 +837,6 @@
         private static void SeedParts(ModelBuilder modelBuilder)
         {
             // To be careful with PartId, and DealerId !!!
-            // Copy the first added part here and use it for template when adding new parts
 
             var parts = new List<Part>();
             Part part;
@@ -1183,6 +1179,8 @@
             //---------------------------------------------------------------------------------------------------------
             //---------------------------------------------------------------------------------------------------------
 
+            // WARNING: DealerIds SHOULD BE VALID
+
             //------------------------------------\\
             parts.ForEach(c => c.DealerId = 14); //Usually the ADMIN for simplicity
             parts.ForEach(c => c.Dealer = null);
@@ -1203,8 +1201,7 @@
                 }
             }
 
-            // Custom set for example data when seeding
-            // WARNING: DealerIds SHOULD BE VALID
+            // Custom set for the home page parts by an already seeded dealer
             parts.First(c => c.ImageUrl == "https://upload.wikimedia.org/wikipedia/commons/f/f0/BMW_S85B50_Engine.JPG")
                 .DealerId = 21;
             parts.First(c => c.ImageUrl == "https://i.ebayimg.com/images/g/vHMAAOSwc6deV7Zx/s-l1600.jpg").DealerId = 21;
@@ -1281,54 +1278,3 @@
 //    return lastCar.CarId;
 //}
  */
-
-
-/*
-TEMPLATE Car
- 
-car = new Car
-{
-    CarId = currentCarId,
-    Make = "make",
-    Model = "model",
-    Year = 2022,
-    Description = "ToAddDescription",
-    Price = 175000,
-    Color = "Color",
-    EngineSize = 2999,
-    FuelTypeId = 4,
-    TransmissionId = 1,
-    CategoryId = 1,
-    Weight = 2345,
-    TopSpeed = 250,
-    Acceleration = 4.9,
-    Horsepower = 365,
-    Torque = 500,
-    FuelConsumption = 5.5,
-    ImageUrl = "image",
-    RentPrice = 100
-};
-cars.Add(car);
-currentCarId += 1;
-//--------------------------------------
-
-*/
-
-/*
-TEMPLATE Part
-
-part = new Part
-{
-    PartId = currentPartId,
-    Name = "NAMENAMENAMENAME",
-    Description = "ToAddPartDescription",
-    Price = 123456789,
-    ImageUrl = "IMAGEIMAGEIMAGE",
-    CategoryId = 1
-};
-parts.Add(part);
-currentPartId += 1;
-//--------------------------------------
-
-
-*/

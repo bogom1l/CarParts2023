@@ -7,15 +7,11 @@
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         private readonly bool seedDb;
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, bool seedDb = true)
             : base(options)
         {
             this.seedDb = seedDb;
-
-            //if (!Database.IsRelational())
-            //{
-            //    Database.EnsureCreated();
-            //}
         }
 
         public DbSet<Car> Cars { get; set; } = null!;
@@ -28,13 +24,11 @@
 
         public DbSet<UserFavoritePart> UsersFavoriteParts { get; set; } = null!;
         public DbSet<UserFavoriteCar> UsersFavoriteCars { get; set; } = null!;
+        public DbSet<UserComparisonCar> UsersComparisonCars { get; set; } = null!;
 
         public DbSet<Dealer> Dealers { get; set; } = null!;
 
         public DbSet<Review> Reviews { get; set; } = null!;
-
-        public DbSet<UserComparisonCar> UsersComparisonCars { get; set; } = null!;
-
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

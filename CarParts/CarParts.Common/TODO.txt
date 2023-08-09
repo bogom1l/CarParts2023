@@ -22,6 +22,8 @@
 
 	-> unit testingzz for CarService, PartService
 	   
+    - SignalR
+    - Host
 
 ------------------
-20:00 - 08.08.2023
+09:00 - 08.08.2023

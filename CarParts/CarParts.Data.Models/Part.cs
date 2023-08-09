@@ -23,7 +23,6 @@
         [Required]
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
-
         public PartCategory Category { get; set; } = null!;
 
         public string? PurchaserId { get; set; }
@@ -32,7 +31,6 @@
         [Required]
         [ForeignKey(nameof(Dealer))]
         public int DealerId { get; set; }
-
         [Required] public Dealer Dealer { get; set; } = null!;
 
         public ICollection<UserFavoritePart> UserFavoriteParts { get; set; } = new List<UserFavoritePart>();

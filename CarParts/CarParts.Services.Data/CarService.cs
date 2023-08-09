@@ -27,39 +27,7 @@
 
         public async Task<ICollection<CarViewModel>> GetAllCarsAsync()
         {
-            //.Select(c => new CarViewModel
-            // {
-            //     CarId = c.CarId,
-            //     Make = c.Make,
-            //     Model = c.Model,
-            //     Year = c.Year,
-            //     Description = c.Description,
-            //     Price = c.Price,
-            //     Color = c.Color,
-            //     EngineSize = c.EngineSize,
-            //     FuelTypeName = c.FuelType.Name,
-            //     TransmissionName = c.Transmission.Name,
-            //     CategoryName = c.Category.Name,
-            //     Weight = c.Weight,
-            //     TopSpeed = c.TopSpeed,
-            //     Acceleration = c.Acceleration,
-            //     Horsepower = c.Horsepower,
-            //     Torque = c.Torque,
-            //     FuelConsumption = c.FuelConsumption,
-            //     OwnerEmail = c.Dealer.User.Email,
-            //     ImageUrl = c.ImageUrl,
-            //     RentPrice = c.RentPrice,
-            //     RenterEmail = c.Renter.Email ?? null
-            // })
-
-
-            var cars = await _dbContext.Cars
-                .To<CarViewModel>()
-                .ToListAsync();
-
-            var a = 5;
-
-            return cars;
+            return await _dbContext.Cars.To<CarViewModel>().ToListAsync();
         }
 
         public async Task<AddCarViewModel> GetAddCarViewModelAsync()
@@ -239,7 +207,7 @@
         {
             var carData = await _dbContext
                 .Cars
-                .FirstOrDefaultAsync(cu => cu.CarId == carId);
+                .FirstOrDefaultAsync(c => c.CarId == carId);
 
             if (carData != null)
             {
@@ -259,29 +227,6 @@
 
         public async Task<ICollection<CarViewModel>> GetMyCarsAsync(string userId)
         {
-            //.Select(c => new CarViewModel
-            //{
-            //    CarId = c.CarId,
-            //    Make = c.Make,
-            //    Model = c.Model,
-            //    Year = c.Year,
-            //    Description = c.Description,
-            //    Price = c.Price,
-            //    Color = c.Color,
-            //    EngineSize = c.EngineSize,
-            //    FuelTypeName = c.FuelType.Name,
-            //    TransmissionName = c.Transmission.Name,
-            //    CategoryName = c.Category.Name,
-            //    Weight = c.Weight,
-            //    TopSpeed = c.TopSpeed,
-            //    Acceleration = c.Acceleration,
-            //    Horsepower = c.Horsepower,
-            //    Torque = c.Torque,
-            //    FuelConsumption = c.FuelConsumption,
-            //    OwnerEmail = c.Dealer.User.Email,
-            //    ImageUrl = c.ImageUrl
-            //})
-
             return await _dbContext
                 .Cars
                 .Where(c => c.Dealer.UserId == userId)
@@ -330,8 +275,11 @@
                 .UsersFavoriteCars
                 .FirstOrDefaultAsync(ufc => ufc.CarId == carId && ufc.UserId == userId);
 
-            _dbContext.UsersFavoriteCars.Remove(car);
-            await _dbContext.SaveChangesAsync();
+            if (car != null)
+            {
+                _dbContext.UsersFavoriteCars.Remove(car);
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
         public async Task<ICollection<CarViewModel>> SearchCarsAsync(string searchTerm, string category,
@@ -409,8 +357,7 @@
             }
 
             var cars = await carsQuery
-                .To<CarViewModel>()
-                .ToListAsync();
+                .To<CarViewModel>().ToListAsync();
 
             return cars;
         }
@@ -467,7 +414,7 @@
                     Price = c.Price,
                     Color = c.Color,
                     ImageUrl = c.ImageUrl,
-                    RentalStartDate = c.RentalStartDate ?? DateTime.Now, // != null ? c.RentalStartDate : DateTime.Now,
+                    RentalStartDate = c.RentalStartDate ?? DateTime.Now,
                     RentalEndDate = c.RentalEndDate ?? DateTime.Now.AddDays(1),
                     RenterName = c.Renter.FirstName + " " + c.Renter.LastName,
                     RentPrice = c.RentPrice,
@@ -493,10 +440,7 @@
                     Color = c.Color,
                     ImageUrl = c.ImageUrl,
                     RentPrice = c.RentPrice,
-                    RentalStartDate =
-                        c.RentalStartDate ??
-                        DateTime.Now
-                            .AddDays(1), //c.RentalStartDate.HasValue ? c.RentalStartDate.Value : DateTime.Now.AddDays(1),
+                    RentalStartDate = c.RentalStartDate ?? DateTime.Now.AddDays(1),
                     RentalEndDate = c.RentalEndDate ?? DateTime.Now.AddDays(1),
                     RenterName = c.Renter.FirstName + " " + c.Renter.LastName,
                     Id = c.CarId
@@ -509,9 +453,7 @@
         {
             var days = ((DateTime)rentCarViewModel!.RentalEndDate! - (DateTime)rentCarViewModel!.RentalStartDate!).Days;
 
-            var totalPrice = days * rentCarViewModel.RentPrice;
-
-            return totalPrice;
+            return days * rentCarViewModel.RentPrice;
         }
 
         public double TotalMoneyToExtendRentAsync(RentCarViewModel rentCarViewModel, DateTime pastEndDate)
@@ -534,28 +476,33 @@
         public async Task UpdateCarRentalAsync(RentCarViewModel rentCarViewModel)
         {
             var car = await _dbContext.Cars
-                .FirstAsync(c => c.CarId == rentCarViewModel.Id);
+                .FirstOrDefaultAsync(c => c.CarId == rentCarViewModel.Id);
 
-            car.RentalEndDate = rentCarViewModel.RentalEndDate;
-
-            await _dbContext.SaveChangesAsync();
+            if (car != null)
+            {
+                car.RentalEndDate = rentCarViewModel.RentalEndDate;
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
         public async Task EndCarRentalAsync(int carId)
         {
             var car = await _dbContext.Cars
-                .FirstAsync(c => c.CarId == carId);
+                .FirstOrDefaultAsync(c => c.CarId == carId);
 
-            car.RenterId = null;
-            car.RentalStartDate = null;
-            car.RentalEndDate = null;
+            if (car != null)
+            {
+                car.RenterId = null;
+                car.RentalStartDate = null;
+                car.RentalEndDate = null;
 
-            await _dbContext.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
         public async Task<double> TotalMoneyToReturnForEndingRentalAsync(int carId)
         {
-            var car = await _dbContext.Cars.FirstAsync(c => c.CarId == carId);
+            var car = await _dbContext.Cars.FirstOrDefaultAsync(c => c.CarId == carId);
 
             if (car.RentalEndDate.HasValue && car.RentalStartDate.HasValue)
             {
@@ -615,7 +562,7 @@
         {
             var userComparisonCar = await _dbContext
                 .UsersComparisonCars
-                .FirstOrDefaultAsync(ufc => ufc.CarId == carId && ufc.UserId == userId);
+                .FirstOrDefaultAsync(c => c.CarId == carId && c.UserId == userId);
 
             if (userComparisonCar != null)
             {
@@ -638,14 +585,14 @@
         {
             return await _dbContext
                 .UsersComparisonCars
-                .AnyAsync(ucc => ucc.CarId == carId && ucc.UserId == userId);
+                .AnyAsync(c => c.CarId == carId && c.UserId == userId);
         }
 
         public async Task<bool> IsComparisonListFullAsync(string userId)
         {
             var comparisonListCount = await _dbContext
                 .UsersComparisonCars
-                .CountAsync(ucc => ucc.UserId == userId);
+                .CountAsync(c => c.UserId == userId);
 
             return comparisonListCount >= ComparisonListMaxCount;
         }
@@ -654,7 +601,7 @@
         {
             var userComparisonCars = await _dbContext
                 .UsersComparisonCars
-                .Where(ucc => ucc.UserId == userId)
+                .Where(c => c.UserId == userId)
                 .ToListAsync();
 
             _dbContext.UsersComparisonCars.RemoveRange(userComparisonCars);
