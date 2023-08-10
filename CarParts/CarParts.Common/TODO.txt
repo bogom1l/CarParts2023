@@ -6,8 +6,8 @@
 
 	-  Host the application in a cloud environment Azure [workshop]
 
-
+	zakomentiral sum "//app.SeedAdmin();" v Program.cs
 
 
 ------------------
-15:00 - 08.08.2023
+10:00 - 10.08.2023
