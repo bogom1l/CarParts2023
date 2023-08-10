@@ -114,7 +114,7 @@
             var cars = new List<Car>();
             Car car;
             var currentCarId =
-                207; //TODO: Change this to the last CarId+1 in the database <=> _seedHelper.GetLastCarId() + 1;
+                236; //TODO: Change this to the last CarId+1 in the database <=> _seedHelper.GetLastCarId() + 1;
 
             car = new Car
             {
@@ -138,18 +138,7 @@
                 Torque = 500,
                 FuelConsumption = 0.7,
                 ImageUrl = "https://www.auto-data.net/images/f94/Mercedes-Benz-S-class-W223.jpg",
-                RentPrice = 700,
-                Dealer = null, //DO NOT TOUCH
-                FuelType = null, //DO NOT TOUCH
-                Transmission = null, //DO NOT TOUCH
-                Category = null, //DO NOT TOUCH
-                RentalStartDate = null, //DO NOT TOUCH
-                RentalEndDate = null, //DO NOT TOUCH
-                RenterId = null, //DO NOT TOUCH
-                Renter = null, //DO NOT TOUCH
-                UserFavoriteCars = new List<UserFavoriteCar>(), //DO NOT TOUCH
-                Reviews = new List<Review>(), //DO NOT TOUCH
-                UserComparisonCars = new List<UserComparisonCar>() //DO NOT TOUCH
+                RentPrice = 700
             };
             cars.Add(car);
             currentCarId += 1;
@@ -697,7 +686,7 @@
                 Torque = 440,
                 FuelConsumption = 18.5,
                 ImageUrl =
-                    "https://collectingcars.imgix.net/007137/19-ww-8.jpg?w=1263&fit=fillmax&crop=edges&auto=format,compress&cs=srgb&q=85",
+                    "https://pbs.twimg.com/media/Ei3lNlHXsAAoMQD.jpg",
                 RentPrice = 600
             };
             cars.Add(car);
@@ -785,6 +774,35 @@
             currentCarId += 1;
 //--------------------------------------
 
+
+            car = new Car
+            {
+                CarId = 232, //TODO!
+                Make = "SeedAfterHost",
+                Model = "SeedAfterHost",
+                Year = 2011,
+                Description = "Descrrrrrrrr",
+                Price = 1234,
+                Color = "Black",
+                EngineSize = 3333,
+                FuelTypeId = 1,
+                TransmissionId = 1,
+                CategoryId = 1,
+                Weight = 1234,
+                TopSpeed = 123,
+                Acceleration = 4.1,
+                Horsepower = 333,
+                Torque = 333,
+                FuelConsumption = 11,
+                ImageUrl =
+                    "https://carwow-uk-wp-3.imgix.net/18015-MC20BluInfinito-scaled-e1666008987698.jpg",
+                RentPrice = 144
+            };
+            cars.Add(car);
+            currentCarId += 1;
+//--------------------------------------
+
+
             //---------------------------------------------------------------------------------------------------------
             //---------------------------------------------------------------------------------------------------------
 
@@ -824,11 +842,10 @@
             cars.First(c =>
                         c.ImageUrl ==
                         "https://citycarrentals.ca/wp-content/uploads/2018/02/mercedes-benz-cls-63-amg-black-3.jpg")
-                    .DealerId =
-                21;
+                    .DealerId = 21;
             cars.First(c =>
                     c.ImageUrl ==
-                    "https://collectingcars.imgix.net/007137/19-ww-8.jpg?w=1263&fit=fillmax&crop=edges&auto=format,compress&cs=srgb&q=85")
+                    "https://pbs.twimg.com/media/Ei3lNlHXsAAoMQD.jpg")
                 .DealerId = 21;
             //------------------------------------\\
             modelBuilder.Entity<Car>().HasData(cars);
@@ -840,7 +857,7 @@
 
             var parts = new List<Part>();
             Part part;
-            var currentPartId = 98; //TODO: Change this to the last PartId in the database
+            var currentPartId = 123; //TODO: Change this to the last PartId in the database
 
             part = new Part
             {
@@ -1175,6 +1192,20 @@
             currentPartId += 1;
 //--------------------------------------
 
+            part = new Part
+            {
+                PartId = currentPartId,
+                Name = "SeedAfterHost",
+                Description =
+                    "descrrrrr",
+                Price = 250,
+                ImageUrl = "https://cdn.w600.comps.canstockphoto.com/exhaust-pipe-and-back-part-of-car-pictures_csp23054986.jpg",
+                CategoryId = 6
+            };
+            parts.Add(part);
+            currentPartId += 1;
+//--------------------------------------
+
 
             //---------------------------------------------------------------------------------------------------------
             //---------------------------------------------------------------------------------------------------------
@@ -1205,9 +1236,8 @@
             parts.First(c => c.ImageUrl == "https://upload.wikimedia.org/wikipedia/commons/f/f0/BMW_S85B50_Engine.JPG")
                 .DealerId = 21;
             parts.First(c => c.ImageUrl == "https://i.ebayimg.com/images/g/vHMAAOSwc6deV7Zx/s-l1600.jpg").DealerId = 21;
-            parts.First(c =>
-                    c.ImageUrl ==
-                    "https://www.mercedes-benz.com.cy/passengercars/mercedes-benz-cars/models/c-class/coupe-c205/safety/safety-packages/mirror-package/_jcr_content/par/productinfotextimage/media2/slides/videoimageslide_3f5b/image.MQ6.12.20210515155216.jpeg")
+            parts.First(
+                    c => c.ImageUrl == "https://www.mercedes-benz.com.cy/passengercars/mercedes-benz-cars/models/c-class/coupe-c205/safety/safety-packages/mirror-package/_jcr_content/par/productinfotextimage/media2/slides/videoimageslide_3f5b/image.MQ6.12.20210515155216.jpeg")
                 .DealerId = 21;
             //------------------------------------\\
             modelBuilder.Entity<Part>().HasData(parts);

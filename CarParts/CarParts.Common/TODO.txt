@@ -3,11 +3,8 @@
 	   
 	✔️ code cleanup 
 
-
-	-  Host the application in a cloud environment Azure [workshop]
-
-	zakomentiral sum "//app.SeedAdmin();" v Program.cs
-
+	✔️ host - promenih appsetings za connection stringa
+		
 
 ------------------
-10:00 - 10.08.2023
+13:30 - 10.08.2023

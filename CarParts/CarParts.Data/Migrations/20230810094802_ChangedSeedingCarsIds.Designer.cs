@@ -4,6 +4,7 @@ using CarParts.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarParts.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230810094802_ChangedSeedingCarsIds")]
+    partial class ChangedSeedingCarsIds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,7 +107,7 @@ namespace CarParts.Data.Migrations
                             Id = "bcb4f072-ecca-43c9-ab26-c060c6f364e4",
                             AccessFailedCount = 0,
                             Balance = 9999999.0,
-                            ConcurrencyStamp = "d5426e0b-beac-47a0-90c6-5af25b70478f",
+                            ConcurrencyStamp = "c5ce0157-4468-4c02-82a6-ac330a649cdc",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "ADMINISTRATOR",
@@ -113,9 +115,9 @@ namespace CarParts.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAdyoZFQgIjWYmxtAyu1PW1A/CTDWPYzb+AbGmENvfD1/jyx7qSd/dsSJPGDciodMg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH9ipkKzfCuM6g0noMPPro+53bR/4c1Unw+AjcyFBuuqzZ2VCRb/fRnBDkaGACMUBA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5795488d-5341-4efa-9c86-7df5905be2fc",
+                            SecurityStamp = "8ccb9562-73e4-4977-9ced-7c493b84441c",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         },
@@ -124,7 +126,7 @@ namespace CarParts.Data.Migrations
                             Id = "asd4f072-ecca-43c9-ab26-c060c6f364e4",
                             AccessFailedCount = 0,
                             Balance = 0.0,
-                            ConcurrencyStamp = "dceadf1d-7ac1-4504-bba4-bf04242b92d1",
+                            ConcurrencyStamp = "88575ad3-7b9c-49af-b34d-1a5d00dc68dd",
                             Email = "johnwick@abv.bg",
                             EmailConfirmed = false,
                             FirstName = "John",
@@ -132,9 +134,9 @@ namespace CarParts.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JOHNWICK@ABV.BG",
                             NormalizedUserName = "JOHNWICK@ABV.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPeVuML2tHkCsQuRXf3jFu+e+rFLIPbFrW0PL6fLS8+KHYtUBSwjjpN5SbEtPngI5Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMFaRIejDJ0HtV9DRgFPBQvmRpzxTOGE5hCTvwM5NqOC86KzunO6NHZ4q9qQzhrqWA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d55722ba-6f2d-4a53-b969-f82087edf9f4",
+                            SecurityStamp = "ff9d086d-f1e8-4df6-bc31-b42c6a60bc14",
                             TwoFactorEnabled = false,
                             UserName = "johnwick@abv.bg"
                         },
@@ -143,7 +145,7 @@ namespace CarParts.Data.Migrations
                             Id = "qwe4f072-ecca-43c9-ab26-c060c6f364e4",
                             AccessFailedCount = 0,
                             Balance = 0.0,
-                            ConcurrencyStamp = "baf75729-5d6d-4a2a-a51d-4a824c37c0cc",
+                            ConcurrencyStamp = "a9081a77-6e3e-435f-b5db-e89f85351f39",
                             Email = "bogi@mail.bg",
                             EmailConfirmed = false,
                             FirstName = "Bogi",
@@ -151,9 +153,9 @@ namespace CarParts.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "BOGI@MAIL.BG",
                             NormalizedUserName = "BOGI@MAIL.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHvg97M8y08VdY9lKfNF7MXWdG7A6LYMbmHcro8AzlKqAOZpRh4cOulKFXFgsuWTKg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELAM/MljX4yCXqbgoBoPNJ6IE80zW6FO9HBpeKC3W1xntwqMuMK7v3lWB1tvJxoWdg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "067c90da-f072-4d6f-8e46-ef6d3d2336c8",
+                            SecurityStamp = "36f1c9ce-a79a-4a88-ae77-f4b4d5435116",
                             TwoFactorEnabled = false,
                             UserName = "bogi@mail.bg"
                         });
@@ -1054,7 +1056,7 @@ namespace CarParts.Data.Migrations
                     b.HasData(
                         new
                         {
-                            PartId = 123,
+                            PartId = 98,
                             CategoryId = 1,
                             DealerId = 14,
                             Description = "The BMW M52 is an inline-six engine that was part of BMW's M52 engine family. Introduced in the mid-1990s, the M52 engine was a significant advancement in BMW's lineup. It encompassed both 2.5-liter and 2.8-liter displacement variants. Known for its smooth and refined performance, the M52 engine utilized technologies like Double-VANOS variable valve timing, which optimized power delivery across different RPM ranges. With its aluminum block and cylinder head, the M52 achieved a balance between durability and weight reduction. The M52 engine found its place in various BMW models, contributing to their sporty and dynamic driving characteristics. Its torque delivery, combined with the efficient VANOS system, offered enhanced responsiveness and fuel efficiency. This engine played a crucial role in BMW's reputation for engineering excellence and driving pleasure. The M52's legacy continues to influence subsequent engine designs, contributing to BMW's commitment to delivering engaging and powerful driving experiences.",
@@ -1064,7 +1066,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 124,
+                            PartId = 99,
                             CategoryId = 1,
                             DealerId = 14,
                             Description = "The BMW M54 is an inline-six engine that belongs to BMW's M54 engine family. Introduced in the late 1990s, the M54 engine represented a significant evolution in BMW's powertrain technology and performance capabilities. The M54 engine was renowned for its smooth power delivery and refined performance. It featured technologies like Double-VANOS variable valve timing, which optimized both power output and fuel efficiency across varying driving conditions. The aluminum block and cylinder head construction helped balance durability with weight reduction. With a range of displacements, including 2.2-liter, 2.5-liter, and 3.0-liter variants, the M54 engine found application in various BMW models. Its performance characteristics contributed to the sporty and dynamic driving experiences that BMW vehicles are known for. One notable feature of the M54 engine was its adaptability to different driving demands. It offered a balance of low-end torque and high-end power, ensuring a responsive driving experience in a variety of situations. The M54 engine's influence extended beyond its initial production years, contributing to BMW's reputation for engineering excellence and driving enjoyment. Its legacy continues to impact subsequent generations of BMW engines, showcasing the brand's commitment to innovative powertrain technology.",
@@ -1074,7 +1076,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 125,
+                            PartId = 100,
                             CategoryId = 1,
                             DealerId = 14,
                             Description = "The BMW N54 is a twin-turbocharged inline-six engine that emerged as a significant milestone in BMW's engine lineup. Introduced in the mid-2000s, the N54 engine represented a departure from traditional naturally aspirated designs, embracing forced induction for enhanced performance. With its twin-turbocharging setup, the N54 engine achieved impressive power output and torque. The turbochargers provided quicker throttle response and increased power across a broad RPM range. This allowed for exhilarating acceleration and dynamic driving experiences. The N54 engine was fitted with direct fuel injection, which improved fuel efficiency and combustion efficiency. The aluminum-alloy block and cylinder head helped reduce weight without compromising durability. A notable feature of the N54 engine was its adaptability to aftermarket tuning and modifications. Enthusiasts found the engine's design to be receptive to performance enhancements, contributing to its popularity in the tuning community. The N54 engine found its place in various BMW models, including performance-oriented vehicles. Its introduction marked a shift in BMW's approach to achieving higher power levels while maintaining efficiency. The legacy of the N54 engine continues to influence BMW's engine development, particularly in the realm of turbocharging and direct injection. This engine highlighted BMW's commitment to pushing boundaries in pursuit of power, performance, and driving pleasure.",
@@ -1084,7 +1086,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 126,
+                            PartId = 101,
                             CategoryId = 2,
                             DealerId = 14,
                             Description = "The S tronic, also known as DSG (Direct-Shift Gearbox), is an innovative dual-clutch automatic transmission technology developed by Audi. This transmission system combines the convenience of an automatic transmission with the quick and precise gear changes of a manual gearbox. The S tronic/DSG transmission utilizes two separate clutches and gear sets, one for even-numbered gears and the other for odd-numbered gears. This design allows for seamless gear changes without the interruption of power delivery, resulting in lightning-fast shifts and improved acceleration. Drivers can experience the S tronic/DSG transmission in two primary modes: automatic mode and manual mode. In automatic mode, the transmission optimizes gear changes based on driving conditions, while manual mode enables drivers to take control of gear selection using paddle shifters or the gear lever. The benefits of the S tronic/DSG transmission include improved fuel efficiency, rapid gear changes, and enhanced driving dynamics. Its ability to predict gear changes and pre-select the next gear contributes to a smoother and more responsive driving experience. Audi has incorporated the S tronic/DSG technology across various models in its lineup, showcasing the brand's commitment to offering cutting-edge transmission solutions that cater to both performance and efficiency. This transmission technology has redefined the driving experience, providing a seamless blend of convenience and sportiness for Audi enthusiasts and drivers.",
@@ -1094,7 +1096,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 127,
+                            PartId = 102,
                             CategoryId = 2,
                             DealerId = 14,
                             Description = "Tiptronic is a transmission technology developed by Audi that offers drivers the flexibility of both automatic and manual gear shifting. Introduced as a response to the demand for more control over gear changes, the Tiptronic system combines the convenience of an automatic transmission with the option to manually select gears. In Tiptronic-equipped vehicles, drivers can choose between fully automatic mode and manual mode. In automatic mode, the transmission shifts gears automatically based on driving conditions. In manual mode, drivers have the ability to manually select gears using either the gear lever or paddle shifters mounted on the steering wheel. The Tiptronic system empowers drivers to take control of gear changes when desired, enhancing the driving experience and allowing for a more engaging ride. This feature is particularly useful when driving on winding roads or seeking a more responsive acceleration. Tiptronic technology caters to both efficiency and sportiness. It optimizes gear changes based on throttle input, speed, and road conditions, contributing to improved fuel economy while maintaining a dynamic driving feel. Audi has integrated the Tiptronic technology across a range of its vehicles, providing a versatile solution for drivers who desire a balance between automatic convenience and manual control. This transmission system underscores Audi's commitment to innovation and delivering driving experiences tailored to individual preferences.",
@@ -1104,7 +1106,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 128,
+                            PartId = 103,
                             CategoryId = 2,
                             DealerId = 21,
                             Description = "The DSG (Direct Shift Gearbox) is an advanced dual-clutch automatic transmission technology developed by Volkswagen Group. This innovative transmission system combines the convenience of an automatic transmission with the precise and rapid gear changes of a manual gearbox. The DSG transmission employs two separate clutches and gear sets, one for odd-numbered gears and the other for even-numbered gears. This dual-clutch setup enables lightning-fast gear changes without interrupting the power flow, resulting in seamless acceleration and enhanced driving dynamics. Drivers can experience the DSG transmission in two primary modes: automatic mode and manual mode. In automatic mode, the transmission optimizes gear changes based on driving conditions. In manual mode, drivers can actively engage in gear selection using paddle shifters or the gear lever. The advantages of the DSG transmission include improved fuel efficiency, quick gear changes, and a more responsive driving experience. Its predictive shifting and pre-selection of the next gear contribute to a smoother and dynamic ride. Volkswagen Group has integrated the DSG technology across various brands under its umbrella, showcasing the commitment to delivering cutting-edge transmission solutions that cater to both efficiency and performance. The DSG transmission has redefined driving experiences, offering the best of both automatic and manual shifting for driving enthusiasts and those seeking a refined ride alike.",
@@ -1114,7 +1116,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 129,
+                            PartId = 104,
                             CategoryId = 2,
                             DealerId = 21,
                             Description = "The 6-speed manual transmission in Volkswagen vehicles is a traditional gearbox that allows drivers to manually select gears for a more engaging and hands-on driving experience. With a 6-speed manual transmission, drivers have direct control over gear changes using the gear lever and clutch pedal. This type of transmission provides a closer connection between the driver and the vehicle, allowing for precise gear selection to match driving conditions and preferences. The 6-speed manual transmission is known for its simplicity, durability, and lower maintenance costs compared to automatic transmissions. It offers a sense of control and engagement that appeals to driving enthusiasts who enjoy shifting gears themselves. Volkswagen offers 6-speed manual transmissions in various models to cater to drivers who prefer a more traditional driving experience. This transmission option underscores Volkswagen's commitment to providing choices that align with drivers' preferences, whether they prioritize performance, engagement, or a combination of both.",
@@ -1124,7 +1126,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 130,
+                            PartId = 105,
                             CategoryId = 3,
                             DealerId = 21,
                             Description = "Mercedes-Benz AMG Ceramic Composite Brakes (CCB) are high-performance braking systems developed by Mercedes-AMG, the performance division of Mercedes-Benz. These advanced brakes are designed to provide exceptional stopping power, reduced fade, and improved performance under demanding driving conditions. The CCB system utilizes ceramic composite materials in the construction of the brake discs. This material offers several advantages, including higher heat resistance, reduced weight, and improved durability compared to traditional iron brake discs. As a result, CCB brakes are highly effective in dissipating heat generated during intense braking, minimizing the risk of brake fade. One of the main benefits of CCB brakes is their superior stopping power, even in high-speed and track-oriented driving scenarios. This technology provides consistent and reliable performance, allowing drivers to confidently tackle challenging conditions without compromising on brake responsiveness. Furthermore, CCB brakes contribute to reducing the unsprung weight of the vehicle, which can have a positive impact on handling, ride quality, and overall performance. This reduction in weight improves the vehicle's agility and responsiveness, enhancing the driving experience. Mercedes-Benz AMG Ceramic Composite Brakes reflect the brand's commitment to engineering excellence and high-performance driving. This braking technology is often found in Mercedes-AMG models and represents a premium option for enthusiasts and drivers who demand the utmost in braking performance for both everyday driving and track experiences.",
@@ -1134,7 +1136,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 131,
+                            PartId = 106,
                             CategoryId = 3,
                             DealerId = 21,
                             Description = "Mercedes-Benz AMG Performance Brakes are high-performance braking systems developed by Mercedes-AMG, the performance division of Mercedes-Benz. These brakes are designed to provide enhanced stopping power, improved heat management, and superior performance to meet the demands of high-performance driving. The AMG Performance Brakes feature larger brake discs and more robust brake calipers compared to standard braking systems. This design increases the braking surface area and improves heat dissipation, making the brakes more resistant to fading during aggressive driving or track use. The brake calipers of the AMG Performance Brakes are often designed with multiple pistons to ensure even and effective distribution of braking force across the brake pads and discs. This results in consistent and reliable braking performance, even under extreme conditions. The AMG Performance Brakes are engineered to offer improved pedal feel and responsiveness, allowing drivers to modulate braking force with precision. This feature is especially valuable for high-performance vehicles that require quick and controlled deceleration. These brakes are often paired with advanced brake pad compounds optimized for performance driving. These pads provide excellent stopping power while maintaining a good balance between noise, dust, and overall brake performance. Mercedes-Benz AMG Performance Brakes reflect the brand's dedication to delivering exceptional performance and engineering excellence. This braking technology is a key component in enhancing the driving experience of Mercedes-AMG models, providing the stopping power and confidence required for spirited driving and track use.",
@@ -1144,7 +1146,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 132,
+                            PartId = 107,
                             CategoryId = 4,
                             DealerId = 21,
                             Description = "Adaptive M Suspension is an advanced suspension system developed by BMW's M division. This technology is designed to provide drivers with the ability to adjust the suspension characteristics to suit different driving conditions and preferences. The Adaptive M Suspension system utilizes electronically controlled dampers that can adjust their stiffness in real-time. This means that the suspension can adapt to changes in road conditions, driving dynamics, and driver inputs. The system takes into account factors like vehicle speed, steering angle, and acceleration to optimize the suspension settings for comfort and performance. Drivers can often select different driving modes, such as Comfort, Sport, and Sport+, to adjust the suspension's behavior. In Comfort mode, the suspension provides a smoother and more comfortable ride, ideal for daily commuting or long-distance travel. In Sport mode, the suspension firms up to improve handling and responsiveness, enhancing the driving experience on twisty roads or more dynamic driving situations. The Adaptive M Suspension technology contributes to improved handling, reduced body roll, and enhanced stability during cornering. It offers the best of both worlds by allowing drivers to choose between a more comfortable ride or a more engaging and sporty driving experience. This technology is often found in BMW M models, reflecting the brand's commitment to performance and driving pleasure. The Adaptive M Suspension is a crucial component in creating a well-rounded driving experience that caters to a variety of driving scenarios and preferences.",
@@ -1154,7 +1156,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 133,
+                            PartId = 108,
                             CategoryId = 4,
                             DealerId = 21,
                             Description = "Audi Dynamic Ride Control (DRC) is an advanced suspension technology developed by Audi to enhance handling, stability, and ride comfort in high-performance vehicles. This innovative system is designed to minimize body roll during cornering and provide a smoother ride by effectively managing the damping forces of the suspension. DRC uses a complex hydraulic system to connect diagonally opposed shock absorbers or dampers. This hydraulic connection allows the dampers to work in unison, counteracting body roll and maintaining optimal tire contact with the road. When the vehicle enters a corner, the DRC system automatically adjusts the damping forces to provide a level and composed ride. One of the key advantages of DRC is its ability to provide a stable and controlled ride even under aggressive driving conditions. It reduces body movements, allowing the vehicle to maintain better stability during dynamic maneuvers, which can be particularly beneficial on winding roads or on the track. DRC also contributes to ride comfort by minimizing pitch and roll motions, resulting in a smoother and more controlled ride quality. This technology strikes a balance between performance and comfort, making it well-suited for drivers who seek both spirited driving experiences and everyday comfort. Audi Dynamic Ride Control is often found in high-performance Audi models, highlighting the brand's commitment to delivering a dynamic and engaging driving experience. This suspension technology is a testament to Audi's dedication to innovation and engineering excellence, offering a sophisticated solution for drivers who demand precise handling and driving pleasure.",
@@ -1164,7 +1166,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 134,
+                            PartId = 109,
                             CategoryId = 5,
                             DealerId = 21,
                             Description = "M Sport Seats are a premium seating option offered by BMW's M division, designed to provide enhanced comfort, support, and a sporty driving experience. These seats are a key component in creating a more engaging and dynamic driving environment while offering a comfortable ride for both driver and passengers. M Sport Seats often feature a combination of high-quality materials, ergonomic design, and adjustable features. They are designed to provide improved lateral support during spirited driving, helping to keep the driver and passengers securely in place during cornering and dynamic maneuvers. The seats are usually contoured to match the body's natural posture, providing a snug fit that reduces fatigue during long drives. The sporty bolstering and padding contribute to the feeling of being connected to the vehicle, enhancing the driving experience and promoting a more engaged and responsive driving style. In addition to their performance-oriented design, M Sport Seats often come with various adjustments, such as height, tilt, and lumbar support, allowing drivers to find the optimal seating position for comfort and control. M Sport Seats are typically available as an option in a range of BMW models, showcasing the brand's commitment to delivering driving pleasure and a premium interior experience. These seats reflect BMW's dedication to engineering excellence and the desire to provide enthusiasts and drivers with the means to enjoy every aspect of their driving journey.",
@@ -1174,7 +1176,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 135,
+                            PartId = 110,
                             CategoryId = 5,
                             DealerId = 21,
                             Description = "The Audi RS4 B7 Recaro Seats are high-performance seats designed for the Audi RS4 B7 model. These seats are a collaboration between Audi and Recaro, a renowned manufacturer of racing and performance seats. They are specifically engineered to provide exceptional support, comfort, and a sporty driving experience. The RS4 B7 Recaro Seats often feature a combination of premium materials, ergonomic design, and aggressive bolstering. They are built to hold the driver and passengers securely in place during dynamic driving maneuvers, reducing lateral movement and ensuring maximum control. The contoured shape of the seats is designed to match the body's natural posture, providing a snug and supportive fit. This not only contributes to comfort during long drives but also enhances the driving experience by promoting a more connected and engaged feeling with the vehicle. RS4 B7 Recaro Seats are equipped with various adjustments, including height, tilt, and lumbar support, allowing drivers to customize their seating position for optimal comfort and control. The seats are often finished in high-quality materials that reflect the luxury and performance-oriented nature of the Audi RS4 B7. These seats are a distinctive feature of the Audi RS4 B7, highlighting the model's focus on performance and driving pleasure. The collaboration between Audi and Recaro underscores Audi's commitment to delivering an exceptional driving environment, tailored to the needs of enthusiasts who seek both comfort and sportiness.",
@@ -1184,7 +1186,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 136,
+                            PartId = 111,
                             CategoryId = 6,
                             DealerId = 21,
                             Description = "The Carbon Rear Wing or Rear Spoiler is a performance-enhancing aerodynamic component commonly found on high-performance and sports cars. Made from lightweight carbon fiber material, this wing is designed to improve vehicle stability, handling, and downforce by optimizing the airflow over the rear of the vehicle. The carbon rear wing is strategically positioned at the back of the vehicle to disrupt the airflow and create a high-pressure zone above it and a low-pressure zone below it. This pressure differential generates downforce, which helps improve traction and stability, especially at high speeds and during aggressive driving maneuvers. The use of carbon fiber in the construction of the rear wing offers several advantages. Carbon fiber is strong yet lightweight, which means the wing can provide the necessary aerodynamic benefits without adding excessive weight to the vehicle. This is crucial for maintaining a favorable power-to-weight ratio and overall performance. Carbon rear wings are often adjustable, allowing drivers to fine-tune the amount of downforce generated based on driving conditions. In some cases, the wing's angle can be modified to increase downforce for track use or reduce drag for highway cruising. This aerodynamic component is a key feature in the design of performance-oriented vehicles, enhancing both aesthetics and driving dynamics. The carbon rear wing showcases the brand's commitment to engineering excellence and performance optimization, offering enthusiasts and drivers a means to achieve better handling and a more exhilarating driving experience.",
@@ -1194,7 +1196,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 137,
+                            PartId = 112,
                             CategoryId = 6,
                             DealerId = 14,
                             Description = "LED Angel Eyes, also referred to as Halo Rings, are a distinctive lighting feature commonly found in modern vehicles, designed to enhance visibility, aesthetics, and recognition. These rings of LED lights are often positioned around the headlights and emit a bright and distinct white light. The LED Angel Eyes serve multiple purposes. Primarily, they provide an instantly recognizable and iconic look to a vehicle's front end, adding a touch of modernity and sophistication. They are especially prominent at night or in low-light conditions, contributing to a vehicle's visual appeal and presence on the road. From a functional standpoint, LED Angel Eyes can serve as daytime running lights, improving the vehicle's visibility to other road users. They create a recognizable light signature that helps drivers stand out and be noticed during the day, enhancing safety on the road. The use of LEDs in the construction of Angel Eyes offers several advantages. LEDs are energy-efficient, have a longer lifespan, and produce a more focused and intense light output compared to traditional halogen bulbs. LED Angel Eyes are often associated with premium and high-end vehicles, showcasing a commitment to innovative design and technology. They reflect the brand's attention to detail, aesthetics, and safety, all while adding a touch of visual flair that captures the essence of modern automotive lighting trends.",
@@ -1204,7 +1206,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 138,
+                            PartId = 113,
                             CategoryId = 6,
                             DealerId = 21,
                             Description = "LCI LED Headlights are a lighting upgrade available for the BMW F10 M5 and 5 Series vehicles, offering improved illumination, energy efficiency, and modern styling. LCI stands for \"Life Cycle Impulse,\" indicating a mid-cycle refresh or update to a vehicle's design and features. These headlights feature Light Emitting Diode (LED) technology, which provides several benefits over traditional halogen or even xenon headlights. LED headlights offer a brighter and more focused beam, enhancing nighttime visibility and road illumination. They also consume less energy, contributing to better fuel efficiency and reduced strain on the vehicle's electrical system. The LED technology used in LCI LED Headlights allows for more precise control of light distribution. This often includes adaptive features that adjust the intensity and direction of the light based on factors such as vehicle speed, steering angle, and road conditions. Adaptive LED headlights can improve safety by providing better visibility around curves and corners. Visually, LCI LED Headlights offer a modern and distinctive appearance. The bright and crisp light produced by the LEDs enhances the vehicle's overall aesthetics and road presence. The LED elements are often arranged in eye-catching patterns, adding a touch of sophistication to the vehicle's front end. LCI LED Headlights are often associated with luxury and performance vehicles, such as the BMW F10 M5 and 5 Series. They reflect the brand's commitment to innovation, safety, and design excellence, offering owners an enhanced driving experience with improved visibility and a stylish lighting signature.",
@@ -1214,7 +1216,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 139,
+                            PartId = 114,
                             CategoryId = 7,
                             DealerId = 21,
                             Description = "The Soundstage + Subwoofer System designed for the BMW 3-Series is an advanced audio upgrade that aims to provide an immersive and high-quality in-car audio experience. This system enhances the vehicle's sound system by offering improved clarity, depth, and bass response, transforming the cabin into a premium listening environment. The \"Soundstage\" aspect of the system refers to the technology used to create a more realistic and enveloping sound experience. This technology often involves strategically placing speakers throughout the vehicle to mimic the sensation of sound coming from different directions, similar to a live performance. The result is an audio environment that makes music feel more expansive and engaging. The addition of a subwoofer is a crucial component of this system. A subwoofer is responsible for reproducing deep and low-frequency bass sounds that regular speakers might struggle to deliver. The subwoofer adds a rich and impactful bass element to the audio, enhancing the overall quality of music playback. The Soundstage + Subwoofer System for the BMW 3-Series is typically designed to seamlessly integrate with the vehicle's existing audio components. This ensures that the upgraded audio system maintains compatibility with the vehicle's technology and controls. This audio upgrade is often tailored to the specific acoustics of the BMW 3-Series cabin, ensuring that the sound quality is optimized for the vehicle's interior. With improved clarity, a more immersive soundstage, and enhanced bass, the system delivers a premium audio experience that complements the driving journey and elevates the enjoyment of music and entertainment.",
@@ -1224,7 +1226,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 140,
+                            PartId = 115,
                             CategoryId = 7,
                             DealerId = 21,
                             Description = "The Performance Chip for the Audi A3 1.9 TDI with 110 horsepower is a tuning modification designed to enhance the engine's performance and overall driving experience. This chip, also known as an ECU (Engine Control Unit) remap, involves reprogramming the engine's computer to optimize various parameters and unlock additional power and torque. The stock ECU settings in vehicles are often calibrated to meet a variety of factors, including emissions regulations, fuel economy, and drivability. Performance chips allow for customization of these settings, focusing on improving power output, throttle response, and potentially fuel efficiency. When applied to the Audi A3 1.9 TDI with 110 horsepower, a performance chip can result in noticeable performance gains. These may include increased horsepower, torque, and acceleration. Throttle response and overall engine responsiveness may also be improved, providing a more engaging and dynamic driving experience. It's important to note that installing a performance chip should be done carefully by professionals who understand the intricacies of ECU tuning. Additionally, the choice of chip and the extent of the tuning should be aligned with the vehicle's existing condition and usage. Done properly, a performance chip can offer significant benefits to enthusiasts seeking a more spirited driving experience from their Audi A3 1.9 TDI.",
@@ -1234,7 +1236,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 141,
+                            PartId = 116,
                             CategoryId = 7,
                             DealerId = 21,
                             Description = "The First Aid Kit is an essential safety item commonly found in vehicles, designed to provide basic medical supplies and assistance in the event of minor injuries or emergencies. It contains a range of items that can be used to provide immediate medical care before professional help arrives.\r\n\r\nA typical first aid kit for a vehicle may include items such as adhesive bandages, sterile gauze pads, adhesive tape, antiseptic wipes, scissors, tweezers, disposable gloves, and pain relief medication. Some kits may also include a CPR face shield, instant cold packs, and a basic first aid guide.\r\n\r\nThe first aid kit is designed to address common injuries like cuts, scrapes, burns, and minor sprains. It can prove invaluable in situations where immediate medical attention is needed, such as during a road trip, long drives, or in remote areas where medical facilities are not easily accessible.\r\n\r\nCarrying a first aid kit in a vehicle is a proactive safety measure that reflects responsible driving and consideration for the well-being of passengers and fellow road users. It provides a means to provide initial care and potentially minimize the impact of injuries until professional medical help can be obtained.",
@@ -1244,7 +1246,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 142,
+                            PartId = 117,
                             CategoryId = 6,
                             DealerId = 14,
                             Description = "BBS CC-R Rims are premium aftermarket wheels designed to enhance the performance, aesthetics, and overall presence of vehicles. BBS is a renowned manufacturer known for producing high-quality wheels with innovative design and engineering. The CC-R series from BBS reflects a commitment to lightweight construction, durability, and style. These rims are often made from advanced materials such as aluminum alloy to reduce weight while maintaining structural integrity. The reduced unsprung weight contributes to improved handling, acceleration, and braking performance. BBS CC-R Rims are designed with aesthetics in mind. They often feature sleek and modern designs that add a touch of sportiness and sophistication to a vehicle's appearance. The attention to detail in the design process ensures that the rims complement the vehicle's lines and character. The choice of aftermarket rims like BBS CC-R can also impact the vehicle's stance and overall aesthetics. Different sizes, offsets, and finishes are available to suit various vehicle models and personal preferences. BBS is known for its rigorous manufacturing processes, quality control, and adherence to safety standards. BBS CC-R Rims are tested and engineered to meet high standards of performance and durability, making them a reliable and popular choice among automotive enthusiasts. The addition of BBS CC-R Rims not only enhances the visual appeal of a vehicle but also contributes to improved performance and driving experience, making them a sought-after upgrade for those who seek both style and functionality in their wheels.",
@@ -1254,7 +1256,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 143,
+                            PartId = 118,
                             CategoryId = 1,
                             DealerId = 21,
                             Description = "The BMW S85 is a high-revving 5.0-liter V10 engine, primarily known for powering the iconic E60 M5 and E63 M6 models. With its distinctive exhaust note and impressive performance, the S85 remains a celebrated powerplant among automotive enthusiasts.",
@@ -1264,7 +1266,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 144,
+                            PartId = 119,
                             CategoryId = 3,
                             DealerId = 21,
                             Description = "Audi S-line brakes offer enhanced stopping power and performance, designed to complement high-performance S-line models. With improved brake pads, calipers, and rotors, they provide precise control and confidence, making them ideal for spirited driving experiences.",
@@ -1274,7 +1276,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 145,
+                            PartId = 120,
                             CategoryId = 6,
                             DealerId = 21,
                             Description = "The Mercedes-Benz C-Class side mirror features a sleek design with integrated turn signals and auto-dimming capabilities. Its power-adjustable function and heating element provide added convenience and safety, enhancing the driving experience.",
@@ -1284,7 +1286,7 @@ namespace CarParts.Data.Migrations
                         },
                         new
                         {
-                            PartId = 146,
+                            PartId = 121,
                             CategoryId = 6,
                             DealerId = 14,
                             Description = "descrrrrr",
