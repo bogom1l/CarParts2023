@@ -16,7 +16,7 @@
 
                 <div class="mb-3">
                     <label asp-for="@Model.Name" class="form-label-add-edit">Name</label>
-                    <input asp-for="@Model.Name" class="form-control" aria-required="true" value="TestPartName1"/>
+                    <input asp-for="@Model.Name" class="form-control" aria-required="true" placeholder="BMW Front Bumper"/>
                     <span asp-validation-for="@Model.Name" class="text-danger"></span>
                 </div>
 
@@ -35,7 +35,7 @@
 
                 <div class="mb-3">
                     <label asp-for="@Model.ImageUrl" class="form-label-add-edit">Image URL</label>
-                    <input asp-for="@Model.ImageUrl" class="form-control" value="https://m.media-amazon.com/images/I/5151jRy7evL.jpg" />
+                    <input asp-for="@Model.ImageUrl" class="form-control" placeholder="https://google.com/images/bmwfrontbumper.jpg" />
                     <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
                 </div>
 

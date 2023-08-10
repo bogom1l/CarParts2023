@@ -14,17 +14,17 @@
             <form asp-action="Add" method="post">
                 <div class="mb-3">
                     <label asp-for="@Model.Make" class="form-label-add-edit">Make</label>
-                    <input asp-for="@Model.Make" class="form-control" aria-required="true" value="BMW"/>
+                    <input asp-for="@Model.Make" class="form-control" aria-required="true" placeholder="BMW"/>
                     <span asp-validation-for="@Model.Make" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="@Model.Model" class="form-label-add-edit">Model</label>
-                    <input asp-for="@Model.Model" class="form-control" aria-required="true" value="E60"/>
+                    <input asp-for="@Model.Model" class="form-control" aria-required="true" placeholder="5-series" />
                     <span asp-validation-for="@Model.Model" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="@Model.Year" class="form-label-add-edit">Year</label>
-                    <input asp-for="@Model.Year" class="form-control" aria-required="true" value="2003"/>
+                    <input asp-for="@Model.Year" class="form-control" aria-required="true" value="2001" />
                     <span asp-validation-for="@Model.Year" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
@@ -35,23 +35,23 @@
 
                 <div class="mb-3">
                     <label asp-for="@Model.ImageUrl" class="form-label-add-edit">Image URL</label>
-                    <input asp-for="@Model.ImageUrl" class="form-control" value="https://img.freepik.com/free-vector/modern-blue-urban-adventure-suv-vehicle-illustration_1344-205.jpg?" />
+                    <input asp-for="@Model.ImageUrl" class="form-control" placeholder="www.google.com/images/bmw5.jpg" />
                     <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label asp-for="@Model.Price" class="form-label-add-edit">Price (EUR)</label>
-                    <input asp-for="@Model.Price" type="number" class="form-control" aria-required="true" step="1" value="9000" />
+                    <input asp-for="@Model.Price" type="number" class="form-control" aria-required="true" value="7500" />
                     <span asp-validation-for="@Model.Price" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="@Model.Color" class="form-label-add-edit">Color</label>
-                    <input asp-for="@Model.Color" class="form-control" aria-required="true" value="red"/>
+                    <input asp-for="@Model.Color" class="form-control" aria-required="true" placeholder="Black" />
                     <span asp-validation-for="@Model.Color" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="@Model.EngineSize" class="form-label-add-edit">Engine Size (cc)</label>
-                    <input asp-for="@Model.EngineSize" class="form-control" aria-required="true" step="0.01" value="2993"/>
+                    <input asp-for="@Model.EngineSize" type="number" class="form-control" aria-required="true" value="1996" />
                     <span asp-validation-for="@Model.EngineSize" class="text-danger"></span>
                 </div>
 
@@ -89,38 +89,38 @@
 
                 <div class="mb-3">
                     <label asp-for="@Model.Weight" class="form-label-add-edit">Weight (kg)</label>
-                    <input asp-for="@Model.Weight" class="form-control" aria-required="true" step="0.01" value="1595"/>
+                    <input asp-for="@Model.Weight" type="number" class="form-control" aria-required="true" value="1595" />
                     <span asp-validation-for="@Model.Weight" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="@Model.TopSpeed" class="form-label-add-edit">Top Speed (km/h)</label>
-                    <input asp-for="@Model.TopSpeed" class="form-control" aria-required="true" step="0.01" value="250"/>
+                    <input asp-for="@Model.TopSpeed" type="number" class="form-control" aria-required="true" value="250" />
                     <span asp-validation-for="@Model.TopSpeed" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="@Model.Acceleration" class="form-label-add-edit">Acceleration (0-100 km/h)</label>
-                    <input asp-for="@Model.Acceleration" class="form-control" aria-required="true" step="0.01" value="6.8"/>
+                    <input asp-for="@Model.Acceleration" type="number" class="form-control" aria-required="true" value="9.3" />
                     <span asp-validation-for="@Model.Acceleration" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="@Model.Horsepower" class="form-label-add-edit">Horsepower</label>
-                    <input asp-for="@Model.Horsepower" class="form-control" aria-required="true" step="0.01" value="231"/>
+                    <input asp-for="@Model.Horsepower" type="number" class="form-control" aria-required="true" value="110" />
                     <span asp-validation-for="@Model.Horsepower" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="@Model.Torque" class="form-label-add-edit">Torque</label>
-                    <input asp-for="@Model.Torque" class="form-control" aria-required="true" step="0.01" value="500"/>
+                    <input asp-for="@Model.Torque" type="number" class="form-control" aria-required="true" value="220" />
                     <span asp-validation-for="@Model.Torque" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="@Model.FuelConsumption" class="form-label-add-edit">Fuel Consumption (L/100km)</label>
-                    <input asp-for="@Model.FuelConsumption" class="form-control" aria-required="true" step="0.01" value="9.2"/>
+                    <input asp-for="@Model.FuelConsumption" type="number" class="form-control" aria-required="true" value="9.2" />
                     <span asp-validation-for="@Model.FuelConsumption" class="text-danger"></span>
                 </div>
-
+            
                 <div class="mb-3">
                     <label asp-for="@Model.RentPrice" class="form-label-add-edit">Rent Price (EUR)</label>
-                    <input asp-for="@Model.RentPrice" class="form-control" aria-required="true" value="100"/>
+                    <input asp-for="@Model.RentPrice" type="number" class="form-control" aria-required="true" value="100" />
                     <span asp-validation-for="@Model.RentPrice" class="text-danger"></span>
                 </div>
                 
