@@ -5,10 +5,10 @@
 
 	✔️ host - promenih appsetings za connection stringa
 		
-	- vmesto value, da sa placeholderi v AddCar / AddPart
-	- da iztriq izlishnite koli/chasti prez admin profila
+	✔️ vmesto value, da sa placeholderi v AddCar / AddPart
+	✔️ da iztriq izlishnite koli/chasti prez admin profila
 	- da oprawq nekade dreboliiki v saita veche za userite
 	
 
 ------------------
-13:30 - 10.08.2023
+15:00 - 10.08.2023
