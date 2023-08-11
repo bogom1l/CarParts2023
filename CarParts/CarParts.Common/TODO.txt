@@ -5,7 +5,7 @@
 
 	✔️ host - promenih appsetings za connection stringa
 	
-	n/a
+	✔️ lifepeak
 
 ------------------
-12:30 - 11.08.2023
+13:00 - 11.08.2023
