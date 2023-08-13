@@ -46,6 +46,9 @@ Project (C# Web 2023 - Softuni)
 
 <hr/>
 
+<h5>Database Diagram</h5>
+<img src="https://github.com/wavezM5/CarParts2023/blob/main/ImagesForReadMe/diagram.png"/>
+
 <h5>Home Page</h5>
 <img src="https://github.com/wavezM5/CarParts2023/blob/main/ImagesForReadMe/homepage1.png"/>
 <img src="https://github.com/wavezM5/CarParts2023/blob/main/ImagesForReadMe/homepage2.png"/>
