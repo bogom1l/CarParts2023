@@ -5,7 +5,9 @@
 
 	✔️ host - promenih appsetings za connection stringa
 	
-	✔️ lifepeak
+	✔️ lifepeak - 13:00 - 11.08.2023
+	
+-------------------------------------------------------
 
-------------------
-13:00 - 11.08.2023
+to run: change the appsettings default connection, and maybe fix the seeding id's
+
