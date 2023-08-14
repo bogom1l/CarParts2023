@@ -99,6 +99,5 @@ pass: admin123
 
 Visit:
 
-http://carpartsweb.azurewebsites.net/
-
+http://carpartsweb.azurewebsites.net/ <b> - No longer active. </b>
 </p>
