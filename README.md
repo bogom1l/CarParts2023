@@ -11,9 +11,8 @@ Project (C# Web 2023 - Softuni)
 <li> Every User can: rent cars, purchase parts, add them to his favorite list, compare them, add reviews.</li>
 </ul>
 
-
-<h3>Technologies Used:</h3> 
 <hr/>
+<h3>Technologies Used:</h3> 
 <ul>
 <li> ASP.NET Core 6.0 (MVC)</li>
 <li> Entity Framework Core 6.0</li>
@@ -99,5 +98,5 @@ pass: admin123
 
 Visit:
 
-http://carpartsweb.azurewebsites.net/ <b> - No longer active. </b>
+http://carpartsweb.azurewebsites.net/ <b> - (EDIT) No longer active. </b>
 </p>
